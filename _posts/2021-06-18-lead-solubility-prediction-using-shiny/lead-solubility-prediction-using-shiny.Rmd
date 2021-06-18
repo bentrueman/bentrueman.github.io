@@ -1,0 +1,23 @@
+---
+title: "Lead solubility prediction using shiny"
+description: |
+  An R package and shiny app for PHREEQC-based equilibrium lead and copper solubility prediction.
+author:
+  - name: Ben Trueman
+    url: https://example.com/norajones
+date: 06-18-2021
+bibliography: references.bib
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Recently, I've been experimenting with the excellent R package `tidyphreeqc` [@tidyphreeqc], which provides a convenient interface for generating PHREEQC input files [@phreeqc_r; @phreeqc]. `tidyphreeqc` incorporates easily into my workflow, and it's found its way into several recent publication *CITE LI*.
+
+I've also used it to build a separate package (`pbcusol` [@pbcusol]) that handles lead and copper solubility prediction specifically, with curated thermodynamic data and some domain specific features implemented in what is hopefully a straightforward collection of functions. `pbcusol` is implemented as a shiny app, available [here](https://bentrueman.shinyapps.io/shinypbcusol/).
+
