@@ -1,0 +1,154 @@
+---
+title: "An improved workflow for qualitative XRD in R"
+description: |
+  A short description of the post.
+author:
+  - name: Nora Jones
+    url: https://example.com/norajones
+date: 06-29-2021
+bibliography: references.bib
+output:
+  distill::distill_article:
+    self_contained: false
+resources:
+  exclude: 
+  *.txt
+  *.csv
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r load}
+library("tidyverse")
+library("fffprocessr") # for peak detection
+data <- read_table("XRD_Ortho_P_pH7.5_DIC5 copy.txt", col_names = FALSE) %>% 
+  rename(two_theta = X1, intensity = X2) %>% 
+  # scale to [0,1]:
+  mutate(
+    intensity = intensity - min(intensity),
+    intensity = intensity / max(intensity)
+  )
+
+stds <- read_csv("xrd_stds.csv")
+```
+
+The data, from @li_impact_2021.
+
+```{r}
+data %>% 
+  ggplot(aes(two_theta, intensity)) + 
+  geom_line()
+```
+
+A quick and dirty method of determining phase importance, for plotting purposes only:
+
+```{r correlations}
+
+# 1. correlation between standard and sample
+
+xrd_corr <- function(run, standard) {
+  list( 
+      sample = run, 
+      std = standard
+    ) %>% 
+    bind_rows(.id = "type") %>% 
+    pivot_wider(id_cols = two_theta, names_from = type, values_from = intensity) %>% 
+    group_by(two_theta = round(two_theta)) %>% 
+    summarize(sample = median(sample, na.rm = TRUE), std = median(std, na.rm = TRUE)) %>% 
+    ungroup() %>% 
+    with(cor(sample, std, use = "complete", method = "pearson"))
+}
+
+importance <- stds %>% 
+  distinct(phase) %>% 
+  pull(phase) %>% 
+  set_names() %>% 
+  map_dfc(
+    ~ xrd_corr(
+        run = data,
+        standard = filter(stds, phase == .x) %>% distinct()
+    )
+  ) %>% 
+  pivot_longer(everything(), names_to = "phase", values_to = "r") %>% 
+  arrange(desc(r))
+
+```
+
+```{r data-w-stds}
+
+ordered_stds <- stds %>% 
+  mutate(phase_f = factor(phase) %>% fct_relevel(importance$phase) %>% as.numeric())
+
+data %>% 
+  ggplot(aes(two_theta, intensity)) + 
+  geom_line() +
+  geom_segment(
+    data = ordered_stds,
+    aes(
+      x = two_theta, xend = two_theta, 
+      y = .5 * (0 - phase_f), yend = .5 * (intensity - phase_f), 
+      col = phase
+    )
+  )
+
+```
+Detect peaks:
+
+```{r}
+
+peaks_detected <- data %>% 
+  peak_maxima(
+    peaks = 20, n = 1, method = "sigma", 
+     x_var = "two_theta", y_var = "intensity",
+    group_vars = NULL
+  )
+
+assign_peaks <- function(sample, standard, round_to = 1, phases) { 
+  sample %>% 
+    mutate(two_theta_rnd = plyr::round_any(two_theta, round_to)) %>% 
+    right_join(
+      standard %>% 
+        filter(phase %in% phases) %>% 
+        mutate(two_theta_rnd = plyr::round_any(two_theta, round_to)) %>% 
+        select(two_theta, two_theta_rnd, phase), 
+      by = "two_theta_rnd", suffix = c("", "_std")
+    ) %>% 
+    group_by(two_theta = round(two_theta_std, 1), phase) %>%
+    summarize(intensity = max(intensity)) %>%
+    ungroup()
+}
+
+peaks_idd <- bind_rows(
+  assign_peaks(peaks_detected, stds, phases = importance$phase[1], round_to = 1),
+  assign_peaks(peaks_detected, stds, phases = importance$phase[2], round_to = 1),
+  assign_peaks(peaks_detected, stds, phases = importance$phase[3], round_to = 1)
+)
+
+```
+
+Add the identified peaks to the plot:
+
+```{r data-w-peaks}
+
+data %>% 
+  ggplot(aes(two_theta, intensity)) + 
+  geom_line() +
+  geom_segment(
+    data = ordered_stds,
+    aes(
+      x = two_theta, xend = two_theta, 
+      y = .5 * (0 - phase_f), yend = .5 * (intensity - phase_f), 
+      col = phase
+    )
+  ) + 
+  geom_point(
+    data = peaks_idd,
+    aes(col = phase)
+  )
+
+```
+
+
