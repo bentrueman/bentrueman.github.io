@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Benjamin Trueman</title>
+
+<!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content=""/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+/* adjust viewport for navbar height */
+/* helps vertically center bootstrap (non-distill) content */
+.min-vh-100 {
+  min-height: calc(100vh - 100px) !important;
+}
+
+</style>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description || ''}
+                </div>
+                <div class="search-item-preview">
+                  ${img}
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+.nav-search {
+  font-size: x-small;
+}
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+<!--radix_placeholder_site_in_header-->
+<!--/radix_placeholder_site_in_header-->
+
+<style type="text/css">
+body {
+  padding-top: 60px;
+}
+</style>
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/bootstrap/js/bootstrap.min.js"></script>
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/bootstrap/shim/html5shiv.min.js"></script>
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/bootstrap/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/navigation-1.1/tabsets.js"></script>
+<link href="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/highlightjs/default.css" rel="stylesheet" />
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/highlightjs/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="index.html" class="title">blog</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="CV.html">CV</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="CV.html">CV</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Benjamin Trueman</h1>
+
+</div>
+
+
+<p>Postdoctoral researcher (2018 – present) Department of Civil &amp; Resource Engineering<br />
+Dalhousie University<br />
+Halifax, NS, CAN<br />
+Email: <a href="mailto:benjamin.trueman@dal.ca" class="email">benjamin.trueman@dal.ca</a></p>
+<div id="academic-background" class="section level1">
+<h1>ACADEMIC BACKGROUND</h1>
+<p>2018 PhD, Civil Engineering<br />
+Dalhousie University, Halifax, NS<br />
+Thesis title: “Controlling Lead Release To Drinking Water: Impacts Of Iron Oxides, Complexing Species, Orthophosphate, And Lead Pipe Replacement”</p>
+<p>2012 BSc, Environmental Science<br />
+Dalhousie University, Halifax, NS</p>
+</div>
+<div id="skills" class="section level1">
+<h1>SKILLS</h1>
+<ul>
+<li>Proficient in the R language (<a href="https://github.com/bentrueman" class="uri">https://github.com/bentrueman</a>)</li>
+<li>Geochemical modeling with applications in corrosion control: developed an R package for predicting lead and copper solubility using PHREEQC, available at <a href="https://github.com/bentrueman/pbcusol" class="uri">https://github.com/bentrueman/pbcusol</a></li>
+<li>Well-developed written and verbal communication skills: wrote or co-wrote 25 peer-reviewed journal articles, presented work at international academic conferences</li>
+<li>Well-developed data analysis skills (see published journal articles 3, 7, 12, and 23 in particular)</li>
+</ul>
+</div>
+<div id="scientific-contributions" class="section level1">
+<h1>SCIENTIFIC CONTRIBUTIONS</h1>
+<div id="published-journal-articles" class="section level2">
+<h2>Published journal articles</h2>
+<p>Google Scholar: <a href="https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&amp;hl=en" class="uri">https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&amp;hl=en</a></p>
+<ol style="list-style-type: decimal">
+<li><p>Joint first author<sup>a</sup>: Anderson, L.E.,<sup>a</sup> Trueman, B.F.,<sup>a</sup> Dunnington, D.W.<sup>a</sup> &amp; Gagnon, G. A. (2021). Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 <a href="https://doi.org/10.1038/s41545-021-00115-4" class="uri">https://doi.org/10.1038/s41545-021-00115-4</a></p></li>
+<li><p>Aghasadeghi, K., Peldszus, S., Trueman, B. F., Mishrra, A., Cooke, M. G., Slawson, R. M., Giammar, D. E., Gagnon, G. A., &amp; Huck, P. M. Pilot-scale comparison of sodium silicates, orthophosphate and pH adjustment to reduce lead release from lead service lines. Water Research. 195, 116955. <a href="https://doi.org/10.1016/j.watres.2021.116955" class="uri">https://doi.org/10.1016/j.watres.2021.116955</a></p></li>
+<li><p>Joint first author<sup>a</sup>: Redden, D.,<sup>a</sup> Trueman, B. F.,<sup>a</sup> Dunnington, D. W., Anderson, L. A., &amp; Gagnon, G. A. (2021). Chemical recovery and browning of Nova Scotia surface waters in response to declining acid deposition. Environmental Science: Processes &amp; Impacts. 23, 446-456. <a href="https://doi.org/10.1039/D0EM00425A" class="uri">https://doi.org/10.1039/D0EM00425A</a></p></li>
+<li><p>Li, B., Trueman, B. F., Locsin, J. A., Rahman, M. S., Gao, Y., Park, Y., &amp; Gagnon, G. A. (2021). Impact of sodium silicate on lead release from lead carbonate. Environmental Science: Water Research &amp; Technology. 7, 599-609. <a href="https://doi.org/10.1039/D0EW00886A" class="uri">https://doi.org/10.1039/D0EW00886A</a></p></li>
+<li><p>Li, B., Trueman, B. F., Rahman, M. S., &amp; Gagnon, G. A. (2021). Controlling lead release due to uniform and galvanic corrosion—An evaluation of silicate-based inhibitors. Journal of Hazardous Materials, 407, 124707. <a href="https://doi.org/10.1016/j.jhazmat.2020.124707" class="uri">https://doi.org/10.1016/j.jhazmat.2020.124707</a></p></li>
+<li><p>Li, B., Trueman, B. F., Munoz, S., Locsin, J. M., &amp; Gagnon, G. A. (2021). Impact of sodium silicate on lead release and colloid size distributions in drinking water. Water Research, 190, 116709. <a href="https://doi.org/10.1016/j.watres.2020.116709" class="uri">https://doi.org/10.1016/j.watres.2020.116709</a></p></li>
+<li><p>Dunnington, D. W., Trueman, B. F., Raseman, W. J., Anderson, L. E., Gagnon, G. A. (2021). Comparing the Predictive Performance, Interpretability, and Accessibility of Machine Learning and Physically Based Models for Water Treatment. ACS ES&amp;T Engineering. 1(3), 348–356. <a href="https://doi.org/10.1021/acsestengg.0c00053" class="uri">https://doi.org/10.1021/acsestengg.0c00053</a></p></li>
+<li><p>Joint first author<sup>a</sup>: Lane, K.,<sup>a</sup> Trueman, B. F.,<sup>a</sup> Locsin, J., Gagnon, G. A. (2020). Inorganic contaminants in Canadian First Nation community water systems. Journal of Water and Health. 18 (5), 728–740. <a href="https://doi.org/10.2166/wh.2020.185" class="uri">https://doi.org/10.2166/wh.2020.185</a></p></li>
+<li><p>Locsin, J. M., Trueman, B.F., Serracin-Pitti, D., Stanton, G. M. L., Gagnon, G. A. (2020). Potential regulatory implications of guideline changes in lead monitoring for Nova Scotia. AWWA Water Science, 2(4), e1182. <a href="https://doi.org/10.1002/aws2.1182" class="uri">https://doi.org/10.1002/aws2.1182</a></p></li>
+<li><p>Gora, S. L., Anaviapik-Soucie, T., Allward, N. E., Ontiveros, C. C., L’Hérault, V., Kunuk- Gavin, M., Trueman, B. F., Campbell, J., Stoddart, A. K., Gagnon, G. A. (2020). Microbiological water quality in a decentralized Arctic drinking water system. Environmental Science: Water Research &amp; Technology, 6, 1855-1868. <a href="https://doi.org/10.1039/d0ew00019a" class="uri">https://doi.org/10.1039/d0ew00019a</a></p></li>
+<li><p>Gora, S. L., Trueman, B. F., Anaviapik-Soucie, T., Gavin, M. K., Ontiveros, C. C., Campbell, J., L’Hérault, V., Stoddart, A. K., &amp; Gagnon, G. A. (2020). Source Water Characteristics and Building-specific Factors Influence Corrosion and Point of Use Water Quality in a Decentralized Arctic Drinking Water System. Environmental Science &amp; Technology, 54, 2192−2201. <a href="https://doi.org/10.1021/acs.est.9b04691" class="uri">https://doi.org/10.1021/acs.est.9b04691</a></p></li>
+<li><p>Joint first author: Brophy, M. J.,<sup>a</sup> Trueman, B. F.,<sup>a</sup> Park, Y., Betts, R. A., &amp; Gagnon, G. A. (2019). Fluorescence Spectra Predict Microcystin-LR and Disinfection Byproduct Formation Potential in Lake Water. Environmental Science &amp; Technology, 53(2), 586–594. <a href="https://doi.org/10.1021/acs.est.8b04139" class="uri">https://doi.org/10.1021/acs.est.8b04139</a></p></li>
+<li><p>Li, B., Trueman, B. F., Rahman, M. S., Gao, Y., Park, Y., &amp; Gagnon, G. A. (2019). Understanding the impacts of sodium silicate on water quality and iron oxide particles. Environmental Science: Water Research &amp; Technology, 5(8), 1360–1370. <a href="https://doi.org/10.1039/C9EW00257J" class="uri">https://doi.org/10.1039/C9EW00257J</a></p></li>
+<li><p>Trueman, B. F., Anaviapik-Soucie, T., L’Hérault, V., &amp; Gagnon, G. A. (2019). Characterizing colloidal metals in drinking water by field flow fractionation. Environmental Science: Water Research &amp; Technology, 5(12), 2202–2209. <a href="https://doi.org/10.1039/C9EW00560A" class="uri">https://doi.org/10.1039/C9EW00560A</a></p></li>
+<li><p>Trueman, B. F., Gregory, B. S., McCormick, N. E., Gao, Y., Gora, S., Anaviapik-Soucie, T., L’Hérault, V., &amp; Gagnon, G. A. (2019). Manganese Increases Lead Release to Drinking Water. Environmental Science &amp; Technology, 53(9), 4803–4812. <a href="https://doi.org/10.1021/acs.est.9b00317" class="uri">https://doi.org/10.1021/acs.est.9b00317</a></p></li>
+<li><p>Deshommes, E., Trueman, B., Douglas, I., Huggins, D., Laroche, L., Swertfeger, J., Spielmacher, A., Gagnon, G. A., &amp; Prévost, M. (2018). Lead Levels at the Tap and Consumer Exposure from Legacy and Recent Lead Service Line Replacements in Six Utilities. Environmental Science &amp; Technology, 52(16), 9451–9459. <a href="https://doi.org/10.1021/acs.est.8b02388" class="uri">https://doi.org/10.1021/acs.est.8b02388</a></p></li>
+<li><p>Gao, Y., Trueman, B. F., Stoddart, A. K., &amp; Gagnon, G. A. (2018). Understanding the Impact of Extracellular Polymeric Substances on Lead Release in Drinking Water Systems. ACS Omega, 3(11), 14824–14832. <a href="https://doi.org/10.1021/acsomega.8b02363" class="uri">https://doi.org/10.1021/acsomega.8b02363</a></p></li>
+<li><p>Trueman, B. F., Krkošek, W. H., &amp; Gagnon, G. A. (2018). Effects of ortho- and polyphosphates on lead speciation in drinking water. Environmental Science: Water Research &amp; Technology, 4(4), 505–512. <a href="https://doi.org/10.1039/C7EW00521K" class="uri">https://doi.org/10.1039/C7EW00521K</a></p></li>
+<li><p>Anderson, L. E., Krkošek, W. H., Stoddart, A. K., Trueman, B. F., &amp; Gagnon, G. A. (2017). Lake Recovery Through Reduced Sulfate Deposition: A New Paradigm for Drinking Water Treatment. Environmental Science &amp; Technology, 51(3), 1414–1422. <a href="https://doi.org/10.1021/acs.est.6b04889" class="uri">https://doi.org/10.1021/acs.est.6b04889</a></p></li>
+<li><p>Trueman, B. F., Sweet, G. A., Harding, M. D., Estabrook, H., Bishop, D. P., &amp; Gagnon, G. A. (2017). Galvanic Corrosion of Lead by Iron (Oxyhydr)Oxides: Potential Impacts on Drinking Water Quality. Environmental Science &amp; Technology, 51(12), 6812–6820. <a href="https://doi.org/10.1021/acs.est.7b01671" class="uri">https://doi.org/10.1021/acs.est.7b01671</a></p></li>
+<li><p>Trueman, B. F., Camara, E., &amp; Gagnon, G. A. (2016). Evaluating the Effects of Full and Partial Lead Service Line Replacement on Lead Levels in Drinking Water. Environmental Science &amp; Technology, 50(14), 7389–7396. <a href="https://doi.org/10.1021/acs.est.6b01912" class="uri">https://doi.org/10.1021/acs.est.6b01912</a></p></li>
+<li><p>Trueman, B. F., &amp; Gagnon, G. A. (2016a). A new analytical approach to understanding nanoscale lead-iron interactions in drinking water distribution systems. Journal of Hazardous Materials, 311, 151–157. <a href="https://doi.org/10.1016/j.jhazmat.2016.03.001" class="uri">https://doi.org/10.1016/j.jhazmat.2016.03.001</a></p></li>
+<li><p>Trueman, B. F., MacIsaac, S. A., Stoddart, A. K., &amp; Gagnon, G. A. (2016). Prediction of disinfection by-product formation in drinking water via fluorescence spectroscopy. Environmental Science: Water Research &amp; Technology, 2(2), 383–389. <a href="https://doi.org/10.1039/C5EW00285K" class="uri">https://doi.org/10.1039/C5EW00285K</a></p></li>
+<li><p>Trueman, B. F., &amp; Gagnon, G. A. (2016b). Understanding the Role of Particulate Iron in Lead Release to Drinking Water. Environmental Science &amp; Technology, 50(17), 9053–9060. <a href="https://doi.org/10.1021/acs.est.6b01153" class="uri">https://doi.org/10.1021/acs.est.6b01153</a></p></li>
+<li><p>Pei, W. W., Xie, X., Ong, P., Trueman, B. F., McVicar, M. A., Walsh, M. E., &amp; Gagnon, G. A. (2013). Water Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. <a href="https://doi.org/10.2175/106143013X13698672322183" class="uri">https://doi.org/10.2175/106143013X13698672322183</a></p></li>
+</ol>
+</div>
+<div id="preprints" class="section level2">
+<h2>Preprints</h2>
+<ol style="list-style-type: decimal">
+<li>Guardado, A. L. P., Sweeney, C. L., Hayes, E., Trueman, B. F., Huang, Y., Jamieson, R. C., … &amp; Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. <a href="https://doi.org/10.1101/2020.12.04.20237230" class="uri">https://doi.org/10.1101/2020.12.04.20237230</a></li>
+</ol>
+</div>
+<div id="first-author-conference-presentations" class="section level2">
+<h2>First author conference presentations</h2>
+<ol style="list-style-type: decimal">
+<li><p>Trueman, B.F., A.K. Stoddart &amp; G.A. Gagnon. 2019. Complexation of metals in drinking water systems by NOM. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.</p></li>
+<li><p>Trueman, B.F., L.A. Anderson &amp; G.A. Gagnon. 2019. NOM, cyanobacteria and algal toxins: monitoring tools and predictive modeling of contaminant occurrence in drinking water supplies. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.</p></li>
+<li><p>Trueman, B.F., D. Dunnington, &amp; G.A. Gagnon. 2019. Communicating water quality data using the grammar of graphics. Poster presentation. American Chemical Society National Meeting &amp; Expo, August 25 – 29 in San Diego, CA.</p></li>
+<li><p>Trueman, B.F., M. Brophy, L. A. Anderson, Y. Park &amp; G. A. Gagnon. 2019. Fluorescence spectra predict microcystin-LR occurrence in lake water. Oral presentation. 3rd Interdisciplinary Freshwater Harmful Algal Blooms Workshop, April 24 – 26 in Toronto, Canada.</p></li>
+<li><p>Trueman, B.F., J. Locsin, W.H. Krkošek, and G.A. Gagnon. 2018. Understanding lead complexation through corrosion control with phosphate-based inhibitors. Oral presentation. American Water Works Association Water Quality Technology Conference, November 11-14 in Toronto, Canada.</p></li>
+<li><p>Trueman, B.F., W.H. Krkošek, and G.A. Gagnon. 2018. Effects of ortho- and polyphosphates on lead speciation in drinking water. Oral presentation. American Chemical Society Annual Conference, March 18-22, in New Orleans, LA.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2017. Galvanic corrosion of lead by iron (oxyhydr)oxides: potential impacts on drinking water quality. Oral presentation. American Chemical Society Annual Conference, August 20-24, in Washington, DC.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2017. Evaluating strategies for controlling lead release to drinking water. Oral presentation. American Water Works Association International Symposium on Inorganics, March 21-22 in Detroit, MI.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding the role of iron particles in lead release to drinking water. Poster presentation. American Water Works Association Water Quality Technology Conference, November 13-17 in Indianapolis, IN.</p></li>
+<li><p>Trueman, B.F., S.A. MacIsaac, A.K. Stoddart, and G.A. Gagnon. 2016. Prediction of disinfection byproduct formation in drinking water via fluorescence spectroscopy. Oral presentation. 17th National Conference on Drinking Water, October 16-18 in Ottawa, Canada.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding lead contamination in drinking water systems. Oral presentation. Atlantic Canadian Water Works Association Annual Conference, September 18-21, in Moncton, Canada.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding the role of colloidal particles in lead release to drinking water. Oral presentation. American Chemical Society Annual Conference, August 21-25 in Philadelphia, PA.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2015. Controlling lead in drinking water: phosphate inhibition, lead service line replacement, and the role of the water main. Oral presentation. Atlantic Canadian Water Works Association Annual Conference, October 4-7 in St. John’s, Canada.</p></li>
+<li><p>Trueman, B.F., J. Woods, G.A. Gagnon and H. Castleden. 2014. The effect of partial lead service line replacement and the barriers to full replacement. Oral presentation. American Water Works Association Annual Conference, June 8-12 in Boston, MA.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2014. The effect of cast iron water mains on lead release to standing water. Oral presentation. Canadian Society for Civil Engineering Environmental Specialty Conference, May 28-31 in Halifax, Canada.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2013. Optimization of phosphate dose following residential sampling for lead. Poster presentation. American Water Works Association Annual Conference and Exposition, June 9-13 in Denver, CO. Reports Prepared confidential consulting reports on topics in drinking water quality and treatment for the cities of Regina, Saint John, and Halifax and for Health Canada and Nova Scotia Environment.</p></li>
+</ol>
+</div>
+</div>
+<div id="professional-service" class="section level1">
+<h1>PROFESSIONAL SERVICE</h1>
+<div id="peer-reviewer-for" class="section level2">
+<h2>Peer-reviewer for:</h2>
+<p>Water Research Environmental Science &amp; Technology Environmental Science &amp; Technology Letters ACS Earth and Space Chemistry Corrosion Science Journal of Hazardous Materials Environmental Science: Water Research &amp; Technology Environmental Science: Processes &amp; Impacts Environmental Pollution Springer Nature Applied Sciences</p>
+</div>
+<div id="honours-and-awards" class="section level2">
+<h2>HONOURS AND AWARDS:</h2>
+<p>2019 Best presentation award, The 7th IWA Specialist Conference on Natural Organic Matter (Tokyo, Japan) 2017 Nova Scotia Graduate Scholarship 2015 NSERC Post Graduate Scholarship Doctoral Level 2015 President’s Award, Dalhousie University</p>
+</div>
+</div>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
