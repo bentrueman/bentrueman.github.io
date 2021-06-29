@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/",
+    "title": "Peak detection for qualitative XRD analysis in R",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Ben Trueman",
+        "url": {}
+      }
+    ],
+    "date": "2021-06-29",
+    "categories": [],
+    "contents": "\n\n\n\nThe data, from Li et al. (2021).\n\n\n\nA quick and dirty method of determining phase importance, for plotting purposes only:\n\n\n\n\n\n\nDetect peaks:\n\n\n\nAdd the identified peaks to the plot:\n\n\n\n\n\n\nLi, Bofu, Benjamin F. Trueman, Javier M. Locsin, Yaohuan Gao, Mohammad Shahedur Rahman, Yuri Park, and Graham A. Gagnon. 2021. “Impact of Sodium Silicate on Lead Release from Lead (Ii) Carbonate.” Environmental Science: Water Research & Technology 7 (3): 599–609. https://doi.org/10.1039/D0EW00886A.\n\n\n\n\n",
+    "preview": "posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/an-improved-workflow-for-qualitative-xrd-in-r_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2021-06-29T17:42:33-03:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2021-06-18-lead-solubility-prediction-using-shiny/",
     "title": "Lead solubility prediction using shiny",
     "description": "An R package and shiny app for PHREEQC-based equilibrium lead and copper solubility prediction.",
@@ -14,23 +31,6 @@
     "contents": "\nRecently, I’ve been experimenting with the excellent R package tidyphreeqc (Dunnington 2019), which provides a convenient interface for generating PHREEQC input files (Charlton and Parkhurst 2011; Parkhurst and Appelo 2013). I’ve used it to build a separate package (pbcusol (Trueman 2021)) that handles lead and copper solubility prediction specifically, with curated thermodynamic data and some domain specific features implemented in what is hopefully a straightforward collection of functions.\nI’ve also implemented it in a shiny app:\n\n\n\nCharlton, S. R., and D. L. Parkhurst. 2011. “Modules Based on the Geochemical Model Phreeqc for Use in Scripting and Programming Languages.” Computers & Geosciences 37: 1653–63. http://dx.doi.org/10.1016/j.cageo.2011.02.005.\n\n\nDunnington, Dewey. 2019. Tidyphreeqc: Tidy Geochemical Modeling Using Phreeqc. https://github.com/paleolimbot/tidyphreeqc.\n\n\nParkhurst, D. L., and C. A. J. Appelo. 2013. Description of Input and Examples for Phreeqc Version 3–a Computer Program for Speciation, Batch-Reaction, One-Dimensional Transport, and Inverse Geochemical Calculations. Vol. book 6. Techniques and Methods. U.S. Geological Survey. https://pubs.usgs.gov/tm/06/a43.\n\n\nTrueman, Benjamin. 2021. Pbcusol: Predict Lead and Copper Solubility. https://github.com/bentrueman/pbcusol.\n\n\n\n\n",
     "preview": {},
     "last_modified": "2021-06-18T17:05:03-03:00",
-    "input_file": {}
-  },
-  {
-    "path": "posts/welcome/",
-    "title": "Welcome to blog",
-    "description": "Welcome to our new blog, blog. We hope you enjoy \nreading what we have to say!",
-    "author": [
-      {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
-      }
-    ],
-    "date": "2021-06-18",
-    "categories": [],
-    "contents": "\n\n\n\n",
-    "preview": {},
-    "last_modified": "2021-06-18T17:06:03-03:00",
     "input_file": {}
   }
 ]

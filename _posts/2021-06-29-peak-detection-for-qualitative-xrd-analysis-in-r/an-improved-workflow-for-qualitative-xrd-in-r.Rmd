@@ -1,24 +1,22 @@
 ---
-title: "An improved workflow for qualitative XRD in R"
+title: "Peak detection for qualitative XRD analysis in R"
 description: |
   A short description of the post.
 author:
-  - name: Nora Jones
-    url: https://example.com/norajones
+  - name: Ben Trueman
+    url: 
 date: 06-29-2021
 bibliography: references.bib
 output:
   distill::distill_article:
     self_contained: false
-resources:
-  exclude: 
-  *.txt
-  *.csv
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library("tidyverse")
+theme_set(theme_minimal())
 ```
 
 ```{r load}
@@ -46,8 +44,6 @@ data %>%
 A quick and dirty method of determining phase importance, for plotting purposes only:
 
 ```{r correlations}
-
-# 1. correlation between standard and sample
 
 xrd_corr <- function(run, standard) {
   list( 
@@ -89,7 +85,7 @@ data %>%
     data = ordered_stds,
     aes(
       x = two_theta, xend = two_theta, 
-      y = .5 * (0 - phase_f), yend = .5 * (intensity - phase_f), 
+      y = .25 * (0 - phase_f), yend = .25 * (intensity - phase_f), 
       col = phase
     )
   )
@@ -140,7 +136,7 @@ data %>%
     data = ordered_stds,
     aes(
       x = two_theta, xend = two_theta, 
-      y = .5 * (0 - phase_f), yend = .5 * (intensity - phase_f), 
+      y = .25 * (0 - phase_f), yend = .25 * (intensity - phase_f), 
       col = phase
     )
   ) + 

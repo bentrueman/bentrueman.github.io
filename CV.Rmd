@@ -1,20 +1,14 @@
 ---
 title: "Benjamin Trueman"
-output: html_document
+description: "Postdoctoral researcher  \nDepartment of Civil & Resource Engineering
+  \ \nDalhousie University  \nHalifax, NS, CAN  \n"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Postdoctoral researcher (2018 – present) 
-Department of Civil & Resource Engineering  
-Dalhousie University  
-Halifax, NS, CAN  
-Email: benjamin.trueman@dal.ca 
-
-
-# ACADEMIC BACKGROUND  
+# Academic background    
 
 2018 PhD, Civil Engineering  
 Dalhousie University, Halifax, NS  
@@ -23,75 +17,75 @@ Thesis title: “Controlling Lead Release To Drinking Water: Impacts Of Iron Oxi
 2012 BSc, Environmental Science  
 Dalhousie University, Halifax, NS  
 
-# SKILLS
+# Skills  
 
-- Proficient in the R language (https://github.com/bentrueman)
-- Geochemical modeling with applications in corrosion control: developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
-- Well-developed written and verbal communication skills:
-wrote or co-wrote 25 peer-reviewed journal articles, presented work at international academic conferences
-- Well-developed data analysis skills (see published journal articles 3, 7, 12, and 23 in particular)
+- Proficient in R (https://github.com/bentrueman)
+- Geochemical modeling with applications in corrosion control
+  - Developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
+- Well-developed written and verbal communication skills
+  - Wrote or co-wrote 25 peer-reviewed journal articles, presented work at international academic conferences
+- Well-developed data analysis skills 
+  - See https://doi.org/10.1039/D0EM00425A, https://doi.org/10.1021/acsestengg.0c00053, https://doi.org/10.1021/acs.est.8b04139, and https://doi.org/10.1039/C5EW00285K in particular
 
-# SCIENTIFIC CONTRIBUTIONS  
-
-## Published journal articles  
+# Journal articles  
 
 Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en  
 
-1.	Joint first author^a^: Anderson, L.E.,^a^ Trueman, B.F.,^a^ Dunnington, D.W.^a^ & Gagnon, G. A. (2021).  Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 https://doi.org/10.1038/s41545-021-00115-4
+1.	**^a^Joint first author**: Anderson, L.E.,^a^ **Trueman, B.F.**,^a^ Dunnington, D.W.^a^ & Gagnon, G. A. (2021).  Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 https://doi.org/10.1038/s41545-021-00115-4
 
-2.	Aghasadeghi, K., Peldszus, S., Trueman, B. F., Mishrra, A., Cooke, M. G., Slawson, R. M., Giammar, D. E., Gagnon, G. A., & Huck, P. M. Pilot-scale comparison of sodium silicates, orthophosphate and pH adjustment to reduce lead release from lead service lines. Water Research. 195, 116955. https://doi.org/10.1016/j.watres.2021.116955
+2.	Aghasadeghi, K., Peldszus, S., **Trueman, B. F.**, Mishrra, A., Cooke, M. G., Slawson, R. M., Giammar, D. E., Gagnon, G. A., & Huck, P. M. Pilot-scale comparison of sodium silicates, orthophosphate and pH adjustment to reduce lead release from lead service lines. Water Research. 195, 116955. https://doi.org/10.1016/j.watres.2021.116955
 
-3.	Joint first author^a^: Redden, D.,^a^ Trueman, B. F.,^a^ Dunnington, D. W., Anderson, L. A., & Gagnon, G. A. (2021). Chemical recovery and browning of Nova Scotia surface waters in response to declining acid deposition. Environmental Science: Processes & Impacts. 23, 446-456. https://doi.org/10.1039/D0EM00425A
+3.	**^a^Joint first author**: Redden, D.,^a^ **Trueman, B. F.**,^a^ Dunnington, D. W., Anderson, L. A., & Gagnon, G. A. (2021). Chemical recovery and browning of Nova Scotia surface waters in response to declining acid deposition. Environmental Science: Processes & Impacts. 23, 446-456. https://doi.org/10.1039/D0EM00425A
 
-4.	Li, B., Trueman, B. F., Locsin, J. A., Rahman, M. S., Gao, Y., Park, Y., & Gagnon, G. A. (2021). Impact of sodium silicate on lead release from lead carbonate. Environmental Science: Water Research & Technology. 7, 599-609. https://doi.org/10.1039/D0EW00886A
+4.	Li, B., **Trueman, B. F.**, Locsin, J. A., Rahman, M. S., Gao, Y., Park, Y., & Gagnon, G. A. (2021). Impact of sodium silicate on lead release from lead carbonate. Environmental Science: Water Research & Technology. 7, 599-609. https://doi.org/10.1039/D0EW00886A
 
-5.	Li, B., Trueman, B. F., Rahman, M. S., & Gagnon, G. A. (2021). Controlling lead release due to uniform and galvanic corrosion—An evaluation of silicate-based inhibitors. Journal of Hazardous Materials, 407, 124707. https://doi.org/10.1016/j.jhazmat.2020.124707
+5.	Li, B., **Trueman, B. F.**, Rahman, M. S., & Gagnon, G. A. (2021). Controlling lead release due to uniform and galvanic corrosion—An evaluation of silicate-based inhibitors. Journal of Hazardous Materials, 407, 124707. https://doi.org/10.1016/j.jhazmat.2020.124707
 
-6.	Li, B., Trueman, B. F., Munoz, S., Locsin, J. M., & Gagnon, G. A. (2021). Impact of sodium silicate on lead release and colloid size distributions in drinking water. Water Research, 190, 116709. https://doi.org/10.1016/j.watres.2020.116709
+6.	Li, B., **Trueman, B. F.**, Munoz, S., Locsin, J. M., & Gagnon, G. A. (2021). Impact of sodium silicate on lead release and colloid size distributions in drinking water. Water Research, 190, 116709. https://doi.org/10.1016/j.watres.2020.116709
 
-7.	Dunnington, D. W., Trueman, B. F., Raseman, W. J., Anderson, L. E., Gagnon, G. A. (2021). Comparing the Predictive Performance, Interpretability, and Accessibility of Machine Learning and Physically Based Models for Water Treatment. ACS ES&T Engineering. 1(3), 348–356. https://doi.org/10.1021/acsestengg.0c00053
+7.	Dunnington, D. W., **Trueman, B. F.**, Raseman, W. J., Anderson, L. E., Gagnon, G. A. (2021). Comparing the Predictive Performance, Interpretability, and Accessibility of Machine Learning and Physically Based Models for Water Treatment. ACS ES&T Engineering. 1(3), 348–356. https://doi.org/10.1021/acsestengg.0c00053
 
-8.	Joint first author^a^: Lane, K.,^a^ Trueman, B. F.,^a^ Locsin, J., Gagnon, G. A. (2020). Inorganic contaminants in Canadian First Nation community water systems. Journal of Water and Health. 18 (5), 728–740. https://doi.org/10.2166/wh.2020.185
+8.	**^a^Joint first author**: Lane, K.,^a^ **Trueman, B. F.**,^a^ Locsin, J., Gagnon, G. A. (2020). Inorganic contaminants in Canadian First Nation community water systems. Journal of Water and Health. 18 (5), 728–740. https://doi.org/10.2166/wh.2020.185
 
-9.	Locsin, J. M., Trueman, B.F., Serracin-Pitti, D., Stanton, G. M. L., Gagnon, G. A. (2020). Potential regulatory implications of guideline changes in lead monitoring for Nova Scotia. AWWA Water Science, 2(4), e1182. https://doi.org/10.1002/aws2.1182
+9.	Locsin, J. M., **Trueman, B.F.**, Serracin-Pitti, D., Stanton, G. M. L., Gagnon, G. A. (2020). Potential regulatory implications of guideline changes in lead monitoring for Nova Scotia. AWWA Water Science, 2(4), e1182. https://doi.org/10.1002/aws2.1182
 
-10.	Gora, S. L., Anaviapik-Soucie, T., Allward, N. E., Ontiveros, C. C., L’Hérault, V., Kunuk- Gavin, M., Trueman, B. F., Campbell, J., Stoddart, A. K., Gagnon, G. A. (2020). Microbiological water quality in a decentralized Arctic drinking water system. Environmental Science: Water Research & Technology, 6, 1855-1868. https://doi.org/10.1039/d0ew00019a
+10.	Gora, S. L., Anaviapik-Soucie, T., Allward, N. E., Ontiveros, C. C., L’Hérault, V., Kunuk- Gavin, M., **Trueman, B. F.**, Campbell, J., Stoddart, A. K., Gagnon, G. A. (2020). Microbiological water quality in a decentralized Arctic drinking water system. Environmental Science: Water Research & Technology, 6, 1855-1868. https://doi.org/10.1039/d0ew00019a
 
-11.	Gora, S. L., Trueman, B. F., Anaviapik-Soucie, T., Gavin, M. K., Ontiveros, C. C., Campbell, J., L’Hérault, V., Stoddart, A. K., & Gagnon, G. A. (2020). Source Water Characteristics and Building-specific Factors Influence Corrosion and Point of Use Water Quality in a Decentralized Arctic Drinking Water System. Environmental Science & Technology, 54, 2192−2201. https://doi.org/10.1021/acs.est.9b04691
+11.	Gora, S. L., **Trueman, B. F.**, Anaviapik-Soucie, T., Gavin, M. K., Ontiveros, C. C., Campbell, J., L’Hérault, V., Stoddart, A. K., & Gagnon, G. A. (2020). Source Water Characteristics and Building-specific Factors Influence Corrosion and Point of Use Water Quality in a Decentralized Arctic Drinking Water System. Environmental Science & Technology, 54, 2192−2201. https://doi.org/10.1021/acs.est.9b04691
 
-12.	Joint first author: Brophy, M. J.,^a^ Trueman, B. F.,^a^ Park, Y., Betts, R. A., & Gagnon, G. A. (2019). Fluorescence Spectra Predict Microcystin-LR and Disinfection Byproduct Formation Potential in Lake Water. Environmental Science & Technology, 53(2), 586–594. https://doi.org/10.1021/acs.est.8b04139
+12.	**^a^Joint first author**: Brophy, M. J.,^a^ **Trueman, B. F.**,^a^ Park, Y., Betts, R. A., & Gagnon, G. A. (2019). Fluorescence Spectra Predict Microcystin-LR and Disinfection Byproduct Formation Potential in Lake Water. Environmental Science & Technology, 53(2), 586–594. https://doi.org/10.1021/acs.est.8b04139
 
-13.	Li, B., Trueman, B. F., Rahman, M. S., Gao, Y., Park, Y., & Gagnon, G. A. (2019). Understanding the impacts of sodium silicate on water quality and iron oxide particles. Environmental Science: Water Research & Technology, 5(8), 1360–1370. https://doi.org/10.1039/C9EW00257J
+13.	Li, B., **Trueman, B. F.**, Rahman, M. S., Gao, Y., Park, Y., & Gagnon, G. A. (2019). Understanding the impacts of sodium silicate on water quality and iron oxide particles. Environmental Science: Water Research & Technology, 5(8), 1360–1370. https://doi.org/10.1039/C9EW00257J
 
-14.	Trueman, B. F., Anaviapik-Soucie, T., L’Hérault, V., & Gagnon, G. A. (2019). Characterizing colloidal metals in drinking water by field flow fractionation. Environmental Science: Water Research & Technology, 5(12), 2202–2209. https://doi.org/10.1039/C9EW00560A
+14.	**Trueman, B. F.**, Anaviapik-Soucie, T., L’Hérault, V., & Gagnon, G. A. (2019). Characterizing colloidal metals in drinking water by field flow fractionation. Environmental Science: Water Research & Technology, 5(12), 2202–2209. https://doi.org/10.1039/C9EW00560A
 
-15.	Trueman, B. F., Gregory, B. S., McCormick, N. E., Gao, Y., Gora, S., Anaviapik-Soucie, T., L’Hérault, V., & Gagnon, G. A. (2019). Manganese Increases Lead Release to Drinking Water. Environmental Science & Technology, 53(9), 4803–4812. https://doi.org/10.1021/acs.est.9b00317
+15.	**Trueman, B. F.**, Gregory, B. S., McCormick, N. E., Gao, Y., Gora, S., Anaviapik-Soucie, T., L’Hérault, V., & Gagnon, G. A. (2019). Manganese Increases Lead Release to Drinking Water. Environmental Science & Technology, 53(9), 4803–4812. https://doi.org/10.1021/acs.est.9b00317
 
-16.	Deshommes, E., Trueman, B., Douglas, I., Huggins, D., Laroche, L., Swertfeger, J., Spielmacher, A., Gagnon, G. A., & Prévost, M. (2018). Lead Levels at the Tap and Consumer Exposure from Legacy and Recent Lead Service Line Replacements in Six Utilities. Environmental Science & Technology, 52(16), 9451–9459. https://doi.org/10.1021/acs.est.8b02388
+16.	Deshommes, E., **Trueman, B .F.**, Douglas, I., Huggins, D., Laroche, L., Swertfeger, J., Spielmacher, A., Gagnon, G. A., & Prévost, M. (2018). Lead Levels at the Tap and Consumer Exposure from Legacy and Recent Lead Service Line Replacements in Six Utilities. Environmental Science & Technology, 52(16), 9451–9459. https://doi.org/10.1021/acs.est.8b02388
 
-17.	Gao, Y., Trueman, B. F., Stoddart, A. K., & Gagnon, G. A. (2018). Understanding the Impact of Extracellular Polymeric Substances on Lead Release in Drinking Water Systems. ACS Omega, 3(11), 14824–14832. https://doi.org/10.1021/acsomega.8b02363
+17.	Gao, Y., **Trueman, B. F.**, Stoddart, A. K., & Gagnon, G. A. (2018). Understanding the Impact of Extracellular Polymeric Substances on Lead Release in Drinking Water Systems. ACS Omega, 3(11), 14824–14832. https://doi.org/10.1021/acsomega.8b02363
 
-18.	Trueman, B. F., Krkošek, W. H., & Gagnon, G. A. (2018). Effects of ortho- and polyphosphates on lead speciation in drinking water. Environmental Science: Water Research & Technology, 4(4), 505–512. https://doi.org/10.1039/C7EW00521K
+18.	**Trueman, B. F.**, Krkošek, W. H., & Gagnon, G. A. (2018). Effects of ortho- and polyphosphates on lead speciation in drinking water. Environmental Science: Water Research & Technology, 4(4), 505–512. https://doi.org/10.1039/C7EW00521K
 
-19.	Anderson, L. E., Krkošek, W. H., Stoddart, A. K., Trueman, B. F., & Gagnon, G. A. (2017). Lake Recovery Through Reduced Sulfate Deposition: A New Paradigm for Drinking Water Treatment. Environmental Science & Technology, 51(3), 1414–1422. https://doi.org/10.1021/acs.est.6b04889
+19.	Anderson, L. E., Krkošek, W. H., Stoddart, A. K., **Trueman, B. F.**, & Gagnon, G. A. (2017). Lake Recovery Through Reduced Sulfate Deposition: A New Paradigm for Drinking Water Treatment. Environmental Science & Technology, 51(3), 1414–1422. https://doi.org/10.1021/acs.est.6b04889
 
-20.	Trueman, B. F., Sweet, G. A., Harding, M. D., Estabrook, H., Bishop, D. P., & Gagnon, G. A. (2017). Galvanic Corrosion of Lead by Iron (Oxyhydr)Oxides: Potential Impacts on Drinking Water Quality. Environmental Science & Technology, 51(12), 6812–6820. https://doi.org/10.1021/acs.est.7b01671
+20.	**Trueman, B. F.**, Sweet, G. A., Harding, M. D., Estabrook, H., Bishop, D. P., & Gagnon, G. A. (2017). Galvanic Corrosion of Lead by Iron (Oxyhydr)Oxides: Potential Impacts on Drinking Water Quality. Environmental Science & Technology, 51(12), 6812–6820. https://doi.org/10.1021/acs.est.7b01671
 
-21.	Trueman, B. F., Camara, E., & Gagnon, G. A. (2016). Evaluating the Effects of Full and Partial Lead Service Line Replacement on Lead Levels in Drinking Water. Environmental Science & Technology, 50(14), 7389–7396. https://doi.org/10.1021/acs.est.6b01912
+21.	**Trueman, B. F.**, Camara, E., & Gagnon, G. A. (2016). Evaluating the Effects of Full and Partial Lead Service Line Replacement on Lead Levels in Drinking Water. Environmental Science & Technology, 50(14), 7389–7396. https://doi.org/10.1021/acs.est.6b01912
 
-22.	Trueman, B. F., & Gagnon, G. A. (2016a). A new analytical approach to understanding nanoscale lead-iron interactions in drinking water distribution systems. Journal of Hazardous Materials, 311, 151–157. https://doi.org/10.1016/j.jhazmat.2016.03.001
+22.	**Trueman, B. F.**, & Gagnon, G. A. (2016a). A new analytical approach to understanding nanoscale lead-iron interactions in drinking water distribution systems. Journal of Hazardous Materials, 311, 151–157. https://doi.org/10.1016/j.jhazmat.2016.03.001
 
-23.	Trueman, B. F., MacIsaac, S. A., Stoddart, A. K., & Gagnon, G. A. (2016). Prediction of disinfection by-product formation in drinking water via fluorescence spectroscopy. Environmental Science: Water Research & Technology, 2(2), 383–389. https://doi.org/10.1039/C5EW00285K
+23.	**Trueman, B. F.**, MacIsaac, S. A., Stoddart, A. K., & Gagnon, G. A. (2016). Prediction of disinfection by-product formation in drinking water via fluorescence spectroscopy. Environmental Science: Water Research & Technology, 2(2), 383–389. https://doi.org/10.1039/C5EW00285K
 
-24.	Trueman, B. F., & Gagnon, G. A. (2016b). Understanding the Role of Particulate Iron in Lead Release to Drinking Water. Environmental Science & Technology, 50(17), 9053–9060. https://doi.org/10.1021/acs.est.6b01153
+24.	**Trueman, B. F.**, & Gagnon, G. A. (2016b). Understanding the Role of Particulate Iron in Lead Release to Drinking Water. Environmental Science & Technology, 50(17), 9053–9060. https://doi.org/10.1021/acs.est.6b01153
 
-25.	Pei, W. W., Xie, X., Ong, P., Trueman, B. F., McVicar, M. A., Walsh, M. E., & Gagnon, G. A. (2013). Water Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. https://doi.org/10.2175/106143013X13698672322183
+25.	Pei, W. W., Xie, X., Ong, P., **Trueman, B. F.**, McVicar, M. A., Walsh, M. E., & Gagnon, G. A. (2013). Water Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. https://doi.org/10.2175/106143013X13698672322183
 
-## Preprints  
+# Preprints  
 
-1.	Guardado, A. L. P., Sweeney, C. L., Hayes, E., Trueman, B. F., Huang, Y., Jamieson, R. C., ... & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. https://doi.org/10.1101/2020.12.04.20237230
+1.	Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., ... & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. https://doi.org/10.1101/2020.12.04.20237230
 
-## First author conference presentations
+# First author conference presentations
 
 1.	Trueman, B.F., A.K. Stoddart & G.A. Gagnon. 2019. Complexation of metals in drinking water systems by NOM. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.
 
@@ -127,24 +121,23 @@ Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en
 Reports
 Prepared confidential consulting reports on topics in drinking water quality and treatment for the cities of Regina, Saint John, and Halifax and for Health Canada and Nova Scotia Environment.
 
-# PROFESSIONAL SERVICE
+# Peer-reviewer
 
-## Peer-reviewer for:
-Water Research
-Environmental Science & Technology
-Environmental Science & Technology Letters
-ACS Earth and Space Chemistry
-Corrosion Science
-Journal of Hazardous Materials
-Environmental Science: Water Research & Technology
-Environmental Science: Processes & Impacts
-Environmental Pollution
-Springer Nature Applied Sciences
+- Water Research
+- Environmental Science & Technology
+- Environmental Science & Technology Letters
+- ACS Earth and Space Chemistry
+- Corrosion Science
+- Journal of Hazardous Materials
+- Environmental Science: Water Research & Technology
+- Environmental Science: Processes & Impacts
+- Environmental Pollution
+- Springer Nature Applied Sciences
 
-## HONOURS AND AWARDS:
+# Awards  
 
-2019	Best presentation award, The 7th IWA Specialist Conference on Natural Organic Matter (Tokyo, Japan)
-2017 	Nova Scotia Graduate Scholarship
-2015	NSERC Post Graduate Scholarship Doctoral Level
-2015	President’s Award, Dalhousie University
+- 2019	Best presentation award, The 7th IWA Specialist Conference on Natural Organic Matter (Tokyo, Japan)
+- 2017 	Nova Scotia Graduate Scholarship
+- 2015	NSERC Post Graduate Scholarship Doctoral Level
+- 2015	President’s Award, Dalhousie University
 
