@@ -12,8 +12,8 @@
     "date": "2021-06-29",
     "categories": [],
     "contents": "\n\n\n\nThe data, from Li et al. (2021).\n\n\n\nA quick and dirty method of determining phase importance, for plotting purposes only:\n\n\n\n\n\n\nDetect peaks:\n\n\n\nAdd the identified peaks to the plot:\n\n\n\n\n\n\nLi, Bofu, Benjamin F. Trueman, Javier M. Locsin, Yaohuan Gao, Mohammad Shahedur Rahman, Yuri Park, and Graham A. Gagnon. 2021. “Impact of Sodium Silicate on Lead Release from Lead (Ii) Carbonate.” Environmental Science: Water Research & Technology 7 (3): 599–609. https://doi.org/10.1039/D0EW00886A.\n\n\n\n\n",
-    "preview": "posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/an-improved-workflow-for-qualitative-xrd-in-r_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2021-06-29T17:42:33-03:00",
+    "preview": "posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2021-06-30T11:22:51-03:00",
     "input_file": {}
   },
   {

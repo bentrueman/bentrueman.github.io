@@ -1,9 +1,11 @@
 ---
-title: "About this blog"
+title: "About me"
 description: |
-  Some additional details about the blog
+  A few details
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+I am a postdoc at the Centre for Water Resources Studies at Dalhousie University (Halifax, CAN). My research interests include drinking/source water quality and treatment, water quality data analysis, and corrosion as it relates to drinking water quality.

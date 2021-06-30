@@ -1,7 +1,7 @@
-name: "blog"
-title: "blog"
+name: "benjamin-trueman"
+title: "Benjamin Trueman"
 description: |
-  blog
+  Welcome to my website
 output_dir: "_site"
 navbar:
   right:
