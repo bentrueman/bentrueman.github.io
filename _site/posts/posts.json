@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data/",
+    "title": "Non-parametric matched pair testing with left-censored data",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Ben Trueman",
+        "url": {}
+      }
+    ],
+    "date": "2021-07-05",
+    "categories": [],
+    "contents": "\nThere are few options in R for comparing matched pairs in two groups with left-censored data. And while NADA2::cen_signedranktest() is an excellent option, I wrote the following as another. It implements the Paired Prentice-Wilcoxon test, as described in @helsel_statistics_2012. I should also acknowledge the orphaned USGS’ orphaned package smwrQW [@smwrQW] for its version of the PPW test.\n\n\n\nThe ppw_test() function works like this:\n\n$statistic\n[1] -0.5628925\n\n$p.value\n[1] 0.5735081\n\nIt also does one-sided tests:\n\n$statistic\n[1] -2.918231\n\n$p.value\n[1] 0.001760118\n\nThe following codes tests that it gives the expected result when applied to the data in Table 9.7 of @helsel_statistics_2012.\n\n$statistic\n[1] 3.012394\n\n$p.value\n[1] 0.001295979\n\nAnd the following code tests that it gives the expected result on the data of @obrien_paired_1987.\n\n$statistic\n[1] 2.08696\n\n$p.value\n[1] 0.01844589\n\nReferences\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-07-05T17:53:39-03:00",
+    "input_file": "non-parametric-matched-pair-testing-with-left-censored-data.utf8.md"
+  },
+  {
     "path": "posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/",
     "title": "Peak detection for qualitative XRD analysis in R",
     "description": "A short description of the post.",

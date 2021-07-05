@@ -1,0 +1,162 @@
+---
+title: "Non-parametric matched pair testing with left-censored data"
+description: |
+  A short description of the post.
+author:
+  - name: Ben Trueman
+    url: {}
+date: 07-05-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+There are few options in R for comparing matched pairs in two groups with left-censored data. And while `NADA2::cen_signedranktest()` is an excellent option, I wrote the following as another. It implements the Paired Prentice-Wilcoxon test, as described in @helsel_statistics_2012. I should also acknowledge the orphaned USGS' orphaned package smwrQW [@smwrQW] for its version of the PPW test.
+
+```{r ppw-test}
+
+library("tidyverse")
+library("survival")
+
+ppw_test <- function(
+  x, # numeric
+  y, # numeric
+  x_cen, # logical 
+  y_cen, # logical 
+  alternative = "two.sided", # either "two.sided", "greater" (x > y), or "less" (x < y)
+  flip = TRUE
+) {
+  
+  if(length(x) != length(y))
+    stop("Lengths of x and y must be the same for paired data.")
+  
+  if(any(c(x, y) < 0))
+    stop("Negative values in x or y.")
+  
+  valid_alternative <- pmatch(alternative, c("two.sided", "greater", "less"))
+  
+  if(is.na(valid_alternative))
+    stop('Invalid choice for alternative, must match "two.sided", "greater", or "less"')
+
+  test_input <- tibble(x_val = x, y_val = y, x_cen, y_cen) %>% 
+    na.omit() %>% 
+    rowid_to_column() %>% 
+    pivot_longer(
+      cols = -rowid,
+      names_to = c("group", ".value"),
+      names_pattern = "(.+)_(.+)"
+    ) %>% 
+    mutate(
+      cen = as.numeric(!cen), # 0 is censored, 1 is observed
+      # flip data so that smallest observation becomes longest "survival time":
+      # N.B., this rounds the flipped data to 6 decimal places
+      flipped = if(flip) {max(val) + 1 - val} else val,
+      flipped = round(flipped, 6)
+    ) %>% 
+    left_join(
+      # estimate survival function:
+      survival::survfit(survival::Surv(flipped, cen) ~ 1, data = .) %>% 
+        broom::tidy() %>% 
+        mutate(time = round(time, 6)),
+      by = c("flipped" = "time")
+    ) %>% 
+    mutate(score = if_else(cen == 1, 1 - 2 * estimate, 1 - estimate)) %>% 
+    pivot_wider(id_cols = rowid, names_from = group, values_from = score) %>% 
+    mutate(d = x - y) %>% 
+    summarize(
+      z_ppw = sum(d) / sqrt(sum(d ^ 2)),
+      p_val = if(alternative == "two.sided") {2 * pnorm(abs(z_ppw), lower.tail = FALSE)} else
+        if(alternative == "greater") {pnorm(-z_ppw, lower.tail = FALSE)} else
+          if(alternative == "less") {pnorm(z_ppw, lower.tail = FALSE)} else
+            "alternative hypothesis is invalid"
+    )
+  
+  list("statistic" = test_input$z_ppw, "p.value" = test_input$p_val)
+  
+}
+
+
+```
+
+The `ppw_test()` function works like this:
+
+```{r basic-use}
+
+# generate two random normal variables, with left-censoring:
+
+withr::with_seed(450, {
+  tibble( 
+    x = rnorm(10, 3, 1),
+    y = rnorm(10, 3, 1),
+    x_cen = x < 2,
+    y_cen = y < 2
+  )
+}) %>% 
+  with(ppw_test(x, y, x_cen, y_cen))
+```
+It also does one-sided tests:
+
+```{r one-sided}
+
+withr::with_seed(23, {
+  tibble( 
+    x = rnorm(10, 10, 1),
+    y = rnorm(10, 5, 1),
+    x_cen = x < 10,
+    y_cen = y < 5
+  )
+}) %>% 
+  with(ppw_test(x, y, x_cen, y_cen, alternative = "greater")) 
+
+```
+The following codes tests that it gives the expected result when applied to the data in Table 9.7 of @helsel_statistics_2012.
+
+```{r helsel-test}
+
+helsel <- read_csv("helsel_table_9.7 copy.csv")
+
+helsel %>% 
+  mutate(
+    june_cen = str_detect(june, "<"),
+    sept_cen = str_detect(september, "<"),
+  ) %>% 
+  mutate_if(is.character, ~ as.numeric(str_remove(.x, "<"))) %>% 
+  with(ppw_test(june, september, june_cen, sept_cen, "less"))
+
+```
+
+And the following code tests that it gives the expected result on the data of @obrien_paired_1987.
+
+```{r o-brien-test}
+
+# from o'brien and fleming, 1987:
+tibble::tribble(
+  ~patient, ~close_match, ~poor_match,
+  1, "37", 29, 
+  2, "19", 13, 
+  3, ">57", 15, 
+  4, "93", 26, 
+  5, "16", 11, 
+  6, "22", 17, 
+  7, "20", 26, 
+  8, "18", 21, 
+  9, "63", 43, 
+  10, "29", 15,
+  11, ">60", 40
+) %>% 
+  mutate(
+    cen_close = str_detect(close_match, ">"),
+    cen_poor = FALSE,
+    close_match = str_remove(close_match, ">") %>% 
+      as.numeric()
+  ) %>% 
+  with(ppw_test(close_match, poor_match, cen_close, cen_poor, alternative = "less", flip = FALSE))
+
+```
+
+# References  
