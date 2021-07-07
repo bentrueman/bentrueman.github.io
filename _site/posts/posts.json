@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-07-07-comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models/",
+    "title": "Comparing drinking water quality time series using generalized additive mixed models",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Ben Trueman",
+        "url": {}
+      }
+    ],
+    "date": "2021-07-07",
+    "categories": [],
+    "contents": "\nDissolved and total as separate models:\n\n\n\n\n\n\n",
+    "preview": "posts/2021-07-07-comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models/comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2021-07-07T16:41:01-03:00",
+    "input_file": "comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models.utf8.md"
+  },
+  {
     "path": "posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data/",
     "title": "Non-parametric matched pair testing with left-censored data",
     "description": "A short description of the post.",

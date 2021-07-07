@@ -1,0 +1,101 @@
+---
+title: "Comparing drinking water quality time series using generalized additive mixed models"
+description: |
+  A short description of the post.
+author:
+  - name: Ben Trueman
+    url: {}
+date: 07-07-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library("tidyverse")
+library("mgcv")
+source("confint_gam.R")
+theme_set(theme_classic() + theme(strip.background = element_blank()))
+jdk_pl <- read_csv("trueman_gagnon_2016_pipe_loop_data_cleaned.csv")
+```
+
+Dissolved and total as separate models:
+
+```{r}
+fe_gam <- jdk_pl %>% 
+  mutate_if(is.character, factor) %>% 
+  arrange(fraction, lsl, time_d) %>% 
+  group_by(fraction) %>% 
+  nest() %>% 
+  ungroup() %>% 
+  mutate(
+    model_raw = map(
+      data,
+      ~ mgcv::gamm(
+        pb_ppb ~ t2(time_d, pipe_config, main, bs = c("tp", "re", "re"), full = TRUE), 
+        correlation = nlme::corCAR1(form = ~ time_d | lsl),
+        method = "REML",
+        data = .x
+      )
+    ),
+    model = map(model_raw, ~ .x$gam),
+    preds = map2(
+      model, data, 
+      ~ predict(.x, newdata = .y, se = TRUE)
+    ),
+    preds = map2(
+      preds, model, 
+      ~ tibble(fit = .x$fit, se_fit = .x$se.fit) %>% 
+        mutate(
+          lwr = fit - simul_critval(.y) * se_fit,
+          upr = fit + simul_critval(.y) * se_fit,
+          fit = fit
+        )
+    )
+  )
+
+fe_gam %>% 
+  unnest(c(data, preds)) %>% 
+  mutate(
+    main = fct_recode(main, "Iron" = "iron", "PVC" = "pvc"),
+    fraction = str_replace(fraction, "u", "µ") %>% 
+      fct_recode("Total" = "total") %>% 
+      fct_relevel("Total", after = 0L),
+    pipe_config = str_to_sentence(pipe_config) %>% 
+      str_replace("lsl", "LSL")
+  ) %>% 
+  ggplot(aes(time_d, col = main, fill = main)) + 
+  facet_grid(
+    cols = vars(fraction), 
+    rows = vars(pipe_config), 
+    scales = "free"
+  ) +
+  geom_point(
+    data = function(x) x %>% 
+      group_by(time_d, main, fraction, pipe_config) %>% 
+      summarize(pb_ppb = mean(pb_ppb)),
+    aes(y = pb_ppb), alpha = .3, shape = 16, size = 3
+  ) + 
+  geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = .3, col = NA) +
+  geom_line(aes(y = fit, group = interaction(pipe_config, main))) +
+  scale_colour_manual(values = wesanderson::wes_palette("Zissou1", 5)[c(5, 1)]) +
+  scale_fill_manual(values = wesanderson::wes_palette("Zissou1", 5)[c(5, 1)]) +
+  guides(col = guide_legend(override.aes = list(size = 1))) +
+  theme(legend.position = "right") +
+  labs(
+    x = "Days elapsed", 
+    y = expression("[Pb] (µg L"^"-1"*")"),
+    col = "Distribution\nmain",
+    fill = "Distribution\nmain"
+  ) 
+ 
+#fe_gam$model_raw %>% map(~ residuals(.x$lme, type = "normalized") %>% acf()) 
+#fe_gam$model %>% map(~ residuals(.x) %>% acf())
+#fe_gam$model %>% map(mgcv::gam.check) 
+#fe_gam$model %>% map(summary) 
+```
+
+
+

@@ -1,0 +1,2094 @@
+time_d,pipe,pb_ppb,fraction,pipe_config,main,lsl
+1,five,61.14,0.45 um filtered,full lsl,iron,five.full lsl
+5,five,124.3,0.45 um filtered,full lsl,iron,five.full lsl
+8,five,60.12,0.45 um filtered,full lsl,iron,five.full lsl
+12,five,65.85,0.45 um filtered,full lsl,iron,five.full lsl
+15,five,69.4,0.45 um filtered,full lsl,iron,five.full lsl
+19,five,67.12,0.45 um filtered,full lsl,iron,five.full lsl
+22,five,60.52,0.45 um filtered,full lsl,iron,five.full lsl
+26,five,59.77,0.45 um filtered,full lsl,iron,five.full lsl
+29,five,66.62,0.45 um filtered,full lsl,iron,five.full lsl
+33,five,67.21,0.45 um filtered,full lsl,iron,five.full lsl
+36,five,62.53,0.45 um filtered,full lsl,iron,five.full lsl
+47,five,107.3,0.45 um filtered,full lsl,iron,five.full lsl
+50,five,112.7,0.45 um filtered,full lsl,iron,five.full lsl
+54,five,113.8,0.45 um filtered,full lsl,iron,five.full lsl
+57,five,110.4,0.45 um filtered,full lsl,iron,five.full lsl
+61,five,124.6,0.45 um filtered,full lsl,iron,five.full lsl
+64,five,113.7,0.45 um filtered,full lsl,iron,five.full lsl
+68,five,91.18,0.45 um filtered,full lsl,iron,five.full lsl
+71,five,89.89,0.45 um filtered,full lsl,iron,five.full lsl
+78,five,77.01,0.45 um filtered,full lsl,iron,five.full lsl
+82,five,80.66,0.45 um filtered,full lsl,iron,five.full lsl
+85,five,86.91,0.45 um filtered,full lsl,iron,five.full lsl
+89,five,98.73,0.45 um filtered,full lsl,iron,five.full lsl
+92,five,187.6,0.45 um filtered,full lsl,iron,five.full lsl
+99,five,178.4,0.45 um filtered,full lsl,iron,five.full lsl
+103,five,153.6,0.45 um filtered,full lsl,iron,five.full lsl
+106,five,135.3,0.45 um filtered,full lsl,iron,five.full lsl
+110,five,165.6,0.45 um filtered,full lsl,iron,five.full lsl
+113,five,120.5,0.45 um filtered,full lsl,iron,five.full lsl
+117,five,117.4,0.45 um filtered,full lsl,iron,five.full lsl
+120,five,119,0.45 um filtered,full lsl,iron,five.full lsl
+127,five,136.7,0.45 um filtered,full lsl,iron,five.full lsl
+131,five,138.1,0.45 um filtered,full lsl,iron,five.full lsl
+134,five,151.2,0.45 um filtered,full lsl,iron,five.full lsl
+138,five,154.7,0.45 um filtered,full lsl,iron,five.full lsl
+141,five,139,0.45 um filtered,full lsl,iron,five.full lsl
+145,five,129.2,0.45 um filtered,full lsl,iron,five.full lsl
+148,five,141.2,0.45 um filtered,full lsl,iron,five.full lsl
+152,five,138.5,0.45 um filtered,full lsl,iron,five.full lsl
+155,five,155.7,0.45 um filtered,full lsl,iron,five.full lsl
+162,five,153.3,0.45 um filtered,full lsl,iron,five.full lsl
+166,five,144.7,0.45 um filtered,full lsl,iron,five.full lsl
+169,five,143.8,0.45 um filtered,full lsl,iron,five.full lsl
+173,five,166.1,0.45 um filtered,full lsl,iron,five.full lsl
+176,five,167.1,0.45 um filtered,full lsl,iron,five.full lsl
+180,five,166.4,0.45 um filtered,full lsl,iron,five.full lsl
+187,five,262.1,0.45 um filtered,full lsl,iron,five.full lsl
+190,five,196,0.45 um filtered,full lsl,iron,five.full lsl
+194,five,157.3,0.45 um filtered,full lsl,iron,five.full lsl
+197,five,141.2,0.45 um filtered,full lsl,iron,five.full lsl
+201,five,103.3,0.45 um filtered,full lsl,iron,five.full lsl
+204,five,95.1,0.45 um filtered,full lsl,iron,five.full lsl
+208,five,102.6,0.45 um filtered,full lsl,iron,five.full lsl
+211,five,88.32,0.45 um filtered,full lsl,iron,five.full lsl
+215,five,75.3,0.45 um filtered,full lsl,iron,five.full lsl
+218,five,79.63,0.45 um filtered,full lsl,iron,five.full lsl
+222,five,86.64,0.45 um filtered,full lsl,iron,five.full lsl
+225,five,142.5,0.45 um filtered,full lsl,iron,five.full lsl
+229,five,89.74,0.45 um filtered,full lsl,iron,five.full lsl
+232,five,90.25,0.45 um filtered,full lsl,iron,five.full lsl
+236,five,93.33,0.45 um filtered,full lsl,iron,five.full lsl
+239,five,99.15,0.45 um filtered,full lsl,iron,five.full lsl
+243,five,114.9,0.45 um filtered,full lsl,iron,five.full lsl
+246,five,194.3,0.45 um filtered,full lsl,iron,five.full lsl
+250,five,106.7,0.45 um filtered,full lsl,iron,five.full lsl
+253,five,143,0.45 um filtered,full lsl,iron,five.full lsl
+257,five,110.4,0.45 um filtered,full lsl,iron,five.full lsl
+260,five,112.4,0.45 um filtered,full lsl,iron,five.full lsl
+264,five,117.8,0.45 um filtered,full lsl,iron,five.full lsl
+267,five,106.4,0.45 um filtered,full lsl,iron,five.full lsl
+274,five,122.8,0.45 um filtered,full lsl,iron,five.full lsl
+278,five,129.8,0.45 um filtered,full lsl,iron,five.full lsl
+281,five,94.14,0.45 um filtered,full lsl,iron,five.full lsl
+285,five,107.5,0.45 um filtered,full lsl,iron,five.full lsl
+288,five,92.05,0.45 um filtered,full lsl,iron,five.full lsl
+292,five,117.3,0.45 um filtered,full lsl,iron,five.full lsl
+295,five,149.2,0.45 um filtered,full lsl,iron,five.full lsl
+299,five,134.1,0.45 um filtered,full lsl,iron,five.full lsl
+302,five,88.24,0.45 um filtered,full lsl,iron,five.full lsl
+306,five,153.1,0.45 um filtered,full lsl,iron,five.full lsl
+309,five,127.1,0.45 um filtered,full lsl,iron,five.full lsl
+313,five,89.5,0.45 um filtered,full lsl,iron,five.full lsl
+317,five,122.8,0.45 um filtered,full lsl,iron,five.full lsl
+321,five,90.18,0.45 um filtered,full lsl,iron,five.full lsl
+324,five,167.9,0.45 um filtered,full lsl,iron,five.full lsl
+328,five,219.1,0.45 um filtered,full lsl,iron,five.full lsl
+331,five,183.3,0.45 um filtered,full lsl,iron,five.full lsl
+335,five,113.5,0.45 um filtered,full lsl,iron,five.full lsl
+338,five,94.31,0.45 um filtered,full lsl,iron,five.full lsl
+342,five,235,0.45 um filtered,full lsl,iron,five.full lsl
+345,five,199.9,0.45 um filtered,full lsl,iron,five.full lsl
+349,five,66.8,0.45 um filtered,full lsl,iron,five.full lsl
+352,five,239.7,0.45 um filtered,full lsl,iron,five.full lsl
+356,five,175.9,0.45 um filtered,full lsl,iron,five.full lsl
+359,five,87.7,0.45 um filtered,full lsl,iron,five.full lsl
+363,five,225,0.45 um filtered,full lsl,iron,five.full lsl
+366,five,166,0.45 um filtered,full lsl,iron,five.full lsl
+370,five,164.8,0.45 um filtered,full lsl,iron,five.full lsl
+373,five,86.48,0.45 um filtered,full lsl,iron,five.full lsl
+377,five,195.7,0.45 um filtered,full lsl,iron,five.full lsl
+380,five,92.98,0.45 um filtered,full lsl,iron,five.full lsl
+384,five,151.2,0.45 um filtered,full lsl,iron,five.full lsl
+387,five,186.3,0.45 um filtered,full lsl,iron,five.full lsl
+391,five,161.6,0.45 um filtered,full lsl,iron,five.full lsl
+394,five,93.16,0.45 um filtered,full lsl,iron,five.full lsl
+398,five,130.4,0.45 um filtered,full lsl,iron,five.full lsl
+401,five,169.3,0.45 um filtered,full lsl,iron,five.full lsl
+408,five,150.7,0.45 um filtered,full lsl,iron,five.full lsl
+412,five,125.1,0.45 um filtered,full lsl,iron,five.full lsl
+426,five,55.28,0.45 um filtered,full lsl,iron,five.full lsl
+429,five,112.5,0.45 um filtered,full lsl,iron,five.full lsl
+433,five,107.9,0.45 um filtered,full lsl,iron,five.full lsl
+436,five,71.48,0.45 um filtered,full lsl,iron,five.full lsl
+443,five,164.8,0.45 um filtered,full lsl,iron,five.full lsl
+447,five,139.2,0.45 um filtered,full lsl,iron,five.full lsl
+450,five,144.8,0.45 um filtered,full lsl,iron,five.full lsl
+457,five,145.9,0.45 um filtered,full lsl,iron,five.full lsl
+461,five,169.2,0.45 um filtered,full lsl,iron,five.full lsl
+464,five,130.2,0.45 um filtered,full lsl,iron,five.full lsl
+471,five,87.26,0.45 um filtered,full lsl,iron,five.full lsl
+478,five,107.5,0.45 um filtered,full lsl,iron,five.full lsl
+485,five,100.4,0.45 um filtered,full lsl,iron,five.full lsl
+492,five,172,0.45 um filtered,full lsl,iron,five.full lsl
+499,five,78.96,0.45 um filtered,full lsl,iron,five.full lsl
+506,five,97.81,0.45 um filtered,full lsl,iron,five.full lsl
+513,five,113.6,0.45 um filtered,full lsl,iron,five.full lsl
+520,five,105.6,0.45 um filtered,full lsl,iron,five.full lsl
+527,five,82.68,0.45 um filtered,full lsl,iron,five.full lsl
+534,five,82.55,0.45 um filtered,full lsl,iron,five.full lsl
+541,five,77.91,0.45 um filtered,full lsl,iron,five.full lsl
+548,five,74.88,0.45 um filtered,full lsl,iron,five.full lsl
+555,five,88.75,0.45 um filtered,full lsl,iron,five.full lsl
+562,five,125,0.45 um filtered,full lsl,iron,five.full lsl
+569,five,84.11,0.45 um filtered,full lsl,iron,five.full lsl
+576,five,104.1,0.45 um filtered,full lsl,iron,five.full lsl
+583,five,68.06,0.45 um filtered,full lsl,iron,five.full lsl
+590,five,70.3,0.45 um filtered,full lsl,iron,five.full lsl
+597,five,65.44,0.45 um filtered,full lsl,iron,five.full lsl
+604,five,71.79,0.45 um filtered,full lsl,iron,five.full lsl
+611,five,59.24,0.45 um filtered,full lsl,iron,five.full lsl
+618,five,90.95,0.45 um filtered,full lsl,iron,five.full lsl
+625,five,63.55,0.45 um filtered,full lsl,iron,five.full lsl
+632,five,83.26,0.45 um filtered,full lsl,iron,five.full lsl
+639,five,49.15,0.45 um filtered,full lsl,iron,five.full lsl
+646,five,55.01,0.45 um filtered,full lsl,iron,five.full lsl
+1,five,435.2,total,full lsl,iron,five.full lsl
+5,five,189.2,total,full lsl,iron,five.full lsl
+8,five,296.1,total,full lsl,iron,five.full lsl
+12,five,332.4,total,full lsl,iron,five.full lsl
+15,five,170.8,total,full lsl,iron,five.full lsl
+19,five,230.8,total,full lsl,iron,five.full lsl
+22,five,125.5,total,full lsl,iron,five.full lsl
+26,five,167.8,total,full lsl,iron,five.full lsl
+29,five,119.1,total,full lsl,iron,five.full lsl
+33,five,198.9,total,full lsl,iron,five.full lsl
+36,five,140.2,total,full lsl,iron,five.full lsl
+47,five,175.8,total,full lsl,iron,five.full lsl
+50,five,185.8,total,full lsl,iron,five.full lsl
+54,five,281.5,total,full lsl,iron,five.full lsl
+57,five,218.3,total,full lsl,iron,five.full lsl
+61,five,317.2,total,full lsl,iron,five.full lsl
+64,five,302.4,total,full lsl,iron,five.full lsl
+68,five,238.9,total,full lsl,iron,five.full lsl
+71,five,257.5,total,full lsl,iron,five.full lsl
+78,five,280.9,total,full lsl,iron,five.full lsl
+82,five,241.1,total,full lsl,iron,five.full lsl
+85,five,190,total,full lsl,iron,five.full lsl
+89,five,225.4,total,full lsl,iron,five.full lsl
+92,five,355.2,total,full lsl,iron,five.full lsl
+99,five,339.3,total,full lsl,iron,five.full lsl
+103,five,295.8,total,full lsl,iron,five.full lsl
+106,five,305.9,total,full lsl,iron,five.full lsl
+110,five,332.9,total,full lsl,iron,five.full lsl
+113,five,288.3,total,full lsl,iron,five.full lsl
+117,five,293.1,total,full lsl,iron,five.full lsl
+120,five,314.5,total,full lsl,iron,five.full lsl
+127,five,237.9,total,full lsl,iron,five.full lsl
+131,five,235.3,total,full lsl,iron,five.full lsl
+134,five,263.3,total,full lsl,iron,five.full lsl
+138,five,249.3,total,full lsl,iron,five.full lsl
+141,five,283.4,total,full lsl,iron,five.full lsl
+145,five,260.7,total,full lsl,iron,five.full lsl
+148,five,416,total,full lsl,iron,five.full lsl
+152,five,327.4,total,full lsl,iron,five.full lsl
+155,five,290.8,total,full lsl,iron,five.full lsl
+162,five,270.8,total,full lsl,iron,five.full lsl
+166,five,273.8,total,full lsl,iron,five.full lsl
+169,five,282.6,total,full lsl,iron,five.full lsl
+173,five,318.4,total,full lsl,iron,five.full lsl
+176,five,367.8,total,full lsl,iron,five.full lsl
+180,five,237.8,total,full lsl,iron,five.full lsl
+187,five,657.4,total,full lsl,iron,five.full lsl
+190,five,276.3,total,full lsl,iron,five.full lsl
+194,five,303,total,full lsl,iron,five.full lsl
+197,five,222.4,total,full lsl,iron,five.full lsl
+201,five,179.7,total,full lsl,iron,five.full lsl
+204,five,156.4,total,full lsl,iron,five.full lsl
+208,five,174.4,total,full lsl,iron,five.full lsl
+211,five,171.5,total,full lsl,iron,five.full lsl
+215,five,154.8,total,full lsl,iron,five.full lsl
+218,five,149.7,total,full lsl,iron,five.full lsl
+222,five,273.9,total,full lsl,iron,five.full lsl
+225,five,478.7,total,full lsl,iron,five.full lsl
+229,five,179.8,total,full lsl,iron,five.full lsl
+232,five,167.8,total,full lsl,iron,five.full lsl
+236,five,214.2,total,full lsl,iron,five.full lsl
+239,five,263.1,total,full lsl,iron,five.full lsl
+243,five,180.5,total,full lsl,iron,five.full lsl
+246,five,441.5,total,full lsl,iron,five.full lsl
+250,five,280.3,total,full lsl,iron,five.full lsl
+253,five,260.7,total,full lsl,iron,five.full lsl
+257,five,169.2,total,full lsl,iron,five.full lsl
+260,five,179.9,total,full lsl,iron,five.full lsl
+264,five,263,total,full lsl,iron,five.full lsl
+267,five,239,total,full lsl,iron,five.full lsl
+274,five,204.5,total,full lsl,iron,five.full lsl
+278,five,222.8,total,full lsl,iron,five.full lsl
+281,five,164.3,total,full lsl,iron,five.full lsl
+285,five,222.1,total,full lsl,iron,five.full lsl
+288,five,169.3,total,full lsl,iron,five.full lsl
+292,five,463.4,total,full lsl,iron,five.full lsl
+295,five,284.5,total,full lsl,iron,five.full lsl
+299,five,332.6,total,full lsl,iron,five.full lsl
+302,five,135.1,total,full lsl,iron,five.full lsl
+306,five,257.4,total,full lsl,iron,five.full lsl
+309,five,223.9,total,full lsl,iron,five.full lsl
+313,five,151.2,total,full lsl,iron,five.full lsl
+317,five,266.3,total,full lsl,iron,five.full lsl
+321,five,173.4,total,full lsl,iron,five.full lsl
+324,five,353.9,total,full lsl,iron,five.full lsl
+328,five,408.6,total,full lsl,iron,five.full lsl
+331,five,332.4,total,full lsl,iron,five.full lsl
+335,five,170.6,total,full lsl,iron,five.full lsl
+338,five,141.5,total,full lsl,iron,five.full lsl
+342,five,332.3,total,full lsl,iron,five.full lsl
+345,five,324.1,total,full lsl,iron,five.full lsl
+349,five,103.2,total,full lsl,iron,five.full lsl
+352,five,356.2,total,full lsl,iron,five.full lsl
+356,five,236.1,total,full lsl,iron,five.full lsl
+359,five,134.2,total,full lsl,iron,five.full lsl
+363,five,330.6,total,full lsl,iron,five.full lsl
+366,five,277,total,full lsl,iron,five.full lsl
+370,five,256.4,total,full lsl,iron,five.full lsl
+373,five,137.5,total,full lsl,iron,five.full lsl
+377,five,327.4,total,full lsl,iron,five.full lsl
+380,five,155.7,total,full lsl,iron,five.full lsl
+384,five,265.3,total,full lsl,iron,five.full lsl
+387,five,287.2,total,full lsl,iron,five.full lsl
+391,five,297.1,total,full lsl,iron,five.full lsl
+394,five,147.6,total,full lsl,iron,five.full lsl
+398,five,246,total,full lsl,iron,five.full lsl
+401,five,265.5,total,full lsl,iron,five.full lsl
+408,five,308.3,total,full lsl,iron,five.full lsl
+412,five,176.9,total,full lsl,iron,five.full lsl
+426,five,70.02,total,full lsl,iron,five.full lsl
+429,five,180.5,total,full lsl,iron,five.full lsl
+433,five,206,total,full lsl,iron,five.full lsl
+436,five,129,total,full lsl,iron,five.full lsl
+443,five,249.2,total,full lsl,iron,five.full lsl
+447,five,231.9,total,full lsl,iron,five.full lsl
+450,five,216.2,total,full lsl,iron,five.full lsl
+457,five,255.4,total,full lsl,iron,five.full lsl
+461,five,284.1,total,full lsl,iron,five.full lsl
+464,five,210.8,total,full lsl,iron,five.full lsl
+471,five,153.7,total,full lsl,iron,five.full lsl
+478,five,336.6,total,full lsl,iron,five.full lsl
+485,five,292.7,total,full lsl,iron,five.full lsl
+1,five,41.22,0.45 um filtered,partial lsl,iron,five.partial lsl
+5,five,35.03,0.45 um filtered,partial lsl,iron,five.partial lsl
+8,five,26.3,0.45 um filtered,partial lsl,iron,five.partial lsl
+12,five,25.19,0.45 um filtered,partial lsl,iron,five.partial lsl
+15,five,25.8,0.45 um filtered,partial lsl,iron,five.partial lsl
+19,five,33.11,0.45 um filtered,partial lsl,iron,five.partial lsl
+22,five,27.98,0.45 um filtered,partial lsl,iron,five.partial lsl
+26,five,24.93,0.45 um filtered,partial lsl,iron,five.partial lsl
+29,five,31.01,0.45 um filtered,partial lsl,iron,five.partial lsl
+33,five,28.32,0.45 um filtered,partial lsl,iron,five.partial lsl
+36,five,26.98,0.45 um filtered,partial lsl,iron,five.partial lsl
+47,five,45.04,0.45 um filtered,partial lsl,iron,five.partial lsl
+50,five,48.83,0.45 um filtered,partial lsl,iron,five.partial lsl
+54,five,46.63,0.45 um filtered,partial lsl,iron,five.partial lsl
+57,five,48.07,0.45 um filtered,partial lsl,iron,five.partial lsl
+61,five,53.39,0.45 um filtered,partial lsl,iron,five.partial lsl
+64,five,40.73,0.45 um filtered,partial lsl,iron,five.partial lsl
+68,five,32.18,0.45 um filtered,partial lsl,iron,five.partial lsl
+71,five,31.45,0.45 um filtered,partial lsl,iron,five.partial lsl
+78,five,31.58,0.45 um filtered,partial lsl,iron,five.partial lsl
+82,five,34.46,0.45 um filtered,partial lsl,iron,five.partial lsl
+85,five,53.8,0.45 um filtered,partial lsl,iron,five.partial lsl
+89,five,56.54,0.45 um filtered,partial lsl,iron,five.partial lsl
+92,five,75.78,0.45 um filtered,partial lsl,iron,five.partial lsl
+99,five,69.92,0.45 um filtered,partial lsl,iron,five.partial lsl
+103,five,77.63,0.45 um filtered,partial lsl,iron,five.partial lsl
+106,five,93.12,0.45 um filtered,partial lsl,iron,five.partial lsl
+110,five,72.67,0.45 um filtered,partial lsl,iron,five.partial lsl
+113,five,57.56,0.45 um filtered,partial lsl,iron,five.partial lsl
+117,five,55.76,0.45 um filtered,partial lsl,iron,five.partial lsl
+120,five,55.01,0.45 um filtered,partial lsl,iron,five.partial lsl
+127,five,63.77,0.45 um filtered,partial lsl,iron,five.partial lsl
+131,five,56.52,0.45 um filtered,partial lsl,iron,five.partial lsl
+134,five,55.35,0.45 um filtered,partial lsl,iron,five.partial lsl
+138,five,50.19,0.45 um filtered,partial lsl,iron,five.partial lsl
+141,five,47.93,0.45 um filtered,partial lsl,iron,five.partial lsl
+145,five,42.24,0.45 um filtered,partial lsl,iron,five.partial lsl
+148,five,46.66,0.45 um filtered,partial lsl,iron,five.partial lsl
+152,five,49.24,0.45 um filtered,partial lsl,iron,five.partial lsl
+155,five,52.58,0.45 um filtered,partial lsl,iron,five.partial lsl
+162,five,56.25,0.45 um filtered,partial lsl,iron,five.partial lsl
+166,five,58.55,0.45 um filtered,partial lsl,iron,five.partial lsl
+169,five,57.45,0.45 um filtered,partial lsl,iron,five.partial lsl
+173,five,55.76,0.45 um filtered,partial lsl,iron,five.partial lsl
+176,five,48.01,0.45 um filtered,partial lsl,iron,five.partial lsl
+180,five,51.92,0.45 um filtered,partial lsl,iron,five.partial lsl
+187,five,51.22,0.45 um filtered,partial lsl,iron,five.partial lsl
+190,five,54.92,0.45 um filtered,partial lsl,iron,five.partial lsl
+194,five,53.56,0.45 um filtered,partial lsl,iron,five.partial lsl
+197,five,42.96,0.45 um filtered,partial lsl,iron,five.partial lsl
+201,five,41.75,0.45 um filtered,partial lsl,iron,five.partial lsl
+204,five,30.31,0.45 um filtered,partial lsl,iron,five.partial lsl
+208,five,32.79,0.45 um filtered,partial lsl,iron,five.partial lsl
+211,five,28.35,0.45 um filtered,partial lsl,iron,five.partial lsl
+215,five,26.15,0.45 um filtered,partial lsl,iron,five.partial lsl
+218,five,30.55,0.45 um filtered,partial lsl,iron,five.partial lsl
+222,five,28.13,0.45 um filtered,partial lsl,iron,five.partial lsl
+225,five,37.39,0.45 um filtered,partial lsl,iron,five.partial lsl
+229,five,36.66,0.45 um filtered,partial lsl,iron,five.partial lsl
+232,five,34.76,0.45 um filtered,partial lsl,iron,five.partial lsl
+236,five,41,0.45 um filtered,partial lsl,iron,five.partial lsl
+239,five,42.35,0.45 um filtered,partial lsl,iron,five.partial lsl
+243,five,48.58,0.45 um filtered,partial lsl,iron,five.partial lsl
+246,five,47.18,0.45 um filtered,partial lsl,iron,five.partial lsl
+250,five,49.56,0.45 um filtered,partial lsl,iron,five.partial lsl
+253,five,58.03,0.45 um filtered,partial lsl,iron,five.partial lsl
+257,five,43.23,0.45 um filtered,partial lsl,iron,five.partial lsl
+260,five,51.74,0.45 um filtered,partial lsl,iron,five.partial lsl
+264,five,51.95,0.45 um filtered,partial lsl,iron,five.partial lsl
+267,five,61.94,0.45 um filtered,partial lsl,iron,five.partial lsl
+274,five,59.04,0.45 um filtered,partial lsl,iron,five.partial lsl
+278,five,65.41,0.45 um filtered,partial lsl,iron,five.partial lsl
+281,five,52.54,0.45 um filtered,partial lsl,iron,five.partial lsl
+285,five,49.09,0.45 um filtered,partial lsl,iron,five.partial lsl
+288,five,54.03,0.45 um filtered,partial lsl,iron,five.partial lsl
+292,five,56.2,0.45 um filtered,partial lsl,iron,five.partial lsl
+295,five,67.04,0.45 um filtered,partial lsl,iron,five.partial lsl
+299,five,66.23,0.45 um filtered,partial lsl,iron,five.partial lsl
+302,five,69.05,0.45 um filtered,partial lsl,iron,five.partial lsl
+306,five,71,0.45 um filtered,partial lsl,iron,five.partial lsl
+309,five,66.44,0.45 um filtered,partial lsl,iron,five.partial lsl
+313,five,73.56,0.45 um filtered,partial lsl,iron,five.partial lsl
+317,five,29.32,0.45 um filtered,partial lsl,iron,five.partial lsl
+321,five,36.5,0.45 um filtered,partial lsl,iron,five.partial lsl
+324,five,36.58,0.45 um filtered,partial lsl,iron,five.partial lsl
+328,five,40.47,0.45 um filtered,partial lsl,iron,five.partial lsl
+331,five,35.84,0.45 um filtered,partial lsl,iron,five.partial lsl
+335,five,36.95,0.45 um filtered,partial lsl,iron,five.partial lsl
+338,five,40.49,0.45 um filtered,partial lsl,iron,five.partial lsl
+342,five,32.27,0.45 um filtered,partial lsl,iron,five.partial lsl
+345,five,30.07,0.45 um filtered,partial lsl,iron,five.partial lsl
+349,five,31.01,0.45 um filtered,partial lsl,iron,five.partial lsl
+352,five,31.19,0.45 um filtered,partial lsl,iron,five.partial lsl
+356,five,35.89,0.45 um filtered,partial lsl,iron,five.partial lsl
+359,five,38.48,0.45 um filtered,partial lsl,iron,five.partial lsl
+363,five,38.45,0.45 um filtered,partial lsl,iron,five.partial lsl
+366,five,34,0.45 um filtered,partial lsl,iron,five.partial lsl
+370,five,34.37,0.45 um filtered,partial lsl,iron,five.partial lsl
+373,five,30.03,0.45 um filtered,partial lsl,iron,five.partial lsl
+377,five,36.69,0.45 um filtered,partial lsl,iron,five.partial lsl
+380,five,37.94,0.45 um filtered,partial lsl,iron,five.partial lsl
+384,five,35.3,0.45 um filtered,partial lsl,iron,five.partial lsl
+387,five,36.47,0.45 um filtered,partial lsl,iron,five.partial lsl
+391,five,33.27,0.45 um filtered,partial lsl,iron,five.partial lsl
+394,five,35.39,0.45 um filtered,partial lsl,iron,five.partial lsl
+398,five,39.08,0.45 um filtered,partial lsl,iron,five.partial lsl
+401,five,36.93,0.45 um filtered,partial lsl,iron,five.partial lsl
+408,five,33.64,0.45 um filtered,partial lsl,iron,five.partial lsl
+412,five,28.73,0.45 um filtered,partial lsl,iron,five.partial lsl
+426,five,27.71,0.45 um filtered,partial lsl,iron,five.partial lsl
+429,five,29.6,0.45 um filtered,partial lsl,iron,five.partial lsl
+433,five,32.94,0.45 um filtered,partial lsl,iron,five.partial lsl
+436,five,29.82,0.45 um filtered,partial lsl,iron,five.partial lsl
+443,five,35.99,0.45 um filtered,partial lsl,iron,five.partial lsl
+447,five,38.78,0.45 um filtered,partial lsl,iron,five.partial lsl
+450,five,43.11,0.45 um filtered,partial lsl,iron,five.partial lsl
+457,five,42.87,0.45 um filtered,partial lsl,iron,five.partial lsl
+461,five,38.76,0.45 um filtered,partial lsl,iron,five.partial lsl
+464,five,89.77,0.45 um filtered,partial lsl,iron,five.partial lsl
+471,five,39.15,0.45 um filtered,partial lsl,iron,five.partial lsl
+478,five,40.82,0.45 um filtered,partial lsl,iron,five.partial lsl
+485,five,34.27,0.45 um filtered,partial lsl,iron,five.partial lsl
+492,five,41.68,0.45 um filtered,partial lsl,iron,five.partial lsl
+499,five,40.16,0.45 um filtered,partial lsl,iron,five.partial lsl
+506,five,33.44,0.45 um filtered,partial lsl,iron,five.partial lsl
+513,five,37.29,0.45 um filtered,partial lsl,iron,five.partial lsl
+520,five,38.72,0.45 um filtered,partial lsl,iron,five.partial lsl
+527,five,40.08,0.45 um filtered,partial lsl,iron,five.partial lsl
+534,five,31.15,0.45 um filtered,partial lsl,iron,five.partial lsl
+541,five,31.9,0.45 um filtered,partial lsl,iron,five.partial lsl
+548,five,40.9,0.45 um filtered,partial lsl,iron,five.partial lsl
+555,five,47.41,0.45 um filtered,partial lsl,iron,five.partial lsl
+562,five,53.18,0.45 um filtered,partial lsl,iron,five.partial lsl
+569,five,38.16,0.45 um filtered,partial lsl,iron,five.partial lsl
+576,five,39.57,0.45 um filtered,partial lsl,iron,five.partial lsl
+583,five,31.79,0.45 um filtered,partial lsl,iron,five.partial lsl
+590,five,34.16,0.45 um filtered,partial lsl,iron,five.partial lsl
+597,five,36.97,0.45 um filtered,partial lsl,iron,five.partial lsl
+604,five,32.29,0.45 um filtered,partial lsl,iron,five.partial lsl
+611,five,36.87,0.45 um filtered,partial lsl,iron,five.partial lsl
+618,five,33.41,0.45 um filtered,partial lsl,iron,five.partial lsl
+625,five,30.71,0.45 um filtered,partial lsl,iron,five.partial lsl
+632,five,35.4,0.45 um filtered,partial lsl,iron,five.partial lsl
+639,five,36.43,0.45 um filtered,partial lsl,iron,five.partial lsl
+646,five,25.23,0.45 um filtered,partial lsl,iron,five.partial lsl
+1,five,173.6,total,partial lsl,iron,five.partial lsl
+5,five,116,total,partial lsl,iron,five.partial lsl
+8,five,28.02,total,partial lsl,iron,five.partial lsl
+12,five,289.4,total,partial lsl,iron,five.partial lsl
+15,five,241.5,total,partial lsl,iron,five.partial lsl
+19,five,171.9,total,partial lsl,iron,five.partial lsl
+22,five,93.4,total,partial lsl,iron,five.partial lsl
+26,five,52.43,total,partial lsl,iron,five.partial lsl
+29,five,137.4,total,partial lsl,iron,five.partial lsl
+33,five,84.04,total,partial lsl,iron,five.partial lsl
+36,five,62.38,total,partial lsl,iron,five.partial lsl
+47,five,82.4,total,partial lsl,iron,five.partial lsl
+50,five,91.42,total,partial lsl,iron,five.partial lsl
+54,five,138.5,total,partial lsl,iron,five.partial lsl
+57,five,85.21,total,partial lsl,iron,five.partial lsl
+61,five,147.8,total,partial lsl,iron,five.partial lsl
+64,five,103.3,total,partial lsl,iron,five.partial lsl
+68,five,79.22,total,partial lsl,iron,five.partial lsl
+71,five,121.3,total,partial lsl,iron,five.partial lsl
+78,five,76.62,total,partial lsl,iron,five.partial lsl
+82,five,79.87,total,partial lsl,iron,five.partial lsl
+85,five,113.7,total,partial lsl,iron,five.partial lsl
+89,five,116.9,total,partial lsl,iron,five.partial lsl
+92,five,163.8,total,partial lsl,iron,five.partial lsl
+99,five,172.4,total,partial lsl,iron,five.partial lsl
+103,five,138,total,partial lsl,iron,five.partial lsl
+106,five,202.9,total,partial lsl,iron,five.partial lsl
+110,five,140.7,total,partial lsl,iron,five.partial lsl
+113,five,127.1,total,partial lsl,iron,five.partial lsl
+117,five,80.22,total,partial lsl,iron,five.partial lsl
+120,five,83.28,total,partial lsl,iron,five.partial lsl
+127,five,130.6,total,partial lsl,iron,five.partial lsl
+131,five,101.5,total,partial lsl,iron,five.partial lsl
+134,five,75.25,total,partial lsl,iron,five.partial lsl
+138,five,85.97,total,partial lsl,iron,five.partial lsl
+141,five,81.93,total,partial lsl,iron,five.partial lsl
+145,five,66.45,total,partial lsl,iron,five.partial lsl
+148,five,67.85,total,partial lsl,iron,five.partial lsl
+152,five,120.9,total,partial lsl,iron,five.partial lsl
+155,five,72.61,total,partial lsl,iron,five.partial lsl
+162,five,81.51,total,partial lsl,iron,five.partial lsl
+166,five,73.34,total,partial lsl,iron,five.partial lsl
+169,five,80.5,total,partial lsl,iron,five.partial lsl
+173,five,67.17,total,partial lsl,iron,five.partial lsl
+176,five,93.71,total,partial lsl,iron,five.partial lsl
+180,five,77.17,total,partial lsl,iron,five.partial lsl
+187,five,135,total,partial lsl,iron,five.partial lsl
+190,five,80.35,total,partial lsl,iron,five.partial lsl
+194,five,76.27,total,partial lsl,iron,five.partial lsl
+197,five,65.25,total,partial lsl,iron,five.partial lsl
+201,five,90.35,total,partial lsl,iron,five.partial lsl
+204,five,54.25,total,partial lsl,iron,five.partial lsl
+208,five,143.8,total,partial lsl,iron,five.partial lsl
+211,five,56.79,total,partial lsl,iron,five.partial lsl
+215,five,58.65,total,partial lsl,iron,five.partial lsl
+218,five,49.65,total,partial lsl,iron,five.partial lsl
+222,five,98.01,total,partial lsl,iron,five.partial lsl
+225,five,316.9,total,partial lsl,iron,five.partial lsl
+229,five,90.03,total,partial lsl,iron,five.partial lsl
+232,five,95.89,total,partial lsl,iron,five.partial lsl
+236,five,77.07,total,partial lsl,iron,five.partial lsl
+239,five,74.16,total,partial lsl,iron,five.partial lsl
+243,five,72.07,total,partial lsl,iron,five.partial lsl
+246,five,103.8,total,partial lsl,iron,five.partial lsl
+250,five,129.1,total,partial lsl,iron,five.partial lsl
+253,five,138.3,total,partial lsl,iron,five.partial lsl
+257,five,65.86,total,partial lsl,iron,five.partial lsl
+260,five,88.04,total,partial lsl,iron,five.partial lsl
+264,five,106.5,total,partial lsl,iron,five.partial lsl
+267,five,138.9,total,partial lsl,iron,five.partial lsl
+274,five,101.2,total,partial lsl,iron,five.partial lsl
+278,five,163.5,total,partial lsl,iron,five.partial lsl
+281,five,93.82,total,partial lsl,iron,five.partial lsl
+285,five,103.6,total,partial lsl,iron,five.partial lsl
+288,five,104.9,total,partial lsl,iron,five.partial lsl
+292,five,102.3,total,partial lsl,iron,five.partial lsl
+295,five,152.6,total,partial lsl,iron,five.partial lsl
+299,five,153.2,total,partial lsl,iron,five.partial lsl
+302,five,104.7,total,partial lsl,iron,five.partial lsl
+306,five,162.3,total,partial lsl,iron,five.partial lsl
+309,five,140.6,total,partial lsl,iron,five.partial lsl
+313,five,121.8,total,partial lsl,iron,five.partial lsl
+317,five,61.13,total,partial lsl,iron,five.partial lsl
+321,five,76.39,total,partial lsl,iron,five.partial lsl
+324,five,89.57,total,partial lsl,iron,five.partial lsl
+328,five,125.6,total,partial lsl,iron,five.partial lsl
+331,five,212.7,total,partial lsl,iron,five.partial lsl
+335,five,61.54,total,partial lsl,iron,five.partial lsl
+338,five,78.46,total,partial lsl,iron,five.partial lsl
+342,five,63.39,total,partial lsl,iron,five.partial lsl
+345,five,48.22,total,partial lsl,iron,five.partial lsl
+349,five,44.82,total,partial lsl,iron,five.partial lsl
+352,five,102.8,total,partial lsl,iron,five.partial lsl
+356,five,89.21,total,partial lsl,iron,five.partial lsl
+359,five,65.65,total,partial lsl,iron,five.partial lsl
+363,five,79.42,total,partial lsl,iron,five.partial lsl
+366,five,53.32,total,partial lsl,iron,five.partial lsl
+370,five,46.33,total,partial lsl,iron,five.partial lsl
+373,five,42.86,total,partial lsl,iron,five.partial lsl
+377,five,115.6,total,partial lsl,iron,five.partial lsl
+380,five,71.65,total,partial lsl,iron,five.partial lsl
+384,five,58.73,total,partial lsl,iron,five.partial lsl
+387,five,85.86,total,partial lsl,iron,five.partial lsl
+391,five,54.78,total,partial lsl,iron,five.partial lsl
+394,five,57.75,total,partial lsl,iron,five.partial lsl
+398,five,65.56,total,partial lsl,iron,five.partial lsl
+401,five,105.9,total,partial lsl,iron,five.partial lsl
+408,five,45.32,total,partial lsl,iron,five.partial lsl
+412,five,44.86,total,partial lsl,iron,five.partial lsl
+426,five,44.86,total,partial lsl,iron,five.partial lsl
+429,five,45.71,total,partial lsl,iron,five.partial lsl
+433,five,41.42,total,partial lsl,iron,five.partial lsl
+436,five,38.82,total,partial lsl,iron,five.partial lsl
+443,five,54.12,total,partial lsl,iron,five.partial lsl
+447,five,61.37,total,partial lsl,iron,five.partial lsl
+450,five,84.21,total,partial lsl,iron,five.partial lsl
+457,five,67.81,total,partial lsl,iron,five.partial lsl
+461,five,98.52,total,partial lsl,iron,five.partial lsl
+464,five,163.4,total,partial lsl,iron,five.partial lsl
+471,five,86.79,total,partial lsl,iron,five.partial lsl
+478,five,85.94,total,partial lsl,iron,five.partial lsl
+485,five,58.91,total,partial lsl,iron,five.partial lsl
+1,four,111.8,0.45 um filtered,full lsl,pvc,four.full lsl
+5,four,120.6,0.45 um filtered,full lsl,pvc,four.full lsl
+8,four,132.7,0.45 um filtered,full lsl,pvc,four.full lsl
+12,four,150.2,0.45 um filtered,full lsl,pvc,four.full lsl
+15,four,143.4,0.45 um filtered,full lsl,pvc,four.full lsl
+19,four,135.3,0.45 um filtered,full lsl,pvc,four.full lsl
+22,four,135.2,0.45 um filtered,full lsl,pvc,four.full lsl
+26,four,143.8,0.45 um filtered,full lsl,pvc,four.full lsl
+29,four,133.5,0.45 um filtered,full lsl,pvc,four.full lsl
+33,four,114.6,0.45 um filtered,full lsl,pvc,four.full lsl
+36,four,131.5,0.45 um filtered,full lsl,pvc,four.full lsl
+47,four,178.1,0.45 um filtered,full lsl,pvc,four.full lsl
+50,four,170.4,0.45 um filtered,full lsl,pvc,four.full lsl
+54,four,168.7,0.45 um filtered,full lsl,pvc,four.full lsl
+57,four,165.8,0.45 um filtered,full lsl,pvc,four.full lsl
+61,four,131.5,0.45 um filtered,full lsl,pvc,four.full lsl
+64,four,115.2,0.45 um filtered,full lsl,pvc,four.full lsl
+68,four,96.8,0.45 um filtered,full lsl,pvc,four.full lsl
+71,four,116.1,0.45 um filtered,full lsl,pvc,four.full lsl
+78,four,107.4,0.45 um filtered,full lsl,pvc,four.full lsl
+82,four,146.9,0.45 um filtered,full lsl,pvc,four.full lsl
+85,four,130.7,0.45 um filtered,full lsl,pvc,four.full lsl
+92,four,174.8,0.45 um filtered,full lsl,pvc,four.full lsl
+99,four,132.3,0.45 um filtered,full lsl,pvc,four.full lsl
+103,four,179.4,0.45 um filtered,full lsl,pvc,four.full lsl
+106,four,174.4,0.45 um filtered,full lsl,pvc,four.full lsl
+110,four,112.4,0.45 um filtered,full lsl,pvc,four.full lsl
+113,four,102.2,0.45 um filtered,full lsl,pvc,four.full lsl
+117,four,102,0.45 um filtered,full lsl,pvc,four.full lsl
+120,four,119.8,0.45 um filtered,full lsl,pvc,four.full lsl
+127,four,137.5,0.45 um filtered,full lsl,pvc,four.full lsl
+131,four,121.3,0.45 um filtered,full lsl,pvc,four.full lsl
+134,four,133.4,0.45 um filtered,full lsl,pvc,four.full lsl
+138,four,118.9,0.45 um filtered,full lsl,pvc,four.full lsl
+141,four,111,0.45 um filtered,full lsl,pvc,four.full lsl
+145,four,108.9,0.45 um filtered,full lsl,pvc,four.full lsl
+148,four,122.1,0.45 um filtered,full lsl,pvc,four.full lsl
+152,four,128.4,0.45 um filtered,full lsl,pvc,four.full lsl
+155,four,107.6,0.45 um filtered,full lsl,pvc,four.full lsl
+162,four,136.4,0.45 um filtered,full lsl,pvc,four.full lsl
+166,four,104.8,0.45 um filtered,full lsl,pvc,four.full lsl
+169,four,106.3,0.45 um filtered,full lsl,pvc,four.full lsl
+173,four,89.44,0.45 um filtered,full lsl,pvc,four.full lsl
+176,four,91.54,0.45 um filtered,full lsl,pvc,four.full lsl
+180,four,103.7,0.45 um filtered,full lsl,pvc,four.full lsl
+187,four,97.5,0.45 um filtered,full lsl,pvc,four.full lsl
+190,four,94.03,0.45 um filtered,full lsl,pvc,four.full lsl
+194,four,96.5,0.45 um filtered,full lsl,pvc,four.full lsl
+197,four,85.13,0.45 um filtered,full lsl,pvc,four.full lsl
+201,four,62.96,0.45 um filtered,full lsl,pvc,four.full lsl
+204,four,60.17,0.45 um filtered,full lsl,pvc,four.full lsl
+208,four,56.42,0.45 um filtered,full lsl,pvc,four.full lsl
+211,four,57.74,0.45 um filtered,full lsl,pvc,four.full lsl
+215,four,46.88,0.45 um filtered,full lsl,pvc,four.full lsl
+218,four,49.59,0.45 um filtered,full lsl,pvc,four.full lsl
+222,four,50.92,0.45 um filtered,full lsl,pvc,four.full lsl
+225,four,59.44,0.45 um filtered,full lsl,pvc,four.full lsl
+229,four,66.85,0.45 um filtered,full lsl,pvc,four.full lsl
+232,four,67.77,0.45 um filtered,full lsl,pvc,four.full lsl
+236,four,57.08,0.45 um filtered,full lsl,pvc,four.full lsl
+239,four,74.53,0.45 um filtered,full lsl,pvc,four.full lsl
+243,four,70.24,0.45 um filtered,full lsl,pvc,four.full lsl
+246,four,73.75,0.45 um filtered,full lsl,pvc,four.full lsl
+250,four,68.43,0.45 um filtered,full lsl,pvc,four.full lsl
+253,four,63.29,0.45 um filtered,full lsl,pvc,four.full lsl
+257,four,61.16,0.45 um filtered,full lsl,pvc,four.full lsl
+260,four,59.15,0.45 um filtered,full lsl,pvc,four.full lsl
+264,four,57.47,0.45 um filtered,full lsl,pvc,four.full lsl
+267,four,61.5,0.45 um filtered,full lsl,pvc,four.full lsl
+274,four,77.78,0.45 um filtered,full lsl,pvc,four.full lsl
+278,four,66.32,0.45 um filtered,full lsl,pvc,four.full lsl
+281,four,75.11,0.45 um filtered,full lsl,pvc,four.full lsl
+285,four,58.51,0.45 um filtered,full lsl,pvc,four.full lsl
+288,four,83.98,0.45 um filtered,full lsl,pvc,four.full lsl
+292,four,71.72,0.45 um filtered,full lsl,pvc,four.full lsl
+295,four,97.55,0.45 um filtered,full lsl,pvc,four.full lsl
+299,four,92.62,0.45 um filtered,full lsl,pvc,four.full lsl
+302,four,96.85,0.45 um filtered,full lsl,pvc,four.full lsl
+306,four,98.17,0.45 um filtered,full lsl,pvc,four.full lsl
+309,four,86.43,0.45 um filtered,full lsl,pvc,four.full lsl
+313,four,86.26,0.45 um filtered,full lsl,pvc,four.full lsl
+317,four,53.12,0.45 um filtered,full lsl,pvc,four.full lsl
+321,four,44.71,0.45 um filtered,full lsl,pvc,four.full lsl
+324,four,51.69,0.45 um filtered,full lsl,pvc,four.full lsl
+328,four,55.11,0.45 um filtered,full lsl,pvc,four.full lsl
+331,four,48.95,0.45 um filtered,full lsl,pvc,four.full lsl
+335,four,43.82,0.45 um filtered,full lsl,pvc,four.full lsl
+338,four,41.15,0.45 um filtered,full lsl,pvc,four.full lsl
+342,four,41,0.45 um filtered,full lsl,pvc,four.full lsl
+345,four,43.13,0.45 um filtered,full lsl,pvc,four.full lsl
+349,four,53.99,0.45 um filtered,full lsl,pvc,four.full lsl
+352,four,51.69,0.45 um filtered,full lsl,pvc,four.full lsl
+356,four,53.16,0.45 um filtered,full lsl,pvc,four.full lsl
+359,four,51.49,0.45 um filtered,full lsl,pvc,four.full lsl
+363,four,49.79,0.45 um filtered,full lsl,pvc,four.full lsl
+366,four,45.35,0.45 um filtered,full lsl,pvc,four.full lsl
+370,four,47.53,0.45 um filtered,full lsl,pvc,four.full lsl
+373,four,44.18,0.45 um filtered,full lsl,pvc,four.full lsl
+377,four,42.45,0.45 um filtered,full lsl,pvc,four.full lsl
+380,four,47.43,0.45 um filtered,full lsl,pvc,four.full lsl
+384,four,47.55,0.45 um filtered,full lsl,pvc,four.full lsl
+387,four,43.55,0.45 um filtered,full lsl,pvc,four.full lsl
+391,four,47.23,0.45 um filtered,full lsl,pvc,four.full lsl
+394,four,51.35,0.45 um filtered,full lsl,pvc,four.full lsl
+398,four,46.63,0.45 um filtered,full lsl,pvc,four.full lsl
+401,four,45.14,0.45 um filtered,full lsl,pvc,four.full lsl
+408,four,54.89,0.45 um filtered,full lsl,pvc,four.full lsl
+412,four,42.99,0.45 um filtered,full lsl,pvc,four.full lsl
+426,four,41.84,0.45 um filtered,full lsl,pvc,four.full lsl
+429,four,52.9,0.45 um filtered,full lsl,pvc,four.full lsl
+433,four,49.81,0.45 um filtered,full lsl,pvc,four.full lsl
+436,four,53.22,0.45 um filtered,full lsl,pvc,four.full lsl
+443,four,44.79,0.45 um filtered,full lsl,pvc,four.full lsl
+447,four,49.33,0.45 um filtered,full lsl,pvc,four.full lsl
+450,four,45.51,0.45 um filtered,full lsl,pvc,four.full lsl
+457,four,63.04,0.45 um filtered,full lsl,pvc,four.full lsl
+461,four,67.69,0.45 um filtered,full lsl,pvc,four.full lsl
+464,four,48.65,0.45 um filtered,full lsl,pvc,four.full lsl
+471,four,46.31,0.45 um filtered,full lsl,pvc,four.full lsl
+478,four,42.23,0.45 um filtered,full lsl,pvc,four.full lsl
+485,four,49.17,0.45 um filtered,full lsl,pvc,four.full lsl
+492,four,57.4,0.45 um filtered,full lsl,pvc,four.full lsl
+499,four,44.67,0.45 um filtered,full lsl,pvc,four.full lsl
+506,four,54.27,0.45 um filtered,full lsl,pvc,four.full lsl
+513,four,32.7,0.45 um filtered,full lsl,pvc,four.full lsl
+520,four,32.61,0.45 um filtered,full lsl,pvc,four.full lsl
+527,four,38.06,0.45 um filtered,full lsl,pvc,four.full lsl
+534,four,28.45,0.45 um filtered,full lsl,pvc,four.full lsl
+541,four,36.75,0.45 um filtered,full lsl,pvc,four.full lsl
+548,four,45.6,0.45 um filtered,full lsl,pvc,four.full lsl
+555,four,54.65,0.45 um filtered,full lsl,pvc,four.full lsl
+562,four,53.29,0.45 um filtered,full lsl,pvc,four.full lsl
+569,four,40.96,0.45 um filtered,full lsl,pvc,four.full lsl
+576,four,26.27,0.45 um filtered,full lsl,pvc,four.full lsl
+583,four,28.78,0.45 um filtered,full lsl,pvc,four.full lsl
+590,four,42.9,0.45 um filtered,full lsl,pvc,four.full lsl
+597,four,37.57,0.45 um filtered,full lsl,pvc,four.full lsl
+604,four,41.55,0.45 um filtered,full lsl,pvc,four.full lsl
+611,four,38.63,0.45 um filtered,full lsl,pvc,four.full lsl
+618,four,31.78,0.45 um filtered,full lsl,pvc,four.full lsl
+625,four,34.55,0.45 um filtered,full lsl,pvc,four.full lsl
+632,four,33.77,0.45 um filtered,full lsl,pvc,four.full lsl
+639,four,34.04,0.45 um filtered,full lsl,pvc,four.full lsl
+646,four,38.13,0.45 um filtered,full lsl,pvc,four.full lsl
+1,four,280.9,total,full lsl,pvc,four.full lsl
+5,four,262.6,total,full lsl,pvc,four.full lsl
+8,four,267,total,full lsl,pvc,four.full lsl
+12,four,253.4,total,full lsl,pvc,four.full lsl
+15,four,231.5,total,full lsl,pvc,four.full lsl
+19,four,415.5,total,full lsl,pvc,four.full lsl
+22,four,232,total,full lsl,pvc,four.full lsl
+26,four,236.7,total,full lsl,pvc,four.full lsl
+29,four,208.7,total,full lsl,pvc,four.full lsl
+33,four,259.3,total,full lsl,pvc,four.full lsl
+36,four,197.8,total,full lsl,pvc,four.full lsl
+47,four,251.5,total,full lsl,pvc,four.full lsl
+50,four,256.7,total,full lsl,pvc,four.full lsl
+54,four,246.3,total,full lsl,pvc,four.full lsl
+57,four,225.2,total,full lsl,pvc,four.full lsl
+61,four,281.3,total,full lsl,pvc,four.full lsl
+64,four,245.8,total,full lsl,pvc,four.full lsl
+68,four,214.3,total,full lsl,pvc,four.full lsl
+71,four,254,total,full lsl,pvc,four.full lsl
+78,four,200.2,total,full lsl,pvc,four.full lsl
+82,four,304,total,full lsl,pvc,four.full lsl
+85,four,293.6,total,full lsl,pvc,four.full lsl
+92,four,275.8,total,full lsl,pvc,four.full lsl
+99,four,199.9,total,full lsl,pvc,four.full lsl
+103,four,294.2,total,full lsl,pvc,four.full lsl
+106,four,304.8,total,full lsl,pvc,four.full lsl
+110,four,252,total,full lsl,pvc,four.full lsl
+113,four,208.6,total,full lsl,pvc,four.full lsl
+117,four,243.5,total,full lsl,pvc,four.full lsl
+120,four,263.9,total,full lsl,pvc,four.full lsl
+127,four,299.2,total,full lsl,pvc,four.full lsl
+131,four,276.3,total,full lsl,pvc,four.full lsl
+134,four,235.2,total,full lsl,pvc,four.full lsl
+138,four,220.7,total,full lsl,pvc,four.full lsl
+141,four,258.3,total,full lsl,pvc,four.full lsl
+145,four,188.1,total,full lsl,pvc,four.full lsl
+148,four,106.2,total,full lsl,pvc,four.full lsl
+152,four,212.1,total,full lsl,pvc,four.full lsl
+155,four,174.9,total,full lsl,pvc,four.full lsl
+162,four,237.2,total,full lsl,pvc,four.full lsl
+166,four,202.8,total,full lsl,pvc,four.full lsl
+169,four,245.9,total,full lsl,pvc,four.full lsl
+173,four,183.3,total,full lsl,pvc,four.full lsl
+176,four,162.3,total,full lsl,pvc,four.full lsl
+180,four,205.8,total,full lsl,pvc,four.full lsl
+187,four,179.7,total,full lsl,pvc,four.full lsl
+190,four,152.5,total,full lsl,pvc,four.full lsl
+194,four,176.3,total,full lsl,pvc,four.full lsl
+197,four,168.7,total,full lsl,pvc,four.full lsl
+201,four,128.9,total,full lsl,pvc,four.full lsl
+204,four,134.1,total,full lsl,pvc,four.full lsl
+208,four,116.3,total,full lsl,pvc,four.full lsl
+211,four,124.7,total,full lsl,pvc,four.full lsl
+215,four,124.3,total,full lsl,pvc,four.full lsl
+218,four,121.4,total,full lsl,pvc,four.full lsl
+222,four,136.2,total,full lsl,pvc,four.full lsl
+225,four,54.92,total,full lsl,pvc,four.full lsl
+229,four,126.2,total,full lsl,pvc,four.full lsl
+232,four,139.6,total,full lsl,pvc,four.full lsl
+236,four,115,total,full lsl,pvc,four.full lsl
+239,four,150.1,total,full lsl,pvc,four.full lsl
+243,four,138.6,total,full lsl,pvc,four.full lsl
+246,four,136.9,total,full lsl,pvc,four.full lsl
+250,four,143.2,total,full lsl,pvc,four.full lsl
+253,four,121.3,total,full lsl,pvc,four.full lsl
+257,four,127.1,total,full lsl,pvc,four.full lsl
+260,four,138,total,full lsl,pvc,four.full lsl
+264,four,116.7,total,full lsl,pvc,four.full lsl
+267,four,125.2,total,full lsl,pvc,four.full lsl
+274,four,146.1,total,full lsl,pvc,four.full lsl
+278,four,124.1,total,full lsl,pvc,four.full lsl
+281,four,119.6,total,full lsl,pvc,four.full lsl
+285,four,105.9,total,full lsl,pvc,four.full lsl
+288,four,136,total,full lsl,pvc,four.full lsl
+292,four,138.4,total,full lsl,pvc,four.full lsl
+295,four,139.6,total,full lsl,pvc,four.full lsl
+299,four,159.5,total,full lsl,pvc,four.full lsl
+302,four,174.6,total,full lsl,pvc,four.full lsl
+306,four,143.3,total,full lsl,pvc,four.full lsl
+309,four,130.9,total,full lsl,pvc,four.full lsl
+313,four,144.2,total,full lsl,pvc,four.full lsl
+317,four,74.68,total,full lsl,pvc,four.full lsl
+321,four,112.6,total,full lsl,pvc,four.full lsl
+324,four,84.67,total,full lsl,pvc,four.full lsl
+328,four,99.48,total,full lsl,pvc,four.full lsl
+331,four,75.81,total,full lsl,pvc,four.full lsl
+335,four,82.01,total,full lsl,pvc,four.full lsl
+338,four,65.05,total,full lsl,pvc,four.full lsl
+342,four,67,total,full lsl,pvc,four.full lsl
+345,four,78.05,total,full lsl,pvc,four.full lsl
+349,four,83.19,total,full lsl,pvc,four.full lsl
+352,four,74.7,total,full lsl,pvc,four.full lsl
+356,four,76.66,total,full lsl,pvc,four.full lsl
+359,four,69.32,total,full lsl,pvc,four.full lsl
+363,four,74.17,total,full lsl,pvc,four.full lsl
+366,four,76.79,total,full lsl,pvc,four.full lsl
+370,four,66.4,total,full lsl,pvc,four.full lsl
+373,four,64.64,total,full lsl,pvc,four.full lsl
+377,four,63.81,total,full lsl,pvc,four.full lsl
+380,four,66.36,total,full lsl,pvc,four.full lsl
+384,four,79.45,total,full lsl,pvc,four.full lsl
+387,four,72.74,total,full lsl,pvc,four.full lsl
+391,four,73.56,total,full lsl,pvc,four.full lsl
+394,four,74.66,total,full lsl,pvc,four.full lsl
+398,four,70.9,total,full lsl,pvc,four.full lsl
+401,four,61.26,total,full lsl,pvc,four.full lsl
+408,four,67.95,total,full lsl,pvc,four.full lsl
+412,four,57.96,total,full lsl,pvc,four.full lsl
+426,four,59.14,total,full lsl,pvc,four.full lsl
+429,four,73.64,total,full lsl,pvc,four.full lsl
+433,four,70.99,total,full lsl,pvc,four.full lsl
+436,four,72.21,total,full lsl,pvc,four.full lsl
+443,four,63.9,total,full lsl,pvc,four.full lsl
+447,four,70.33,total,full lsl,pvc,four.full lsl
+450,four,58.98,total,full lsl,pvc,four.full lsl
+457,four,83.69,total,full lsl,pvc,four.full lsl
+461,four,92.05,total,full lsl,pvc,four.full lsl
+464,four,69.2,total,full lsl,pvc,four.full lsl
+471,four,76.16,total,full lsl,pvc,four.full lsl
+478,four,74.06,total,full lsl,pvc,four.full lsl
+485,four,81.87,total,full lsl,pvc,four.full lsl
+15,four,9.241,0.45 um filtered,partial lsl,pvc,four.partial lsl
+19,four,8.149,0.45 um filtered,partial lsl,pvc,four.partial lsl
+22,four,4.925,0.45 um filtered,partial lsl,pvc,four.partial lsl
+29,four,6.987,0.45 um filtered,partial lsl,pvc,four.partial lsl
+33,four,7.933,0.45 um filtered,partial lsl,pvc,four.partial lsl
+36,four,7.319,0.45 um filtered,partial lsl,pvc,four.partial lsl
+47,four,10.34,0.45 um filtered,partial lsl,pvc,four.partial lsl
+50,four,6.576,0.45 um filtered,partial lsl,pvc,four.partial lsl
+54,four,5.282,0.45 um filtered,partial lsl,pvc,four.partial lsl
+57,four,5.273,0.45 um filtered,partial lsl,pvc,four.partial lsl
+61,four,11.8,0.45 um filtered,partial lsl,pvc,four.partial lsl
+64,four,7.477,0.45 um filtered,partial lsl,pvc,four.partial lsl
+68,four,5.874,0.45 um filtered,partial lsl,pvc,four.partial lsl
+71,four,6.53,0.45 um filtered,partial lsl,pvc,four.partial lsl
+78,four,4.587,0.45 um filtered,partial lsl,pvc,four.partial lsl
+82,four,7.98,0.45 um filtered,partial lsl,pvc,four.partial lsl
+85,four,13.32,0.45 um filtered,partial lsl,pvc,four.partial lsl
+89,four,12.35,0.45 um filtered,partial lsl,pvc,four.partial lsl
+92,four,11.84,0.45 um filtered,partial lsl,pvc,four.partial lsl
+99,four,9.632,0.45 um filtered,partial lsl,pvc,four.partial lsl
+103,four,8.749,0.45 um filtered,partial lsl,pvc,four.partial lsl
+106,four,10.15,0.45 um filtered,partial lsl,pvc,four.partial lsl
+110,four,8.125,0.45 um filtered,partial lsl,pvc,four.partial lsl
+113,four,7.797,0.45 um filtered,partial lsl,pvc,four.partial lsl
+117,four,7.118,0.45 um filtered,partial lsl,pvc,four.partial lsl
+120,four,6.958,0.45 um filtered,partial lsl,pvc,four.partial lsl
+127,four,10.77,0.45 um filtered,partial lsl,pvc,four.partial lsl
+131,four,8.375,0.45 um filtered,partial lsl,pvc,four.partial lsl
+134,four,8.752,0.45 um filtered,partial lsl,pvc,four.partial lsl
+138,four,7.988,0.45 um filtered,partial lsl,pvc,four.partial lsl
+141,four,7.127,0.45 um filtered,partial lsl,pvc,four.partial lsl
+145,four,8.075,0.45 um filtered,partial lsl,pvc,four.partial lsl
+148,four,8.211,0.45 um filtered,partial lsl,pvc,four.partial lsl
+152,four,7.881,0.45 um filtered,partial lsl,pvc,four.partial lsl
+155,four,7.963,0.45 um filtered,partial lsl,pvc,four.partial lsl
+162,four,9.389,0.45 um filtered,partial lsl,pvc,four.partial lsl
+166,four,10.02,0.45 um filtered,partial lsl,pvc,four.partial lsl
+169,four,9.782,0.45 um filtered,partial lsl,pvc,four.partial lsl
+173,four,9.556,0.45 um filtered,partial lsl,pvc,four.partial lsl
+176,four,7.7,0.45 um filtered,partial lsl,pvc,four.partial lsl
+180,four,9.238,0.45 um filtered,partial lsl,pvc,four.partial lsl
+187,four,7.878,0.45 um filtered,partial lsl,pvc,four.partial lsl
+190,four,8.676,0.45 um filtered,partial lsl,pvc,four.partial lsl
+194,four,9.561,0.45 um filtered,partial lsl,pvc,four.partial lsl
+197,four,9.611,0.45 um filtered,partial lsl,pvc,four.partial lsl
+201,four,6.107,0.45 um filtered,partial lsl,pvc,four.partial lsl
+204,four,5.373,0.45 um filtered,partial lsl,pvc,four.partial lsl
+208,four,5.683,0.45 um filtered,partial lsl,pvc,four.partial lsl
+211,four,5.925,0.45 um filtered,partial lsl,pvc,four.partial lsl
+215,four,7.239,0.45 um filtered,partial lsl,pvc,four.partial lsl
+218,four,7.595,0.45 um filtered,partial lsl,pvc,four.partial lsl
+222,four,6.73,0.45 um filtered,partial lsl,pvc,four.partial lsl
+225,four,9.203,0.45 um filtered,partial lsl,pvc,four.partial lsl
+229,four,8.224,0.45 um filtered,partial lsl,pvc,four.partial lsl
+232,four,7.622,0.45 um filtered,partial lsl,pvc,four.partial lsl
+236,four,6.421,0.45 um filtered,partial lsl,pvc,four.partial lsl
+239,four,7.446,0.45 um filtered,partial lsl,pvc,four.partial lsl
+243,four,8.273,0.45 um filtered,partial lsl,pvc,four.partial lsl
+246,four,7.921,0.45 um filtered,partial lsl,pvc,four.partial lsl
+250,four,6.627,0.45 um filtered,partial lsl,pvc,four.partial lsl
+253,four,6.475,0.45 um filtered,partial lsl,pvc,four.partial lsl
+257,four,7.725,0.45 um filtered,partial lsl,pvc,four.partial lsl
+260,four,7.519,0.45 um filtered,partial lsl,pvc,four.partial lsl
+264,four,7.772,0.45 um filtered,partial lsl,pvc,four.partial lsl
+267,four,7.692,0.45 um filtered,partial lsl,pvc,four.partial lsl
+274,four,7.207,0.45 um filtered,partial lsl,pvc,four.partial lsl
+278,four,6.942,0.45 um filtered,partial lsl,pvc,four.partial lsl
+281,four,6.647,0.45 um filtered,partial lsl,pvc,four.partial lsl
+285,four,6.164,0.45 um filtered,partial lsl,pvc,four.partial lsl
+288,four,6.729,0.45 um filtered,partial lsl,pvc,four.partial lsl
+292,four,7.02,0.45 um filtered,partial lsl,pvc,four.partial lsl
+295,four,7.83,0.45 um filtered,partial lsl,pvc,four.partial lsl
+299,four,6.651,0.45 um filtered,partial lsl,pvc,four.partial lsl
+302,four,6.731,0.45 um filtered,partial lsl,pvc,four.partial lsl
+306,four,6.674,0.45 um filtered,partial lsl,pvc,four.partial lsl
+309,four,5.838,0.45 um filtered,partial lsl,pvc,four.partial lsl
+313,four,6.085,0.45 um filtered,partial lsl,pvc,four.partial lsl
+317,four,5.548,0.45 um filtered,partial lsl,pvc,four.partial lsl
+321,four,5.115,0.45 um filtered,partial lsl,pvc,four.partial lsl
+324,four,6.481,0.45 um filtered,partial lsl,pvc,four.partial lsl
+328,four,5.255,0.45 um filtered,partial lsl,pvc,four.partial lsl
+331,four,5.379,0.45 um filtered,partial lsl,pvc,four.partial lsl
+335,four,4.986,0.45 um filtered,partial lsl,pvc,four.partial lsl
+338,four,7.072,0.45 um filtered,partial lsl,pvc,four.partial lsl
+342,four,6.213,0.45 um filtered,partial lsl,pvc,four.partial lsl
+345,four,4.632,0.45 um filtered,partial lsl,pvc,four.partial lsl
+349,four,5.582,0.45 um filtered,partial lsl,pvc,four.partial lsl
+352,four,6.609,0.45 um filtered,partial lsl,pvc,four.partial lsl
+356,four,6.133,0.45 um filtered,partial lsl,pvc,four.partial lsl
+359,four,6.255,0.45 um filtered,partial lsl,pvc,four.partial lsl
+363,four,5.461,0.45 um filtered,partial lsl,pvc,four.partial lsl
+366,four,5.423,0.45 um filtered,partial lsl,pvc,four.partial lsl
+370,four,5.369,0.45 um filtered,partial lsl,pvc,four.partial lsl
+373,four,5.391,0.45 um filtered,partial lsl,pvc,four.partial lsl
+377,four,5.604,0.45 um filtered,partial lsl,pvc,four.partial lsl
+380,four,6.383,0.45 um filtered,partial lsl,pvc,four.partial lsl
+384,four,5.564,0.45 um filtered,partial lsl,pvc,four.partial lsl
+387,four,5.701,0.45 um filtered,partial lsl,pvc,four.partial lsl
+391,four,5.296,0.45 um filtered,partial lsl,pvc,four.partial lsl
+394,four,5.358,0.45 um filtered,partial lsl,pvc,four.partial lsl
+398,four,5.091,0.45 um filtered,partial lsl,pvc,four.partial lsl
+401,four,5.027,0.45 um filtered,partial lsl,pvc,four.partial lsl
+408,four,5.575,0.45 um filtered,partial lsl,pvc,four.partial lsl
+412,four,4.253,0.45 um filtered,partial lsl,pvc,four.partial lsl
+426,four,5.319,0.45 um filtered,partial lsl,pvc,four.partial lsl
+429,four,6.048,0.45 um filtered,partial lsl,pvc,four.partial lsl
+433,four,6.233,0.45 um filtered,partial lsl,pvc,four.partial lsl
+436,four,6.4,0.45 um filtered,partial lsl,pvc,four.partial lsl
+443,four,4.168,0.45 um filtered,partial lsl,pvc,four.partial lsl
+447,four,6.443,0.45 um filtered,partial lsl,pvc,four.partial lsl
+450,four,6.256,0.45 um filtered,partial lsl,pvc,four.partial lsl
+457,four,7.356,0.45 um filtered,partial lsl,pvc,four.partial lsl
+461,four,10.8,0.45 um filtered,partial lsl,pvc,four.partial lsl
+464,four,6.432,0.45 um filtered,partial lsl,pvc,four.partial lsl
+471,four,5.241,0.45 um filtered,partial lsl,pvc,four.partial lsl
+478,four,5.042,0.45 um filtered,partial lsl,pvc,four.partial lsl
+485,four,6.109,0.45 um filtered,partial lsl,pvc,four.partial lsl
+492,four,7.108,0.45 um filtered,partial lsl,pvc,four.partial lsl
+499,four,5.088,0.45 um filtered,partial lsl,pvc,four.partial lsl
+506,four,8.358,0.45 um filtered,partial lsl,pvc,four.partial lsl
+513,four,5.262,0.45 um filtered,partial lsl,pvc,four.partial lsl
+520,four,4.18,0.45 um filtered,partial lsl,pvc,four.partial lsl
+527,four,6.632,0.45 um filtered,partial lsl,pvc,four.partial lsl
+534,four,6.554,0.45 um filtered,partial lsl,pvc,four.partial lsl
+541,four,5.497,0.45 um filtered,partial lsl,pvc,four.partial lsl
+548,four,6.629,0.45 um filtered,partial lsl,pvc,four.partial lsl
+555,four,6.442,0.45 um filtered,partial lsl,pvc,four.partial lsl
+562,four,7.659,0.45 um filtered,partial lsl,pvc,four.partial lsl
+569,four,3.83,0.45 um filtered,partial lsl,pvc,four.partial lsl
+576,four,3.961,0.45 um filtered,partial lsl,pvc,four.partial lsl
+583,four,5.404,0.45 um filtered,partial lsl,pvc,four.partial lsl
+590,four,4.825,0.45 um filtered,partial lsl,pvc,four.partial lsl
+597,four,3.726,0.45 um filtered,partial lsl,pvc,four.partial lsl
+604,four,4.352,0.45 um filtered,partial lsl,pvc,four.partial lsl
+611,four,3.792,0.45 um filtered,partial lsl,pvc,four.partial lsl
+618,four,3.477,0.45 um filtered,partial lsl,pvc,four.partial lsl
+625,four,4.597,0.45 um filtered,partial lsl,pvc,four.partial lsl
+632,four,3.926,0.45 um filtered,partial lsl,pvc,four.partial lsl
+639,four,4.078,0.45 um filtered,partial lsl,pvc,four.partial lsl
+646,four,3.79,0.45 um filtered,partial lsl,pvc,four.partial lsl
+15,four,48.49,total,partial lsl,pvc,four.partial lsl
+19,four,42.91,total,partial lsl,pvc,four.partial lsl
+22,four,37.82,total,partial lsl,pvc,four.partial lsl
+29,four,38.7,total,partial lsl,pvc,four.partial lsl
+33,four,35.53,total,partial lsl,pvc,four.partial lsl
+36,four,28.36,total,partial lsl,pvc,four.partial lsl
+47,four,28.96,total,partial lsl,pvc,four.partial lsl
+50,four,22.66,total,partial lsl,pvc,four.partial lsl
+54,four,25.33,total,partial lsl,pvc,four.partial lsl
+57,four,42.06,total,partial lsl,pvc,four.partial lsl
+61,four,216.1,total,partial lsl,pvc,four.partial lsl
+64,four,59.69,total,partial lsl,pvc,four.partial lsl
+68,four,34.39,total,partial lsl,pvc,four.partial lsl
+71,four,32.37,total,partial lsl,pvc,four.partial lsl
+78,four,14.89,total,partial lsl,pvc,four.partial lsl
+82,four,19.28,total,partial lsl,pvc,four.partial lsl
+85,four,26.17,total,partial lsl,pvc,four.partial lsl
+89,four,120,total,partial lsl,pvc,four.partial lsl
+92,four,24.05,total,partial lsl,pvc,four.partial lsl
+99,four,24.07,total,partial lsl,pvc,four.partial lsl
+103,four,85.44,total,partial lsl,pvc,four.partial lsl
+106,four,111,total,partial lsl,pvc,four.partial lsl
+110,four,28.9,total,partial lsl,pvc,four.partial lsl
+113,four,34.64,total,partial lsl,pvc,four.partial lsl
+117,four,24.2,total,partial lsl,pvc,four.partial lsl
+120,four,24.95,total,partial lsl,pvc,four.partial lsl
+127,four,41.08,total,partial lsl,pvc,four.partial lsl
+131,four,20.83,total,partial lsl,pvc,four.partial lsl
+134,four,35.45,total,partial lsl,pvc,four.partial lsl
+138,four,22.87,total,partial lsl,pvc,four.partial lsl
+141,four,33.27,total,partial lsl,pvc,four.partial lsl
+145,four,30.26,total,partial lsl,pvc,four.partial lsl
+148,four,93.36,total,partial lsl,pvc,four.partial lsl
+152,four,42.22,total,partial lsl,pvc,four.partial lsl
+155,four,44.06,total,partial lsl,pvc,four.partial lsl
+162,four,25.93,total,partial lsl,pvc,four.partial lsl
+166,four,38.15,total,partial lsl,pvc,four.partial lsl
+169,four,30.49,total,partial lsl,pvc,four.partial lsl
+173,four,30.96,total,partial lsl,pvc,four.partial lsl
+176,four,59.83,total,partial lsl,pvc,four.partial lsl
+180,four,88.93,total,partial lsl,pvc,four.partial lsl
+187,four,30.03,total,partial lsl,pvc,four.partial lsl
+190,four,23.18,total,partial lsl,pvc,four.partial lsl
+194,four,28.63,total,partial lsl,pvc,four.partial lsl
+197,four,55.62,total,partial lsl,pvc,four.partial lsl
+201,four,28.63,total,partial lsl,pvc,four.partial lsl
+204,four,28.26,total,partial lsl,pvc,four.partial lsl
+208,four,45.73,total,partial lsl,pvc,four.partial lsl
+211,four,21.49,total,partial lsl,pvc,four.partial lsl
+215,four,35.86,total,partial lsl,pvc,four.partial lsl
+218,four,35.64,total,partial lsl,pvc,four.partial lsl
+222,four,21.52,total,partial lsl,pvc,four.partial lsl
+225,four,31.75,total,partial lsl,pvc,four.partial lsl
+229,four,34.14,total,partial lsl,pvc,four.partial lsl
+232,four,24.81,total,partial lsl,pvc,four.partial lsl
+236,four,31.19,total,partial lsl,pvc,four.partial lsl
+239,four,25.38,total,partial lsl,pvc,four.partial lsl
+243,four,32.91,total,partial lsl,pvc,four.partial lsl
+246,four,21.59,total,partial lsl,pvc,four.partial lsl
+250,four,30.47,total,partial lsl,pvc,four.partial lsl
+253,four,22.81,total,partial lsl,pvc,four.partial lsl
+257,four,28.37,total,partial lsl,pvc,four.partial lsl
+260,four,39.73,total,partial lsl,pvc,four.partial lsl
+264,four,32.11,total,partial lsl,pvc,four.partial lsl
+267,four,26.15,total,partial lsl,pvc,four.partial lsl
+274,four,43.45,total,partial lsl,pvc,four.partial lsl
+278,four,23.22,total,partial lsl,pvc,four.partial lsl
+281,four,33.01,total,partial lsl,pvc,four.partial lsl
+285,four,16.53,total,partial lsl,pvc,four.partial lsl
+288,four,19.12,total,partial lsl,pvc,four.partial lsl
+292,four,20.47,total,partial lsl,pvc,four.partial lsl
+295,four,17.36,total,partial lsl,pvc,four.partial lsl
+299,four,24.58,total,partial lsl,pvc,four.partial lsl
+302,four,23.67,total,partial lsl,pvc,four.partial lsl
+306,four,15.87,total,partial lsl,pvc,four.partial lsl
+309,four,17.31,total,partial lsl,pvc,four.partial lsl
+313,four,16.83,total,partial lsl,pvc,four.partial lsl
+317,four,29.3,total,partial lsl,pvc,four.partial lsl
+321,four,13.64,total,partial lsl,pvc,four.partial lsl
+324,four,14.69,total,partial lsl,pvc,four.partial lsl
+328,four,14.5,total,partial lsl,pvc,four.partial lsl
+331,four,13.03,total,partial lsl,pvc,four.partial lsl
+335,four,10.35,total,partial lsl,pvc,four.partial lsl
+338,four,11.46,total,partial lsl,pvc,four.partial lsl
+342,four,19.58,total,partial lsl,pvc,four.partial lsl
+345,four,14.03,total,partial lsl,pvc,four.partial lsl
+349,four,10,total,partial lsl,pvc,four.partial lsl
+352,four,13.05,total,partial lsl,pvc,four.partial lsl
+356,four,10.04,total,partial lsl,pvc,four.partial lsl
+359,four,11.33,total,partial lsl,pvc,four.partial lsl
+363,four,12.86,total,partial lsl,pvc,four.partial lsl
+366,four,15.05,total,partial lsl,pvc,four.partial lsl
+370,four,9.978,total,partial lsl,pvc,four.partial lsl
+373,four,24.39,total,partial lsl,pvc,four.partial lsl
+377,four,10.31,total,partial lsl,pvc,four.partial lsl
+380,four,17.69,total,partial lsl,pvc,four.partial lsl
+384,four,11.53,total,partial lsl,pvc,four.partial lsl
+387,four,13.64,total,partial lsl,pvc,four.partial lsl
+391,four,8.806,total,partial lsl,pvc,four.partial lsl
+394,four,11.26,total,partial lsl,pvc,four.partial lsl
+398,four,8.37,total,partial lsl,pvc,four.partial lsl
+401,four,7.985,total,partial lsl,pvc,four.partial lsl
+408,four,17.76,total,partial lsl,pvc,four.partial lsl
+412,four,8.176,total,partial lsl,pvc,four.partial lsl
+426,four,8.176,total,partial lsl,pvc,four.partial lsl
+429,four,8.947,total,partial lsl,pvc,four.partial lsl
+433,four,11.83,total,partial lsl,pvc,four.partial lsl
+436,four,18.27,total,partial lsl,pvc,four.partial lsl
+443,four,34.65,total,partial lsl,pvc,four.partial lsl
+447,four,85.08,total,partial lsl,pvc,four.partial lsl
+450,four,9.135,total,partial lsl,pvc,four.partial lsl
+457,four,14.6,total,partial lsl,pvc,four.partial lsl
+461,four,15,total,partial lsl,pvc,four.partial lsl
+464,four,10.88,total,partial lsl,pvc,four.partial lsl
+471,four,9.163,total,partial lsl,pvc,four.partial lsl
+478,four,12.97,total,partial lsl,pvc,four.partial lsl
+485,four,12.36,total,partial lsl,pvc,four.partial lsl
+1,one,62.32,0.45 um filtered,full lsl,pvc,one.full lsl
+5,one,66.73,0.45 um filtered,full lsl,pvc,one.full lsl
+8,one,75.3,0.45 um filtered,full lsl,pvc,one.full lsl
+12,one,65.83,0.45 um filtered,full lsl,pvc,one.full lsl
+15,one,54.74,0.45 um filtered,full lsl,pvc,one.full lsl
+19,one,60.2,0.45 um filtered,full lsl,pvc,one.full lsl
+22,one,54.72,0.45 um filtered,full lsl,pvc,one.full lsl
+26,one,53.56,0.45 um filtered,full lsl,pvc,one.full lsl
+29,one,52.6,0.45 um filtered,full lsl,pvc,one.full lsl
+33,one,81.38,0.45 um filtered,full lsl,pvc,one.full lsl
+36,one,80.6,0.45 um filtered,full lsl,pvc,one.full lsl
+47,one,92.7,0.45 um filtered,full lsl,pvc,one.full lsl
+50,one,95.71,0.45 um filtered,full lsl,pvc,one.full lsl
+54,one,97.59,0.45 um filtered,full lsl,pvc,one.full lsl
+57,one,104.1,0.45 um filtered,full lsl,pvc,one.full lsl
+61,one,119.3,0.45 um filtered,full lsl,pvc,one.full lsl
+64,one,82.62,0.45 um filtered,full lsl,pvc,one.full lsl
+68,one,103,0.45 um filtered,full lsl,pvc,one.full lsl
+71,one,89.22,0.45 um filtered,full lsl,pvc,one.full lsl
+78,one,87.14,0.45 um filtered,full lsl,pvc,one.full lsl
+82,one,94.07,0.45 um filtered,full lsl,pvc,one.full lsl
+85,one,98.06,0.45 um filtered,full lsl,pvc,one.full lsl
+89,one,100.7,0.45 um filtered,full lsl,pvc,one.full lsl
+92,one,140.6,0.45 um filtered,full lsl,pvc,one.full lsl
+99,one,137.9,0.45 um filtered,full lsl,pvc,one.full lsl
+103,one,200.4,0.45 um filtered,full lsl,pvc,one.full lsl
+106,one,173.2,0.45 um filtered,full lsl,pvc,one.full lsl
+110,one,148.8,0.45 um filtered,full lsl,pvc,one.full lsl
+113,one,151.8,0.45 um filtered,full lsl,pvc,one.full lsl
+117,one,115.7,0.45 um filtered,full lsl,pvc,one.full lsl
+120,one,114.2,0.45 um filtered,full lsl,pvc,one.full lsl
+127,one,120.8,0.45 um filtered,full lsl,pvc,one.full lsl
+131,one,162,0.45 um filtered,full lsl,pvc,one.full lsl
+134,one,160.8,0.45 um filtered,full lsl,pvc,one.full lsl
+138,one,144,0.45 um filtered,full lsl,pvc,one.full lsl
+141,one,91.23,0.45 um filtered,full lsl,pvc,one.full lsl
+145,one,98.78,0.45 um filtered,full lsl,pvc,one.full lsl
+148,one,129.8,0.45 um filtered,full lsl,pvc,one.full lsl
+152,one,130.1,0.45 um filtered,full lsl,pvc,one.full lsl
+155,one,160.9,0.45 um filtered,full lsl,pvc,one.full lsl
+162,one,149,0.45 um filtered,full lsl,pvc,one.full lsl
+166,one,143.6,0.45 um filtered,full lsl,pvc,one.full lsl
+169,one,116.1,0.45 um filtered,full lsl,pvc,one.full lsl
+173,one,96.9,0.45 um filtered,full lsl,pvc,one.full lsl
+176,one,102.5,0.45 um filtered,full lsl,pvc,one.full lsl
+180,one,106.4,0.45 um filtered,full lsl,pvc,one.full lsl
+187,one,152.7,0.45 um filtered,full lsl,pvc,one.full lsl
+190,one,152.5,0.45 um filtered,full lsl,pvc,one.full lsl
+194,one,121.3,0.45 um filtered,full lsl,pvc,one.full lsl
+197,one,96.94,0.45 um filtered,full lsl,pvc,one.full lsl
+201,one,86.17,0.45 um filtered,full lsl,pvc,one.full lsl
+204,one,82.45,0.45 um filtered,full lsl,pvc,one.full lsl
+208,one,49.42,0.45 um filtered,full lsl,pvc,one.full lsl
+211,one,74.53,0.45 um filtered,full lsl,pvc,one.full lsl
+215,one,60.29,0.45 um filtered,full lsl,pvc,one.full lsl
+218,one,68.34,0.45 um filtered,full lsl,pvc,one.full lsl
+222,one,70.24,0.45 um filtered,full lsl,pvc,one.full lsl
+225,one,68.4,0.45 um filtered,full lsl,pvc,one.full lsl
+229,one,77.72,0.45 um filtered,full lsl,pvc,one.full lsl
+232,one,74.39,0.45 um filtered,full lsl,pvc,one.full lsl
+236,one,75.14,0.45 um filtered,full lsl,pvc,one.full lsl
+239,one,72.57,0.45 um filtered,full lsl,pvc,one.full lsl
+243,one,76.44,0.45 um filtered,full lsl,pvc,one.full lsl
+246,one,72.81,0.45 um filtered,full lsl,pvc,one.full lsl
+250,one,63.01,0.45 um filtered,full lsl,pvc,one.full lsl
+253,one,37.48,0.45 um filtered,full lsl,pvc,one.full lsl
+257,one,70.92,0.45 um filtered,full lsl,pvc,one.full lsl
+260,one,68.08,0.45 um filtered,full lsl,pvc,one.full lsl
+264,one,64.76,0.45 um filtered,full lsl,pvc,one.full lsl
+267,one,58.98,0.45 um filtered,full lsl,pvc,one.full lsl
+274,one,66.35,0.45 um filtered,full lsl,pvc,one.full lsl
+281,one,33.26,0.45 um filtered,full lsl,pvc,one.full lsl
+285,one,32.15,0.45 um filtered,full lsl,pvc,one.full lsl
+288,one,34.89,0.45 um filtered,full lsl,pvc,one.full lsl
+292,one,57.77,0.45 um filtered,full lsl,pvc,one.full lsl
+295,one,58.92,0.45 um filtered,full lsl,pvc,one.full lsl
+299,one,43.58,0.45 um filtered,full lsl,pvc,one.full lsl
+302,one,64.52,0.45 um filtered,full lsl,pvc,one.full lsl
+306,one,64.31,0.45 um filtered,full lsl,pvc,one.full lsl
+309,one,44.33,0.45 um filtered,full lsl,pvc,one.full lsl
+313,one,57.35,0.45 um filtered,full lsl,pvc,one.full lsl
+317,one,64.02,0.45 um filtered,full lsl,pvc,one.full lsl
+321,one,59.14,0.45 um filtered,full lsl,pvc,one.full lsl
+324,one,63.23,0.45 um filtered,full lsl,pvc,one.full lsl
+328,one,63.71,0.45 um filtered,full lsl,pvc,one.full lsl
+331,one,50.59,0.45 um filtered,full lsl,pvc,one.full lsl
+335,one,55.95,0.45 um filtered,full lsl,pvc,one.full lsl
+338,one,58.18,0.45 um filtered,full lsl,pvc,one.full lsl
+342,one,57.34,0.45 um filtered,full lsl,pvc,one.full lsl
+345,one,75.91,0.45 um filtered,full lsl,pvc,one.full lsl
+349,one,32.85,0.45 um filtered,full lsl,pvc,one.full lsl
+352,one,37,0.45 um filtered,full lsl,pvc,one.full lsl
+356,one,65.86,0.45 um filtered,full lsl,pvc,one.full lsl
+359,one,32.07,0.45 um filtered,full lsl,pvc,one.full lsl
+363,one,33.45,0.45 um filtered,full lsl,pvc,one.full lsl
+366,one,55.07,0.45 um filtered,full lsl,pvc,one.full lsl
+370,one,36.27,0.45 um filtered,full lsl,pvc,one.full lsl
+373,one,33.89,0.45 um filtered,full lsl,pvc,one.full lsl
+377,one,36.13,0.45 um filtered,full lsl,pvc,one.full lsl
+380,one,126.4,0.45 um filtered,full lsl,pvc,one.full lsl
+384,one,58.22,0.45 um filtered,full lsl,pvc,one.full lsl
+387,one,59.84,0.45 um filtered,full lsl,pvc,one.full lsl
+391,one,59.24,0.45 um filtered,full lsl,pvc,one.full lsl
+394,one,54.72,0.45 um filtered,full lsl,pvc,one.full lsl
+398,one,39.06,0.45 um filtered,full lsl,pvc,one.full lsl
+401,one,62.66,0.45 um filtered,full lsl,pvc,one.full lsl
+408,one,57.26,0.45 um filtered,full lsl,pvc,one.full lsl
+412,one,54.14,0.45 um filtered,full lsl,pvc,one.full lsl
+426,one,51.11,0.45 um filtered,full lsl,pvc,one.full lsl
+429,one,30.88,0.45 um filtered,full lsl,pvc,one.full lsl
+433,one,27.81,0.45 um filtered,full lsl,pvc,one.full lsl
+436,one,32.3,0.45 um filtered,full lsl,pvc,one.full lsl
+443,one,43.41,0.45 um filtered,full lsl,pvc,one.full lsl
+447,one,52.01,0.45 um filtered,full lsl,pvc,one.full lsl
+450,one,51.77,0.45 um filtered,full lsl,pvc,one.full lsl
+457,one,33.83,0.45 um filtered,full lsl,pvc,one.full lsl
+461,one,51.11,0.45 um filtered,full lsl,pvc,one.full lsl
+464,one,49.45,0.45 um filtered,full lsl,pvc,one.full lsl
+471,one,45.4,0.45 um filtered,full lsl,pvc,one.full lsl
+478,one,47.13,0.45 um filtered,full lsl,pvc,one.full lsl
+485,one,57.5,0.45 um filtered,full lsl,pvc,one.full lsl
+492,one,58.24,0.45 um filtered,full lsl,pvc,one.full lsl
+499,one,48.89,0.45 um filtered,full lsl,pvc,one.full lsl
+506,one,61.01,0.45 um filtered,full lsl,pvc,one.full lsl
+513,one,30.65,0.45 um filtered,full lsl,pvc,one.full lsl
+520,one,47.38,0.45 um filtered,full lsl,pvc,one.full lsl
+527,one,50.22,0.45 um filtered,full lsl,pvc,one.full lsl
+534,one,43.65,0.45 um filtered,full lsl,pvc,one.full lsl
+541,one,46.82,0.45 um filtered,full lsl,pvc,one.full lsl
+548,one,46.59,0.45 um filtered,full lsl,pvc,one.full lsl
+555,one,56.25,0.45 um filtered,full lsl,pvc,one.full lsl
+562,one,54.13,0.45 um filtered,full lsl,pvc,one.full lsl
+569,one,46.7,0.45 um filtered,full lsl,pvc,one.full lsl
+576,one,48.14,0.45 um filtered,full lsl,pvc,one.full lsl
+583,one,45.45,0.45 um filtered,full lsl,pvc,one.full lsl
+590,one,43.39,0.45 um filtered,full lsl,pvc,one.full lsl
+597,one,27.64,0.45 um filtered,full lsl,pvc,one.full lsl
+604,one,24.62,0.45 um filtered,full lsl,pvc,one.full lsl
+611,one,44.66,0.45 um filtered,full lsl,pvc,one.full lsl
+618,one,22.23,0.45 um filtered,full lsl,pvc,one.full lsl
+625,one,28.12,0.45 um filtered,full lsl,pvc,one.full lsl
+632,one,42.08,0.45 um filtered,full lsl,pvc,one.full lsl
+639,one,43.05,0.45 um filtered,full lsl,pvc,one.full lsl
+646,one,52.94,0.45 um filtered,full lsl,pvc,one.full lsl
+1,one,94.98,total,full lsl,pvc,one.full lsl
+5,one,144.9,total,full lsl,pvc,one.full lsl
+8,one,123.5,total,full lsl,pvc,one.full lsl
+12,one,108.9,total,full lsl,pvc,one.full lsl
+15,one,107.2,total,full lsl,pvc,one.full lsl
+19,one,89.96,total,full lsl,pvc,one.full lsl
+22,one,109.6,total,full lsl,pvc,one.full lsl
+26,one,91.63,total,full lsl,pvc,one.full lsl
+29,one,137.8,total,full lsl,pvc,one.full lsl
+33,one,109,total,full lsl,pvc,one.full lsl
+36,one,116.1,total,full lsl,pvc,one.full lsl
+47,one,128.4,total,full lsl,pvc,one.full lsl
+50,one,141.4,total,full lsl,pvc,one.full lsl
+54,one,143,total,full lsl,pvc,one.full lsl
+57,one,145.4,total,full lsl,pvc,one.full lsl
+61,one,157.4,total,full lsl,pvc,one.full lsl
+64,one,115.1,total,full lsl,pvc,one.full lsl
+68,one,132.5,total,full lsl,pvc,one.full lsl
+71,one,123.6,total,full lsl,pvc,one.full lsl
+78,one,135.5,total,full lsl,pvc,one.full lsl
+82,one,165.5,total,full lsl,pvc,one.full lsl
+85,one,159,total,full lsl,pvc,one.full lsl
+89,one,169.1,total,full lsl,pvc,one.full lsl
+92,one,180.1,total,full lsl,pvc,one.full lsl
+99,one,232.8,total,full lsl,pvc,one.full lsl
+103,one,374.8,total,full lsl,pvc,one.full lsl
+106,one,327.8,total,full lsl,pvc,one.full lsl
+110,one,231.2,total,full lsl,pvc,one.full lsl
+113,one,255.9,total,full lsl,pvc,one.full lsl
+117,one,197.6,total,full lsl,pvc,one.full lsl
+120,one,203.2,total,full lsl,pvc,one.full lsl
+127,one,224.5,total,full lsl,pvc,one.full lsl
+131,one,321.5,total,full lsl,pvc,one.full lsl
+134,one,409.3,total,full lsl,pvc,one.full lsl
+138,one,320,total,full lsl,pvc,one.full lsl
+141,one,168.2,total,full lsl,pvc,one.full lsl
+145,one,160.2,total,full lsl,pvc,one.full lsl
+148,one,193,total,full lsl,pvc,one.full lsl
+152,one,179.7,total,full lsl,pvc,one.full lsl
+155,one,323.3,total,full lsl,pvc,one.full lsl
+162,one,239.8,total,full lsl,pvc,one.full lsl
+166,one,230.9,total,full lsl,pvc,one.full lsl
+169,one,190,total,full lsl,pvc,one.full lsl
+173,one,155.2,total,full lsl,pvc,one.full lsl
+176,one,169.8,total,full lsl,pvc,one.full lsl
+180,one,185.2,total,full lsl,pvc,one.full lsl
+187,one,239,total,full lsl,pvc,one.full lsl
+190,one,261.1,total,full lsl,pvc,one.full lsl
+194,one,220,total,full lsl,pvc,one.full lsl
+197,one,205.3,total,full lsl,pvc,one.full lsl
+201,one,146.2,total,full lsl,pvc,one.full lsl
+204,one,155,total,full lsl,pvc,one.full lsl
+208,one,130.3,total,full lsl,pvc,one.full lsl
+211,one,122,total,full lsl,pvc,one.full lsl
+215,one,123.1,total,full lsl,pvc,one.full lsl
+218,one,133.5,total,full lsl,pvc,one.full lsl
+222,one,128.2,total,full lsl,pvc,one.full lsl
+225,one,134.3,total,full lsl,pvc,one.full lsl
+229,one,182.9,total,full lsl,pvc,one.full lsl
+232,one,143.1,total,full lsl,pvc,one.full lsl
+236,one,145.6,total,full lsl,pvc,one.full lsl
+239,one,140.1,total,full lsl,pvc,one.full lsl
+243,one,139.7,total,full lsl,pvc,one.full lsl
+246,one,133.5,total,full lsl,pvc,one.full lsl
+250,one,112.7,total,full lsl,pvc,one.full lsl
+253,one,108.2,total,full lsl,pvc,one.full lsl
+257,one,107.7,total,full lsl,pvc,one.full lsl
+260,one,107.1,total,full lsl,pvc,one.full lsl
+264,one,96.11,total,full lsl,pvc,one.full lsl
+267,one,100.7,total,full lsl,pvc,one.full lsl
+274,one,126.2,total,full lsl,pvc,one.full lsl
+281,one,58.04,total,full lsl,pvc,one.full lsl
+285,one,59.46,total,full lsl,pvc,one.full lsl
+288,one,58.56,total,full lsl,pvc,one.full lsl
+292,one,95.82,total,full lsl,pvc,one.full lsl
+295,one,95,total,full lsl,pvc,one.full lsl
+299,one,77.92,total,full lsl,pvc,one.full lsl
+302,one,103.8,total,full lsl,pvc,one.full lsl
+306,one,96.05,total,full lsl,pvc,one.full lsl
+309,one,60.78,total,full lsl,pvc,one.full lsl
+313,one,91.47,total,full lsl,pvc,one.full lsl
+317,one,117.6,total,full lsl,pvc,one.full lsl
+321,one,119.8,total,full lsl,pvc,one.full lsl
+324,one,106.7,total,full lsl,pvc,one.full lsl
+328,one,94.81,total,full lsl,pvc,one.full lsl
+331,one,84.74,total,full lsl,pvc,one.full lsl
+335,one,82.5,total,full lsl,pvc,one.full lsl
+338,one,84.7,total,full lsl,pvc,one.full lsl
+342,one,87.64,total,full lsl,pvc,one.full lsl
+345,one,101.3,total,full lsl,pvc,one.full lsl
+349,one,64.93,total,full lsl,pvc,one.full lsl
+352,one,50.05,total,full lsl,pvc,one.full lsl
+356,one,96.98,total,full lsl,pvc,one.full lsl
+359,one,53.08,total,full lsl,pvc,one.full lsl
+363,one,47.28,total,full lsl,pvc,one.full lsl
+366,one,84.36,total,full lsl,pvc,one.full lsl
+370,one,46.99,total,full lsl,pvc,one.full lsl
+373,one,45.7,total,full lsl,pvc,one.full lsl
+377,one,95.42,total,full lsl,pvc,one.full lsl
+380,one,181.8,total,full lsl,pvc,one.full lsl
+384,one,86.54,total,full lsl,pvc,one.full lsl
+387,one,90.59,total,full lsl,pvc,one.full lsl
+391,one,89.18,total,full lsl,pvc,one.full lsl
+394,one,85.16,total,full lsl,pvc,one.full lsl
+398,one,60.28,total,full lsl,pvc,one.full lsl
+401,one,103.3,total,full lsl,pvc,one.full lsl
+408,one,77.79,total,full lsl,pvc,one.full lsl
+412,one,68.87,total,full lsl,pvc,one.full lsl
+426,one,73.62,total,full lsl,pvc,one.full lsl
+429,one,45.6,total,full lsl,pvc,one.full lsl
+433,one,49.46,total,full lsl,pvc,one.full lsl
+436,one,46.9,total,full lsl,pvc,one.full lsl
+443,one,59.99,total,full lsl,pvc,one.full lsl
+447,one,70.88,total,full lsl,pvc,one.full lsl
+450,one,72.92,total,full lsl,pvc,one.full lsl
+457,one,47.82,total,full lsl,pvc,one.full lsl
+461,one,73.25,total,full lsl,pvc,one.full lsl
+464,one,66.52,total,full lsl,pvc,one.full lsl
+471,one,90.37,total,full lsl,pvc,one.full lsl
+478,one,70.58,total,full lsl,pvc,one.full lsl
+485,one,92.83,total,full lsl,pvc,one.full lsl
+1,one,10.88,0.45 um filtered,partial lsl,pvc,one.partial lsl
+5,one,9.961,0.45 um filtered,partial lsl,pvc,one.partial lsl
+8,one,15.5,0.45 um filtered,partial lsl,pvc,one.partial lsl
+12,one,8.903,0.45 um filtered,partial lsl,pvc,one.partial lsl
+15,one,7.521,0.45 um filtered,partial lsl,pvc,one.partial lsl
+19,one,13.35,0.45 um filtered,partial lsl,pvc,one.partial lsl
+22,one,5.491,0.45 um filtered,partial lsl,pvc,one.partial lsl
+26,one,4.758,0.45 um filtered,partial lsl,pvc,one.partial lsl
+29,one,7.39,0.45 um filtered,partial lsl,pvc,one.partial lsl
+33,one,16.05,0.45 um filtered,partial lsl,pvc,one.partial lsl
+36,one,17.81,0.45 um filtered,partial lsl,pvc,one.partial lsl
+47,one,14.35,0.45 um filtered,partial lsl,pvc,one.partial lsl
+50,one,15.7,0.45 um filtered,partial lsl,pvc,one.partial lsl
+54,one,10.17,0.45 um filtered,partial lsl,pvc,one.partial lsl
+57,one,31.69,0.45 um filtered,partial lsl,pvc,one.partial lsl
+61,one,17.33,0.45 um filtered,partial lsl,pvc,one.partial lsl
+64,one,11.03,0.45 um filtered,partial lsl,pvc,one.partial lsl
+68,one,28.04,0.45 um filtered,partial lsl,pvc,one.partial lsl
+71,one,29.44,0.45 um filtered,partial lsl,pvc,one.partial lsl
+78,one,25.65,0.45 um filtered,partial lsl,pvc,one.partial lsl
+82,one,29.86,0.45 um filtered,partial lsl,pvc,one.partial lsl
+85,one,19.71,0.45 um filtered,partial lsl,pvc,one.partial lsl
+89,one,9.892,0.45 um filtered,partial lsl,pvc,one.partial lsl
+92,one,40.4,0.45 um filtered,partial lsl,pvc,one.partial lsl
+99,one,14.2,0.45 um filtered,partial lsl,pvc,one.partial lsl
+103,one,32.46,0.45 um filtered,partial lsl,pvc,one.partial lsl
+106,one,35.58,0.45 um filtered,partial lsl,pvc,one.partial lsl
+110,one,39.46,0.45 um filtered,partial lsl,pvc,one.partial lsl
+113,one,40.46,0.45 um filtered,partial lsl,pvc,one.partial lsl
+117,one,31.62,0.45 um filtered,partial lsl,pvc,one.partial lsl
+120,one,36.39,0.45 um filtered,partial lsl,pvc,one.partial lsl
+127,one,26.89,0.45 um filtered,partial lsl,pvc,one.partial lsl
+131,one,42.4,0.45 um filtered,partial lsl,pvc,one.partial lsl
+134,one,40.39,0.45 um filtered,partial lsl,pvc,one.partial lsl
+138,one,39.76,0.45 um filtered,partial lsl,pvc,one.partial lsl
+141,one,24.15,0.45 um filtered,partial lsl,pvc,one.partial lsl
+145,one,41.19,0.45 um filtered,partial lsl,pvc,one.partial lsl
+148,one,48.14,0.45 um filtered,partial lsl,pvc,one.partial lsl
+152,one,42.62,0.45 um filtered,partial lsl,pvc,one.partial lsl
+155,one,42.72,0.45 um filtered,partial lsl,pvc,one.partial lsl
+162,one,52.33,0.45 um filtered,partial lsl,pvc,one.partial lsl
+166,one,57.04,0.45 um filtered,partial lsl,pvc,one.partial lsl
+169,one,58.23,0.45 um filtered,partial lsl,pvc,one.partial lsl
+173,one,46.47,0.45 um filtered,partial lsl,pvc,one.partial lsl
+176,one,48.35,0.45 um filtered,partial lsl,pvc,one.partial lsl
+180,one,66.08,0.45 um filtered,partial lsl,pvc,one.partial lsl
+187,one,68.2,0.45 um filtered,partial lsl,pvc,one.partial lsl
+190,one,68.16,0.45 um filtered,partial lsl,pvc,one.partial lsl
+194,one,69.3,0.45 um filtered,partial lsl,pvc,one.partial lsl
+197,one,19.44,0.45 um filtered,partial lsl,pvc,one.partial lsl
+201,one,56.39,0.45 um filtered,partial lsl,pvc,one.partial lsl
+204,one,54.97,0.45 um filtered,partial lsl,pvc,one.partial lsl
+208,one,27.49,0.45 um filtered,partial lsl,pvc,one.partial lsl
+211,one,56.51,0.45 um filtered,partial lsl,pvc,one.partial lsl
+215,one,56.12,0.45 um filtered,partial lsl,pvc,one.partial lsl
+218,one,65.75,0.45 um filtered,partial lsl,pvc,one.partial lsl
+222,one,15.75,0.45 um filtered,partial lsl,pvc,one.partial lsl
+225,one,55.73,0.45 um filtered,partial lsl,pvc,one.partial lsl
+229,one,68.35,0.45 um filtered,partial lsl,pvc,one.partial lsl
+232,one,61.67,0.45 um filtered,partial lsl,pvc,one.partial lsl
+236,one,56.9,0.45 um filtered,partial lsl,pvc,one.partial lsl
+239,one,59.7,0.45 um filtered,partial lsl,pvc,one.partial lsl
+243,one,67.18,0.45 um filtered,partial lsl,pvc,one.partial lsl
+246,one,63.22,0.45 um filtered,partial lsl,pvc,one.partial lsl
+250,one,58.5,0.45 um filtered,partial lsl,pvc,one.partial lsl
+253,one,20.67,0.45 um filtered,partial lsl,pvc,one.partial lsl
+257,one,58.79,0.45 um filtered,partial lsl,pvc,one.partial lsl
+260,one,59.67,0.45 um filtered,partial lsl,pvc,one.partial lsl
+264,one,37.2,0.45 um filtered,partial lsl,pvc,one.partial lsl
+267,one,51.1,0.45 um filtered,partial lsl,pvc,one.partial lsl
+274,one,60.39,0.45 um filtered,partial lsl,pvc,one.partial lsl
+281,one,18.76,0.45 um filtered,partial lsl,pvc,one.partial lsl
+285,one,28.75,0.45 um filtered,partial lsl,pvc,one.partial lsl
+288,one,23.54,0.45 um filtered,partial lsl,pvc,one.partial lsl
+292,one,63.36,0.45 um filtered,partial lsl,pvc,one.partial lsl
+295,one,60.3,0.45 um filtered,partial lsl,pvc,one.partial lsl
+299,one,21.28,0.45 um filtered,partial lsl,pvc,one.partial lsl
+302,one,57.08,0.45 um filtered,partial lsl,pvc,one.partial lsl
+306,one,59.78,0.45 um filtered,partial lsl,pvc,one.partial lsl
+309,one,16.04,0.45 um filtered,partial lsl,pvc,one.partial lsl
+313,one,46.88,0.45 um filtered,partial lsl,pvc,one.partial lsl
+317,one,33.55,0.45 um filtered,partial lsl,pvc,one.partial lsl
+321,one,39.94,0.45 um filtered,partial lsl,pvc,one.partial lsl
+324,one,38.14,0.45 um filtered,partial lsl,pvc,one.partial lsl
+328,one,37.34,0.45 um filtered,partial lsl,pvc,one.partial lsl
+331,one,39,0.45 um filtered,partial lsl,pvc,one.partial lsl
+335,one,41.66,0.45 um filtered,partial lsl,pvc,one.partial lsl
+338,one,34.89,0.45 um filtered,partial lsl,pvc,one.partial lsl
+342,one,43.61,0.45 um filtered,partial lsl,pvc,one.partial lsl
+345,one,44.5,0.45 um filtered,partial lsl,pvc,one.partial lsl
+349,one,9.912,0.45 um filtered,partial lsl,pvc,one.partial lsl
+352,one,14.11,0.45 um filtered,partial lsl,pvc,one.partial lsl
+356,one,45.55,0.45 um filtered,partial lsl,pvc,one.partial lsl
+359,one,10.09,0.45 um filtered,partial lsl,pvc,one.partial lsl
+363,one,7.536,0.45 um filtered,partial lsl,pvc,one.partial lsl
+366,one,41.34,0.45 um filtered,partial lsl,pvc,one.partial lsl
+370,one,8.523,0.45 um filtered,partial lsl,pvc,one.partial lsl
+373,one,10.76,0.45 um filtered,partial lsl,pvc,one.partial lsl
+377,one,9.996,0.45 um filtered,partial lsl,pvc,one.partial lsl
+380,one,46.75,0.45 um filtered,partial lsl,pvc,one.partial lsl
+384,one,48.95,0.45 um filtered,partial lsl,pvc,one.partial lsl
+387,one,48.77,0.45 um filtered,partial lsl,pvc,one.partial lsl
+391,one,46.94,0.45 um filtered,partial lsl,pvc,one.partial lsl
+394,one,51.25,0.45 um filtered,partial lsl,pvc,one.partial lsl
+398,one,9.62,0.45 um filtered,partial lsl,pvc,one.partial lsl
+401,one,42.19,0.45 um filtered,partial lsl,pvc,one.partial lsl
+408,one,55.16,0.45 um filtered,partial lsl,pvc,one.partial lsl
+412,one,51.91,0.45 um filtered,partial lsl,pvc,one.partial lsl
+426,one,53.91,0.45 um filtered,partial lsl,pvc,one.partial lsl
+429,one,10.12,0.45 um filtered,partial lsl,pvc,one.partial lsl
+433,one,11.23,0.45 um filtered,partial lsl,pvc,one.partial lsl
+436,one,14.29,0.45 um filtered,partial lsl,pvc,one.partial lsl
+443,one,44.15,0.45 um filtered,partial lsl,pvc,one.partial lsl
+447,one,47.54,0.45 um filtered,partial lsl,pvc,one.partial lsl
+450,one,54.94,0.45 um filtered,partial lsl,pvc,one.partial lsl
+457,one,16.62,0.45 um filtered,partial lsl,pvc,one.partial lsl
+461,one,48.71,0.45 um filtered,partial lsl,pvc,one.partial lsl
+464,one,57.06,0.45 um filtered,partial lsl,pvc,one.partial lsl
+468,one,56.78,0.45 um filtered,partial lsl,pvc,one.partial lsl
+471,one,56.12,0.45 um filtered,partial lsl,pvc,one.partial lsl
+478,one,48.42,0.45 um filtered,partial lsl,pvc,one.partial lsl
+485,one,65.74,0.45 um filtered,partial lsl,pvc,one.partial lsl
+492,one,58.09,0.45 um filtered,partial lsl,pvc,one.partial lsl
+499,one,54.95,0.45 um filtered,partial lsl,pvc,one.partial lsl
+506,one,63.98,0.45 um filtered,partial lsl,pvc,one.partial lsl
+513,one,14.47,0.45 um filtered,partial lsl,pvc,one.partial lsl
+520,one,50.81,0.45 um filtered,partial lsl,pvc,one.partial lsl
+527,one,55.3,0.45 um filtered,partial lsl,pvc,one.partial lsl
+534,one,46.05,0.45 um filtered,partial lsl,pvc,one.partial lsl
+541,one,38.93,0.45 um filtered,partial lsl,pvc,one.partial lsl
+548,one,56.93,0.45 um filtered,partial lsl,pvc,one.partial lsl
+555,one,57.36,0.45 um filtered,partial lsl,pvc,one.partial lsl
+562,one,46.7,0.45 um filtered,partial lsl,pvc,one.partial lsl
+569,one,44.08,0.45 um filtered,partial lsl,pvc,one.partial lsl
+576,one,40.17,0.45 um filtered,partial lsl,pvc,one.partial lsl
+583,one,42.36,0.45 um filtered,partial lsl,pvc,one.partial lsl
+590,one,40.62,0.45 um filtered,partial lsl,pvc,one.partial lsl
+597,one,10.13,0.45 um filtered,partial lsl,pvc,one.partial lsl
+604,one,7.265,0.45 um filtered,partial lsl,pvc,one.partial lsl
+611,one,51.19,0.45 um filtered,partial lsl,pvc,one.partial lsl
+618,one,23.06,0.45 um filtered,partial lsl,pvc,one.partial lsl
+625,one,15.69,0.45 um filtered,partial lsl,pvc,one.partial lsl
+632,one,37.34,0.45 um filtered,partial lsl,pvc,one.partial lsl
+639,one,35.76,0.45 um filtered,partial lsl,pvc,one.partial lsl
+646,one,41.03,0.45 um filtered,partial lsl,pvc,one.partial lsl
+1,one,63.43,total,partial lsl,pvc,one.partial lsl
+5,one,69.1,total,partial lsl,pvc,one.partial lsl
+8,one,57.38,total,partial lsl,pvc,one.partial lsl
+12,one,115.3,total,partial lsl,pvc,one.partial lsl
+15,one,56.37,total,partial lsl,pvc,one.partial lsl
+19,one,37.53,total,partial lsl,pvc,one.partial lsl
+22,one,37.72,total,partial lsl,pvc,one.partial lsl
+26,one,36.11,total,partial lsl,pvc,one.partial lsl
+29,one,80.24,total,partial lsl,pvc,one.partial lsl
+33,one,44.56,total,partial lsl,pvc,one.partial lsl
+36,one,43.04,total,partial lsl,pvc,one.partial lsl
+47,one,25.08,total,partial lsl,pvc,one.partial lsl
+50,one,34.54,total,partial lsl,pvc,one.partial lsl
+54,one,130.3,total,partial lsl,pvc,one.partial lsl
+57,one,63.18,total,partial lsl,pvc,one.partial lsl
+61,one,52.19,total,partial lsl,pvc,one.partial lsl
+64,one,155.7,total,partial lsl,pvc,one.partial lsl
+68,one,74.88,total,partial lsl,pvc,one.partial lsl
+71,one,114.9,total,partial lsl,pvc,one.partial lsl
+78,one,63.24,total,partial lsl,pvc,one.partial lsl
+82,one,58.17,total,partial lsl,pvc,one.partial lsl
+85,one,35.47,total,partial lsl,pvc,one.partial lsl
+89,one,69.67,total,partial lsl,pvc,one.partial lsl
+92,one,62.46,total,partial lsl,pvc,one.partial lsl
+99,one,101.1,total,partial lsl,pvc,one.partial lsl
+103,one,53.83,total,partial lsl,pvc,one.partial lsl
+106,one,63.58,total,partial lsl,pvc,one.partial lsl
+110,one,61.43,total,partial lsl,pvc,one.partial lsl
+113,one,64.45,total,partial lsl,pvc,one.partial lsl
+117,one,50.13,total,partial lsl,pvc,one.partial lsl
+120,one,55.75,total,partial lsl,pvc,one.partial lsl
+127,one,41.39,total,partial lsl,pvc,one.partial lsl
+131,one,66.41,total,partial lsl,pvc,one.partial lsl
+134,one,59.28,total,partial lsl,pvc,one.partial lsl
+138,one,59.78,total,partial lsl,pvc,one.partial lsl
+141,one,59.41,total,partial lsl,pvc,one.partial lsl
+145,one,70.43,total,partial lsl,pvc,one.partial lsl
+148,one,68.5,total,partial lsl,pvc,one.partial lsl
+152,one,82.26,total,partial lsl,pvc,one.partial lsl
+155,one,93.37,total,partial lsl,pvc,one.partial lsl
+162,one,126.9,total,partial lsl,pvc,one.partial lsl
+166,one,150,total,partial lsl,pvc,one.partial lsl
+169,one,123.2,total,partial lsl,pvc,one.partial lsl
+173,one,308.5,total,partial lsl,pvc,one.partial lsl
+176,one,150.5,total,partial lsl,pvc,one.partial lsl
+180,one,142.9,total,partial lsl,pvc,one.partial lsl
+187,one,202.7,total,partial lsl,pvc,one.partial lsl
+190,one,148,total,partial lsl,pvc,one.partial lsl
+194,one,153.2,total,partial lsl,pvc,one.partial lsl
+197,one,360.3,total,partial lsl,pvc,one.partial lsl
+201,one,111.6,total,partial lsl,pvc,one.partial lsl
+204,one,116.8,total,partial lsl,pvc,one.partial lsl
+208,one,108,total,partial lsl,pvc,one.partial lsl
+211,one,147.5,total,partial lsl,pvc,one.partial lsl
+215,one,146.4,total,partial lsl,pvc,one.partial lsl
+218,one,172,total,partial lsl,pvc,one.partial lsl
+222,one,185.4,total,partial lsl,pvc,one.partial lsl
+225,one,126.5,total,partial lsl,pvc,one.partial lsl
+229,one,178.4,total,partial lsl,pvc,one.partial lsl
+232,one,174.4,total,partial lsl,pvc,one.partial lsl
+236,one,158.5,total,partial lsl,pvc,one.partial lsl
+239,one,177.7,total,partial lsl,pvc,one.partial lsl
+243,one,156.2,total,partial lsl,pvc,one.partial lsl
+246,one,178.9,total,partial lsl,pvc,one.partial lsl
+250,one,167.3,total,partial lsl,pvc,one.partial lsl
+253,one,141.2,total,partial lsl,pvc,one.partial lsl
+257,one,145,total,partial lsl,pvc,one.partial lsl
+260,one,174.6,total,partial lsl,pvc,one.partial lsl
+264,one,104.2,total,partial lsl,pvc,one.partial lsl
+267,one,142.9,total,partial lsl,pvc,one.partial lsl
+274,one,157.5,total,partial lsl,pvc,one.partial lsl
+281,one,52.69,total,partial lsl,pvc,one.partial lsl
+285,one,65.11,total,partial lsl,pvc,one.partial lsl
+288,one,57.76,total,partial lsl,pvc,one.partial lsl
+292,one,151.1,total,partial lsl,pvc,one.partial lsl
+295,one,126.2,total,partial lsl,pvc,one.partial lsl
+299,one,61.56,total,partial lsl,pvc,one.partial lsl
+302,one,113.4,total,partial lsl,pvc,one.partial lsl
+306,one,101.6,total,partial lsl,pvc,one.partial lsl
+309,one,38.37,total,partial lsl,pvc,one.partial lsl
+313,one,104.5,total,partial lsl,pvc,one.partial lsl
+317,one,112.5,total,partial lsl,pvc,one.partial lsl
+321,one,102.4,total,partial lsl,pvc,one.partial lsl
+324,one,90.66,total,partial lsl,pvc,one.partial lsl
+328,one,71.34,total,partial lsl,pvc,one.partial lsl
+331,one,67.63,total,partial lsl,pvc,one.partial lsl
+335,one,64.82,total,partial lsl,pvc,one.partial lsl
+338,one,57.12,total,partial lsl,pvc,one.partial lsl
+342,one,76.55,total,partial lsl,pvc,one.partial lsl
+345,one,81.86,total,partial lsl,pvc,one.partial lsl
+349,one,59.92,total,partial lsl,pvc,one.partial lsl
+352,one,22.56,total,partial lsl,pvc,one.partial lsl
+356,one,68.95,total,partial lsl,pvc,one.partial lsl
+359,one,24.14,total,partial lsl,pvc,one.partial lsl
+363,one,44.79,total,partial lsl,pvc,one.partial lsl
+366,one,66.97,total,partial lsl,pvc,one.partial lsl
+370,one,32.46,total,partial lsl,pvc,one.partial lsl
+373,one,23.52,total,partial lsl,pvc,one.partial lsl
+377,one,17.64,total,partial lsl,pvc,one.partial lsl
+380,one,71.03,total,partial lsl,pvc,one.partial lsl
+384,one,76.98,total,partial lsl,pvc,one.partial lsl
+387,one,79.78,total,partial lsl,pvc,one.partial lsl
+391,one,73.61,total,partial lsl,pvc,one.partial lsl
+394,one,89.45,total,partial lsl,pvc,one.partial lsl
+398,one,18.42,total,partial lsl,pvc,one.partial lsl
+401,one,70.22,total,partial lsl,pvc,one.partial lsl
+408,one,79.18,total,partial lsl,pvc,one.partial lsl
+412,one,70.12,total,partial lsl,pvc,one.partial lsl
+426,one,70.02,total,partial lsl,pvc,one.partial lsl
+429,one,18.72,total,partial lsl,pvc,one.partial lsl
+433,one,28.93,total,partial lsl,pvc,one.partial lsl
+436,one,23.13,total,partial lsl,pvc,one.partial lsl
+443,one,76.34,total,partial lsl,pvc,one.partial lsl
+447,one,86.08,total,partial lsl,pvc,one.partial lsl
+450,one,101.9,total,partial lsl,pvc,one.partial lsl
+457,one,20,total,partial lsl,pvc,one.partial lsl
+461,one,76.53,total,partial lsl,pvc,one.partial lsl
+464,one,99.54,total,partial lsl,pvc,one.partial lsl
+471,one,132.7,total,partial lsl,pvc,one.partial lsl
+478,one,124.2,total,partial lsl,pvc,one.partial lsl
+485,one,185.5,total,partial lsl,pvc,one.partial lsl
+1,two,70.04,0.45 um filtered,full lsl,iron,two.full lsl
+5,two,121.3,0.45 um filtered,full lsl,iron,two.full lsl
+8,two,104.2,0.45 um filtered,full lsl,iron,two.full lsl
+12,two,194,0.45 um filtered,full lsl,iron,two.full lsl
+15,two,213.7,0.45 um filtered,full lsl,iron,two.full lsl
+19,two,245.7,0.45 um filtered,full lsl,iron,two.full lsl
+22,two,236.2,0.45 um filtered,full lsl,iron,two.full lsl
+26,two,260.2,0.45 um filtered,full lsl,iron,two.full lsl
+29,two,83.45,0.45 um filtered,full lsl,iron,two.full lsl
+33,two,187.7,0.45 um filtered,full lsl,iron,two.full lsl
+36,two,192.3,0.45 um filtered,full lsl,iron,two.full lsl
+47,two,97.58,0.45 um filtered,full lsl,iron,two.full lsl
+50,two,86.5,0.45 um filtered,full lsl,iron,two.full lsl
+54,two,248.3,0.45 um filtered,full lsl,iron,two.full lsl
+57,two,99.17,0.45 um filtered,full lsl,iron,two.full lsl
+61,two,179,0.45 um filtered,full lsl,iron,two.full lsl
+64,two,87.65,0.45 um filtered,full lsl,iron,two.full lsl
+68,two,98.34,0.45 um filtered,full lsl,iron,two.full lsl
+71,two,208,0.45 um filtered,full lsl,iron,two.full lsl
+78,two,257.3,0.45 um filtered,full lsl,iron,two.full lsl
+82,two,259.1,0.45 um filtered,full lsl,iron,two.full lsl
+85,two,415.3,0.45 um filtered,full lsl,iron,two.full lsl
+89,two,360.3,0.45 um filtered,full lsl,iron,two.full lsl
+92,two,354.9,0.45 um filtered,full lsl,iron,two.full lsl
+99,two,109.9,0.45 um filtered,full lsl,iron,two.full lsl
+103,two,75.96,0.45 um filtered,full lsl,iron,two.full lsl
+106,two,115.1,0.45 um filtered,full lsl,iron,two.full lsl
+110,two,103.5,0.45 um filtered,full lsl,iron,two.full lsl
+113,two,124.4,0.45 um filtered,full lsl,iron,two.full lsl
+117,two,149.1,0.45 um filtered,full lsl,iron,two.full lsl
+120,two,94.35,0.45 um filtered,full lsl,iron,two.full lsl
+127,two,114.9,0.45 um filtered,full lsl,iron,two.full lsl
+131,two,148.7,0.45 um filtered,full lsl,iron,two.full lsl
+134,two,205.6,0.45 um filtered,full lsl,iron,two.full lsl
+138,two,152.4,0.45 um filtered,full lsl,iron,two.full lsl
+141,two,188.9,0.45 um filtered,full lsl,iron,two.full lsl
+145,two,113.7,0.45 um filtered,full lsl,iron,two.full lsl
+148,two,138,0.45 um filtered,full lsl,iron,two.full lsl
+152,two,109.9,0.45 um filtered,full lsl,iron,two.full lsl
+155,two,176.5,0.45 um filtered,full lsl,iron,two.full lsl
+162,two,179,0.45 um filtered,full lsl,iron,two.full lsl
+166,two,129.7,0.45 um filtered,full lsl,iron,two.full lsl
+169,two,178.1,0.45 um filtered,full lsl,iron,two.full lsl
+173,two,192.7,0.45 um filtered,full lsl,iron,two.full lsl
+176,two,114.6,0.45 um filtered,full lsl,iron,two.full lsl
+180,two,137.5,0.45 um filtered,full lsl,iron,two.full lsl
+187,two,138,0.45 um filtered,full lsl,iron,two.full lsl
+190,two,197.6,0.45 um filtered,full lsl,iron,two.full lsl
+194,two,195.4,0.45 um filtered,full lsl,iron,two.full lsl
+197,two,122.1,0.45 um filtered,full lsl,iron,two.full lsl
+201,two,80.13,0.45 um filtered,full lsl,iron,two.full lsl
+204,two,184.6,0.45 um filtered,full lsl,iron,two.full lsl
+222,two,113.4,0.45 um filtered,full lsl,iron,two.full lsl
+225,two,76.13,0.45 um filtered,full lsl,iron,two.full lsl
+229,two,70.44,0.45 um filtered,full lsl,iron,two.full lsl
+232,two,98.46,0.45 um filtered,full lsl,iron,two.full lsl
+236,two,116.7,0.45 um filtered,full lsl,iron,two.full lsl
+239,two,75.98,0.45 um filtered,full lsl,iron,two.full lsl
+243,two,100.5,0.45 um filtered,full lsl,iron,two.full lsl
+246,two,137.2,0.45 um filtered,full lsl,iron,two.full lsl
+250,two,132.3,0.45 um filtered,full lsl,iron,two.full lsl
+253,two,85.95,0.45 um filtered,full lsl,iron,two.full lsl
+257,two,112.2,0.45 um filtered,full lsl,iron,two.full lsl
+260,two,104.8,0.45 um filtered,full lsl,iron,two.full lsl
+264,two,98.99,0.45 um filtered,full lsl,iron,two.full lsl
+267,two,117.2,0.45 um filtered,full lsl,iron,two.full lsl
+274,two,89.9,0.45 um filtered,full lsl,iron,two.full lsl
+281,two,75.83,0.45 um filtered,full lsl,iron,two.full lsl
+285,two,79.5,0.45 um filtered,full lsl,iron,two.full lsl
+288,two,82.96,0.45 um filtered,full lsl,iron,two.full lsl
+292,two,72.39,0.45 um filtered,full lsl,iron,two.full lsl
+295,two,87.6,0.45 um filtered,full lsl,iron,two.full lsl
+299,two,86.48,0.45 um filtered,full lsl,iron,two.full lsl
+302,two,97.65,0.45 um filtered,full lsl,iron,two.full lsl
+306,two,113.8,0.45 um filtered,full lsl,iron,two.full lsl
+309,two,102.5,0.45 um filtered,full lsl,iron,two.full lsl
+313,two,101.6,0.45 um filtered,full lsl,iron,two.full lsl
+317,two,84.68,0.45 um filtered,full lsl,iron,two.full lsl
+321,two,90.11,0.45 um filtered,full lsl,iron,two.full lsl
+324,two,75.99,0.45 um filtered,full lsl,iron,two.full lsl
+328,two,85.2,0.45 um filtered,full lsl,iron,two.full lsl
+331,two,74.24,0.45 um filtered,full lsl,iron,two.full lsl
+335,two,72.95,0.45 um filtered,full lsl,iron,two.full lsl
+338,two,57.55,0.45 um filtered,full lsl,iron,two.full lsl
+342,two,52.11,0.45 um filtered,full lsl,iron,two.full lsl
+345,two,54.38,0.45 um filtered,full lsl,iron,two.full lsl
+349,two,59.97,0.45 um filtered,full lsl,iron,two.full lsl
+352,two,84.52,0.45 um filtered,full lsl,iron,two.full lsl
+356,two,92.55,0.45 um filtered,full lsl,iron,two.full lsl
+359,two,78.21,0.45 um filtered,full lsl,iron,two.full lsl
+363,two,63.31,0.45 um filtered,full lsl,iron,two.full lsl
+366,two,62.69,0.45 um filtered,full lsl,iron,two.full lsl
+370,two,55.78,0.45 um filtered,full lsl,iron,two.full lsl
+373,two,51.47,0.45 um filtered,full lsl,iron,two.full lsl
+377,two,83.55,0.45 um filtered,full lsl,iron,two.full lsl
+380,two,60.04,0.45 um filtered,full lsl,iron,two.full lsl
+384,two,65.95,0.45 um filtered,full lsl,iron,two.full lsl
+387,two,82.64,0.45 um filtered,full lsl,iron,two.full lsl
+391,two,55.23,0.45 um filtered,full lsl,iron,two.full lsl
+394,two,56.09,0.45 um filtered,full lsl,iron,two.full lsl
+398,two,78.06,0.45 um filtered,full lsl,iron,two.full lsl
+401,two,61.86,0.45 um filtered,full lsl,iron,two.full lsl
+408,two,104.7,0.45 um filtered,full lsl,iron,two.full lsl
+412,two,65.42,0.45 um filtered,full lsl,iron,two.full lsl
+426,two,51.89,0.45 um filtered,full lsl,iron,two.full lsl
+429,two,50.15,0.45 um filtered,full lsl,iron,two.full lsl
+433,two,75.6,0.45 um filtered,full lsl,iron,two.full lsl
+436,two,56.97,0.45 um filtered,full lsl,iron,two.full lsl
+443,two,77.2,0.45 um filtered,full lsl,iron,two.full lsl
+447,two,83.41,0.45 um filtered,full lsl,iron,two.full lsl
+450,two,63.57,0.45 um filtered,full lsl,iron,two.full lsl
+457,two,98.21,0.45 um filtered,full lsl,iron,two.full lsl
+461,two,249.2,0.45 um filtered,full lsl,iron,two.full lsl
+478,two,167.1,0.45 um filtered,full lsl,iron,two.full lsl
+485,two,81.16,0.45 um filtered,full lsl,iron,two.full lsl
+492,two,117,0.45 um filtered,full lsl,iron,two.full lsl
+499,two,107,0.45 um filtered,full lsl,iron,two.full lsl
+506,two,86.14,0.45 um filtered,full lsl,iron,two.full lsl
+513,two,76.49,0.45 um filtered,full lsl,iron,two.full lsl
+520,two,106.3,0.45 um filtered,full lsl,iron,two.full lsl
+527,two,71.93,0.45 um filtered,full lsl,iron,two.full lsl
+534,two,108.4,0.45 um filtered,full lsl,iron,two.full lsl
+541,two,109.6,0.45 um filtered,full lsl,iron,two.full lsl
+548,two,108,0.45 um filtered,full lsl,iron,two.full lsl
+555,two,95.35,0.45 um filtered,full lsl,iron,two.full lsl
+562,two,113.4,0.45 um filtered,full lsl,iron,two.full lsl
+569,two,66.36,0.45 um filtered,full lsl,iron,two.full lsl
+576,two,279.1,0.45 um filtered,full lsl,iron,two.full lsl
+583,two,181.7,0.45 um filtered,full lsl,iron,two.full lsl
+590,two,118.2,0.45 um filtered,full lsl,iron,two.full lsl
+597,two,80.29,0.45 um filtered,full lsl,iron,two.full lsl
+604,two,92.73,0.45 um filtered,full lsl,iron,two.full lsl
+611,two,62.59,0.45 um filtered,full lsl,iron,two.full lsl
+618,two,52.44,0.45 um filtered,full lsl,iron,two.full lsl
+625,two,62.83,0.45 um filtered,full lsl,iron,two.full lsl
+632,two,71.48,0.45 um filtered,full lsl,iron,two.full lsl
+639,two,46.84,0.45 um filtered,full lsl,iron,two.full lsl
+646,two,43.69,0.45 um filtered,full lsl,iron,two.full lsl
+1,two,480.4,total,full lsl,iron,two.full lsl
+5,two,228.7,total,full lsl,iron,two.full lsl
+8,two,178,total,full lsl,iron,two.full lsl
+12,two,340.2,total,full lsl,iron,two.full lsl
+15,two,372.3,total,full lsl,iron,two.full lsl
+19,two,457.8,total,full lsl,iron,two.full lsl
+22,two,376.9,total,full lsl,iron,two.full lsl
+26,two,574.1,total,full lsl,iron,two.full lsl
+29,two,626,total,full lsl,iron,two.full lsl
+33,two,460.9,total,full lsl,iron,two.full lsl
+36,two,427.5,total,full lsl,iron,two.full lsl
+47,two,312.5,total,full lsl,iron,two.full lsl
+50,two,246.7,total,full lsl,iron,two.full lsl
+54,two,343.6,total,full lsl,iron,two.full lsl
+57,two,195.6,total,full lsl,iron,two.full lsl
+61,two,272.1,total,full lsl,iron,two.full lsl
+64,two,185.9,total,full lsl,iron,two.full lsl
+68,two,258.4,total,full lsl,iron,two.full lsl
+71,two,301.6,total,full lsl,iron,two.full lsl
+78,two,458.1,total,full lsl,iron,two.full lsl
+82,two,496.5,total,full lsl,iron,two.full lsl
+85,two,490.1,total,full lsl,iron,two.full lsl
+89,two,464.7,total,full lsl,iron,two.full lsl
+92,two,593.4,total,full lsl,iron,two.full lsl
+99,two,177,total,full lsl,iron,two.full lsl
+103,two,232.5,total,full lsl,iron,two.full lsl
+106,two,166.5,total,full lsl,iron,two.full lsl
+110,two,247.7,total,full lsl,iron,two.full lsl
+113,two,97.31,total,full lsl,iron,two.full lsl
+117,two,208.5,total,full lsl,iron,two.full lsl
+120,two,232.5,total,full lsl,iron,two.full lsl
+127,two,221,total,full lsl,iron,two.full lsl
+131,two,235.7,total,full lsl,iron,two.full lsl
+134,two,339.7,total,full lsl,iron,two.full lsl
+138,two,269,total,full lsl,iron,two.full lsl
+141,two,371,total,full lsl,iron,two.full lsl
+145,two,187.1,total,full lsl,iron,two.full lsl
+148,two,218.4,total,full lsl,iron,two.full lsl
+152,two,173.5,total,full lsl,iron,two.full lsl
+155,two,269.1,total,full lsl,iron,two.full lsl
+162,two,238,total,full lsl,iron,two.full lsl
+166,two,188.8,total,full lsl,iron,two.full lsl
+169,two,241.5,total,full lsl,iron,two.full lsl
+173,two,288.7,total,full lsl,iron,two.full lsl
+176,two,171.8,total,full lsl,iron,two.full lsl
+180,two,187.9,total,full lsl,iron,two.full lsl
+187,two,206.7,total,full lsl,iron,two.full lsl
+190,two,247,total,full lsl,iron,two.full lsl
+194,two,244.6,total,full lsl,iron,two.full lsl
+197,two,169.7,total,full lsl,iron,two.full lsl
+201,two,136,total,full lsl,iron,two.full lsl
+204,two,304.3,total,full lsl,iron,two.full lsl
+222,two,178,total,full lsl,iron,two.full lsl
+225,two,123.3,total,full lsl,iron,two.full lsl
+229,two,116,total,full lsl,iron,two.full lsl
+232,two,151.8,total,full lsl,iron,two.full lsl
+236,two,162,total,full lsl,iron,two.full lsl
+239,two,119.3,total,full lsl,iron,two.full lsl
+243,two,133,total,full lsl,iron,two.full lsl
+246,two,198.9,total,full lsl,iron,two.full lsl
+250,two,181.2,total,full lsl,iron,two.full lsl
+253,two,553.3,total,full lsl,iron,two.full lsl
+257,two,149.2,total,full lsl,iron,two.full lsl
+260,two,148.8,total,full lsl,iron,two.full lsl
+264,two,145.2,total,full lsl,iron,two.full lsl
+267,two,160.2,total,full lsl,iron,two.full lsl
+274,two,134.3,total,full lsl,iron,two.full lsl
+281,two,108.9,total,full lsl,iron,two.full lsl
+285,two,116.1,total,full lsl,iron,two.full lsl
+288,two,107.7,total,full lsl,iron,two.full lsl
+292,two,124,total,full lsl,iron,two.full lsl
+295,two,127.9,total,full lsl,iron,two.full lsl
+299,two,140,total,full lsl,iron,two.full lsl
+302,two,152.9,total,full lsl,iron,two.full lsl
+306,two,160,total,full lsl,iron,two.full lsl
+309,two,143.9,total,full lsl,iron,two.full lsl
+313,two,138.6,total,full lsl,iron,two.full lsl
+317,two,195,total,full lsl,iron,two.full lsl
+321,two,153.8,total,full lsl,iron,two.full lsl
+324,two,133.8,total,full lsl,iron,two.full lsl
+328,two,161,total,full lsl,iron,two.full lsl
+331,two,139.4,total,full lsl,iron,two.full lsl
+335,two,110.7,total,full lsl,iron,two.full lsl
+338,two,85.4,total,full lsl,iron,two.full lsl
+342,two,76.44,total,full lsl,iron,two.full lsl
+345,two,84.64,total,full lsl,iron,two.full lsl
+349,two,92.15,total,full lsl,iron,two.full lsl
+352,two,108.1,total,full lsl,iron,two.full lsl
+356,two,121.8,total,full lsl,iron,two.full lsl
+359,two,101.4,total,full lsl,iron,two.full lsl
+363,two,85.63,total,full lsl,iron,two.full lsl
+366,two,85.29,total,full lsl,iron,two.full lsl
+370,two,77.17,total,full lsl,iron,two.full lsl
+373,two,72.38,total,full lsl,iron,two.full lsl
+377,two,117.3,total,full lsl,iron,two.full lsl
+380,two,82.93,total,full lsl,iron,two.full lsl
+384,two,86.62,total,full lsl,iron,two.full lsl
+387,two,108.9,total,full lsl,iron,two.full lsl
+391,two,77.09,total,full lsl,iron,two.full lsl
+394,two,77.28,total,full lsl,iron,two.full lsl
+398,two,104,total,full lsl,iron,two.full lsl
+401,two,79.79,total,full lsl,iron,two.full lsl
+408,two,133,total,full lsl,iron,two.full lsl
+412,two,78,total,full lsl,iron,two.full lsl
+426,two,67.41,total,full lsl,iron,two.full lsl
+429,two,68.86,total,full lsl,iron,two.full lsl
+433,two,98.21,total,full lsl,iron,two.full lsl
+436,two,83.51,total,full lsl,iron,two.full lsl
+443,two,121.6,total,full lsl,iron,two.full lsl
+447,two,118.7,total,full lsl,iron,two.full lsl
+450,two,83.35,total,full lsl,iron,two.full lsl
+457,two,156.5,total,full lsl,iron,two.full lsl
+461,two,319.9,total,full lsl,iron,two.full lsl
+478,two,417.3,total,full lsl,iron,two.full lsl
+485,two,111.7,total,full lsl,iron,two.full lsl
+1,two,103.6,0.45 um filtered,partial lsl,iron,two.partial lsl
+5,two,108.6,0.45 um filtered,partial lsl,iron,two.partial lsl
+8,two,106.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+12,two,135.8,0.45 um filtered,partial lsl,iron,two.partial lsl
+15,two,121.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+19,two,113.8,0.45 um filtered,partial lsl,iron,two.partial lsl
+22,two,84.75,0.45 um filtered,partial lsl,iron,two.partial lsl
+26,two,123.4,0.45 um filtered,partial lsl,iron,two.partial lsl
+29,two,97.95,0.45 um filtered,partial lsl,iron,two.partial lsl
+33,two,110.1,0.45 um filtered,partial lsl,iron,two.partial lsl
+36,two,69.57,0.45 um filtered,partial lsl,iron,two.partial lsl
+47,two,84.29,0.45 um filtered,partial lsl,iron,two.partial lsl
+50,two,77.08,0.45 um filtered,partial lsl,iron,two.partial lsl
+54,two,83.69,0.45 um filtered,partial lsl,iron,two.partial lsl
+57,two,86.3,0.45 um filtered,partial lsl,iron,two.partial lsl
+61,two,115.1,0.45 um filtered,partial lsl,iron,two.partial lsl
+64,two,97.15,0.45 um filtered,partial lsl,iron,two.partial lsl
+68,two,100.4,0.45 um filtered,partial lsl,iron,two.partial lsl
+71,two,88.24,0.45 um filtered,partial lsl,iron,two.partial lsl
+78,two,54.66,0.45 um filtered,partial lsl,iron,two.partial lsl
+82,two,77.08,0.45 um filtered,partial lsl,iron,two.partial lsl
+85,two,249.4,0.45 um filtered,partial lsl,iron,two.partial lsl
+89,two,112.3,0.45 um filtered,partial lsl,iron,two.partial lsl
+92,two,129,0.45 um filtered,partial lsl,iron,two.partial lsl
+99,two,137.1,0.45 um filtered,partial lsl,iron,two.partial lsl
+103,two,95.72,0.45 um filtered,partial lsl,iron,two.partial lsl
+106,two,125.7,0.45 um filtered,partial lsl,iron,two.partial lsl
+110,two,94.81,0.45 um filtered,partial lsl,iron,two.partial lsl
+113,two,110.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+117,two,115.3,0.45 um filtered,partial lsl,iron,two.partial lsl
+120,two,87.19,0.45 um filtered,partial lsl,iron,two.partial lsl
+127,two,115.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+131,two,134.5,0.45 um filtered,partial lsl,iron,two.partial lsl
+134,two,178.8,0.45 um filtered,partial lsl,iron,two.partial lsl
+138,two,105.3,0.45 um filtered,partial lsl,iron,two.partial lsl
+141,two,109.4,0.45 um filtered,partial lsl,iron,two.partial lsl
+145,two,83.16,0.45 um filtered,partial lsl,iron,two.partial lsl
+148,two,91.4,0.45 um filtered,partial lsl,iron,two.partial lsl
+152,two,62.62,0.45 um filtered,partial lsl,iron,two.partial lsl
+155,two,115.3,0.45 um filtered,partial lsl,iron,two.partial lsl
+162,two,55.95,0.45 um filtered,partial lsl,iron,two.partial lsl
+166,two,109.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+169,two,144.7,0.45 um filtered,partial lsl,iron,two.partial lsl
+173,two,153.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+176,two,99,0.45 um filtered,partial lsl,iron,two.partial lsl
+180,two,75.22,0.45 um filtered,partial lsl,iron,two.partial lsl
+187,two,83.49,0.45 um filtered,partial lsl,iron,two.partial lsl
+190,two,180.5,0.45 um filtered,partial lsl,iron,two.partial lsl
+194,two,143.7,0.45 um filtered,partial lsl,iron,two.partial lsl
+197,two,84.87,0.45 um filtered,partial lsl,iron,two.partial lsl
+201,two,53.91,0.45 um filtered,partial lsl,iron,two.partial lsl
+204,two,81.75,0.45 um filtered,partial lsl,iron,two.partial lsl
+222,two,52.06,0.45 um filtered,partial lsl,iron,two.partial lsl
+225,two,34.78,0.45 um filtered,partial lsl,iron,two.partial lsl
+229,two,47.86,0.45 um filtered,partial lsl,iron,two.partial lsl
+232,two,74.26,0.45 um filtered,partial lsl,iron,two.partial lsl
+236,two,79.67,0.45 um filtered,partial lsl,iron,two.partial lsl
+239,two,53.72,0.45 um filtered,partial lsl,iron,two.partial lsl
+243,two,79.03,0.45 um filtered,partial lsl,iron,two.partial lsl
+246,two,108.5,0.45 um filtered,partial lsl,iron,two.partial lsl
+250,two,95.28,0.45 um filtered,partial lsl,iron,two.partial lsl
+253,two,43.75,0.45 um filtered,partial lsl,iron,two.partial lsl
+257,two,99.43,0.45 um filtered,partial lsl,iron,two.partial lsl
+260,two,78.64,0.45 um filtered,partial lsl,iron,two.partial lsl
+264,two,57.1,0.45 um filtered,partial lsl,iron,two.partial lsl
+267,two,40.33,0.45 um filtered,partial lsl,iron,two.partial lsl
+274,two,85.65,0.45 um filtered,partial lsl,iron,two.partial lsl
+281,two,84.42,0.45 um filtered,partial lsl,iron,two.partial lsl
+285,two,83.24,0.45 um filtered,partial lsl,iron,two.partial lsl
+288,two,81.54,0.45 um filtered,partial lsl,iron,two.partial lsl
+292,two,69.03,0.45 um filtered,partial lsl,iron,two.partial lsl
+295,two,86.52,0.45 um filtered,partial lsl,iron,two.partial lsl
+299,two,80.27,0.45 um filtered,partial lsl,iron,two.partial lsl
+302,two,69.12,0.45 um filtered,partial lsl,iron,two.partial lsl
+306,two,36.96,0.45 um filtered,partial lsl,iron,two.partial lsl
+309,two,127.7,0.45 um filtered,partial lsl,iron,two.partial lsl
+313,two,168.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+317,two,77.45,0.45 um filtered,partial lsl,iron,two.partial lsl
+321,two,78.42,0.45 um filtered,partial lsl,iron,two.partial lsl
+324,two,53.61,0.45 um filtered,partial lsl,iron,two.partial lsl
+328,two,57,0.45 um filtered,partial lsl,iron,two.partial lsl
+331,two,58.19,0.45 um filtered,partial lsl,iron,two.partial lsl
+335,two,49.83,0.45 um filtered,partial lsl,iron,two.partial lsl
+338,two,34.89,0.45 um filtered,partial lsl,iron,two.partial lsl
+342,two,47.15,0.45 um filtered,partial lsl,iron,two.partial lsl
+345,two,55.86,0.45 um filtered,partial lsl,iron,two.partial lsl
+349,two,51.89,0.45 um filtered,partial lsl,iron,two.partial lsl
+352,two,150.5,0.45 um filtered,partial lsl,iron,two.partial lsl
+356,two,164.6,0.45 um filtered,partial lsl,iron,two.partial lsl
+359,two,158.6,0.45 um filtered,partial lsl,iron,two.partial lsl
+363,two,50.87,0.45 um filtered,partial lsl,iron,two.partial lsl
+366,two,48.45,0.45 um filtered,partial lsl,iron,two.partial lsl
+370,two,34.32,0.45 um filtered,partial lsl,iron,two.partial lsl
+373,two,44.55,0.45 um filtered,partial lsl,iron,two.partial lsl
+377,two,24.03,0.45 um filtered,partial lsl,iron,two.partial lsl
+380,two,39.27,0.45 um filtered,partial lsl,iron,two.partial lsl
+384,two,36.74,0.45 um filtered,partial lsl,iron,two.partial lsl
+387,two,26.05,0.45 um filtered,partial lsl,iron,two.partial lsl
+391,two,43.5,0.45 um filtered,partial lsl,iron,two.partial lsl
+394,two,33.56,0.45 um filtered,partial lsl,iron,two.partial lsl
+398,two,28.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+401,two,36.89,0.45 um filtered,partial lsl,iron,two.partial lsl
+408,two,28.86,0.45 um filtered,partial lsl,iron,two.partial lsl
+412,two,37.49,0.45 um filtered,partial lsl,iron,two.partial lsl
+426,two,43.39,0.45 um filtered,partial lsl,iron,two.partial lsl
+429,two,42.95,0.45 um filtered,partial lsl,iron,two.partial lsl
+433,two,66.27,0.45 um filtered,partial lsl,iron,two.partial lsl
+436,two,45.59,0.45 um filtered,partial lsl,iron,two.partial lsl
+443,two,58.96,0.45 um filtered,partial lsl,iron,two.partial lsl
+447,two,55.12,0.45 um filtered,partial lsl,iron,two.partial lsl
+450,two,40.02,0.45 um filtered,partial lsl,iron,two.partial lsl
+457,two,77.06,0.45 um filtered,partial lsl,iron,two.partial lsl
+461,two,403.5,0.45 um filtered,partial lsl,iron,two.partial lsl
+478,two,66.87,0.45 um filtered,partial lsl,iron,two.partial lsl
+485,two,46.98,0.45 um filtered,partial lsl,iron,two.partial lsl
+492,two,76.82,0.45 um filtered,partial lsl,iron,two.partial lsl
+499,two,24.24,0.45 um filtered,partial lsl,iron,two.partial lsl
+506,two,64.05,0.45 um filtered,partial lsl,iron,two.partial lsl
+513,two,35.77,0.45 um filtered,partial lsl,iron,two.partial lsl
+520,two,90.07,0.45 um filtered,partial lsl,iron,two.partial lsl
+527,two,71.09,0.45 um filtered,partial lsl,iron,two.partial lsl
+534,two,86.82,0.45 um filtered,partial lsl,iron,two.partial lsl
+541,two,68.02,0.45 um filtered,partial lsl,iron,two.partial lsl
+548,two,63.25,0.45 um filtered,partial lsl,iron,two.partial lsl
+555,two,58.82,0.45 um filtered,partial lsl,iron,two.partial lsl
+562,two,89.41,0.45 um filtered,partial lsl,iron,two.partial lsl
+569,two,39.43,0.45 um filtered,partial lsl,iron,two.partial lsl
+576,two,236.2,0.45 um filtered,partial lsl,iron,two.partial lsl
+583,two,137.3,0.45 um filtered,partial lsl,iron,two.partial lsl
+590,two,77.1,0.45 um filtered,partial lsl,iron,two.partial lsl
+597,two,49.95,0.45 um filtered,partial lsl,iron,two.partial lsl
+604,two,56.48,0.45 um filtered,partial lsl,iron,two.partial lsl
+611,two,38.63,0.45 um filtered,partial lsl,iron,two.partial lsl
+618,two,34.26,0.45 um filtered,partial lsl,iron,two.partial lsl
+625,two,35.09,0.45 um filtered,partial lsl,iron,two.partial lsl
+632,two,57.06,0.45 um filtered,partial lsl,iron,two.partial lsl
+639,two,31.12,0.45 um filtered,partial lsl,iron,two.partial lsl
+646,two,32.41,0.45 um filtered,partial lsl,iron,two.partial lsl
+1,two,200,total,partial lsl,iron,two.partial lsl
+5,two,207.9,total,partial lsl,iron,two.partial lsl
+8,two,196.8,total,partial lsl,iron,two.partial lsl
+12,two,255.3,total,partial lsl,iron,two.partial lsl
+15,two,246.1,total,partial lsl,iron,two.partial lsl
+19,two,177,total,partial lsl,iron,two.partial lsl
+22,two,171.3,total,partial lsl,iron,two.partial lsl
+26,two,228.9,total,partial lsl,iron,two.partial lsl
+29,two,176.1,total,partial lsl,iron,two.partial lsl
+33,two,226.8,total,partial lsl,iron,two.partial lsl
+36,two,122.8,total,partial lsl,iron,two.partial lsl
+47,two,141.6,total,partial lsl,iron,two.partial lsl
+50,two,126.9,total,partial lsl,iron,two.partial lsl
+54,two,128.4,total,partial lsl,iron,two.partial lsl
+57,two,164,total,partial lsl,iron,two.partial lsl
+61,two,201.5,total,partial lsl,iron,two.partial lsl
+64,two,213.1,total,partial lsl,iron,two.partial lsl
+68,two,198.6,total,partial lsl,iron,two.partial lsl
+71,two,194,total,partial lsl,iron,two.partial lsl
+78,two,117.3,total,partial lsl,iron,two.partial lsl
+82,two,157.3,total,partial lsl,iron,two.partial lsl
+85,two,315.2,total,partial lsl,iron,two.partial lsl
+89,two,163.8,total,partial lsl,iron,two.partial lsl
+92,two,208.9,total,partial lsl,iron,two.partial lsl
+99,two,258.9,total,partial lsl,iron,two.partial lsl
+103,two,186.1,total,partial lsl,iron,two.partial lsl
+106,two,246.9,total,partial lsl,iron,two.partial lsl
+110,two,167.6,total,partial lsl,iron,two.partial lsl
+113,two,228.9,total,partial lsl,iron,two.partial lsl
+117,two,260.1,total,partial lsl,iron,two.partial lsl
+120,two,181.7,total,partial lsl,iron,two.partial lsl
+127,two,286.5,total,partial lsl,iron,two.partial lsl
+131,two,276.6,total,partial lsl,iron,two.partial lsl
+134,two,375.3,total,partial lsl,iron,two.partial lsl
+138,two,218.2,total,partial lsl,iron,two.partial lsl
+141,two,201,total,partial lsl,iron,two.partial lsl
+145,two,144.5,total,partial lsl,iron,two.partial lsl
+148,two,196.9,total,partial lsl,iron,two.partial lsl
+152,two,175.2,total,partial lsl,iron,two.partial lsl
+155,two,191.2,total,partial lsl,iron,two.partial lsl
+162,two,229,total,partial lsl,iron,two.partial lsl
+166,two,229.1,total,partial lsl,iron,two.partial lsl
+169,two,287.3,total,partial lsl,iron,two.partial lsl
+173,two,327.4,total,partial lsl,iron,two.partial lsl
+176,two,169.4,total,partial lsl,iron,two.partial lsl
+180,two,132.5,total,partial lsl,iron,two.partial lsl
+187,two,120.8,total,partial lsl,iron,two.partial lsl
+190,two,427.4,total,partial lsl,iron,two.partial lsl
+194,two,318.3,total,partial lsl,iron,two.partial lsl
+197,two,162.6,total,partial lsl,iron,two.partial lsl
+201,two,151.2,total,partial lsl,iron,two.partial lsl
+204,two,147.9,total,partial lsl,iron,two.partial lsl
+222,two,167.8,total,partial lsl,iron,two.partial lsl
+225,two,70.13,total,partial lsl,iron,two.partial lsl
+229,two,115.3,total,partial lsl,iron,two.partial lsl
+232,two,193.7,total,partial lsl,iron,two.partial lsl
+236,two,180.3,total,partial lsl,iron,two.partial lsl
+239,two,90.65,total,partial lsl,iron,two.partial lsl
+243,two,160.9,total,partial lsl,iron,two.partial lsl
+246,two,254.7,total,partial lsl,iron,two.partial lsl
+250,two,284.7,total,partial lsl,iron,two.partial lsl
+253,two,89.14,total,partial lsl,iron,two.partial lsl
+257,two,250.2,total,partial lsl,iron,two.partial lsl
+260,two,159.1,total,partial lsl,iron,two.partial lsl
+264,two,100.6,total,partial lsl,iron,two.partial lsl
+267,two,69.15,total,partial lsl,iron,two.partial lsl
+274,two,181.3,total,partial lsl,iron,two.partial lsl
+281,two,149.4,total,partial lsl,iron,two.partial lsl
+285,two,186.6,total,partial lsl,iron,two.partial lsl
+288,two,140.6,total,partial lsl,iron,two.partial lsl
+292,two,125.1,total,partial lsl,iron,two.partial lsl
+295,two,177.7,total,partial lsl,iron,two.partial lsl
+299,two,170.6,total,partial lsl,iron,two.partial lsl
+302,two,120.2,total,partial lsl,iron,two.partial lsl
+306,two,43.93,total,partial lsl,iron,two.partial lsl
+309,two,326.7,total,partial lsl,iron,two.partial lsl
+313,two,389.3,total,partial lsl,iron,two.partial lsl
+317,two,158.5,total,partial lsl,iron,two.partial lsl
+321,two,150.9,total,partial lsl,iron,two.partial lsl
+324,two,91.11,total,partial lsl,iron,two.partial lsl
+328,two,88.89,total,partial lsl,iron,two.partial lsl
+331,two,87.21,total,partial lsl,iron,two.partial lsl
+335,two,67.11,total,partial lsl,iron,two.partial lsl
+338,two,51.88,total,partial lsl,iron,two.partial lsl
+342,two,72.01,total,partial lsl,iron,two.partial lsl
+345,two,88.95,total,partial lsl,iron,two.partial lsl
+349,two,75.53,total,partial lsl,iron,two.partial lsl
+352,two,215.2,total,partial lsl,iron,two.partial lsl
+356,two,257,total,partial lsl,iron,two.partial lsl
+359,two,244.6,total,partial lsl,iron,two.partial lsl
+363,two,71.72,total,partial lsl,iron,two.partial lsl
+366,two,67.35,total,partial lsl,iron,two.partial lsl
+370,two,47.13,total,partial lsl,iron,two.partial lsl
+373,two,67.57,total,partial lsl,iron,two.partial lsl
+377,two,48.49,total,partial lsl,iron,two.partial lsl
+380,two,57.83,total,partial lsl,iron,two.partial lsl
+384,two,47.85,total,partial lsl,iron,two.partial lsl
+387,two,40.87,total,partial lsl,iron,two.partial lsl
+391,two,60.44,total,partial lsl,iron,two.partial lsl
+394,two,46.3,total,partial lsl,iron,two.partial lsl
+398,two,41.46,total,partial lsl,iron,two.partial lsl
+401,two,48.32,total,partial lsl,iron,two.partial lsl
+408,two,43.48,total,partial lsl,iron,two.partial lsl
+412,two,46.59,total,partial lsl,iron,two.partial lsl
+426,two,46.59,total,partial lsl,iron,two.partial lsl
+429,two,54.1,total,partial lsl,iron,two.partial lsl
+433,two,91.87,total,partial lsl,iron,two.partial lsl
+436,two,60.11,total,partial lsl,iron,two.partial lsl
+443,two,87.8,total,partial lsl,iron,two.partial lsl
+447,two,70.19,total,partial lsl,iron,two.partial lsl
+450,two,49.93,total,partial lsl,iron,two.partial lsl
+457,two,106.9,total,partial lsl,iron,two.partial lsl
+461,two,512.5,total,partial lsl,iron,two.partial lsl
+478,two,107.1,total,partial lsl,iron,two.partial lsl
+485,two,70.34,total,partial lsl,iron,two.partial lsl
