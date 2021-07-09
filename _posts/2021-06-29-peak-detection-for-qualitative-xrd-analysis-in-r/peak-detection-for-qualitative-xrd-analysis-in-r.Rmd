@@ -20,21 +20,22 @@ theme_set(theme_minimal())
 ```
 
 ```{r load}
-library("tidyverse")
 library("fffprocessr") # for peak detection
-data <- read_tsv("XRD_Ortho_P_pH7.5_DIC50 copy.txt", col_names = FALSE) %>% 
-  rename(two_theta = X1, intensity = X2) %>% 
+data <- read_csv("xrd_data.csv", skip = 13) %>% 
+  rename(two_theta = DATA, intensity = X2) %>% 
   # scale to [0,1]:
   mutate(
-    intensity = intensity - min(intensity),
-    intensity = intensity / max(intensity)
+    two_theta = as.numeric(two_theta),
+    intensity = intensity - min(intensity, na.rm = TRUE),
+    intensity = intensity / max(intensity, na.rm = TRUE)
   ) %>% 
-  correct_baseline(left = 19, right = 80, group_vars = NULL, x_var = "two_theta", y_var = "intensity")
+  filter_all(all_vars(!is.na(.))) %>% 
+  correct_baseline(left = 15, right = 55, group_vars = NULL, x_var = "two_theta", y_var = "intensity")
 
 stds <- read_csv("xrd_stds.csv")
 ```
 
-The data, from @li_impact_2021.
+The data, from @trueman_etal_2018.
 
 ```{r}
 
@@ -114,10 +115,11 @@ Detect peaks:
 ```{r}
 
 peaks_detected <- data %>% 
+  mutate(grp = cut_number(intensity, 50)) %>% 
   peak_maxima(
-    peaks = 30, n = 1, method = "sigma", 
+    peaks = 30, n = 7, method = "sigma", 
      x_var = "two_theta", y_var = "intensity",
-    group_vars = NULL
+    group_vars = "grp"
   )
 
 assign_peaks <- function(sample, standard, round_to = 1, phases) { 

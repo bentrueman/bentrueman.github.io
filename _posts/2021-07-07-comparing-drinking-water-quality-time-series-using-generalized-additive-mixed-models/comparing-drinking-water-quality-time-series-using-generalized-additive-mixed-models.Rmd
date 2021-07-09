@@ -16,45 +16,107 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 library("tidyverse")
 library("mgcv")
-source("confint_gam.R")
+#source("confint_gam.R")
 theme_set(theme_classic() + theme(strip.background = element_blank()))
+pal <- wesanderson::wes_palette("Zissou1", 5)[c(5, 1)]
 jdk_pl <- read_csv("trueman_gagnon_2016_pipe_loop_data_cleaned.csv")
 ```
 
-Dissolved and total as separate models:
+In a 2016 paper [@citation], I evaluated the effect of a cast iron distribution main on the lead concentration due to a lead pipe downstream from the main. In that paper, I used the `arima()` function in R with a matrix of external regressors to account for the effect of the distribution main and autocorrelation in the time series of lead concentrations. 
 
-```{r}
+But linear regression was only a rough approximation of the behaviour of the concentration time series, and I think using a generalized additive model would have been a better choice. Here, I revisit these data, using `mgcv::gamm()` to fit a generalized additive mixed model and `nlme::corCAR1()` to include a continuous time first-order autoregressive error structure.
+
+I also make use of the material in an excellent blog post by [Gavin Simpson](http://fromthebottomoftheheap.net/2016/12/15/simultaneous-interval-revisited) to compute a simultaneous 95% confidence interval for the model.
+
+First, I use Simpson's approach to calculate a critical value for construction of the confidence interval:
+
+```{r simpson-crit-val}
+
+# multivariate normal random deviates
+
+rmvn <- function(n, mu, sig) { 
+  L <- mgcv::mroot(sig)
+  m <- ncol(L)
+  t(mu + L %*% matrix(rnorm(m*n), m, n))
+}
+
+simul_critval <- function(model, N = 10000) {
+  
+  Vb <- vcov(model)
+  
+  pred <- predict(model, se.fit = TRUE)
+  
+  se.fit <- pred$se.fit
+  
+  BUdiff <- rmvn(N, mu = rep(0, nrow(Vb)), sig = Vb)
+  
+  Cg <- predict(model, type = "lpmatrix")
+  
+  simDev <- Cg %*% t(BUdiff)
+  
+  absDev <- abs(sweep(simDev, 1, se.fit, FUN = "/"))
+  
+  masd <- apply(absDev, 2, max)
+  
+  quantile(masd, prob = 0.95, type = 8)
+  
+}
+
+```
+
+Next, I fit the model, using `t2()` to construct a tensor product smooth that fits a separate smooth to each category of lead time series. In this model, the smooths all have the same level of flexibility, but the differ in shape [@pedersen2019].
+
+```{r model}
+
 fe_gam <- jdk_pl %>% 
   mutate_if(is.character, factor) %>% 
+  mutate(lsl_grp = interaction(pipe_config, main)) %>% 
   arrange(fraction, lsl, time_d) %>% 
   group_by(fraction) %>% 
   nest() %>% 
   ungroup() %>% 
   mutate(
-    model_raw = map(
+    model = map(
       data,
       ~ mgcv::gamm(
-        pb_ppb ~ t2(time_d, pipe_config, main, bs = c("tp", "re", "re"), full = TRUE), 
+        # pb_ppb ~ s(time_d, by = lsl_grp, bs = "cr") + main + pipe_config, # model I
+        pb_ppb ~ t2(time_d, lsl_grp, bs = c("tp", "re"), full = TRUE), # model S
+        # pb_ppb ~ s(time_d) + t2(time_d, lsl_grp, bs = c("tp", "re"), full = TRUE), # model GS
         correlation = nlme::corCAR1(form = ~ time_d | lsl),
         method = "REML",
         data = .x
       )
-    ),
-    model = map(model_raw, ~ .x$gam),
+    )
+  )
+
+```
+
+Next, I predicted from the model over the range of x values, and constructed the 95% confidence band using the method due to Simpson.
+
+```{r confidence-bands}
+
+fe_gam <- fe_gam %>% 
+  mutate(
     preds = map2(
       model, data, 
-      ~ predict(.x, newdata = .y, se = TRUE)
+      ~ predict(.x$gam, newdata = .y, se = TRUE)
     ),
     preds = map2(
       preds, model, 
       ~ tibble(fit = .x$fit, se_fit = .x$se.fit) %>% 
         mutate(
-          lwr = fit - simul_critval(.y) * se_fit,
-          upr = fit + simul_critval(.y) * se_fit,
+          lwr = fit - simul_critval(.y$gam) * se_fit,
+          upr = fit + simul_critval(.y$gam) * se_fit,
           fit = fit
         )
     )
   )
+
+```
+
+Here are the data, the fitted model, and the simultaneous 95% confidence bands:
+
+```{r}
 
 fe_gam %>% 
   unnest(c(data, preds)) %>% 
@@ -80,8 +142,8 @@ fe_gam %>%
   ) + 
   geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = .3, col = NA) +
   geom_line(aes(y = fit, group = interaction(pipe_config, main))) +
-  scale_colour_manual(values = wesanderson::wes_palette("Zissou1", 5)[c(5, 1)]) +
-  scale_fill_manual(values = wesanderson::wes_palette("Zissou1", 5)[c(5, 1)]) +
+  scale_colour_manual(values = pal) +
+  scale_fill_manual(values = pal) +
   guides(col = guide_legend(override.aes = list(size = 1))) +
   theme(legend.position = "right") +
   labs(
@@ -91,11 +153,52 @@ fe_gam %>%
     fill = "Distribution\nmain"
   ) 
  
-#fe_gam$model_raw %>% map(~ residuals(.x$lme, type = "normalized") %>% acf()) 
-#fe_gam$model %>% map(~ residuals(.x) %>% acf())
-#fe_gam$model %>% map(mgcv::gam.check) 
-#fe_gam$model %>% map(summary) 
 ```
 
+The model does a reasonalably good job accounting for autocorrelation in the time series:
+
+```{r acf, fig.height=2.5}
+
+fe_gam %>% 
+  mutate(
+    resid = map(model, ~ residuals(.x$gam)),
+    bound = map(resid, ~ 1.96 / sqrt(length(.x))),
+    resid_norm = map(model, ~ residuals(.x$lme, type = "normalized")),
+    acf_raw = map(resid, ~ acf(.x, plot = FALSE) %>% with(tibble(lag_raw = lag, acf_raw = acf))),
+    acf_norm = map(resid_norm, ~ acf(.x, plot = FALSE) %>% with(tibble(lag_norm = lag, acf_norm = acf)))
+  ) %>% 
+  unnest(c(acf_raw, acf_norm, bound)) %>%
+  select_if(~ !is.list(.x)) %>% 
+  pivot_longer(-c(fraction, bound), names_to = c(".value", "type"), names_pattern = "(.+)_(.+)") %>% 
+  filter(lag != 0) %>%
+  group_by(fraction) %>% 
+  ggplot(aes(lag, acf, col = type)) + 
+  facet_wrap(vars(fraction = str_to_sentence(fraction)), scales = "free_x") +
+  geom_ribbon(
+    aes(x = lag, ymin = -bound, ymax = bound),
+    alpha = .2, inherit.aes = FALSE
+  ) +
+  geom_hline(yintercept = 0) +
+  geom_line() + 
+  scale_colour_manual(values = pal, labels = c("Normalized", "Raw")) +
+  labs(x = "Time lag", y = "Autocorrelation", col = "Residual type")
+
+```
+
+```{r qqplots, fig.height=2.5}
+
+fe_gam %>% 
+  mutate(resid = map(model, ~ residuals(.x$gam))) %>% 
+  unnest(c(data, resid)) %>% 
+  ggplot(aes(sample = resid)) + 
+  facet_wrap(vars(fraction = str_to_sentence(fraction))) +
+  geom_qq(size = 3, alpha = .2, shape = 16) + 
+  geom_qq_line(col = "firebrick") + 
+  labs(
+    x = "Standard normal quantiles",
+    y = "Residuals"
+  )
+
+```
 
 
