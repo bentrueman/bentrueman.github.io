@@ -1,11 +1,12 @@
 ---
 title: "Comparing drinking water quality time series using generalized additive mixed models"
 description: |
-  A short description of the post.
+  Revisiting work from 2016 to better model non-linear time series trends.
 author:
   - name: Ben Trueman
     url: {}
 date: 07-07-2021
+bibliography: references.bib
 output:
   distill::distill_article:
     self_contained: false
@@ -13,62 +14,51 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 library("tidyverse")
 library("mgcv")
-#source("confint_gam.R")
+options(dplyr.summarise.inform = FALSE)
 theme_set(theme_classic() + theme(strip.background = element_blank()))
 pal <- wesanderson::wes_palette("Zissou1", 5)[c(5, 1)]
 jdk_pl <- read_csv("trueman_gagnon_2016_pipe_loop_data_cleaned.csv")
 ```
 
-In a 2016 paper [@citation], I evaluated the effect of a cast iron distribution main on the lead concentration due to a lead pipe downstream from the main. In that paper, I used the `arima()` function in R with a matrix of external regressors to account for the effect of the distribution main and autocorrelation in the time series of lead concentrations. 
+In a 2016 paper [@trueman_understanding_2016], I evaluated the effect of cast iron distribution mains on the lead concentrations due to lead pipes downstream from those mains. This question has relevance for minimizing lead in drinking water and for prioritizing lead pipe replacement; if a lead pipe is connected to an unlined iron distribution main, lead levels reaching the consumer are likely to be higher.
 
-But linear regression was only a rough approximation of the behaviour of the concentration time series, and I think using a generalized additive model would have been a better choice. Here, I revisit these data, using `mgcv::gamm()` to fit a generalized additive mixed model and `nlme::corCAR1()` to include a continuous time first-order autoregressive error structure.
+In the paper, I used the `arima()` function in R with a matrix of external regressors to account for the effect of the distribution main and autocorrelation in the time series of lead concentrations. But linear regression was only a rough approximation of the behaviour of the concentration time series, and I think using a generalized additive model would have been a better choice. Here, I revisit these data, using `mgcv::gamm()` to fit a generalized additive mixed model and `nlme::corCAR1()` to include a continuous time first-order autoregressive error structure.
 
 I also make use of the material in an excellent blog post by [Gavin Simpson](http://fromthebottomoftheheap.net/2016/12/15/simultaneous-interval-revisited) to compute a simultaneous 95% confidence interval for the model.
 
-First, I use Simpson's approach to calculate a critical value for construction of the confidence interval:
+First, I used Gavin Simpson's approach to write a function that calculates the critical value used to construct simultaneous confidence intervals:
 
 ```{r simpson-crit-val}
 
-# multivariate normal random deviates
-
-rmvn <- function(n, mu, sig) { 
+rmvn <- function(n, mu, sig) { # generate multivariate normal random deviates
   L <- mgcv::mroot(sig)
   m <- ncol(L)
   t(mu + L %*% matrix(rnorm(m*n), m, n))
 }
 
 simul_critval <- function(model, N = 10000) {
-  
   Vb <- vcov(model)
-  
   pred <- predict(model, se.fit = TRUE)
-  
   se.fit <- pred$se.fit
-  
   BUdiff <- rmvn(N, mu = rep(0, nrow(Vb)), sig = Vb)
-  
   Cg <- predict(model, type = "lpmatrix")
-  
   simDev <- Cg %*% t(BUdiff)
-  
   absDev <- abs(sweep(simDev, 1, se.fit, FUN = "/"))
-  
   masd <- apply(absDev, 2, max)
-  
   quantile(masd, prob = 0.95, type = 8)
-  
 }
 
 ```
 
-Next, I fit the model, using `t2()` to construct a tensor product smooth that fits a separate smooth to each category of lead time series. In this model, the smooths all have the same level of flexibility, but the differ in shape [@pedersen2019].
+Next, I built the model, using `s()` to fit a separate smooth to each category of lead time series. (The categories are defined by the distribution main---PVC or cast iron---and the lead pipe configuration---full lead or half lead half copper.) In this model, the smooths differ in their flexibility and shape [@pedersen_hierarchical_2019]. I use `tidyr::nest()` to allow for list columns that include the model and predicted values along with the data.
 
 ```{r model}
 
 fe_gam <- jdk_pl %>% 
+  filter(fraction == "total") %>% 
   mutate_if(is.character, factor) %>% 
   mutate(lsl_grp = interaction(pipe_config, main)) %>% 
   arrange(fraction, lsl, time_d) %>% 
@@ -79,9 +69,7 @@ fe_gam <- jdk_pl %>%
     model = map(
       data,
       ~ mgcv::gamm(
-        # pb_ppb ~ s(time_d, by = lsl_grp, bs = "cr") + main + pipe_config, # model I
-        pb_ppb ~ t2(time_d, lsl_grp, bs = c("tp", "re"), full = TRUE), # model S
-        # pb_ppb ~ s(time_d) + t2(time_d, lsl_grp, bs = c("tp", "re"), full = TRUE), # model GS
+        log(pb_ppb) ~ s(time_d, by = lsl_grp) + main + pipe_config, # model I
         correlation = nlme::corCAR1(form = ~ time_d | lsl),
         method = "REML",
         data = .x
@@ -91,7 +79,7 @@ fe_gam <- jdk_pl %>%
 
 ```
 
-Next, I predicted from the model over the range of x values, and constructed the 95% confidence band using the method due to Simpson.
+Next, I predicted from the model over the range of x values, and constructed the 95% confidence band using Simpson's method.
 
 ```{r confidence-bands}
 
@@ -108,7 +96,8 @@ fe_gam <- fe_gam %>%
           lwr = fit - simul_critval(.y$gam) * se_fit,
           upr = fit + simul_critval(.y$gam) * se_fit,
           fit = fit
-        )
+        ) %>% 
+        mutate_at(vars(c(fit, lwr, upr)), exp)
     )
   )
 
@@ -116,7 +105,7 @@ fe_gam <- fe_gam %>%
 
 Here are the data, the fitted model, and the simultaneous 95% confidence bands:
 
-```{r}
+```{r plot, echo=FALSE}
 
 fe_gam %>% 
   unnest(c(data, preds)) %>% 
@@ -129,11 +118,7 @@ fe_gam %>%
       str_replace("lsl", "LSL")
   ) %>% 
   ggplot(aes(time_d, col = main, fill = main)) + 
-  facet_grid(
-    cols = vars(fraction), 
-    rows = vars(pipe_config), 
-    scales = "free"
-  ) +
+  facet_wrap(vars(pipe_config)) +
   geom_point(
     data = function(x) x %>% 
       group_by(time_d, main, fraction, pipe_config) %>% 
@@ -154,10 +139,9 @@ fe_gam %>%
   ) 
  
 ```
+The model does a reasonably good job---but not a perfect job---accounting for autocorrelation in the time series. "Raw" and "normalized" residuals are defined in the help file to `nlme::residuals.lme()` under `type`. Essentially, raw residuals represent the difference between the observed and fitted values, while normalized residuals account for the estimated error structure (here, continuous time first-order autoregressive). The grey shaded band in the figure below represents a 95% confidence interval on the autocorrelation of white Gaussian noise.
 
-The model does a reasonalably good job accounting for autocorrelation in the time series:
-
-```{r acf, fig.height=2.5}
+```{r acf, fig.height=2.5, echo=FALSE}
 
 fe_gam %>% 
   mutate(
@@ -173,7 +157,6 @@ fe_gam %>%
   filter(lag != 0) %>%
   group_by(fraction) %>% 
   ggplot(aes(lag, acf, col = type)) + 
-  facet_wrap(vars(fraction = str_to_sentence(fraction)), scales = "free_x") +
   geom_ribbon(
     aes(x = lag, ymin = -bound, ymax = bound),
     alpha = .2, inherit.aes = FALSE
@@ -185,13 +168,14 @@ fe_gam %>%
 
 ```
 
-```{r qqplots, fig.height=2.5}
+The natural log transformation yields a model with residuals that are approximately normal.
+
+```{r qqplots, fig.height=2.5, echo=FALSE}
 
 fe_gam %>% 
   mutate(resid = map(model, ~ residuals(.x$gam))) %>% 
   unnest(c(data, resid)) %>% 
   ggplot(aes(sample = resid)) + 
-  facet_wrap(vars(fraction = str_to_sentence(fraction))) +
   geom_qq(size = 3, alpha = .2, shape = 16) + 
   geom_qq_line(col = "firebrick") + 
   labs(
@@ -199,6 +183,12 @@ fe_gam %>%
     y = "Residuals"
   )
 
+```
+
+Finally, let's have a look at the model summary. The effect of the distribution main is statistically significant, as is the effect of pipe configuration (which we're less concerned about here). Based on the retransformed coefficient (exponentiating and subtracting one), the model estimates that lead release is `r signif(abs(100 * (exp(coef(fe_gam$model[[1]]$gam)[2]) - 1)), 2)`% lower when the distribution main supplying the lead pipe is plastic as opposed to iron.
+
+```{r summary, echo=FALSE}
+summary(fe_gam$model[[1]]$gam)
 ```
 
 

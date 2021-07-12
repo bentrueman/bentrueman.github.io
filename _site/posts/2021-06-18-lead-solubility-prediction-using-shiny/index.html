@@ -110,8 +110,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--/radix_placeholder_meta_tags-->
   
-  <meta name="citation_reference" content="citation_title=Tidyphreeqc: Tidy geochemical modeling using phreeqc;citation_publication_date=2019;citation_author=Dewey Dunnington"/>
-  <meta name="citation_reference" content="citation_title=Pbcusol: Predict lead and copper solubility;citation_publication_date=2021;citation_author=Benjamin Trueman"/>
+  <meta name="citation_reference" content="citation_title=&lt;span class=&quot;nocase&quot;&gt;tidyphreeqc&lt;/span&gt;: Tidy geochemical modeling using phreeqc;citation_publication_date=2019;citation_author=Dewey Dunnington"/>
+  <meta name="citation_reference" content="citation_title=&lt;span class=&quot;nocase&quot;&gt;pbcusol&lt;/span&gt;: Predict lead and copper solubility;citation_publication_date=2021;citation_author=Benjamin Trueman"/>
+  <meta name="citation_reference" content="citation_title=&lt;span class=&quot;nocase&quot;&gt;wesanderson&lt;/span&gt;: A wes anderson palette generator;citation_publication_date=2018;citation_author=Karthik Ram;citation_author=Hadley Wickham"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
@@ -2103,7 +2104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="d-article">
 <p>Recently, I’ve been experimenting with the excellent R package <code>tidyphreeqc</code> <span class="citation" data-cites="tidyphreeqc">(Dunnington <a href="#ref-tidyphreeqc" role="doc-biblioref">2019</a>)</span>, which provides a convenient interface for generating PHREEQC input files <span class="citation" data-cites="phreeqc_r phreeqc">(Charlton and Parkhurst <a href="#ref-phreeqc_r" role="doc-biblioref">2011</a>; Parkhurst and Appelo <a href="#ref-phreeqc" role="doc-biblioref">2013</a>)</span>. <code>tidyphreeqc</code> incorporates easily into my workflow, and it’s found its way into several recent publications <em>CITE LI</em>.</p>
 <p>I’ve also used it to build a separate package (<code>pbcusol</code> <span class="citation" data-cites="pbcusol">(Trueman <a href="#ref-pbcusol" role="doc-biblioref">2021</a>)</span>) that handles lead and copper solubility prediction specifically, with curated thermodynamic data and some domain specific features implemented in what is hopefully a straightforward collection of functions. <code>pbcusol</code> is implemented as a shiny app, available <a href="https://bentrueman.shinyapps.io/shinypbcusol/">here</a>.</p>
-<p><code>pbcusol</code> can be used to generate lead and copper solubility predictions that are comparable with those found in literature <em>CITE SCHOCK</em>, as detailed in the package README on <a href="https://github.com/bentrueman/pbcusol">GitHub</a>.</p>
+<p><code>pbcusol</code> can be used to generate lead and copper solubility predictions that are comparable with those found in literature <em>CITE SCHOCK</em>, as detailed in the package README on <a href="https://github.com/bentrueman/pbcusol">GitHub</a>. (They’re reproduced here using the <code>wesanderson</code> package for colour palettes <span class="citation" data-cites="wes">(Ram and Wickham <a href="#ref-wes" role="doc-biblioref">2018</a>)</span>.)</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="lead-solubility-prediction-using-shiny_files/figure-html5/basic-grid-1.png" width="624" /></p>
 </div>
@@ -2117,13 +2118,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Charlton, S. R., and D. L. Parkhurst. 2011. “Modules Based on the Geochemical Model Phreeqc for Use in Scripting and Programming Languages.” <em>Computers &amp; Geosciences</em> 37: 1653–63. <a href="http://dx.doi.org/10.1016/j.cageo.2011.02.005">http://dx.doi.org/10.1016/j.cageo.2011.02.005</a>.</p>
 </div>
 <div id="ref-tidyphreeqc">
-<p>Dunnington, Dewey. 2019. <em>Tidyphreeqc: Tidy Geochemical Modeling Using Phreeqc</em>. <a href="https://github.com/paleolimbot/tidyphreeqc">https://github.com/paleolimbot/tidyphreeqc</a>.</p>
+<p>Dunnington, Dewey. 2019. <em>tidyphreeqc: Tidy Geochemical Modeling Using Phreeqc</em>. <a href="https://github.com/paleolimbot/tidyphreeqc">https://github.com/paleolimbot/tidyphreeqc</a>.</p>
 </div>
 <div id="ref-phreeqc">
 <p>Parkhurst, D. L., and C. A. J. Appelo. 2013. <em>Description of Input and Examples for Phreeqc Version 3–a Computer Program for Speciation, Batch-Reaction, One-Dimensional Transport, and Inverse Geochemical Calculations</em>. Vol. book 6. Techniques and Methods. U.S. Geological Survey. <a href="https://pubs.usgs.gov/tm/06/a43">https://pubs.usgs.gov/tm/06/a43</a>.</p>
 </div>
+<div id="ref-wes">
+<p>Ram, Karthik, and Hadley Wickham. 2018. <em>wesanderson: A Wes Anderson Palette Generator</em>. <a href="https://CRAN.R-project.org/package=wesanderson">https://CRAN.R-project.org/package=wesanderson</a>.</p>
+</div>
 <div id="ref-pbcusol">
-<p>Trueman, Benjamin. 2021. <em>Pbcusol: Predict Lead and Copper Solubility</em>. <a href="https://github.com/bentrueman/pbcusol">https://github.com/bentrueman/pbcusol</a>.</p>
+<p>Trueman, Benjamin. 2021. <em>pbcusol: Predict Lead and Copper Solubility</em>. <a href="https://github.com/bentrueman/pbcusol">https://github.com/bentrueman/pbcusol</a>.</p>
 </div>
 </div>
 <!--radix_placeholder_article_footer-->

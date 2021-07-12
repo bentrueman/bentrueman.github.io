@@ -1,7 +1,7 @@
 ---
 title: "Peak detection for qualitative XRD analysis in R"
 description: |
-  A short description of the post.
+  Improved visualization of X-ray diffraction data.
 author:
   - name: Ben Trueman
     url: 

@@ -1,11 +1,12 @@
 ---
 title: "Non-parametric matched pair testing with left-censored data"
 description: |
-  A short description of the post.
+  Comparing two groups of measurements when some values are below a detection limit.
 author:
   - name: Ben Trueman
     url: {}
 date: 07-05-2021
+bibliography: references.bib
 output:
   distill::distill_article:
     self_contained: false
@@ -13,12 +14,12 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 There are few options in R for comparing matched pairs in two groups with left-censored data. And while `NADA2::cen_signedranktest()` is an excellent option, I wrote the following as another. It implements the Paired Prentice-Wilcoxon test, as described in @helsel_statistics_2012. I should also acknowledge the orphaned USGS' orphaned package smwrQW [@smwrQW] for its version of the PPW test.
 
-```{r ppw-test}
+```{r ppw-test, echo=TRUE}
 
 library("tidyverse")
 library("survival")
@@ -87,9 +88,7 @@ The `ppw_test()` function works like this:
 
 ```{r basic-use}
 
-# generate two random normal variables, with left-censoring:
-
-withr::with_seed(450, {
+withr::with_seed(450, { # generate two random normal variables, with left-censoring:
   tibble( 
     x = rnorm(10, 3, 1),
     y = rnorm(10, 3, 1),
@@ -114,11 +113,51 @@ withr::with_seed(23, {
   with(ppw_test(x, y, x_cen, y_cen, alternative = "greater")) 
 
 ```
-The following codes tests that it gives the expected result when applied to the data in Table 9.7 of @helsel_statistics_2012.
+The following codes tests that it gives the expected result when applied to the data in Table 9.7 of @helsel_statistics_2012. First, here are the data:
+
+```{r, echo=FALSE}
+theme_set(theme_classic())
+```
+
+
+```{r helsel-data}
+helsel <- read_csv("helsel_table_9.7 copy.csv")
+```
+
+```{r helsel-plot, fig.height=3, echo=FALSE}
+
+helsel %>% 
+  transmute(
+    june_num = str_remove(june, "<") %>% 
+      as.numeric(),
+    june_cen = str_detect(june, "<"),
+    sept_num = str_remove(september, "<") %>% 
+      as.numeric(),
+    sept_cen = str_detect(september, "<"),
+  ) %>% 
+  pivot_longer(everything(), 
+    names_to = c("month", ".value"),
+    names_pattern = "(.+)_(.+)"
+  ) %>% 
+  ggplot(aes(
+    x = num, 
+    y = str_to_sentence(month), 
+    col = if_else(cen, "Nondetect", "Quantified")
+  )) + 
+  geom_jitter(height = .1, width = 0, size = 4, shape = 16, alpha = .5) + 
+  scale_x_log10() + 
+  scale_colour_manual(values = wesanderson::wes_palette("Zissou1")[c(1,5)]) +
+  labs(
+    x = expression("Atrazine (µg L"^-1*")"),
+    y = NULL,
+    col = NULL
+  )
+
+```
+
+And here are the test results. These match the results in @helsel_statistics_2012.
 
 ```{r helsel-test}
-
-helsel <- read_csv("helsel_table_9.7 copy.csv")
 
 helsel %>% 
   mutate(
@@ -134,8 +173,8 @@ And the following code tests that it gives the expected result on the data of @o
 
 ```{r o-brien-test}
 
-# from o'brien and fleming, 1987:
 tibble::tribble(
+  # from o'brien and fleming, 1987:
   ~patient, ~close_match, ~poor_match,
   1, "37", 29, 
   2, "19", 13, 
@@ -159,4 +198,3 @@ tibble::tribble(
 
 ```
 
-# References  

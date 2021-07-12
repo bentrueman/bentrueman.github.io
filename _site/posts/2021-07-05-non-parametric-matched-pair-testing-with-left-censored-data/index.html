@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Benjamin Trueman: Non-parametric matched pair testing with left-censored data</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Comparing two groups of measurements when some values are below a detection limit."/>
 
 
 <!--  https://schema.org/Article -->
@@ -99,25 +99,29 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Benjamin Trueman: Non-parametric matched pair testing with left-censored data"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Comparing two groups of measurements when some values are below a detection limit."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Benjamin Trueman"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Benjamin Trueman: Non-parametric matched pair testing with left-censored data"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Comparing two groups of measurements when some values are below a detection limit."/>
 
 <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Statistics for censored environmental data using Minitab and R;citation_publication_date=2012;citation_publisher=Wiley;citation_author=Dennis R. Helsel"/>
+  <meta name="citation_reference" content="citation_title=SmwrQW–an r package for managing and analyzing water-quality data, version 0.7.9;citation_publication_date=2017;citation_publisher=U.S. Geological Survey;citation_author=Dave Lorenz"/>
+  <meta name="citation_reference" content="citation_title=A Paired Prentice-Wilcoxon Test for Censored Paired Data;citation_publication_date=1987;citation_volume=43;citation_doi=10.2307/2531957;citation_issn=0006341X;citation_author=Peter C. O’Brien;citation_author=Thomas R. Fleming"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Non-parametric matched pair testing with left-censored data"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Trueman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["07-05-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","bibliography","output"]}},"value":[{"type":"character","attributes":{},"value":["Non-parametric matched pair testing with left-censored data"]},{"type":"character","attributes":{},"value":["Comparing two groups of measurements when some values are below a detection limit."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Trueman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["07-05-2021"]},{"type":"character","attributes":{},"value":["references.bib"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["helsel_table_9.7 copy.csv","references.bib"]}
+  {"type":"character","attributes":{},"value":["helsel_table_9.7 copy.csv","non-parametric-matched-pair-testing-with-left-censored-data_files/anchor-4.2.2/anchor.min.js","non-parametric-matched-pair-testing-with-left-censored-data_files/bowser-1.9.3/bowser.min.js","non-parametric-matched-pair-testing-with-left-censored-data_files/distill-2.2.21/template.v2.js","non-parametric-matched-pair-testing-with-left-censored-data_files/figure-html5/helsel-plot-1.png","non-parametric-matched-pair-testing-with-left-censored-data_files/jquery-1.11.3/jquery.min.js","non-parametric-matched-pair-testing-with-left-censored-data_files/popper-2.6.0/popper.min.js","non-parametric-matched-pair-testing-with-left-censored-data_files/tippy-6.2.7/tippy-bundle.umd.min.js","non-parametric-matched-pair-testing-with-left-censored-data_files/tippy-6.2.7/tippy-light-border.css","non-parametric-matched-pair-testing-with-left-censored-data_files/tippy-6.2.7/tippy.css","non-parametric-matched-pair-testing-with-left-censored-data_files/tippy-6.2.7/tippy.umd.min.js","non-parametric-matched-pair-testing-with-left-censored-data_files/webcomponents-2.0.0/webcomponents.js","references.bib"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2061,7 +2065,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Non-parametric matched pair testing with left-censored data","description":"A short description of the post.","authors":[{"author":"Ben Trueman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-07-05T00:00:00.000+00:00","citationText":"Trueman, 2021"}
+{"title":"Non-parametric matched pair testing with left-censored data","description":"Comparing two groups of measurements when some values are below a detection limit.","authors":[{"author":"Ben Trueman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-07-05T00:00:00.000+00:00","citationText":"Trueman, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2088,7 +2092,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <h1>Non-parametric matched pair testing with left-censored data</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Comparing two groups of measurements when some values are below a detection limit.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2098,12 +2102,85 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <div class="d-article">
-<p>There are few options in R for comparing matched pairs in two groups with left-censored data. And while <code>NADA2::cen_signedranktest()</code> is an excellent option, I wrote the following as another. It implements the Paired Prentice-Wilcoxon test, as described in <span class="citation" data-cites="helsel_statistics_2012">@helsel_statistics_2012</span>. I should also acknowledge the orphaned USGS’ orphaned package smwrQW <span class="citation" data-cites="smwrQW">[@smwrQW]</span> for its version of the PPW test.</p>
+<p>There are few options in R for comparing matched pairs in two groups with left-censored data. And while <code>NADA2::cen_signedranktest()</code> is an excellent option, I wrote the following as another. It implements the Paired Prentice-Wilcoxon test, as described in <span class="citation" data-cites="helsel_statistics_2012">Helsel (<a href="#ref-helsel_statistics_2012" role="doc-biblioref">2012</a>)</span>. I should also acknowledge the orphaned USGS’ orphaned package smwrQW <span class="citation" data-cites="smwrQW">(Lorenz <a href="#ref-smwrQW" role="doc-biblioref">2017</a>)</span> for its version of the PPW test.</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='http://tidyverse.tidyverse.org'>"tidyverse"</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/therneau/survival'>"survival"</a></span><span class='op'>)</span>
 
+<span class='va'>ppw_test</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span>
+  <span class='va'>x</span>, <span class='co'># numeric</span>
+  <span class='va'>y</span>, <span class='co'># numeric</span>
+  <span class='va'>x_cen</span>, <span class='co'># logical </span>
+  <span class='va'>y_cen</span>, <span class='co'># logical </span>
+  <span class='va'>alternative</span> <span class='op'>=</span> <span class='st'>"two.sided"</span>, <span class='co'># either "two.sided", "greater" (x &gt; y), or "less" (x &lt; y)</span>
+  <span class='va'>flip</span> <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span> <span class='op'>{</span>
+  
+  <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>!=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"Lengths of x and y must be the same for paired data."</span><span class='op'>)</span>
+  
+  <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/any.html'>any</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"Negative values in x or y."</span><span class='op'>)</span>
+  
+  <span class='va'>valid_alternative</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/pmatch.html'>pmatch</a></span><span class='op'>(</span><span class='va'>alternative</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"two.sided"</span>, <span class='st'>"greater"</span>, <span class='st'>"less"</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>valid_alternative</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>'Invalid choice for alternative, must match "two.sided", "greater", or "less"'</span><span class='op'>)</span>
+
+  <span class='va'>test_input</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='op'>(</span>x_val <span class='op'>=</span> <span class='va'>x</span>, y_val <span class='op'>=</span> <span class='va'>y</span>, <span class='va'>x_cen</span>, <span class='va'>y_cen</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>rowid_to_column</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>pivot_longer</span><span class='op'>(</span>
+      cols <span class='op'>=</span> <span class='op'>-</span><span class='va'>rowid</span>,
+      names_to <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"group"</span>, <span class='st'>".value"</span><span class='op'>)</span>,
+      names_pattern <span class='op'>=</span> <span class='st'>"(.+)_(.+)"</span>
+    <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>mutate</span><span class='op'>(</span>
+      cen <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>cen</span><span class='op'>)</span>, <span class='co'># 0 is censored, 1 is observed</span>
+      <span class='co'># flip data so that smallest observation becomes longest "survival time":</span>
+      <span class='co'># N.B., this rounds the flipped data to 6 decimal places</span>
+      flipped <span class='op'>=</span> <span class='kw'>if</span><span class='op'>(</span><span class='va'>flip</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>val</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>1</span> <span class='op'>-</span> <span class='va'>val</span><span class='op'>}</span> <span class='kw'>else</span> <span class='va'>val</span>,
+      flipped <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>flipped</span>, <span class='fl'>6</span><span class='op'>)</span>
+    <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>left_join</span><span class='op'>(</span>
+      <span class='co'># estimate survival function:</span>
+      <span class='fu'>survival</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span><span class='op'>(</span><span class='fu'>survival</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span><span class='op'>(</span><span class='va'>flipped</span>, <span class='va'>cen</span><span class='op'>)</span> <span class='op'>~</span> <span class='fl'>1</span>, data <span class='op'>=</span> <span class='va'>.</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+        <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+        <span class='fu'>mutate</span><span class='op'>(</span>time <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>,
+      by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"flipped"</span> <span class='op'>=</span> <span class='st'>"time"</span><span class='op'>)</span>
+    <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>mutate</span><span class='op'>(</span>score <span class='op'>=</span> <span class='fu'>if_else</span><span class='op'>(</span><span class='va'>cen</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='fl'>1</span> <span class='op'>-</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='va'>estimate</span>, <span class='fl'>1</span> <span class='op'>-</span> <span class='va'>estimate</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>pivot_wider</span><span class='op'>(</span>id_cols <span class='op'>=</span> <span class='va'>rowid</span>, names_from <span class='op'>=</span> <span class='va'>group</span>, values_from <span class='op'>=</span> <span class='va'>score</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>mutate</span><span class='op'>(</span>d <span class='op'>=</span> <span class='va'>x</span> <span class='op'>-</span> <span class='va'>y</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>summarize</span><span class='op'>(</span>
+      z_ppw <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>d</span> <span class='op'>^</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>,
+      p_val <span class='op'>=</span> <span class='kw'>if</span><span class='op'>(</span><span class='va'>alternative</span> <span class='op'>==</span> <span class='st'>"two.sided"</span><span class='op'>)</span> <span class='op'>{</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>pnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>z_ppw</span><span class='op'>)</span>, lower.tail <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>}</span> <span class='kw'>else</span>
+        <span class='kw'>if</span><span class='op'>(</span><span class='va'>alternative</span> <span class='op'>==</span> <span class='st'>"greater"</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>pnorm</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>z_ppw</span>, lower.tail <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>}</span> <span class='kw'>else</span>
+          <span class='kw'>if</span><span class='op'>(</span><span class='va'>alternative</span> <span class='op'>==</span> <span class='st'>"less"</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>pnorm</a></span><span class='op'>(</span><span class='va'>z_ppw</span>, lower.tail <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>}</span> <span class='kw'>else</span>
+            <span class='st'>"alternative hypothesis is invalid"</span>
+    <span class='op'>)</span>
+  
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"statistic"</span> <span class='op'>=</span> <span class='va'>test_input</span><span class='op'>$</span><span class='va'>z_ppw</span>, <span class='st'>"p.value"</span> <span class='op'>=</span> <span class='va'>test_input</span><span class='op'>$</span><span class='va'>p_val</span><span class='op'>)</span>
+  
+<span class='op'>}</span>
+</code></pre>
+</div>
 </div>
 <p>The <code>ppw_test()</code> function works like this:</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>withr</span><span class='fu'>::</span><span class='fu'><a href='https://withr.r-lib.org/reference/with_seed.html'>with_seed</a></span><span class='op'>(</span><span class='fl'>450</span>, <span class='op'>{</span> <span class='co'># generate two random normal variables, with left-censoring:</span>
+  <span class='fu'>tibble</span><span class='op'>(</span> 
+    x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span>,
+    y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span>,
+    x_cen <span class='op'>=</span> <span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>2</span>,
+    y_cen <span class='op'>=</span> <span class='va'>y</span> <span class='op'>&lt;</span> <span class='fl'>2</span>
+  <span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'>ppw_test</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>x_cen</span>, <span class='va'>y_cen</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 <pre><code>$statistic
 [1] -0.5628925
 
@@ -2112,30 +2189,100 @@ $p.value
 </div>
 <p>It also does one-sided tests:</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>withr</span><span class='fu'>::</span><span class='fu'><a href='https://withr.r-lib.org/reference/with_seed.html'>with_seed</a></span><span class='op'>(</span><span class='fl'>23</span>, <span class='op'>{</span>
+  <span class='fu'>tibble</span><span class='op'>(</span> 
+    x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>10</span>, <span class='fl'>1</span><span class='op'>)</span>,
+    y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>5</span>, <span class='fl'>1</span><span class='op'>)</span>,
+    x_cen <span class='op'>=</span> <span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>10</span>,
+    y_cen <span class='op'>=</span> <span class='va'>y</span> <span class='op'>&lt;</span> <span class='fl'>5</span>
+  <span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'>ppw_test</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>x_cen</span>, <span class='va'>y_cen</span>, alternative <span class='op'>=</span> <span class='st'>"greater"</span><span class='op'>)</span><span class='op'>)</span> 
+</code></pre>
+</div>
 <pre><code>$statistic
 [1] -2.918231
 
 $p.value
 [1] 0.001760118</code></pre>
 </div>
-<p>The following codes tests that it gives the expected result when applied to the data in Table 9.7 of <span class="citation" data-cites="helsel_statistics_2012">@helsel_statistics_2012</span>.</p>
+<p>The following codes tests that it gives the expected result when applied to the data in Table 9.7 of <span class="citation" data-cites="helsel_statistics_2012">Helsel (<a href="#ref-helsel_statistics_2012" role="doc-biblioref">2012</a>)</span>. First, here are the data:</p>
 <div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>helsel</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span><span class='st'>"helsel_table_9.7 copy.csv"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="non-parametric-matched-pair-testing-with-left-censored-data_files/figure-html5/helsel-plot-1.png" width="624" /></p>
+</div>
+<p>And here are the test results. These match the results in <span class="citation" data-cites="helsel_statistics_2012">Helsel (<a href="#ref-helsel_statistics_2012" role="doc-biblioref">2012</a>)</span>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>helsel</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>
+    june_cen <span class='op'>=</span> <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>june</span>, <span class='st'>"&lt;"</span><span class='op'>)</span>,
+    sept_cen <span class='op'>=</span> <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>september</span>, <span class='st'>"&lt;"</span><span class='op'>)</span>,
+  <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate_if</span><span class='op'>(</span><span class='va'>is.character</span>, <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'>str_remove</span><span class='op'>(</span><span class='va'>.x</span>, <span class='st'>"&lt;"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'>ppw_test</span><span class='op'>(</span><span class='va'>june</span>, <span class='va'>september</span>, <span class='va'>june_cen</span>, <span class='va'>sept_cen</span>, <span class='st'>"less"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 <pre><code>$statistic
 [1] 3.012394
 
 $p.value
 [1] 0.001295979</code></pre>
 </div>
-<p>And the following code tests that it gives the expected result on the data of <span class="citation" data-cites="obrien_paired_1987">@obrien_paired_1987</span>.</p>
+<p>And the following code tests that it gives the expected result on the data of <span class="citation" data-cites="obrien_paired_1987">O’Brien and Fleming (<a href="#ref-obrien_paired_1987" role="doc-biblioref">1987</a>)</span>.</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span><span class='op'>(</span>
+  <span class='co'># from o'brien and fleming, 1987:</span>
+  <span class='op'>~</span><span class='va'>patient</span>, <span class='op'>~</span><span class='va'>close_match</span>, <span class='op'>~</span><span class='va'>poor_match</span>,
+  <span class='fl'>1</span>, <span class='st'>"37"</span>, <span class='fl'>29</span>, 
+  <span class='fl'>2</span>, <span class='st'>"19"</span>, <span class='fl'>13</span>, 
+  <span class='fl'>3</span>, <span class='st'>"&gt;57"</span>, <span class='fl'>15</span>, 
+  <span class='fl'>4</span>, <span class='st'>"93"</span>, <span class='fl'>26</span>, 
+  <span class='fl'>5</span>, <span class='st'>"16"</span>, <span class='fl'>11</span>, 
+  <span class='fl'>6</span>, <span class='st'>"22"</span>, <span class='fl'>17</span>, 
+  <span class='fl'>7</span>, <span class='st'>"20"</span>, <span class='fl'>26</span>, 
+  <span class='fl'>8</span>, <span class='st'>"18"</span>, <span class='fl'>21</span>, 
+  <span class='fl'>9</span>, <span class='st'>"63"</span>, <span class='fl'>43</span>, 
+  <span class='fl'>10</span>, <span class='st'>"29"</span>, <span class='fl'>15</span>,
+  <span class='fl'>11</span>, <span class='st'>"&gt;60"</span>, <span class='fl'>40</span>
+<span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>
+    cen_close <span class='op'>=</span> <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>close_match</span>, <span class='st'>"&gt;"</span><span class='op'>)</span>,
+    cen_poor <span class='op'>=</span> <span class='cn'>FALSE</span>,
+    close_match <span class='op'>=</span> <span class='fu'>str_remove</span><span class='op'>(</span><span class='va'>close_match</span>, <span class='st'>"&gt;"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'>ppw_test</span><span class='op'>(</span><span class='va'>close_match</span>, <span class='va'>poor_match</span>, <span class='va'>cen_close</span>, <span class='va'>cen_poor</span>, alternative <span class='op'>=</span> <span class='st'>"less"</span>, flip <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 <pre><code>$statistic
 [1] 2.08696
 
 $p.value
 [1] 0.01844589</code></pre>
 </div>
-<h1 id="references">References</h1>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-helsel_statistics_2012">
+<p>Helsel, Dennis R. 2012. <em>Statistics for Censored Environmental Data Using Minitab and R</em>. 2nd ed. Wiley Series in Statistics in Practice. Hoboken, N.J: Wiley.</p>
+</div>
+<div id="ref-smwrQW">
+<p>Lorenz, Dave. 2017. “SmwrQW–an R Package for Managing and Analyzing Water-Quality Data, Version 0.7.9.” Open File Report. U.S. Geological Survey.</p>
+</div>
+<div id="ref-obrien_paired_1987">
+<p>O’Brien, Peter C., and Thomas R. Fleming. 1987. “A Paired Prentice-Wilcoxon Test for Censored Paired Data.” <em>Biometrics</em> 43 (1): 169. <a href="https://doi.org/10.2307/2531957">https://doi.org/10.2307/2531957</a>.</p>
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2147,7 +2294,10 @@ $p.value
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom"></div>
+<div class="appendix-bottom">
+  <h3 id="references">References</h3>
+  <div id="references-listing"></div>
+</div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->

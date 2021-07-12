@@ -3,10 +3,10 @@
     {
       "path": "about.html",
       "title": "About me",
-      "description": "A few details",
+      "description": "Postdoctoral researcher<br>\nCentre for Water Resources Studies<br>\nDalhousie University<br>\nHalifax, NS, CAN",
       "author": [],
-      "contents": "\nI am a postdoc at the Centre for Water Resources Studies at Dalhousie University (Halifax, CAN). My research interests include drinking/source water quality and treatment, water quality data analysis, and corrosion as it relates to drinking water quality.\n\n\n\n",
-      "last_modified": "2021-06-30T11:23:33-03:00"
+      "contents": "\nMy research interests include drinking/source water quality and treatment, water quality data analysis, and corrosion as it relates to drinking water quality. I study the occurrence and mobility of lead and copper in drinking water, the impact of iron corrosion on water quality, and changes in source water bodies that impact drinking water quality (e.g., brownification, cyanobacteria).\n\n\n\n",
+      "last_modified": "2021-07-12T10:26:53-03:00"
     },
     {
       "path": "CV.html",
@@ -21,7 +21,7 @@
       "title": "Posts",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-06-30T11:23:34-03:00"
+      "last_modified": "2021-07-12T10:24:31-03:00"
     }
   ],
   "collections": ["posts/posts.json"]
