@@ -20,9 +20,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r load, echo=FALSE}
 library("tidyverse")
 library("fffprocessr") # for peak detection
-theme_set(theme_minimal())
+theme_set(
+  theme_classic() + 
+    theme(
+      axis.line.y = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+    )
+)
 
-unit_scale <- . %>% 
+unit_scale <- . %>% # scale to [0,1]
   mutate(
     intensity = intensity - min(intensity, na.rm = TRUE),
     intensity = intensity / max(intensity, na.rm = TRUE)
@@ -30,24 +37,28 @@ unit_scale <- . %>%
 
 data <- read_csv("xrd_data_digestion.csv") %>% 
   filter(sample == "lead_carbonate") %>% 
-  unit_scale() # scale to [0,1]
+  unit_scale() 
   
 
 stds <- read_csv("xrd_standards.csv") %>% 
-  filter(phase %in% c("Cerussite", "Hydrocerussite")) %>% 
-  unit_scale() # scale to [0,1]
+  filter(
+    phase %in% c("Cerussite", "Hydrocerussite"),
+    two_theta >= min(data$two_theta),
+    two_theta <= max(data$two_theta)
+  ) %>% 
+  unit_scale() 
 ```
 
-Preamble
+A important aspect of understanding inorganic contaminant mobility in drinking water systems is identifying the solid phases that exist on the surfaces of pipes. This is often done using X-ray diffraction (XRD), and I am often preparing figures to communicate XRD data. This post provides an example workflow for displaying XRD data and labelling the peaks so that readers can easily attribute them. It makes use of the peak detection function `peak_maxima()` in my field-flow fractionation data analysis package `fffprocessr` [@fffprocessr].
 
-The data represent a mixed lead carbonate phase containing cerussite (PbCO~3~) and hydrocerussite (Pb~3~(CO~3~)~2~(OH)~2~).
+For this example, we'll use an XRD pattern representing a mixed lead carbonate phase containing cerussite (PbCO~3~) and hydrocerussite (Pb~3~(CO~3~)~2~(OH)~2~). Here are the data:
 
 ```{r plot-funs, fig.height=2.5}
 
 label_axes <- function(...) {
   labs(
     x = expression("2"*theta~"(Cu K"*alpha*")"),
-    y = "Normalized response",
+    y = NULL,
     ...
   )
 }

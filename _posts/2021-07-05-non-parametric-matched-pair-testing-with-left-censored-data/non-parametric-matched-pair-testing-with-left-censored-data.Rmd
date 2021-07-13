@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-There are few options in R for comparing matched pairs in two groups with left-censored data. And while `NADA2::cen_signedranktest()` is an excellent option, I wrote the following as another. It implements the Paired Prentice-Wilcoxon test, as described in @helsel_statistics_2012. I should also acknowledge the orphaned USGS' orphaned package smwrQW [@smwrQW] for its version of the PPW test.
+There are few options in R for comparing matched pairs in two groups with left-censored data. And while `NADA2::cen_signedranktest()` is an excellent tool, I wrote the following as another. It implements the Paired Prentice-Wilcoxon test, as described in @helsel_statistics_2012. I should also acknowledge the USGS' orphaned package smwrQW [@smwrQW] for its version of the same test.
 
 ```{r ppw-test, echo=TRUE}
 
@@ -113,12 +113,12 @@ withr::with_seed(23, {
   with(ppw_test(x, y, x_cen, y_cen, alternative = "greater")) 
 
 ```
-The following codes tests that it gives the expected result when applied to the data in Table 9.7 of @helsel_statistics_2012. First, here are the data:
+
+The following code tests that `ppw_test()` gives the expected result when applied to the data in Table 9.7 of @helsel_statistics_2012. First, here are the data:
 
 ```{r, echo=FALSE}
 theme_set(theme_classic())
 ```
-
 
 ```{r helsel-data}
 helsel <- read_csv("helsel_table_9.7 copy.csv")
@@ -155,7 +155,7 @@ helsel %>%
 
 ```
 
-And here are the test results. These match the results in @helsel_statistics_2012.
+And here are the test results. These are close to the values in @helsel_statistics_2012, but not exactly the same. I suspect there are a few typos in the table, which may have something to do with it. For example, while most of the scores calculated by `ppw_test()` are consistent with those reported in the table, line 11, column 3 list a score of 0.55 for the second-highest value in column 1, while `ppw_test()` calculates a score of -0.54, much closer to the value of -0.67 corresponding to the largest value in column 1. There is a similar problem on line 12.
 
 ```{r helsel-test}
 
@@ -169,9 +169,9 @@ helsel %>%
 
 ```
 
-And the following code tests that it gives the expected result on the data of @obrien_paired_1987.
+<!-- The following code tests that `ppw_test()` gives the expected result on the data of @obrien_paired_1987. -->
 
-```{r o-brien-test}
+```{r o-brien-test, eval=FALSE}
 
 tibble::tribble(
   # from o'brien and fleming, 1987:
@@ -195,6 +195,70 @@ tibble::tribble(
       as.numeric()
   ) %>% 
   with(ppw_test(close_match, poor_match, cen_close, cen_poor, alternative = "less", flip = FALSE))
+
+```
+
+```{r inspect-helsel, eval=FALSE}
+
+test <- helsel %>% 
+  transmute(
+    june_num = str_remove(june, "<") %>% 
+      as.numeric(),
+    june_cen = str_detect(june, "<"),
+    sept_num = str_remove(september, "<") %>% 
+      as.numeric(),
+    sept_cen = str_detect(september, "<"),
+  )
+
+x <- test$june_num
+y <- test$sept_num
+x_cen <- test$june_cen
+y_cen <- test$sept_cen
+
+alternative <- "two.sided"
+flip <- TRUE
+
+test_input <- tibble(x_val = x, y_val = y, x_cen, y_cen) %>% 
+    na.omit() %>% 
+    rowid_to_column() %>% 
+    pivot_longer(
+      cols = -rowid,
+      names_to = c("group", ".value"),
+      names_pattern = "(.+)_(.+)"
+    ) %>% 
+    mutate(
+      cen = as.numeric(!cen), # 0 is censored, 1 is observed
+      # flip data so that smallest observation becomes longest "survival time":
+      # N.B., this rounds the flipped data to 6 decimal places
+      flipped = if(flip) {max(val) + 1 - val} else val,
+      flipped = round(flipped, 6)
+    ) %>% 
+    left_join(
+      # estimate survival function:
+      survival::survfit(survival::Surv(flipped, cen) ~ 1, data = .) %>% 
+        broom::tidy() %>% 
+        mutate(time = round(time, 6)),
+      by = c("flipped" = "time")
+    ) %>% 
+    mutate(score = if_else(cen == 1, 1 - 2 * estimate, 1 - estimate)) %>% 
+    pivot_wider(id_cols = rowid, names_from = group, values_from = score) %>% 
+    mutate(d = x - y)
+
+tibble(
+  jun_helsel = helsel$june_score_s1,
+  jun_ben = test_input$x,
+  sep_helsel = helsel$june_score_s1,
+  sep_ben = test_input$x,
+  d_helsel = helsel$diff_s1_s2,
+  d_ben = test_input$d
+) %>% 
+  rowid_to_column() %>% 
+  pivot_longer(-rowid,
+    names_to = c("set", ".value"),
+    names_pattern = "(.+)_(.+)"
+  ) %>% 
+  mutate(ben = round(ben, 2)) %>% 
+  filter(!near(helsel, ben, .1))
 
 ```
 
