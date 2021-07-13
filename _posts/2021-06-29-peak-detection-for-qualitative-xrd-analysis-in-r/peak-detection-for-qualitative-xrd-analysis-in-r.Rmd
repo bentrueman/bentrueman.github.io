@@ -14,30 +14,35 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-library("tidyverse")
-theme_set(theme_minimal())
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r load}
+```{r load, echo=FALSE}
+library("tidyverse")
 library("fffprocessr") # for peak detection
-data <- read_csv("xrd_data.csv", skip = 13) %>% 
-  rename(two_theta = DATA, intensity = X2) %>% 
-  # scale to [0,1]:
+theme_set(theme_minimal())
+
+unit_scale <- . %>% 
   mutate(
-    two_theta = as.numeric(two_theta),
     intensity = intensity - min(intensity, na.rm = TRUE),
     intensity = intensity / max(intensity, na.rm = TRUE)
-  ) %>% 
-  filter_all(all_vars(!is.na(.))) %>% 
-  correct_baseline(left = 15, right = 55, group_vars = NULL, x_var = "two_theta", y_var = "intensity")
+  )
 
-stds <- read_csv("xrd_stds.csv")
+data <- read_csv("xrd_data_digestion.csv") %>% 
+  filter(sample == "lead_carbonate") %>% 
+  unit_scale() # scale to [0,1]
+  
+
+stds <- read_csv("xrd_standards.csv") %>% 
+  filter(phase %in% c("Cerussite", "Hydrocerussite")) %>% 
+  unit_scale() # scale to [0,1]
 ```
 
-The data, from @trueman_etal_2018.
+Preamble
 
-```{r}
+The data represent a mixed lead carbonate phase containing cerussite (PbCO~3~) and hydrocerussite (Pb~3~(CO~3~)~2~(OH)~2~).
+
+```{r plot-funs, fig.height=2.5}
 
 label_axes <- function(...) {
   labs(
@@ -48,16 +53,16 @@ label_axes <- function(...) {
 }
 
 custom_colour_scale <- function(n = 3, ...) {
-  scale_colour_manual(values = wesanderson::wes_palette("Zissou1", n))
+  scale_colour_manual(values = wesanderson::wes_palette("Zissou1", n)[c(1, n)])
 }
 
-data %>% 
-  ggplot(aes(two_theta, intensity)) + 
-  geom_line() + 
+data %>%
+  ggplot(aes(two_theta, intensity)) +
+  geom_line() +
   label_axes()
 ```
 
-A quick and dirty method of determining phase importance, for plotting purposes only:
+First we need a quick and dirty method of determining the order in which phases should appear in the plot---interpretation is easiest when the standard that matches the data best appears closest to it. 
 
 ```{r correlations}
 
@@ -89,7 +94,9 @@ importance <- stds %>%
 
 ```
 
-```{r data-w-stds}
+Here are the data with the standard patterns for cerussite and hydrrocerussite. Cerussite is a better match to the data and so it is plotted closest to the data.
+
+```{r data-w-stds, fig.height=3}
 
 ordered_stds <- stds %>% 
   mutate(phase_f = factor(phase) %>% fct_relevel(importance$phase) %>% as.numeric())
@@ -107,28 +114,32 @@ data %>%
   ) + 
   scale_y_continuous(breaks = seq(0, 1, .25)) +
   label_axes(col = NULL) + 
-  custom_colour_scale()
+  custom_colour_scale(4)
 
 ```
-Detect peaks:
+We detect peaks in the pattern using `fffprocessr::peak_maxima()`.
 
-```{r}
+```{r detect}
 
 peaks_detected <- data %>% 
-  mutate(grp = cut_number(intensity, 50)) %>% 
   peak_maxima(
-    peaks = 30, n = 7, method = "sigma", 
+    peaks = 23, n = 1, method = "sigma", 
      x_var = "two_theta", y_var = "intensity",
-    group_vars = "grp"
+    group_vars = NULL
   )
+```
 
-assign_peaks <- function(sample, standard, round_to = 1, phases) { 
+Then, we need a function to assign the detected peaks to the appropriate standard.
+
+```{r assign}
+
+assign_peaks <- function(sample, standard, tol = 1, phases) { 
   sample %>% 
-    mutate(two_theta_rnd = plyr::round_any(two_theta, round_to)) %>% 
+    mutate(two_theta_rnd = plyr::round_any(two_theta, tol)) %>% 
     right_join(
       standard %>% 
         filter(phase %in% phases) %>% 
-        mutate(two_theta_rnd = plyr::round_any(two_theta, round_to)) %>% 
+        mutate(two_theta_rnd = plyr::round_any(two_theta, tol)) %>% 
         select(two_theta, two_theta_rnd, phase), 
       by = "two_theta_rnd", suffix = c("", "_std")
     ) %>% 
@@ -138,16 +149,15 @@ assign_peaks <- function(sample, standard, round_to = 1, phases) {
 }
 
 peaks_idd <- bind_rows(
-  assign_peaks(peaks_detected, stds, phases = importance$phase[1], round_to = .5),
-  assign_peaks(peaks_detected, stds, phases = importance$phase[2], round_to = .5),
-  assign_peaks(peaks_detected, stds, phases = importance$phase[3], round_to = .5)
+  assign_peaks(peaks_detected, stds, phases = importance$phase[1], tol = .5),
+  assign_peaks(peaks_detected, stds, phases = importance$phase[2], tol = .5)
 )
 
 ```
 
-Add the identified peaks to the plot:
+Finally, we add the identified peaks to the plot:
 
-```{r data-w-peaks}
+```{r data-w-peaks, fig.height=3.5}
 
 data %>% 
   ggplot(aes(two_theta, intensity)) + 
@@ -166,7 +176,7 @@ data %>%
   ) + 
   scale_y_continuous(breaks = seq(0, 1, .25)) +
   label_axes(col = NULL) + 
-  custom_colour_scale()
+  custom_colour_scale(4)
 
 ```
 
