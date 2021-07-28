@@ -1,7 +1,7 @@
 ---
-title: "Comparing drinking water quality time series using generalized additive mixed models"
+title: "Comparing drinking water quality time series using a generalized additive mixed model"
 description: |
-  Revisiting work from 2016 to better model non-linear time series trends.
+  Revisiting work from 2016 to better model non-linear time series.
 author:
   - name: Ben Trueman
     url: {}
@@ -17,43 +17,18 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library("tidyverse")
 library("mgcv")
+library("gratia")
 options(dplyr.summarise.inform = FALSE)
-theme_set(theme_classic() + theme(strip.background = element_blank()))
+theme_set(theme_bw(14) + theme(strip.background = element_blank()))
 pal <- wesanderson::wes_palette("Zissou1", 5)[c(5, 1)]
 jdk_pl <- read_csv("trueman_gagnon_2016_pipe_loop_data_cleaned.csv")
 ```
 
 In a 2016 paper [@trueman_understanding_2016], I evaluated the effect of cast iron distribution mains on the lead concentrations due to lead pipes downstream from those mains. This question has relevance for minimizing lead in drinking water and for prioritizing lead pipe replacement; if a lead pipe is connected to an unlined iron distribution main, lead levels reaching the consumer are likely to be higher.
 
-In the paper, I used the `arima()` function in R with a matrix of external regressors to account for the effect of the distribution main and autocorrelation in the time series of lead concentrations. But linear regression was only a rough approximation of the behaviour of the concentration time series, and I think using a generalized additive model would have been a better choice. Here, I revisit these data, using `mgcv::gamm()` to fit a generalized additive mixed model and `nlme::corCAR1()` to include a continuous time first-order autoregressive error structure.
+In the paper, I used the `arima()` function in R with a matrix of external regressors to account for the effect of the distribution main and autocorrelation in the time series of lead concentrations. But linear regression was only a rough approximation of the concentration time series' behaviour, and I think using a generalized additive model would have been a better choice. Here, I revisit those data, using `mgcv::gamm()` to fit a generalized additive mixed model and `nlme::corCAR1()` to include a continuous time first-order autoregressive error structure.
 
-I also make use of the material in an excellent blog post by [Gavin Simpson](http://fromthebottomoftheheap.net/2016/12/15/simultaneous-interval-revisited) to compute a simultaneous 95% confidence interval for the model.
-
-First, I used Gavin Simpson's approach to write a function that calculates the critical value used to construct simultaneous confidence intervals:
-
-```{r simpson-crit-val}
-
-rmvn <- function(n, mu, sig) { # generate multivariate normal random deviates
-  L <- mgcv::mroot(sig)
-  m <- ncol(L)
-  t(mu + L %*% matrix(rnorm(m*n), m, n))
-}
-
-simul_critval <- function(model, N = 10000) {
-  Vb <- vcov(model)
-  pred <- predict(model, se.fit = TRUE)
-  se.fit <- pred$se.fit
-  BUdiff <- rmvn(N, mu = rep(0, nrow(Vb)), sig = Vb)
-  Cg <- predict(model, type = "lpmatrix")
-  simDev <- Cg %*% t(BUdiff)
-  absDev <- abs(sweep(simDev, 1, se.fit, FUN = "/"))
-  masd <- apply(absDev, 2, max)
-  quantile(masd, prob = 0.95, type = 8)
-}
-
-```
-
-Next, I built the model, using `s()` to fit a separate smooth to each category of lead time series. (The categories are defined by the distribution main---PVC or cast iron---and the lead pipe configuration---full lead or half lead half copper.) In this model, the smooths differ in their flexibility and shape [@pedersen_hierarchical_2019]. I use `tidyr::nest()` to allow for list columns that include the model and predicted values along with the data.
+First, I built the model, using `s()` to fit a separate smooth to each category of lead time series. (The categories are defined by the distribution main---PVC or cast iron---and the lead pipe configuration---full lead or half lead, half copper.) In this model, the smooths differ in their flexibility and shape [@pedersen_hierarchical_2019]. They are centered, so the grouping variables are added as main effects (see the documentation for `mgcv::s()`). I use `tidyr::nest()` to allow for list columns that include the model and predicted values along with the data.
 
 ```{r model}
 
@@ -79,7 +54,7 @@ fe_gam <- jdk_pl %>%
 
 ```
 
-Next, I predicted from the model over the range of x values, and constructed the 95% confidence band using Simpson's method.
+Next, I predicted from the model over the range of x values, and constructed a pointwise (approximate) 95% confidence band using the standard errors of the fitted values.
 
 ```{r confidence-bands}
 
@@ -93,8 +68,8 @@ fe_gam <- fe_gam %>%
       preds, model, 
       ~ tibble(fit = .x$fit, se_fit = .x$se.fit) %>% 
         mutate(
-          lwr = fit - simul_critval(.y$gam) * se_fit,
-          upr = fit + simul_critval(.y$gam) * se_fit,
+          lwr = fit - 2 * se_fit,
+          upr = fit + 2 * se_fit,
           fit = fit
         ) %>% 
         mutate_at(vars(c(fit, lwr, upr)), exp)
@@ -103,7 +78,7 @@ fe_gam <- fe_gam %>%
 
 ```
 
-Here are the data, the fitted model, and the simultaneous 95% confidence bands:
+Here are the data, the fitted model, and the confidence bands:
 
 ```{r plot, echo=FALSE}
 
@@ -139,6 +114,9 @@ fe_gam %>%
   ) 
  
 ```
+
+You'll notice that some of the smooths---especially the "full LSL"/ "PVC" smooth---are smoother than the eye would expect. This is probably because the model is attributing some of the  nonlinearity to autocorrelation, something discussed in more detail elsewhere [@simpson_modelling_2018].
+
 The model does a reasonably good job---but not a perfect job---accounting for autocorrelation in the time series. "Raw" and "normalized" residuals are defined in the help file to `nlme::residuals.lme()` under `type`. Essentially, raw residuals represent the difference between the observed and fitted values, while normalized residuals account for the estimated error structure (here, continuous time first-order autoregressive). The grey shaded band in the figure below represents a 95% confidence interval on the autocorrelation of white Gaussian noise.
 
 ```{r acf, fig.height=2.5, echo=FALSE}
@@ -185,7 +163,7 @@ fe_gam %>%
 
 ```
 
-Finally, let's have a look at the model summary. The effect of the distribution main is statistically significant, as is the effect of pipe configuration (which we're less concerned about here). Based on the retransformed coefficient (exponentiating and subtracting one), the model estimates that lead release is `r signif(abs(100 * (exp(coef(fe_gam$model[[1]]$gam)[2]) - 1)), 2)`% lower when the distribution main supplying the lead pipe is plastic as opposed to iron.
+Finally, let's have a look at the model summary. The effect of the distribution main is statistically significant, as is the effect of pipe configuration (which we're less concerned about here). Based on the retransformed coefficient (exponentiating and subtracting one), the model estimates that lead release is `r signif(abs(100 * (exp(coef(fe_gam$model[[1]]$gam)[2]) - 1)), 2)`% lower when the distribution main supplying the lead pipe is plastic as opposed to iron---an important result given the 
 
 ```{r summary, echo=FALSE}
 summary(fe_gam$model[[1]]$gam)

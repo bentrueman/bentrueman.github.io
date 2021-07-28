@@ -1,7 +1,7 @@
 ---
 title: "Non-parametric matched pair testing with left-censored data"
 description: |
-  Comparing two groups of measurements when some values are below a detection limit.
+  Comparing two groups of measurements when some values are below one or multiple detection limit(s).
 author:
   - name: Ben Trueman
     url: {}
@@ -17,9 +17,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-There are few options in R for comparing matched pairs in two groups with left-censored data. And while `NADA2::cen_signedranktest()` is an excellent tool, I wrote the following as another. It implements the Paired Prentice-Wilcoxon test, as described in @helsel_statistics_2012. I should also acknowledge the USGS' orphaned package smwrQW [@smwrQW] for its version of the same test.
+There are relatively few options in R for comparing matched pairs in two groups with left-censored data. And while `NADA2::cen_signedranktest()` is an excellent tool, I wrote the following function as another. It implements the Paired Prentice-Wilcoxon test, as described in @helsel_statistics_2012. I should also acknowledge the USGS' orphaned package smwrQW [@smwrQW] for its version of the same test.
 
-```{r ppw-test, echo=TRUE}
+```{r ppw-test}
 
 library("tidyverse")
 library("survival")
@@ -84,6 +84,10 @@ ppw_test <- function(
 
 ```
 
+```{r set-theme, echo=FALSE}
+theme_set(theme_bw(14) + theme(strip.background = element_blank()))
+```
+ 
 The `ppw_test()` function works like this:
 
 ```{r basic-use}
@@ -98,6 +102,7 @@ withr::with_seed(450, { # generate two random normal variables, with left-censor
 }) %>% 
   with(ppw_test(x, y, x_cen, y_cen))
 ```
+
 It also does one-sided tests:
 
 ```{r one-sided}
@@ -116,11 +121,7 @@ withr::with_seed(23, {
 
 The following code tests that `ppw_test()` gives the expected result when applied to the data in Table 9.7 of @helsel_statistics_2012. First, here are the data:
 
-```{r, echo=FALSE}
-theme_set(theme_classic())
-```
-
-```{r helsel-data}
+```{r helsel-data, echo=FALSE}
 helsel <- read_csv("helsel_table_9.7 copy.csv")
 ```
 
@@ -169,36 +170,7 @@ helsel %>%
 
 ```
 
-<!-- The following code tests that `ppw_test()` gives the expected result on the data of @obrien_paired_1987. -->
-
-```{r o-brien-test, eval=FALSE}
-
-tibble::tribble(
-  # from o'brien and fleming, 1987:
-  ~patient, ~close_match, ~poor_match,
-  1, "37", 29, 
-  2, "19", 13, 
-  3, ">57", 15, 
-  4, "93", 26, 
-  5, "16", 11, 
-  6, "22", 17, 
-  7, "20", 26, 
-  8, "18", 21, 
-  9, "63", 43, 
-  10, "29", 15,
-  11, ">60", 40
-) %>% 
-  mutate(
-    cen_close = str_detect(close_match, ">"),
-    cen_poor = FALSE,
-    close_match = str_remove(close_match, ">") %>% 
-      as.numeric()
-  ) %>% 
-  with(ppw_test(close_match, poor_match, cen_close, cen_poor, alternative = "less", flip = FALSE))
-
-```
-
-```{r inspect-helsel, eval=FALSE}
+```{r inspect-helsel, eval=FALSE, echo=FALSE}
 
 test <- helsel %>% 
   transmute(

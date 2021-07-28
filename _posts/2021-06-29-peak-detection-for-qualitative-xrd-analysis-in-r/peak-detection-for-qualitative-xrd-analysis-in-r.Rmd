@@ -1,7 +1,7 @@
 ---
 title: "Peak detection for qualitative XRD analysis in R"
 description: |
-  Improved visualization of X-ray diffraction data.
+  An improved workflow for visualizing X-ray diffraction data in R.
 author:
   - name: Ben Trueman
     url: 
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library("tidyverse")
 library("fffprocessr") # for peak detection
 theme_set(
-  theme_classic() + 
+  theme_bw(14) + 
     theme(
       axis.line.y = element_blank(),
       axis.text.y = element_blank(),
@@ -49,16 +49,16 @@ stds <- read_csv("xrd_standards.csv") %>%
   unit_scale() 
 ```
 
-A important aspect of understanding inorganic contaminant mobility in drinking water systems is identifying the solid phases that exist on the surfaces of pipes. This is often done using X-ray diffraction (XRD), and I am often preparing figures to communicate XRD data. This post provides an example workflow for displaying XRD data and labelling the peaks so that readers can easily attribute them. It makes use of the peak detection function `peak_maxima()` in my field-flow fractionation data analysis package `fffprocessr` [@fffprocessr].
+A important aspect of understanding inorganic contaminant mobility in drinking water systems is identifying the solid phases that exist on the interior surfaces of pipes. This is frequently done with X-ray diffraction (XRD), and I am often preparing figures to communicate XRD data. This post provides an example workflow for displaying XRD data and automatically labelling the peaks so that readers can easily attribute them to the appropriate solid phases. It makes use of the peak detection function `peak_maxima()` in my field-flow fractionation data analysis package [`fffprocessr`](https://github.com/bentrueman/fffprocessr).
 
-For this example, we'll use an XRD pattern representing a mixed lead carbonate phase containing cerussite (PbCO~3~) and hydrocerussite (Pb~3~(CO~3~)~2~(OH)~2~). Here are the data:
+For this example, we'll use an XRD pattern representing a mixed lead carbonate phase containing cerussite (PbCO~3~) and hydrocerussite (Pb~3~(CO~3~)~2~(OH)~2~). Here are the data, along with a couple of quick plotting functions to avoid repetition later on:
 
 ```{r plot-funs, fig.height=2.5}
 
 label_axes <- function(...) {
   labs(
     x = expression("2"*theta~"(Cu K"*alpha*")"),
-    y = NULL,
+    y = "Intensity",
     ...
   )
 }
@@ -191,4 +191,5 @@ data %>%
 
 ```
 
+And there we have it---the XRD data with and the appropriate standard patterns, with each peak in the data labelled according to the corresponding peak in one of the standards. Of course, this is a relatively crystalline sample, and the signal-to-noise ratio is high; in a future post I'll test this workflow out on some noisy XRD data.
 
