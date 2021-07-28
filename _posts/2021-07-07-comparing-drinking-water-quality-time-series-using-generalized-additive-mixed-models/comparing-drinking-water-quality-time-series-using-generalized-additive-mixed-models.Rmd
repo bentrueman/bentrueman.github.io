@@ -163,7 +163,7 @@ fe_gam %>%
 
 ```
 
-Finally, let's have a look at the model summary. The effect of the distribution main is statistically significant, as is the effect of pipe configuration (which we're less concerned about here). Based on the retransformed coefficient (exponentiating and subtracting one), the model estimates that lead release is `r signif(abs(100 * (exp(coef(fe_gam$model[[1]]$gam)[2]) - 1)), 2)`% lower when the distribution main supplying the lead pipe is plastic as opposed to iron---an important result given the 
+Finally, let's have a look at the model summary. The effect of the distribution main is statistically significant, as is the effect of pipe configuration (which we're less concerned about here). Based on the retransformed coefficient (exponentiating and subtracting one), the model estimates that lead release is `r signif(abs(100 * (exp(coef(fe_gam$model[[1]]$gam)[2]) - 1)), 2)`% lower when the distribution main supplying the lead pipe is plastic as opposed to iron---an important result given the limited resources available to replace lead drinking water pipes.  
 
 ```{r summary, echo=FALSE}
 summary(fe_gam$model[[1]]$gam)
