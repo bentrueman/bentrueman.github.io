@@ -1,8 +1,8 @@
 name: "benjamin-trueman"
 title: "Benjamin Trueman"
 description: |
-  Welcome to my website
-output_dir: "_site"
+  Data analysis, water quality, and R workflow.
+output_dir: "."
 navbar:
   right:
     - text: "Home"

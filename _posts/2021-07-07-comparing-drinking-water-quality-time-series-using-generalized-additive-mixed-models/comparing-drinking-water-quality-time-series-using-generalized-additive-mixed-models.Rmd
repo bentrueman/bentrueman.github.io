@@ -80,7 +80,7 @@ fe_gam <- fe_gam %>%
 
 Here are the data, the fitted model, and the confidence bands:
 
-```{r plot, echo=FALSE}
+```{r plot, echo=FALSE, fig.height=3.5}
 
 fe_gam %>% 
   unnest(c(data, preds)) %>% 
