@@ -2,7 +2,7 @@ name: "benjamin-trueman"
 title: "Benjamin Trueman"
 description: |
   Data analysis, water quality, and R workflow.
-output_dir: "_site"
+output_dir: "docs"
 navbar:
   right:
     - text: "Home"
