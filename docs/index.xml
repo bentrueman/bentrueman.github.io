@@ -24,7 +24,7 @@
       <description>Comparing two groups of measurements when some values are below one or multiple detection limit(s).</description>
       <guid>https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data</guid>
       <pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data/non-parametric-matched-pair-testing-with-left-censored-data_files/figure-html5/helsel-plot-1.png" medium="image" type="image/png"/>
+      <media:content url="https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data/non-parametric-matched-pair-testing-with-left-censored-data_files/figure-html5/helsel-plot-1.png" medium="image" type="image/png" width="1248" height="576"/>
     </item>
     <item>
       <title>Peak detection for qualitative XRD analysis in R</title>
@@ -33,7 +33,7 @@
       <description>An improved workflow for visualizing X-ray diffraction data in R.</description>
       <guid>https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r</guid>
       <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/plot-funs-1.png" medium="image" type="image/png"/>
+      <media:content url="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/plot-funs-1.png" medium="image" type="image/png" width="1248" height="480"/>
     </item>
     <item>
       <title>Lead solubility prediction using R and Shiny</title>
@@ -42,7 +42,7 @@
       <description>An R package and Shiny app for PHREEQC-based equilibrium lead and copper solubility prediction.</description>
       <guid>https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny</guid>
       <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny/lead-solubility-prediction-using-shiny_files/figure-html5/basic-grid-plot-1.png" medium="image" type="image/png"/>
+      <media:content url="https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny/lead-solubility-prediction-using-shiny_files/figure-html5/basic-grid-plot-1.png" medium="image" type="image/png" width="1248" height="576"/>
     </item>
   </channel>
 </rss>
