@@ -83,7 +83,9 @@ Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en
 
 # Preprints  
 
-1.	Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., ... & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. https://doi.org/10.1101/2020.12.04.20237230
+1.	Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. https://doi.org/10.1101/2020.12.04.20237230
+
+2. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.33774/chemrxiv-2021-59nd6
 
 # First author conference presentations
 
@@ -118,7 +120,9 @@ Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en
 15.	Trueman, B.F. and G.A. Gagnon. 2014. The effect of cast iron water mains on lead release to standing water. Oral presentation. Canadian Society for Civil Engineering Environmental Specialty Conference, May 28-31 in Halifax, Canada.
 
 16.	Trueman, B.F. and G.A. Gagnon. 2013. Optimization of phosphate dose following residential sampling for lead. Poster presentation. American Water Works Association Annual Conference and Exposition, June 9-13 in Denver, CO.
-Reports
+
+# Reports
+
 Prepared confidential consulting reports on topics in drinking water quality and treatment for the cities of Regina, Saint John, and Halifax and for Health Canada and Nova Scotia Environment.
 
 # Peer-reviewer
