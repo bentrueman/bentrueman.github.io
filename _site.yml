@@ -6,6 +6,8 @@ base_url: https://bentrueman.github.io/
 repository_url: https://github.com/bentrueman/bentrueman.github.io
 output_dir: "docs"
 navbar:
+  logo:
+    image: images/headshot.jpeg
   right:
     - text: "Home"
       href: index.html
