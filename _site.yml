@@ -13,5 +13,5 @@ navbar:
       href: about.html
     - text: "CV"
       href: CV.html
-  source_url: true
+    - source_url: true
 output: distill::distill_article
