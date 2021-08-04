@@ -1,7 +1,7 @@
 ---
-title: "Comparing drinking water quality time series using a generalized additive mixed model"
+title: "Comparing water quality time series using a generalized additive mixed model"
 description: |
-  Revisiting work from 2016 to better model non-linear time series.
+  Revisiting work from 2016 to better model time series with non-linear trends.
 author:
   - name: Ben Trueman
     url: {}
@@ -115,9 +115,9 @@ fe_gam %>%
  
 ```
 
-You'll notice that some of the smooths---especially the "full LSL"/ "PVC" smooth---are smoother than the eye would expect. This is probably because the model is attributing some of the  nonlinearity to autocorrelation, something discussed in more detail elsewhere [@simpson_modelling_2018].
+You'll notice that some of the smooths---especially the "full LSL"/ "PVC" smooth---are smoother than the eye would expect. This is probably because the model is attributing some of the nonlinearity to autocorrelation, something discussed in more detail elsewhere [@simpson_modelling_2018].
 
-The model does a reasonably good job---but not a perfect job---accounting for autocorrelation in the time series. "Raw" and "normalized" residuals are defined in the help file to `nlme::residuals.lme()` under `type`. Essentially, raw residuals represent the difference between the observed and fitted values, while normalized residuals account for the estimated error structure (here, continuous time first-order autoregressive). The grey shaded band in the figure below represents a 95% confidence interval on the autocorrelation of white Gaussian noise.
+The model does a reasonably good job---but not a perfect job---accounting for autocorrelation in the time series. "Raw" and "normalized" residuals are defined in the help file to `nlme::residuals.lme()` under `type`. Essentially, raw residuals represent the difference between the observed and fitted values, while normalized residuals account for the estimated error structure. The grey shaded band in the figure below represents a 95% confidence interval on the autocorrelation of white Gaussian noise.
 
 ```{r acf, fig.height=2.5, echo=FALSE}
 
