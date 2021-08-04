@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Benjamin Trueman</title>
+    <link>https://bentrueman.github.io/</link>
+    <atom:link href="https://bentrueman.github.io/index.xml" rel="self" type="application/rss+xml"/>
+    <description>Data analysis, water quality, and R workflow.
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Wed, 07 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Comparing water quality time series using a generalized additive mixed model</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2021-07-07-comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models</link>
+      <description>Revisiting work from 2016 to better model time series with non-linear trends.</description>
+      <guid>https://bentrueman.github.io/posts/2021-07-07-comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models</guid>
+      <pubDate>Wed, 07 Jul 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2021-07-07-comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models/comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models_files/figure-html5/plot-1.png" medium="image" type="image/png" width="1248" height="672"/>
+    </item>
+    <item>
+      <title>Non-parametric matched pair testing with left-censored data</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data</link>
+      <description>Comparing two groups of measurements when some values are below one or multiple detection limit(s).</description>
+      <guid>https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data</guid>
+      <pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data/non-parametric-matched-pair-testing-with-left-censored-data_files/figure-html5/helsel-plot-1.png" medium="image" type="image/png"/>
+    </item>
+    <item>
+      <title>Peak detection for qualitative XRD analysis in R</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r</link>
+      <description>An improved workflow for visualizing X-ray diffraction data in R.</description>
+      <guid>https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r</guid>
+      <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/plot-funs-1.png" medium="image" type="image/png"/>
+    </item>
+    <item>
+      <title>Lead solubility prediction using R and Shiny</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny</link>
+      <description>An R package and Shiny app for PHREEQC-based equilibrium lead and copper solubility prediction.</description>
+      <guid>https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny</guid>
+      <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny/lead-solubility-prediction-using-shiny_files/figure-html5/basic-grid-plot-1.png" medium="image" type="image/png"/>
+    </item>
+  </channel>
+</rss>

@@ -2,6 +2,7 @@ name: "benjamin-trueman"
 title: "Benjamin Trueman"
 description: |
   Data analysis, water quality, and R workflow.
+base_url: https://bentrueman.github.io/
 output_dir: "docs"
 navbar:
   right:
