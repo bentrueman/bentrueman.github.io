@@ -1,0 +1,112 @@
+---
+title: "New preprint"
+description: |
+  A short description of the post.
+author:
+  - name: Ben Trueman
+    url: {}
+date: 08-13-2021
+bibliography: references.bib
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library("tidyverse")
+theme_set(
+  theme_bw(14) + 
+    theme(
+      strip.background = element_blank(),
+      panel.grid = element_blank()
+    )
+)
+palette <- wesanderson::wes_palette("Zissou1")
+```
+
+I used a preprint server for the first time recently for early dissemination of a research paper. Preprints are not very common in my field, but I imagine that will change in the future as their advantages become clear. The paper, "Seasonal lead release to drinking water and the effect of aluminum" [@trueman_seasonal_2021], explores the role of aluminum in limiting the availability of orthophosphate for lead corrosion control in drinking water systems.
+
+Orthophosphate works by forming an insoluble precipitate with lead. Here, I reproduce some of the code included in the paper to account for aluminum phosphate precipitation in calculating equilibrium lead solubility. I also extend the analysis to include other metals that might precipitate with orthophosphate and interfere with lead phosphate formation.
+
+```{r sol-calc}
+
+library("tidyverse")
+# remotes::install_github("bentrueman/pbcusol)
+library("pbcusol") 
+
+variscite <- list(
+  "Variscite",
+  "AlPO4:2H2O = Al+3 + PO4-3 + 2H2O",
+  "log_k" = -22.36 # https://doi.org/10.1016/j.gca.2010.10.012
+)
+
+aqueous_species <- list( 
+  # from https://doi.org/10.1016/j.gca.2010.10.012 and 
+  # https://doi.org/10.1080/09593332708618735
+  "HPO4-2 + Al+3 = AlHPO4+",
+  "log_k" = 7.4,
+  "HPO4-2 + H+ + Al+3 = AlH2PO4+2",
+  "log_k" = 3.1
+)
+
+future::plan("multisession")
+
+pb_sol_custom <- function(phase2 = "Variscite", ...) {
+      pbcusol::eq_sol_fixed(element = "Pb",
+        ph = 7.3, dic = 5,  
+        Na = 10 / chemr::mass("Na"),
+        eq_phase_components = rlang::list2(!!phase2 := c(0, 0)),
+        new_species = aqueous_species,
+        new_phase = variscite,
+        ...
+    ) %>% 
+    select(!!phase2 := pb_ppb)
+}
+
+# TO DO: CHECK OUTPUT FOR UNEXPECTED PHASES
+out <- crossing(
+  phase = c("Hxypyromorphite", "Cerussite"),
+  po4 = seq(0.1, 2, length.out = 15),
+  metal_mM = seq(0, .02, length.out = 15)
+) %>% 
+  rowid_to_column() %>% 
+  group_by(rowid) %>% 
+  nest() %>% 
+  ungroup() %>% 
+  mutate(
+    al = furrr::future_map(data, 
+      ~ pb_sol_custom(phase2 = "Variscite", phosphate = .x$po4, Al = .x$metal_mM, phase = .x$phase)
+    ),
+    mn = furrr::future_map(data, 
+      ~ pb_sol_custom(phase2 = "MnHPO4(C)", phosphate = .x$po4, Mn = .x$metal_mM, phase = .x$phase)
+    ),
+    fe = furrr::future_map(data, 
+      ~ pb_sol_custom(phase2 = "Vivianite", phosphate = .x$po4, Fe = .x$metal_mM, phase = .x$phase)
+    )
+  )
+
+out %>% 
+  unnest(c(data, mn, al, fe)) %>% 
+  pivot_longer(
+    cols = -c(rowid, phase, po4, metal_mM), 
+    names_to = "phase2", values_to = "pb_ppb"
+  ) %>% 
+  group_by(po4, metal_mM, phase2) %>% 
+  summarize(pb_ppb = log10(min(pb_ppb))) %>% 
+  ggplot(aes(po4, metal_mM, fill = pb_ppb)) + 
+  facet_wrap(vars(phase2), ncol = 2) +
+  geom_raster() + 
+  geom_contour(aes(z = pb_ppb), col = "white") +
+  scale_fill_gradientn(
+    colours = palette, 
+    breaks = log10(c(10, 30, 100, 300)),
+    labels = function(breaks) 10 ^ breaks
+  )
+
+```
+
+
+
+
