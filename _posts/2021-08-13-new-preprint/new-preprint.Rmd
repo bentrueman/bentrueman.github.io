@@ -1,7 +1,7 @@
 ---
 title: "New preprint"
 description: |
-  A short description of the post.
+  Aluminum in drinking water can interact with orthophosphate, increasing lead solubility.
 author:
   - name: Ben Trueman
     url: {}
@@ -26,11 +26,13 @@ theme_set(
 palette <- wesanderson::wes_palette("Zissou1")
 ```
 
-I used a preprint server for the first time recently for early dissemination of a research paper. Preprints are not very common in my field, but I imagine that will change in the future as their advantages become clear. The paper, "Seasonal lead release to drinking water and the effect of aluminum" [@trueman_seasonal_2021], explores the role of aluminum in limiting the availability of orthophosphate for lead corrosion control in drinking water systems.
+My coauthors and I used a preprint server ([chemRxiv](https://chemrxiv.org/)) for the first time recently for early dissemination of a research paper. Preprints are not very common in my field, but I imagine that will change in the future as their advantages become clear. The paper, "Seasonal lead release to drinking water and the effect of aluminum" [@trueman_seasonal_2021], explores the role of aluminum in limiting the availability of orthophosphate for lead corrosion control in drinking water systems.
 
-Orthophosphate works by forming an insoluble precipitate with lead. Here, I reproduce some of the code included in the paper to account for aluminum phosphate precipitation in calculating equilibrium lead solubility. I also extend the analysis to include other metals that might precipitate with orthophosphate and interfere with lead phosphate formation. The concentrations of interfering aluminum, calcium, manganese, and iron have been chosen to approximate typical ranges, although more extreme values are certainly possible or even likely. A caveat: the phases that precipitate in the model and limit available orthophosphate---variscite (AlPO~4~&middot;2H~2~O), vivianite (Fe~3~(PO~4~)~2~&middot;8H~2~O, CaHPO~4~, and MnHPO~4~---may not be the phases that precipitate in distribution systems.
+Orthophosphate works by forming an insoluble precipitate with lead, but precipitation with other metals can limit its effect on lead solubility. Here, I reproduce some of the code included in the paper to account for aluminum phosphate precipitation in calculating equilibrium lead solubility. I also extend the analysis to include other metals that might precipitate with orthophosphate and interfere with lead phosphate formation. 
 
-```{r sol-calc}
+The concentrations of interfering aluminum, calcium, manganese, and iron have been chosen to approximate typical ranges, although more extreme values are certainly possible or even likely. A caveat: the phases that precipitate in the model and limit available orthophosphate---variscite (AlPO~4~&middot;2H~2~O), vivianite (Fe~3~(PO~4~)~2~&middot;8H~2~O, CaHPO~4~, and MnHPO~4~---may not be the phases that precipitate in drinking water systems.
+
+```{r sol-calc, echo=TRUE}
 
 library("tidyverse")
 # remotes::install_github("bentrueman/pbcusol)
