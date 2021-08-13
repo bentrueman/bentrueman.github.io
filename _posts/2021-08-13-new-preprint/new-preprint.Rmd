@@ -28,7 +28,7 @@ palette <- wesanderson::wes_palette("Zissou1")
 
 I used a preprint server for the first time recently for early dissemination of a research paper. Preprints are not very common in my field, but I imagine that will change in the future as their advantages become clear. The paper, "Seasonal lead release to drinking water and the effect of aluminum" [@trueman_seasonal_2021], explores the role of aluminum in limiting the availability of orthophosphate for lead corrosion control in drinking water systems.
 
-Orthophosphate works by forming an insoluble precipitate with lead. Here, I reproduce some of the code included in the paper to account for aluminum phosphate precipitation in calculating equilibrium lead solubility. I also extend the analysis to include other metals that might precipitate with orthophosphate and interfere with lead phosphate formation.
+Orthophosphate works by forming an insoluble precipitate with lead. Here, I reproduce some of the code included in the paper to account for aluminum phosphate precipitation in calculating equilibrium lead solubility. I also extend the analysis to include other metals that might precipitate with orthophosphate and interfere with lead phosphate formation. The concentrations of interfering aluminum, calcium, manganese, and iron have been chosen to approximate typical ranges, although more extreme values are certainly possible or even likely. A caveat: the phases that precipitate in the model and limit available orthophosphate---variscite (AlPO~4~&middot;2H~2~O), vivianite (Fe~3~(PO~4~)~2~&middot;8H~2~O, CaHPO~4~, and MnHPO~4~---may not be the phases that precipitate in distribution systems.
 
 ```{r sol-calc}
 
@@ -36,10 +36,13 @@ library("tidyverse")
 # remotes::install_github("bentrueman/pbcusol)
 library("pbcusol") 
 
-variscite <- list(
+solids <- list(
   "Variscite",
   "AlPO4:2H2O = Al+3 + PO4-3 + 2H2O",
-  "log_k" = -22.36 # https://doi.org/10.1016/j.gca.2010.10.012
+  "log_k" = -22.36, # https://doi.org/10.1016/j.gca.2010.10.012
+  "CaHPO4",
+  "CaHPO4 = Ca+2 + H+ + PO4-3",
+  "log_k" = -19.275 # from phreeqc::minteq.v4.dat
 )
 
 aqueous_species <- list( 
@@ -53,56 +56,92 @@ aqueous_species <- list(
 
 future::plan("multisession")
 
-pb_sol_custom <- function(phase2 = "Variscite", ...) {
+pb_sol_custom <- function(interference = "Variscite", ...) {
       pbcusol::eq_sol_fixed(element = "Pb",
         ph = 7.3, dic = 5,  
         Na = 10 / chemr::mass("Na"),
-        eq_phase_components = rlang::list2(!!phase2 := c(0, 0)),
+        eq_phase_components = rlang::list2(!!interference := c(0, 0)),
         new_species = aqueous_species,
-        new_phase = variscite,
+        new_phase = solids,
         ...
     ) %>% 
-    select(!!phase2 := pb_ppb)
+    select(pb_ppb)
 }
 
-# TO DO: CHECK OUTPUT FOR UNEXPECTED PHASES
+build_args <- function(x) {
+  list(x$metal_conc / chemr::mass(x$metal)) %>% 
+    set_names(nm = x$metal) %>% 
+    c(list(
+      phase = x$phase,
+      interference = x$interference,
+      phosphate = x$po4
+    ))
+}
+
+grid_size <- 10
+
+# TO DO: CHECK OUTPUT FOR UNEXPECTED PHASES IN RAW OUTPUT
 out <- crossing(
   phase = c("Hxypyromorphite", "Cerussite"),
-  po4 = seq(0.1, 2, length.out = 15),
-  metal_mM = seq(0, .02, length.out = 15)
+  po4 = seq(0.1, 2, length.out = grid_size),
+  metal = c("Ca", "Al", "Mn", "Fe"), 
+  metal_conc = seq(0, .5, length.out = grid_size)
 ) %>% 
+  mutate(
+    interference = fct_recode(metal, 
+      "Variscite" = "Al", "MnHPO4(C)" = "Mn", 
+      "Vivianite" = "Fe", "CaHPO4" = "Ca"
+    ) %>% 
+      as.character(),
+    # adjust metal concentrations to approximate typical values:
+    metal_conc = case_when(
+      metal == "Ca" ~ metal_conc * 200,
+      metal == "Fe" ~ metal_conc * 2,
+      metal == "Mn" ~ metal_conc * .5,
+      TRUE ~ metal_conc
+    )
+  ) %>% 
   rowid_to_column() %>% 
   group_by(rowid) %>% 
   nest() %>% 
   ungroup() %>% 
   mutate(
-    al = furrr::future_map(data, 
-      ~ pb_sol_custom(phase2 = "Variscite", phosphate = .x$po4, Al = .x$metal_mM, phase = .x$phase)
-    ),
-    mn = furrr::future_map(data, 
-      ~ pb_sol_custom(phase2 = "MnHPO4(C)", phosphate = .x$po4, Mn = .x$metal_mM, phase = .x$phase)
-    ),
-    fe = furrr::future_map(data, 
-      ~ pb_sol_custom(phase2 = "Vivianite", phosphate = .x$po4, Fe = .x$metal_mM, phase = .x$phase)
-    )
+    args = map(data, build_args),
+    pb_ppb = furrr::future_map(args, ~ do.call(pb_sol_custom, .x))
   )
 
+```
+
+```{r plot, warning=FALSE}
+
 out %>% 
-  unnest(c(data, mn, al, fe)) %>% 
-  pivot_longer(
-    cols = -c(rowid, phase, po4, metal_mM), 
-    names_to = "phase2", values_to = "pb_ppb"
-  ) %>% 
-  group_by(po4, metal_mM, phase2) %>% 
-  summarize(pb_ppb = log10(min(pb_ppb))) %>% 
-  ggplot(aes(po4, metal_mM, fill = pb_ppb)) + 
-  facet_wrap(vars(phase2), ncol = 2) +
+  unnest(c(data, pb_ppb)) %>% 
+  group_by(po4, metal_conc, interference) %>% 
+  summarize(pb_ppb = log10(1e-3 * min(pb_ppb))) %>% 
+  ggplot(aes(po4, metal_conc, fill = pb_ppb)) + 
+  facet_wrap(
+    vars(
+      facet_var = fct_recode(interference, 
+        "MnHPO<sub>4</sub>" = "MnHPO4(C)",
+        "CaHPO<sub>4</sub>" = "CaHPO4",
+        "AlPO<sub>4</sub>&middot;2H<sub>2</sub>O" = "Variscite",
+        "Fe<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub>&middot;8H<sub>2</sub>O" = "Vivianite"
+      )
+    ), 
+    ncol = 2, scales = "free_y"
+  ) +
   geom_raster() + 
   geom_contour(aes(z = pb_ppb), col = "white") +
   scale_fill_gradientn(
     colours = palette, 
-    breaks = log10(c(10, 30, 100, 300)),
+    breaks = log10(1e-3 * c(10, 30, 100, 300)),
     labels = function(breaks) 10 ^ breaks
+  ) + 
+  theme(strip.text.x = ggtext::element_markdown()) +
+  labs(
+    x = expression("[PO"[4]*"] (mg L"^-1*")"),
+    y = expression("[Metal] (mg L"^-1*")"),
+    fill = expression("[Pb] (mg L"^-1*")")
   )
 
 ```
