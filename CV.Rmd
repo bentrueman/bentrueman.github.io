@@ -2,11 +2,17 @@
 title: "Benjamin Trueman"
 description: "Postdoctoral researcher  \nDepartment of Civil & Resource Engineering
   \ \nDalhousie University  \nHalifax, NS, CAN  \n"
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+Website: https://bentrueman.github.io  
+Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en  
 
 # Academic background    
 
@@ -28,8 +34,6 @@ Dalhousie University, Halifax, NS
   - See https://doi.org/10.1039/D0EM00425A, https://doi.org/10.1021/acsestengg.0c00053, https://doi.org/10.1021/acs.est.8b04139, and https://doi.org/10.1039/C5EW00285K in particular
 
 # Journal articles  
-
-Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en  
 
 1.	**^a^Joint first author**: Anderson, L.E.,^a^ **Trueman, B.F.**,^a^ Dunnington, D.W.^a^ & Gagnon, G. A. (2021).  Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 https://doi.org/10.1038/s41545-021-00115-4
 
@@ -85,7 +89,7 @@ Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en
 
 1.	Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. https://doi.org/10.1101/2020.12.04.20237230
 
-2. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.33774/chemrxiv-2021-59nd6
+2. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.33774/chemrxiv-2021-59nd6-v2
 
 # First author conference presentations
 
