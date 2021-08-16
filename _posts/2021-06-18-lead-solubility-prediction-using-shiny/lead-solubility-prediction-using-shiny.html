@@ -1490,9 +1490,33 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="lead-solubility-prediction-using-shiny_files/figure-html5/basic-grid-plot-1.png" width="624" /></p>
 </div>
-<p><code>pbcusol</code> can also be used to generate predicted lead and copper solubility in the presence of humic substances. This is also outlined in the package README, but here is an example of the type of visualization that can be generated. Of course, these predictions should be properly validated—more on that later.</p>
+<p><code>pbcusol</code> can also be used to generate predicted lead and copper solubility in the presence of humic substances. This is also outlined in the package README, but here is an example of the type of visualization that can be generated, along with the code necessary to reproduce the model output. Of course, these predictions should be properly validated—more on that later.</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>grid_dim</span> <span class='op'>&lt;-</span> <span class='fl'>25</span> <span class='co'># dimension of solubility grid square</span>
 
+<span class='fu'>future</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/future/man/plan.html'>plan</a></span><span class='op'>(</span><span class='st'>"multisession"</span><span class='op'>)</span>
+
+<span class='va'>nom_grid</span> <span class='op'>&lt;-</span> <span class='fu'>crossing</span><span class='op'>(</span>
+  pH_in <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>6.5</span>, <span class='fl'>10.5</span>, length.out <span class='op'>=</span> <span class='va'>grid_dim</span><span class='op'>)</span>,
+  nom_in <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>3e-3</span>, length.out <span class='op'>=</span> <span class='va'>grid_dim</span><span class='op'>)</span>
+<span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>rowid_to_column</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>rowid</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>nest</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ungroup</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  
+  <span class='fu'>mutate</span><span class='op'>(</span>
+    model <span class='op'>=</span> <span class='fu'>furrr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_map.html'>future_map</a></span><span class='op'>(</span><span class='va'>data</span>, 
+      <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>.x</span>, 
+        <span class='fu'><a href='https://rdrr.io/pkg/pbcusol/man/eq_sol_wham.html'>pb_sol_wham</a></span><span class='op'>(</span>
+          ph <span class='op'>=</span> <span class='va'>pH_in</span>, dic <span class='op'>=</span> <span class='fl'>5</span>, phase <span class='op'>=</span> <span class='st'>"Hydcerussite"</span>, 
+          Na <span class='op'>=</span> <span class='fl'>10</span> <span class='op'>/</span> <span class='fu'>chemr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/chemr/man/mass.html'>mass</a></span><span class='op'>(</span><span class='st'>"Na"</span><span class='op'>)</span>, mass_ha <span class='op'>=</span> <span class='va'>nom_in</span>
+        <span class='op'>)</span>
+      <span class='op'>)</span>
+    <span class='op'>)</span>
+  <span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="lead-solubility-prediction-using-shiny_files/figure-html5/nom-grid-plot-1.png" width="624" /></p>

@@ -147,11 +147,11 @@ list(
   )
 ```
 
-`pbcusol` can also be used to generate predicted lead and copper solubility in the presence of humic substances. This is also outlined in the package README, but here is an example of the type of visualization that can be generated. Of course, these predictions should be properly validated---more on that later.
+`pbcusol` can also be used to generate predicted lead and copper solubility in the presence of humic substances. This is also outlined in the package README, but here is an example of the type of visualization that can be generated, along with the code necessary to reproduce the model output. Of course, these predictions should be properly validated---more on that later.
 
-```{r nom-grid-calc, cache=TRUE}
+```{r nom-grid-calc, cache=TRUE, echo=TRUE}
 
-grid_dim <- 50 # dimension of solubility grid square
+grid_dim <- 25 # dimension of solubility grid square
 
 future::plan("multisession")
 
@@ -166,7 +166,10 @@ nom_grid <- crossing(
   mutate(
     model = furrr::future_map(data, 
       ~ with(.x, 
-        pb_sol_wham(ph = pH_in, dic = 5, phase = "Hydcerussite", Na = 10 / chemr::mass("Na"), mass_ha = nom_in)
+        pb_sol_wham(
+          ph = pH_in, dic = 5, phase = "Hydcerussite", 
+          Na = 10 / chemr::mass("Na"), mass_ha = nom_in
+        )
       )
     )
   )

@@ -1,5 +1,5 @@
 ---
-title: "New preprint"
+title: "New preprint!"
 description: |
   Aluminum in drinking water can interact with orthophosphate, increasing lead solubility.
 author:
@@ -10,11 +10,10 @@ bibliography: references.bib
 output:
   distill::distill_article:
     self_contained: false
-draft: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 library("tidyverse")
 theme_set(
   theme_bw(14) + 
@@ -26,13 +25,15 @@ theme_set(
 palette <- wesanderson::wes_palette("Zissou1")
 ```
 
-My coauthors and I used a preprint server ([chemRxiv](https://chemrxiv.org/)) for the first time recently, for early dissemination of a research paper. Preprints are not very common in my field, but I imagine that will change in the future as their advantages become clear. The paper, "Seasonal lead release to drinking water and the effect of aluminum" [@trueman_seasonal_2021], explores the role of aluminum in limiting the availability of orthophosphate for lead corrosion control in drinking water systems.
+Recently, my coauthors and I used a preprint server ([chemRxiv](https://chemrxiv.org/)) to share an early draft of a research paper for the first time. Preprints are not very common in my field, but I imagine that will change in the future as their advantages become clear. The paper, "Seasonal lead release to drinking water and the effect of aluminum" [@trueman_seasonal_2021], explores the role of aluminum in limiting the availability of orthophosphate for lead corrosion control in drinking water systems.
 
-Orthophosphate works by forming an insoluble precipitate with lead, but precipitation with other metals can limit its effect on lead solubility. Here, I reproduce some of the code included in the paper to account for aluminum phosphate precipitation in calculating equilibrium lead solubility. I also extend the analysis to include other metals that might precipitate with orthophosphate and interfere with lead phosphate formation. 
+Orthophosphate works by forming an insoluble precipitate with lead, but precipitation with other metals can limit its effect on lead solubility. Here, I reproduce some of the code included in the paper to account for aluminum phosphate precipitation in calculating equilibrium lead solubility. Solubility modeling is done here using [`pbcusol`](https://github.com/bentrueman/pbcusol), an interface for PHREEQC in R that is geared specifically to lead and copper solubility predictions. I also extend the analysis to include other metals that might precipitate with orthophosphate and interfere with lead phosphate formation. 
 
 The concentrations of interfering aluminum, calcium, manganese, and iron have been chosen to approximate typical ranges, although more extreme values are certainly possible or even likely. A caveat: the phases that precipitate in the model and limit available orthophosphate---variscite (AlPO~4~&middot;2H~2~O), vivianite (Fe~3~(PO~4~)~2~&middot;8H~2~O, CaHPO~4~, and MnHPO~4~---may not be the phases that precipitate in drinking water systems.
 
-```{r sol-calc, echo=TRUE}
+To reproduce the model, load the necessary packages and define a few chemical equations that are not included in the default (`pbcusol`) database.
+
+```{r definitions}
 
 library("tidyverse")
 # remotes::install_github("bentrueman/pbcusol)
@@ -55,9 +56,11 @@ aqueous_species <- list(
   "HPO4-2 + H+ + Al+3 = AlH2PO4+2",
   "log_k" = 3.1
 )
+```
 
-future::plan("multisession")
+Then, define a couple of functions that we will use to build the model. The first is a wrapper around `pbcusol::eq_sol_fixed()` that saves having to code the same arguments repeatedly. The second builds a list of the arguments to `pbcusol::eq_sol_fixed()` that change over the iterations.
 
+```{r funs}
 pb_sol_custom <- function(interference = "Variscite", ...) {
       pbcusol::eq_sol_fixed(element = "Pb",
         ph = 7.3, dic = 5,  
@@ -79,8 +82,15 @@ build_args <- function(x) {
       phosphate = x$po4
     ))
 }
+```
+
+Lead solubility is calculated over a grid of input values in parallel, using `future::plan()`.
+
+```{r model-run}
 
 grid_size <- 10
+
+future::plan("multisession") # parallel iteration
 
 # TO DO: CHECK OUTPUT FOR UNEXPECTED PHASES IN RAW OUTPUT
 out <- crossing(
@@ -114,7 +124,9 @@ out <- crossing(
 
 ```
 
-```{r plot, warning=FALSE}
+And here are the results. At pH 7.3 and a dissolved inorganic carbon concentration of 5 mg C L^-1^, all four metals impact lead solubility to some extent, and the predicted effect of manganese is largest.
+
+```{r plot, warning=FALSE, echo=FALSE}
 
 out %>% 
   unnest(c(data, pb_ppb)) %>% 
