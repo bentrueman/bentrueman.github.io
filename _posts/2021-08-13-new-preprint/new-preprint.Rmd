@@ -58,7 +58,7 @@ aqueous_species <- list(
 )
 ```
 
-Then, define a couple of functions that we will use to build the model. The first is a wrapper around `pbcusol::eq_sol_fixed()` that saves having to code the same arguments repeatedly. The second builds a list of the arguments to `pbcusol::eq_sol_fixed()` that change over the iterations.
+Then, define a couple of functions that we will use to build the model. The first is a wrapper around `pbcusol::eq_sol_fixed()` that saves having to code the same arguments repeatedly. The second builds a list of the arguments to `pbcusol::eq_sol_fixed()` that change across iterations.
 
 ```{r funs}
 pb_sol_custom <- function(interference = "Variscite", ...) {
@@ -92,7 +92,6 @@ grid_size <- 10
 
 future::plan("multisession") # parallel iteration
 
-# TO DO: CHECK OUTPUT FOR UNEXPECTED PHASES IN RAW OUTPUT
 out <- crossing(
   phase = c("Hxypyromorphite", "Cerussite"),
   po4 = seq(0.1, 2, length.out = grid_size),

@@ -2148,7 +2148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </code></pre>
 </div>
 </div>
-<p>Then, define a couple of functions that we will use to build the model. The first is a wrapper around <code>pbcusol::eq_sol_fixed()</code> that saves having to code the same arguments repeatedly. The second builds a list of the arguments to <code>pbcusol::eq_sol_fixed()</code> that change over the iterations.</p>
+<p>Then, define a couple of functions that we will use to build the model. The first is a wrapper around <code>pbcusol::eq_sol_fixed()</code> that saves having to code the same arguments repeatedly. The second builds a list of the arguments to <code>pbcusol::eq_sol_fixed()</code> that change across iterations.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>pb_sol_custom</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>interference</span> <span class='op'>=</span> <span class='st'>"Variscite"</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
@@ -2182,7 +2182,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <span class='fu'>future</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/future/man/plan.html'>plan</a></span><span class='op'>(</span><span class='st'>"multisession"</span><span class='op'>)</span> <span class='co'># parallel iteration</span>
 
-<span class='co'># TO DO: CHECK OUTPUT FOR UNEXPECTED PHASES IN RAW OUTPUT</span>
 <span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>crossing</span><span class='op'>(</span>
   phase <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Hxypyromorphite"</span>, <span class='st'>"Cerussite"</span><span class='op'>)</span>,
   po4 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>2</span>, length.out <span class='op'>=</span> <span class='va'>grid_size</span><span class='op'>)</span>,
