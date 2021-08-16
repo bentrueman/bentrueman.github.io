@@ -2,9 +2,6 @@
 title: "Benjamin Trueman"
 description: "Postdoctoral researcher  \nDepartment of Civil & Resource Engineering
   \ \nDalhousie University  \nHalifax, NS, CAN  \n"
-output:
-  html_document:
-    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
