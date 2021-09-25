@@ -119,7 +119,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["a-brownification-pause_files/anchor-4.2.2/anchor.min.js","a-brownification-pause_files/bowser-1.9.3/bowser.min.js","a-brownification-pause_files/distill-2.2.21/template.v2.js","a-brownification-pause_files/figure-html5/diagnostics-1.png","a-brownification-pause_files/figure-html5/plot-1.png","a-brownification-pause_files/figure-html5/plot-carx-1.png","a-brownification-pause_files/figure-html5/qq-1.png","a-brownification-pause_files/figure-html5/r-vs-time-1.png","a-brownification-pause_files/header-attrs-2.10/header-attrs.js","a-brownification-pause_files/jquery-1.11.3/jquery.min.js","a-brownification-pause_files/popper-2.6.0/popper.min.js","a-brownification-pause_files/tippy-6.2.7/tippy-bundle.umd.min.js","a-brownification-pause_files/tippy-6.2.7/tippy-light-border.css","a-brownification-pause_files/tippy-6.2.7/tippy.css","a-brownification-pause_files/tippy-6.2.7/tippy.umd.min.js","a-brownification-pause_files/webcomponents-2.0.0/webcomponents.js","BEAVERSKIN-LAKE.csv","COBRIELLE-LAKE.csv","references.bib","UPPER-SILVER-LAKE.csv"]}
+  {"type":"character","attributes":{},"value":["a-brownification-pause_files/anchor-4.2.2/anchor.min.js","a-brownification-pause_files/bowser-1.9.3/bowser.min.js","a-brownification-pause_files/distill-2.2.21/template.v2.js","a-brownification-pause_files/figure-html5/diagnostics-1.png","a-brownification-pause_files/figure-html5/plot-1.png","a-brownification-pause_files/figure-html5/plot-carx-1.png","a-brownification-pause_files/figure-html5/qq-1.png","a-brownification-pause_files/figure-html5/r-vs-time-1.png","a-brownification-pause_files/header-attrs-2.10/header-attrs.js","a-brownification-pause_files/jquery-1.11.3/jquery.min.js","a-brownification-pause_files/popper-2.6.0/popper.min.js","a-brownification-pause_files/tippy-6.2.7/tippy-bundle.umd.min.js","a-brownification-pause_files/tippy-6.2.7/tippy-light-border.css","a-brownification-pause_files/tippy-6.2.7/tippy.css","a-brownification-pause_files/tippy-6.2.7/tippy.umd.min.js","a-brownification-pause_files/webcomponents-2.0.0/webcomponents.js","BEAVERSKIN-LAKE.csv","BIG-DAM-EAST-LAKE.csv","COBRIELLE-LAKE.csv","references.bib","UPPER-SILVER-LAKE.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1481,6 +1481,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
+<!-- compare AIC of linear model and 10 df spline -->
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -1494,7 +1495,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>Apparent colour values below 5 Pt-Co are left-censored, and these account for 39% of the time series. To generate a regular time series, I aggregated the data into semesters by taking medians, and I excluded a single value collected in 1970, 9 years before the next measurement. I chose to handle missing values in the series by left-censoring them at a limit of positive infinity. When aggregation into semesters required taking the midpoint of one left-censored and one observed value, the output was left-censored at the observed value. The response was log-transformed prior to fitting the model, and the matrix of covariates comprised a cubic regression spline basis expansion of the time variable using <code>splines::bs()</code> with 10 degrees of freedom. The model also included a semester as a covariate to account for seasonal variation in the series.</p>
+<p>Apparent colour values below 5 Pt-Co are left-censored, and these account for 7.8% of the time series. To generate a regular time series, I aggregated the data into semesters by taking medians, and I excluded a single value collected in 1970, 9 years before the next measurement. I chose to handle missing values in the series by left-censoring them at a limit of positive infinity. When aggregation into semesters required taking the midpoint of one left-censored and one observed value, the output was left-censored at the midpoint between the observed value and the censoring limit. The response was log-transformed prior to fitting the model, and the matrix of covariates comprised a cubic regression spline basis expansion of the time variable using <code>splines::bs()</code> with 5 degrees of freedom. The model also included a semester as a covariate to account for seasonal variation in the series.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -1502,7 +1503,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="a-brownification-pause_files/figure-html5/plot-carx-1.png" width="624" /></p>
 </div>
-<p>The residuals showed no clear deviations from whiteness; here, the grey band denotes <span class="math inline">\(\pm1.96/\sqrt{n}\)</span>, the approximate 95% confidence bands on the autocorrelation function of a white noise series.</p>
+<p>The linear model yielded an AIC of -41, whereas the cubic regression spline model yielded an AIC of -36.</p>
+<p>The regression spline residuals showed no clear deviations from whiteness; here, the grey band denotes <span class="math inline">\(\pm1.96/\sqrt{n}\)</span>, the approximate 95% confidence bands on the autocorrelation function of a white noise series.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="a-brownification-pause_files/figure-html5/diagnostics-1.png" width="624" /></p>
 </div>
