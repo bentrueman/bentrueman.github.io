@@ -13,12 +13,10 @@ draft: true
 bibliography: references.bib
 ---
 
-<!-- compare AIC of linear model and 10 df spline -->
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, fig.height = 2.5)
 library("tidyverse")
-# library("brms")
+library("brms")
 library("carx")
 theme_set(
   theme_classic() + 
@@ -33,27 +31,29 @@ pal <- wesanderson::wes_palette("Zissou1")
 ```{r load, message=FALSE}
 # ldat <- read_csv("COBRIELLE-LAKE.csv")
 # ldat <- read_csv("BEAVERSKIN-LAKE.csv")
-ldat <- read_csv("BIG-DAM-EAST-LAKE.csv")
-# ldat <- read_csv("UPPER-SILVER-LAKE.csv")
+# ldat <- read_csv("BIG-DAM-EAST-LAKE.csv")
+ldat <- read_csv("UPPER-SILVER-LAKE.csv")
 ```
 
-Recently I came across a new paper titled "Brownification on hold: What traditional analyses miss in extended surface water records" [@eklof_brownification_2021]. In it, the authors argue that linear trend analysis misses important nonlinearities in surface water time series. Specifically, the authors argue that surface water browning---increases in coloured organic matter---has paused in recent decades and that generalized additive modeling would be better suited than linear trend estimation to identify this pause. Earlier this year I cowrote an article [@redden_chemical_2021] describing a linear trend analysis of surface water time series in Nova Scotia. We found strong evidence of browning in many surface waters, but I thought I'd briefly revisit that analysis here to see if we missed anything that a nonlinear trend analysis wouldn't.
+Recently I came across a new paper titled "Brownification on hold: What traditional analyses miss in extended surface water records" [@eklof_brownification_2021]. In it, the authors argue that linear trend analysis misses important nonlinearities in surface water time series. Specifically, the authors argue that surface water browning---increases in coloured organic matter---has paused in recent decades and that generalized additive modeling would be better suited than linear regression to describe that pause. 
 
-But there is a significant roadblock to fitting generalized additive models (GAMs) to the data from our paper---at least, GAMs as they are implemented in the popular R package `mgcv`. That is, `mgcv` does not permit modeling of autocorrelation and left-censoring (values below a detection limit) simultaneously (censored autoregression). 
+Earlier this year I cowrote an article [@redden_chemical_2021] describing a linear trend analysis of surface water time series in Nova Scotia. We found strong evidence of browning in many surface waters, but I thought I'd briefly revisit that analysis here to see if we missed anything that a nonlinear trend analysis wouldn't. This isn't meant to be a full reanalysis of the data, but it might point in the direction that a future analysis would take.
+
+There is a significant roadblock to fitting generalized additive models (GAMs) to the data from our paper: GAMs---at least, as they are implemented in the popular R package `mgcv`---do not allow *censored autoregression* (models of autocorrelated time series where part of the series is censored). 
 
 One option for censored autoregression is the `carx` package in R. It's primary function, `carx::carx()`, also permits a matrix of external covariates that can include a basis expansion---making it possible to fit a GAM to a left-censored, autocorrelated time series.
 
-Here I demonstrate the package on a single time series, one of many we used in the paper. Here are the data:
+In this post I demonstrate the package on a single time series, one of many we used in the paper. Here are the data:
 
 ```{r plot}
 
 ldat %>% 
+  mutate(
+    cen = if_else(is.na(flag), "Observed", "Left-censored")
+  ) %>%
   ggplot(aes(date, value)) + 
   geom_line() +
-  geom_point(
-    aes(col = if_else(is.na(flag), "Observed", "Left-censored")),
-    size = 3, shape = 16, alpha = .5
-  ) +
+  geom_point(aes(col = cen), size = 3, shape = 16, alpha = .5) +
   scale_y_log10() +
   scale_color_manual(values = pal[c(3,1)]) +
   labs(x = NULL, y = "Apparent colour (Pt-Co)", col = NULL)
@@ -76,10 +76,9 @@ ldat_clean <- ldat %>%
 model_in <- crossing(
   # yr = seq(1983, max(ldat_clean$yr), by = 1), # for Cobrielle
   # yr = seq(1979, max(ldat_clean$yr), by = 1), # for Beaverskin
-  yr = seq(1982, max(ldat_clean$yr), by = 1), # for Big Dam East
-  # yr = seq(1983, max(ldat_clean$yr), by = 1), # for Upper Silver
+  # yr = seq(1982, max(ldat_clean$yr), by = 1), # for Big Dam East
+  yr = seq(1983, max(ldat_clean$yr), by = 1), # for Upper Silver
   sem = 1:2
-  # qtr = 1:4
 ) %>% 
   left_join(ldat_clean, by = c("yr", "sem")) %>%
   group_by(yr, sem) %>% 
@@ -87,12 +86,6 @@ model_in <- crossing(
     date = median(date),
     med_ci = median(ci),
     value = median(value)
-    # value = case_when(
-    #   # if median value is left-censored, recensor at maximum value:
-    #   med_ci < 0 ~ max(value),
-    #   # if median value is observed, take it as representative:
-    #   med_ci == 0 ~ median(value)
-    # )
   ) %>% 
   ungroup() %>% 
   transmute(
@@ -105,76 +98,76 @@ model_in <- crossing(
     lcl = if_else(ci == -1, value, 5)
   )
 
-spline_df <- 5
+spline_df <- 6
 
 ```
 
-Apparent colour values below 5 Pt-Co are left-censored, and these account for `r 100 * signif(mean(ldat_clean$ci == -1), 2)`% of the time series. To generate a regular time series, I aggregated the data into semesters by taking medians, and I excluded a single value collected in 1970, 9 years before the next measurement. I chose to handle missing values in the series by left-censoring them at a limit of positive infinity. When aggregation into semesters required taking the midpoint of one left-censored and one observed value, the output was left-censored at the midpoint between the observed value and the censoring limit. The response was log-transformed prior to fitting the model, and the matrix of covariates comprised a cubic regression spline basis expansion of the time variable using `splines::bs()` with `r spline_df` degrees of freedom. The model also included a semester as a covariate to account for seasonal variation in the series.
+Apparent colour values below 5 Pt-Co are left-censored, and these account for `r 100 * signif(mean(ldat_clean$ci == -1), 2)`% of the time series. To generate a regularly spaced series, I aggregated the data into semesters by taking medians, and I excluded values collected before `r lubridate::year(min(model_in$date, na.rm = TRUE))`. 
+
+I chose to handle missing values in the series by left-censoring them at a limit of positive infinity. When aggregation into semesters required taking the midpoint of a left-censored and an observed value, the output was left-censored at the midpoint between the observed value and the censoring limit. The response was log-transformed prior to fitting the model, and the matrix of covariates comprised a cubic regression spline basis expansion of the time variable using `splines::bs()` with `r spline_df` degrees of freedom. The model also included a semester as a covariate to account for seasonal variation in the series.
 
 ```{r model-carx}
+
+out_tbl <- function(x, y) {
+  tibble(
+      fit = fitted(x),
+      pred = y$fit,
+      lwr = y$ci[,1],
+      upr = y$ci[,2]
+    ) %>%
+    mutate(across(c(fit, pred, lwr, upr), exp))
+}
 
 model <- model_in %>% 
   nest(data = everything()) %>% 
   mutate(
     data_df = map(data, data.frame),
-    model_carx_gam = map(data_df,
-      ~ carx(
-        log(value) ~ splines::bs(numeric_date, df = spline_df) + sem,
-        data = .x,
-        y.na.action = "as.censored",
-        CI.compute = FALSE,
-        p = 1, 
-        seed = 4411
-      )
+    # formulas:
+    formula_lm = map(data_df, ~ formula(log(value) ~ numeric_date + sem)),
+    formula_gam = map(data_df,
+      ~ formula(log(value) ~ splines::bs(numeric_date, df = spline_df) + sem)
     ),
-    model_carx_lm = map(data_df,
+    # models:
+    model_lm = map2(data_df, formula_lm,~ lm(.y, data = .x)),
+    model_gam = map2(data_df, formula_gam, ~ lm(.y, data = .x)),
+    model_lm_carx = map2(data_df, formula_lm,
       ~ carx(
-        log(value) ~ numeric_date + sem,
-        data = .x,
-        y.na.action = "as.censored",
-        CI.compute = FALSE,
-        p = 1, 
+        .y, data = .x, y.na.action = "as.censored", 
         seed = 431
+        # CI.compute = TRUE
       )
     ),
-    preds_gam = map2(model_carx_gam, data_df,
+    model_gam_carx = map2(data_df, formula_gam,
+      ~ carx(.y, data = .x, y.na.action = "as.censored", seed = 4411)
+    ),
+    # predictions:
+    preds_lm = map2(model_lm_carx, data_df,
       ~ predict(.x, newxreg = .y, n.ahead = nrow(.y))
     ),
-    out_gam = map2(model_carx_gam, preds_gam,
-      ~ tibble(
-        fit = fitted(.x),
-        pred = .y$fit,
-        lwr = .y$ci[,1],
-        upr = .y$ci[,2]
-      ) %>%
-      mutate(across(c(fit, pred, lwr, upr), exp))
-    ),
-    preds_lm = map2(model_carx_lm, data_df,
+    preds_gam = map2(model_gam_carx, data_df,
       ~ predict(.x, newxreg = .y, n.ahead = nrow(.y))
     ),
-    out_lm = map2(model_carx_lm, preds_lm,
-      ~ tibble(
-        fit = fitted(.x),
-        pred = .y$fit,
-        lwr = .y$ci[,1],
-        upr = .y$ci[,2]
-      ) %>%
-      mutate(across(c(fit, pred, lwr, upr), exp))
-    )
+    # output:
+    out_lm = map2(model_lm_carx, preds_lm, ~ out_tbl(.x, .y)),
+    out_gam = map2(model_gam_carx, preds_gam, ~ out_tbl(.x, .y))
   )
 
 ```
 
-Here are the model predictions along with a 95% confidence interval on the predicted values. 
+As a point of comparison, I fit a separate censored autoregression with a linear time covariate. Here are the linear model and GAM predictions along with 95% confidence intervals on the predicted values:
 
 ```{r plot-carx, fig.height=4.5}
 
 list(
-  linear = unnest(model, c(data, out_lm)),
-  gam = unnest(model, c(data, out_gam))
+  `Linear AR(1)` = unnest(model, c(data, out_lm)),
+  `GAM AR(1)` = unnest(model, c(data, out_gam))
 ) %>% 
   bind_rows(.id = "model_type") %>% 
   select(where(~!is.list(.x))) %>% 
+  mutate(
+    cen = fct_recode(factor(ci), "Observed" = "0", "Left-censored" = "-1"),
+    cen = fct_relevel(cen, "Observed", after = 0L)
+  ) %>% 
   ggplot(aes(date)) + 
   facet_wrap(vars(model_type), ncol = 1) +
   geom_ribbon(
@@ -185,10 +178,8 @@ list(
   geom_line(aes(y = pred, linetype = sem)) +
   geom_point(
     data = function(x) x %>%
-      filter(
-        !is.na(ci)
-      ),
-    aes(y = value, col = if_else(ci == 0, "Observed", "Left-censored")),
+      filter(!is.na(ci)),
+    aes(y = value, col = cen),
     size = 3, shape = 16, alpha = .8
   ) +
   scale_y_log10() +
@@ -201,9 +192,9 @@ list(
 
 ```
 
-The linear model yielded an AIC of `r signif(model$model_carx_lm[[1]]$aic, 2)`, whereas the cubic regression spline model yielded an AIC of `r signif(model$model_carx_gam[[1]]$aic, 2)`.
+While the GAM does appear to track the series slightly better, the linear model yielded an AIC of `r signif(model$model_lm_carx[[1]]$aic, 2)`, whereas the cubic regression spline model yielded a larger AIC of `r signif(model$model_gam_carx[[1]]$aic, 2)`.
 
-The regression spline residuals showed no clear deviations from whiteness; here, the grey band denotes $\pm1.96/\sqrt{n}$, the approximate 95% confidence bands on the autocorrelation function of a white noise series.
+The linear covariate model also yielded residuals with no obvious deviations from whiteness, whereas the GAM residuals did exhibit negative autocorrelation at lag 1. For comparison, equivalent models fit using the function `lm()` (no autoregression) are shown as well. The grey band denotes $\pm1.96/\sqrt{n}$, the approximate 95% confidence bands on the autocorrelation function of white noise.
 
 ```{r diagnostics}
 
@@ -216,129 +207,154 @@ custom_acf <- function(x, suffix = "_carx") {
 
 model <- model %>% 
   mutate(
-    model_gam = map(data_df,
-      ~ lm(
-        log(value) ~ splines::bs(numeric_date, df = spline_df) + sem, 
-        data = .x
-      )
-    ),
+    # residuals:
+    resid_lm = map(model_lm, residuals),
     resid_gam = map(model_gam, residuals),
-    # resid_carx = map(model_carx_gam, residuals),
-    resid_carx = map(model_carx_lm, residuals),
+    resid_lm_carx = map(model_lm_carx, residuals),
+    resid_gam_carx = map(model_gam_carx, residuals),
+    # acf:
+    acf_lm = map(resid_lm, ~ custom_acf(.x, "_lm")),
     acf_gam = map(resid_gam, ~ custom_acf(.x, "_gam")),
-    acf_carx = map(resid_carx, custom_acf),
-    bound = map(resid_carx, ~ 1.96 / sqrt(length(.x)))
+    acf_lm_carx = map(resid_lm_carx, ~ custom_acf(.x, "_lm.carx")),
+    acf_gam_carx = map(resid_gam_carx, ~ custom_acf(.x, "_gam.carx")),
+    bound = map(resid_lm_carx, ~ 1.96 / sqrt(length(.x)))
   )
 
 model %>% 
-  unnest(c(acf_gam, acf_carx, bound)) %>% 
+  unnest(c(starts_with("acf"), bound)) %>% 
   select(where(~!is.list(.x))) %>% 
   pivot_longer(
     cols = -bound,
-    names_to = c(".value", "model"),
+    names_to = c(".value", "name"),
     names_pattern = "(.+)_(.+)"
   ) %>% 
   mutate(
-    model = fct_recode(model, 
-      "Censored autoregression" = "carx", 
-      "GAM" = "gam"
+    name = fct_recode(name, 
+      "Linear" = "lm",
+      "GAM" = "gam",
+      " Linear AR(1)" = "lm.carx",
+      "GAM AR(1)" = "gam.carx"
     )
   ) %>% 
   filter(lag > 0) %>% 
   ggplot(aes(lag)) + 
-  # facet_wrap(vars(location)) +
-  geom_ribbon(aes(ymin = -bound, ymax = bound), alpha = .25) +
-  geom_line(aes(y = acf, col = model)) + 
-  scale_color_manual(values = pal[c(1,5)]) +
+  geom_ribbon(aes(ymin = -bound, ymax = bound), alpha = .2) +
+  geom_line(aes(y = acf, col = name)) + 
+  scale_color_manual(values = pal[c(1,3,4,5)]) +
   labs(x = "Time lag", y = "Autocorrelation function", col = "Model")
 
 ```
 
-Model residuals were approximately Gaussian... 
+Both autoregressions yielded residuals that were approximately Gaussian, albeit with somewhat fatter tails than expected (the `carx` method is robust against mild departures from normality [@wang_carx_2017]).
 
-```{r qq}
+```{r qq, fig.height=3.5}
 
-model %>% 
-  unnest(resid_carx) %>% 
-  select(where(~!is.list(.x))) %>% 
-  ggplot(aes(sample = resid_carx)) + 
+unnest_pivot <- function(x, regex) {
+  x %>% 
+    unnest(matches(regex)) %>% 
+    select(where(~!is.list(.x))) %>% 
+    pivot_longer(starts_with("resid_"), values_to = "resid") 
+}
+
+bind_rows(
+  unnest_pivot(model, "^resid_[a-z]+$"),
+  unnest_pivot(model, "^resid_[a-z]+_[a-z]+$")
+) %>% 
+  mutate(
+    name = fct_recode(name, 
+      "Linear" = "resid_lm",
+      "GAM" = "resid_gam",
+      " Linear AR(1)" = "resid_lm_carx",
+      "GAM AR(1)" = "resid_gam_carx"
+    )
+  ) %>% 
+  ggplot(aes(sample = resid)) + 
+  facet_wrap(vars(name)) +
   geom_qq() + 
   geom_qq_line() +
   labs(x = "Standard normal quantiles", y = "Model residuals")
 
 ```
 
-... and variance was reasonably constant, apart from a few outliers.
+The variance of the residuals was also reasonably constant, apart from a few outliers and perhaps a slight reduction towards the end of the series.
 
 ```{r r-vs-time}
 
-model %>% 
-  unnest(c(data, resid_carx)) %>% 
-  select(where(~!is.list(.x))) %>% 
-  ggplot(aes(date, resid_carx)) + 
+unnest_pivot(model, "^resid_[a-z]+_[a-z]+$|^data$")%>% 
+  mutate(
+    name = fct_recode(name, 
+      "Linear AR(1)" = "resid_lm_carx",
+      "GAM AR(1)" = "resid_gam_carx"
+    )
+  ) %>% 
+  ggplot(aes(date, resid)) + 
+  facet_wrap(vars(name)) +
   geom_point() +
   geom_line(col = "grey", size = .3) + 
   labs(x = NULL, y = "Model residuals")
 
 ```
 
-<!-- extras -->
+But overall, there's not much evidence here that the GAM describes this particular series any better than the linear model. 
 
-```{r simulate, eval=FALSE}
+```{r model-brms}
 
-simdata <- tibble(
-  x = seq(0, 10, length.out = 30),
-  # e = withr::with_seed(101, {rnorm(length(x))}),
-  e = withr::with_seed(23, {arima.sim(list(ar = .9), length(x))}),
-  y = .25 * x ^ 2 + 25 + as.numeric(e),
-  censored = if_else(y < 26, "left", "none")
-)
-  
-simdata %>% 
-  ggplot(aes(x, y, col = censored)) + 
-  geom_point()
+model_in_brms <- model_in %>% 
+  mutate(censored = if_else(ci == -1, "left", "none"))
 
-```
-
-```{r model-fit-brms, eval=FALSE}
-
-model <- brm(
-  bf(y | cens(censored) ~ s(x) + ar(time = x, p = 1)),
-  data = simdata,
-  control = list(adapt_delta = .99)
+model_brms <- brm(
+  bf((log(value)) | cens(censored) ~ 
+       s(numeric_date) + ar(time = numeric_date, p = 1)),
+  data = model_in_brms,
+  iter = 4000,
+  control = list(adapt_delta = .8)
 )
 
 ```
 
 ```{r model-criticism, eval=FALSE}
 
-summary(model)
-mcmc_plot(model)
-conditional_smooths(model)
-pp_check(model)
-pp_check(model, type = "ecdf_overlay") + 
+pairs(model_brms)
+plot(model_brms)
+summary(model_brms)
+mcmc_plot(model_brms)
+conditional_smooths(model_brms)
+pp_check(model_brms)
+pp_check(model_brms, type = "ecdf_overlay") + 
   theme_classic() + 
   labs(y = "ecdf")
-bayes_R2(model, digits=2)
+bayes_R2(model_brms, digits = 2)
 
 ```
 
 ```{r model-preds, eval=FALSE}
 
-preds <- simdata %>% 
-  tidybayes::add_epred_draws(model)
+preds <- model_in_brms %>% 
+  tidybayes::add_epred_draws(model_brms)
 
 preds %>% 
-  ggplot(aes(x)) + 
+  ggplot(aes(date)) + 
+  geom_line(
+    data = function(x) x %>% 
+      distinct(date, value), 
+    aes(y = value)
+  ) +
   tidybayes::stat_lineribbon(
-    aes(y = .epred), 
+    aes(y = exp(.epred)), 
     .width = seq(.5, .99, by = .01), 
-    alpha = .5,
-    show.legend = FALSEz
+    alpha = .25,
+    show.legend = FALSE
   ) + 
   # geom_line(aes(y = .epred, group = .draw), size = .05) +
-  geom_point(aes(y = y)) 
+  geom_point(
+    data = function(x) x %>% 
+      distinct(date, value), 
+    aes(y = value)
+  ) +
+  viridis::scale_fill_viridis(option = "mako", discrete = TRUE) +
+  scale_y_log10()
 
 ```
+
 
 
