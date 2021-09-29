@@ -35,7 +35,7 @@ pal <- wesanderson::wes_palette("Zissou1")
 ldat <- read_csv("UPPER-SILVER-LAKE.csv")
 ```
 
-Recently I came across a new paper titled "Brownification on hold: What traditional analyses miss in extended surface water records" [@eklof_brownification_2021]. In it, the authors argue that linear trend analysis misses important nonlinearities in surface water time series. Specifically, the authors argue that surface water browning---increases in coloured organic matter---has paused in recent decades and that generalized additive modeling would be better suited than linear regression to describe that pause. 
+I recently  came across a new paper titled "Brownification on hold: What traditional analyses miss in extended surface water records" [@eklof_brownification_2021]. In it, the authors argue that linear trend analysis misses important nonlinearities in surface water quality records. Specifically, the authors argue that surface water browning---increases in coloured organic matter---has paused in recent decades and that generalized additive modeling would be better suited than linear regression to describe that pause. 
 
 Earlier this year I cowrote an article [@redden_chemical_2021] describing a linear trend analysis of surface water time series in Nova Scotia. We found strong evidence of browning in many surface waters, but I thought I'd briefly revisit that analysis here to see if we missed anything that a nonlinear trend analysis wouldn't. This isn't meant to be a full reanalysis of the data, but it might point in the direction that a future analysis would take.
 
@@ -43,7 +43,7 @@ There is a significant roadblock to fitting generalized additive models (GAMs) t
 
 One option for censored autoregression is the `carx` package in R. It's primary function, `carx::carx()`, also permits a matrix of external covariates that can include a basis expansion---making it possible to fit a GAM to a left-censored, autocorrelated time series.
 
-In this post I demonstrate the package on a single time series, one of many we used in the paper. Here are the data:
+In this post I demonstrate the package on a single measurement series, one of many we used in @redden_chemical_2021 The data are sourced from Environment Canada, as described in the paper.
 
 ```{r plot}
 
@@ -52,7 +52,10 @@ ldat %>%
     cen = if_else(is.na(flag), "Observed", "Left-censored")
   ) %>%
   ggplot(aes(date, value)) + 
-  geom_line() +
+  geom_line(
+    data = function(x) x %>% 
+      filter(date > "1980-01-01")
+  ) +
   geom_point(aes(col = cen), size = 3, shape = 16, alpha = .5) +
   scale_y_log10() +
   scale_color_manual(values = pal[c(3,1)]) +
@@ -102,9 +105,9 @@ spline_df <- 6
 
 ```
 
-Apparent colour values below 5 Pt-Co are left-censored, and these account for `r 100 * signif(mean(ldat_clean$ci == -1), 2)`% of the time series. To generate a regularly spaced series, I aggregated the data into semesters by taking medians, and I excluded values collected before `r lubridate::year(min(model_in$date, na.rm = TRUE))`. 
+In the series, `r 100 * signif(mean(ldat_clean$ci == -1), 2)`% of apparent colour values below 5 Pt-Co are left-censored. To generate a regularly spaced time series, I aggregated the data into semesters by taking medians, and I excluded values collected before `r lubridate::year(min(model_in$date, na.rm = TRUE))`. When aggregation into semesters required taking the midpoint of a left-censored and an observed value, the output was left-censored at the midpoint between the observed value and the censoring limit.
 
-I chose to handle missing values in the series by left-censoring them at a limit of positive infinity. When aggregation into semesters required taking the midpoint of a left-censored and an observed value, the output was left-censored at the midpoint between the observed value and the censoring limit. The response was log-transformed prior to fitting the model, and the matrix of covariates comprised a cubic regression spline basis expansion of the time variable using `splines::bs()` with `r spline_df` degrees of freedom. The model also included a semester as a covariate to account for seasonal variation in the series.
+I chose to handle missing values by left-censoring them at a limit of positive infinity. The response was log-transformed prior to fitting the model, and the matrix of covariates comprised a cubic regression spline basis expansion of the time variable using `splines::bs()` with `r spline_df` degrees of freedom. The model also included semester as a binary covariate to account for seasonal variation.
 
 ```{r model-carx}
 
@@ -276,7 +279,7 @@ bind_rows(
 
 ```
 
-The variance of the residuals was also reasonably constant, apart from a few outliers and perhaps a slight reduction towards the end of the series.
+The variance of the residuals was also reasonably constant, apart from a few outliers and perhaps a slight reduction in later years.
 
 ```{r r-vs-time}
 
@@ -295,19 +298,17 @@ unnest_pivot(model, "^resid_[a-z]+_[a-z]+$|^data$")%>%
 
 ```
 
-But overall, there's not much evidence here that the GAM describes this particular series any better than the linear model. 
+But overall, there's not much evidence here that the GAM describes this particular series any better than the linear model. An alternative to the `carx` package is `brms` ("Bayesian Regression Models using Stan"), which accomodates both left-censoring and autoregression. Here is a sketch of the model one might fit using `brms::brm()`. Basic diagnostic plots suggest that this model needs work, but it is worth noting that it yields a smooth curve that differs little from the censored autogregression with linear time covariate.
 
-```{r model-brms}
+```{r model-brms, echo=TRUE, results="hide"}
 
 model_in_brms <- model_in %>% 
   mutate(censored = if_else(ci == -1, "left", "none"))
 
 model_brms <- brm(
-  bf((log(value)) | cens(censored) ~ 
-       s(numeric_date) + ar(time = numeric_date, p = 1)),
-  data = model_in_brms,
-  iter = 4000,
-  control = list(adapt_delta = .8)
+  bf(log(value) | cens(censored) ~
+       s(numeric_date) + sem + ar(time = numeric_date, p = 1)),
+  data = model_in_brms
 )
 
 ```
@@ -327,12 +328,16 @@ bayes_R2(model_brms, digits = 2)
 
 ```
 
-```{r model-preds, eval=FALSE}
+```{r model-preds, fig.height=4}
 
 preds <- model_in_brms %>% 
   tidybayes::add_epred_draws(model_brms)
 
 preds %>% 
+  mutate(
+    censored = if_else(censored == "left", "Left-censored", "Observed"),
+    # censored = replace_na(censored, "Missing")
+  ) %>% 
   ggplot(aes(date)) + 
   geom_line(
     data = function(x) x %>% 
@@ -340,19 +345,27 @@ preds %>%
     aes(y = value)
   ) +
   tidybayes::stat_lineribbon(
-    aes(y = exp(.epred)), 
+    aes(y = exp(.epred), linetype = sem), 
     .width = seq(.5, .99, by = .01), 
-    alpha = .25,
-    show.legend = FALSE
+    alpha = .05, size = .5,
+    show.legend = TRUE
   ) + 
-  # geom_line(aes(y = .epred, group = .draw), size = .05) +
   geom_point(
     data = function(x) x %>% 
-      distinct(date, value), 
-    aes(y = value)
+      distinct(date, value, censored) %>% 
+      filter(!is.na(date)), 
+    aes(y = value, col = censored),
+    size = 3, shape = 16, alpha = .5
   ) +
-  viridis::scale_fill_viridis(option = "mako", discrete = TRUE) +
-  scale_y_log10()
+  scale_fill_brewer(palette = "Greys") +
+  scale_color_manual(values = pal[c(3,1)]) +
+  scale_y_log10() +
+  guides(fill = "none", linetype = guide_legend(), color = guide_legend()) +
+  labs(
+    x = NULL, 
+    y = "Apparent colour (Pt-Co)", col = NULL,
+    linetype = "Semester"
+  )
 
 ```
 
