@@ -7,7 +7,16 @@
     <description>Data analysis, water quality, and R workflow.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 13 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>A brownification pause?</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause</link>
+      <description>Censored autoregression with a smoothed time covariate.</description>
+      <guid>https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause</guid>
+      <pubDate>Wed, 08 Sep 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause/a-brownification-pause_files/figure-html5/plot-1.png" medium="image" type="image/png" width="1248" height="576"/>
+    </item>
     <item>
       <title>New preprint!</title>
       <dc:creator>Ben Trueman</dc:creator>
