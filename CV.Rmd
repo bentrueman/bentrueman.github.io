@@ -30,7 +30,9 @@ Dalhousie University, Halifax, NS
 - Well-developed data analysis skills 
   - See https://doi.org/10.1039/D0EM00425A, https://doi.org/10.1021/acsestengg.0c00053, https://doi.org/10.1021/acs.est.8b04139, and https://doi.org/10.1039/C5EW00285K in particular
 
-# Journal articles  
+# Journal articles 
+
+1.	Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00539A
 
 1. **^a^Joint first author**: Anderson, L.E.,^a^ **Trueman, B.F.**,^a^ Dunnington, D.W.^a^ & Gagnon, G. A. (2021).  Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 https://doi.org/10.1038/s41545-021-00115-4
 
@@ -84,11 +86,9 @@ Dalhousie University, Halifax, NS
 
 # Preprints  
 
-1.	Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. https://doi.org/10.1101/2020.12.04.20237230
+1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.33774/chemrxiv-2021-59nd6-v2
 
-2. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.33774/chemrxiv-2021-59nd6-v2
-
-3. Munoz, S., **Trueman, B. F.** Li, B., & Gagnon, G. A. (2021) .Effect of sodium silicate on drinking water biofilm development. bioRxiv. https://doi.org/10.1101/2021.09.15.460503
+2. Munoz, S., **Trueman, B. F.** Li, B., & Gagnon, G. A. (2021). Effect of sodium silicate on drinking water biofilm development. bioRxiv. https://doi.org/10.1101/2021.09.15.460503
 
 # First author conference presentations
 
