@@ -97,9 +97,9 @@ spline_df <- 4
 
 ```
 
-In the series, `r 100 * signif(mean(ldat_clean$ci == -1), 2)`% of apparent colour values---those below 5 Pt-Co---are left-censored. To generate a regularly spaced time series, I aggregated the data into semesters by taking medians, and I excluded values collected before `r lubridate::year(min(model_in$date, na.rm = TRUE))`. When aggregation into semesters required taking the midpoint of a left-censored and an observed value, the output was left-censored at the midpoint between the observed value and the censoring limit.
+In the series, `r 100 * signif(mean(ldat_clean$ci == -1), 2)`% of apparent colour values---those below 5 Pt-Co---are left-censored. To generate a regularly spaced time series, I aggregated the data into semesters by taking medians, and I excluded values collected before `r lubridate::year(min(model_in$date, na.rm = TRUE))`. When aggregation required taking the midpoint of a left-censored and an observed value, the output was left-censored at the midpoint between the observed value and the censoring limit.
 
-I chose to handle missing values by left-censoring them at a limit of positive infinity. The response was log-transformed prior to fitting the model, and the matrix of covariates comprised a cubic regression spline basis expansion of the time variable using `splines::bs()` with `r spline_df` degrees of freedom. The model also included semester as a binary covariate to account for seasonal variation.
+I chose to handle missing values by left-censoring them at a limit of positive infinity, as implemented in `carx()`. The response was log-transformed prior to fitting the model, and the matrix of covariates comprised a cubic regression spline basis expansion of the time variable using `splines::bs()` with `r spline_df` degrees of freedom. The model also included semester as a binary covariate to account for seasonal variation.
 
 ```{r model-carx}
 
@@ -289,18 +289,28 @@ unnest_pivot(model, "^resid_[a-z]+_[a-z]+$|^data$")%>%
 
 ```
 
-But overall, there's not much evidence here that the GAM describes this particular series any better than the linear model. And a GAM fit using `brms` ("Bayesian Regression Models using Stan")---which accomodates both left-censoring and autoregression---yielded similar results. Here is a sketch of the model one might fit using `brms::brm()`. Basic diagnostic plots suggest that this model needs work, but it is worth noting that it yields a smooth curve that differs little from the censored autogregression with linear time covariate. Fitted values from the latter model---including the AR(1) component---are superimposed in red on the following plot.
+But overall, there's not much evidence here that the GAM describes this particular series any better than the linear model. And a GAM fit using `brms` ("Bayesian Regression Models using Stan")---which accomodates both left-censoring and autoregression---yielded similar results. Here is a sketch of the model one might fit using `brms::brm()`; missing values are left-censored at the maximum observed value of the series. While I haven't fully evaluated the fit of this model, it is worth noting that it yields a smooth curve that differs little from the censored autogregression with linear time covariate. Fitted values from the latter model---including the AR(1) component---are superimposed in red on the following plot.
+
 
 ```{r model-brms, echo=TRUE, results="hide"}
 
+future::plan("multisession") # for parallelization
+
 model_in_brms <- model_in %>% 
-  mutate(censored = if_else(ci == -1, "left", "none"))
+  mutate(
+    # left-censor missing values at the maximum value of the series
+    ci = replace_na(ci, -1),
+    value = replace_na(value, max(value, na.rm = TRUE)),
+    censored = if_else(ci == -1, "left", "none")
+  )
 
 model_brms <- brm(
   bf(log(value) | cens(censored) ~
        s(numeric_date) + sem + ar(time = numeric_date, p = 1)),
   data = model_in_brms,
-  control = list(adapt_delta = .999)
+  control = list(adapt_delta = .999),
+  seed = 3152,
+  future = TRUE # for parallelization
 )
 
 ```
@@ -308,15 +318,13 @@ model_brms <- brm(
 ```{r model-criticism, eval=FALSE}
 
 pairs(model_brms)
-plot(model_brms)
+plot(model_brms, ask = FALSE)
 summary(model_brms)
 mcmc_plot(model_brms)
 conditional_smooths(model_brms)
-pp_check(model_brms)
-pp_check(model_brms, type = "ecdf_overlay") + 
+pp_check(model_brms, type = "ecdf_overlay") + # improved below
   theme_classic() + 
   labs(y = "ecdf")
-bayes_R2(model_brms, digits = 2)
 
 ```
 
@@ -362,6 +370,7 @@ preds %>%
   ) +
   scale_fill_brewer(palette = "Greys") +
   scale_color_manual(values = c("black", pal[c(5,3,1)])) +
+  scale_y_continuous(limits = c(0, 70)) +
   # scale_y_log10() +
   labs(
     x = NULL,
@@ -371,5 +380,5 @@ preds %>%
 
 ```
 
-Both the `brms` and `carx` models also yielded similar estimates of the AR(1) parameter: `r signif(model$model_lm_carx[[1]]$coefficients["AR1"], 2)` for the censored autoregression (linear time covariate) and `r signif(summary(model_brms)$cor_pars$Estimate, 2)` for the Bayesian regression model. In percentage terms, the two approaches differ mainly in the predictions over the first part of the series, where most of the censored observations were recorded.
+The `brms` and `carx` models also yielded similar estimates of the AR(1) parameter: `r signif(model$model_lm_carx[[1]]$coefficients["AR1"], 2)` for the censored autoregression (linear time covariate) and `r signif(summary(model_brms)$cor_pars$Estimate, 2)` for the Bayesian regression model. In percentage terms, the two approaches differ mainly in the predictions over the first part of the series, where most of the censored observations were recorded.
 

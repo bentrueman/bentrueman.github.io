@@ -1,0 +1,118 @@
+---
+title: "Diagnostics for censored autoregressive models fit with brms"
+description: |
+  A short description of the post.
+author:
+  - name: Ben Trueman
+    url: {}
+date: 10-08-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r ecdf}
+
+# first fit brm model in prev. post
+
+library("NADA")
+
+censored <- model_in_brms$censored == "left"
+
+cenfit_brms <- NADA::cenfit(
+  obs = log(model_in_brms$value), 
+  censored = censored
+)
+
+pp <- posterior_predict(model_brms, ndraws = 100) %>% 
+  t() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  pivot_longer(everything(), names_to = "draw") %>% 
+  group_by(draw) %>% 
+  nest() %>% 
+  ungroup() %>% 
+  mutate(
+    cenfit = map(data, ~ NADA::cenfit(.x$value, censored = rep(FALSE, length(.x$value)))),
+    cenfit_summ = map(cenfit, summary)
+  ) %>% 
+  unnest(cenfit_summ) %>% 
+  select(where(~ !is.list(.x)))
+
+list(
+  "Observations" = summary(cenfit_brms),
+  "Posterior predictions" = pp
+) %>% 
+  bind_rows(.id = "type") %>% 
+  ggplot(aes(obs, prob, col = type, linetype = type, size = type, group = draw)) + 
+  geom_line() + 
+  scale_color_manual(values = pal[c(5,1)]) + 
+  scale_size_manual(values = c(.7, .2)) +
+  labs(
+    x = "Observation", 
+    y = "Empirical cumulative\ndistribution function", 
+    linetype = NULL,
+    col = NULL,
+    size = NULL
+  )
+  
+```
+
+```{r simulated-resids}
+
+# work in progress! 
+# see ?carx::residuals.carx and ?DHARMa::simulateResiduals for details on this 
+
+model_in_brms2 <- preds %>% 
+  mutate(
+    value = if_else(censored == "left", exp(.epred), value),
+    censored = "none"
+  ) %>% 
+  ungroup() %>% 
+  filter(.draw == sample(1:max(preds$.draw), 1)) 
+
+preds_aug %>% 
+  ggplot(aes(date, value, group = .draw)) + 
+  geom_line(col = "grey", size = .1)
+
+model_brms2 <- update(
+  model_brms, 
+  newdata = model_in_brms2,
+  seed = 35
+)
+
+model_resid <- model_in_brms2 %>% 
+  select(date, numeric_date, sem, value, ci, lcl, censored) %>% 
+  tidybayes::add_epred_draws(model_brms2) %>% # should this be add_posterior_draws()?? same with pred above
+  ungroup() %>% 
+  mutate(resid = log(value) - .epred)
+
+map(
+  sample(1:max(preds$.draw), 3), 
+  ~ model_resid %>%
+      filter(.draw == .x) %>% 
+      with(acf(resid))
+)
+
+map(
+  sample(1:max(preds$.draw), 3), 
+  ~ model_resid %>% 
+    filter(.draw == .x) %>% 
+    ggplot(aes(sample = resid)) + 
+    geom_qq() + 
+    geom_qq_line()
+)
+
+model_resid %>% 
+  filter(.draw == 1) %>% 
+  ggplot(aes(sample = resid)) + 
+  geom_qq() + 
+  geom_qq_line()
+
+```
+
