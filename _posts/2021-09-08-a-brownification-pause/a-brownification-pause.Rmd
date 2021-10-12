@@ -331,7 +331,7 @@ pp_check(model_brms, type = "ecdf_overlay") + # improved below
 ```{r model-preds, fig.height=4}
 
 preds <- model_in_brms %>% 
-  tidybayes::add_epred_draws(model_brms)
+  tidybayes::add_predicted_draws(model_brms)
 
 preds %>%
   mutate(
@@ -344,15 +344,16 @@ preds %>%
     aes(y = value), col = "grey75"
   ) +
   tidybayes::stat_lineribbon(
-    aes(y = exp(.epred), linetype = sem),
-    .width = seq(.5, .99, by = .01),
-    alpha = .05, size = 0,
+    aes(y = exp(.prediction), linetype = sem),
+    .width = .95,
+    alpha = .1,
+    fill = "black",
     show.legend = FALSE
   ) +
   geom_line(
     data = function(x) x %>%
       group_by(date, sem) %>%
-      summarize(med_pred = median(exp(.epred))),
+      summarize(med_pred = median(exp(.prediction))),
     aes(y = med_pred, linetype = sem, col = "brms")
   ) +
   geom_point(
@@ -368,7 +369,6 @@ preds %>%
     aes(date, fit, linetype = sem, col = "carx"), 
     inherit.aes = FALSE
   ) +
-  scale_fill_brewer(palette = "Greys") +
   scale_color_manual(values = c("black", pal[c(5,3,1)])) +
   scale_y_continuous(limits = c(0, 70)) +
   # scale_y_log10() +

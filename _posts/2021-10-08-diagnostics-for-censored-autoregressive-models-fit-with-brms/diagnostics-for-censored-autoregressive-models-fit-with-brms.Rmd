@@ -15,39 +15,83 @@ draft: true
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library("tidyverse")
+library("brms")
+
+theme_set(
+  theme_bw(14) + 
+    theme(
+      legend.position = "bottom",
+      strip.background = element_blank()
+    )
+)
 ```
 
-```{r ecdf}
+```{r data-simulate}
 
-# first fit brm model in prev. post
+lcl <- 9 # lower censoring limit
 
-library("NADA")
+simdat <- withr::with_seed(101, {
+  tibble(
+  x = 1:100,
+  y_t = 2 * sin(x / 5),
+  e = arima.sim(list(ar = .5), length(y_t)) %>% 
+    as.numeric(),
+  y = y_t + e + 10,
+  y_star = pmax(y, lcl),
+  ci = if_else(y < lcl, "left", "none")
+)
+})
 
-censored <- model_in_brms$censored == "left"
+simdat %>% 
+  pivot_longer(c(y, y_star)) %>% 
+  ggplot(aes(x, value, col = name)) +
+  geom_line()
 
-cenfit_brms <- NADA::cenfit(
-  obs = log(model_in_brms$value), 
-  censored = censored
+```
+
+```{r model}
+
+model_brm <- brm(
+  bf(y_star | cens(ci) ~ s(x)),
+  data = simdat,
+  seed = 124,
+  control = list(adapt_delta = .99)
 )
 
-pp <- posterior_predict(model_brms, ndraws = 100) %>% 
-  t() %>% 
-  as_tibble(.name_repair = "unique") %>% 
-  pivot_longer(everything(), names_to = "draw") %>% 
-  group_by(draw) %>% 
-  nest() %>% 
-  ungroup() %>% 
-  mutate(
-    cenfit = map(data, ~ NADA::cenfit(.x$value, censored = rep(FALSE, length(.x$value)))),
-    cenfit_summ = map(cenfit, summary)
-  ) %>% 
-  unnest(cenfit_summ) %>% 
-  select(where(~ !is.list(.x)))
+```
 
-list(
+```{r ecdf-fn}
+
+ppc_km_nada <- function(model, y, ci) {
+  
+  pal <- wesanderson::wes_palette("Zissou1")
+  
+  library("NADA")
+  
+  cenfit_brms <- NADA::cenfit(
+    obs = y,
+    censored = ci
+  )
+  
+  pp <- posterior_predict(model, ndraws = 100) %>% 
+    t() %>% 
+    as_tibble(.name_repair = "unique") %>% 
+    pivot_longer(everything(), names_to = "draw") %>% 
+    group_by(draw) %>% 
+    nest() %>% 
+    ungroup() %>% 
+    mutate(
+      cenfit = map(data, ~ NADA::cenfit(.x$value, censored = rep(FALSE, length(.x$value)))),
+      cenfit_summ = map(cenfit, summary)
+    ) %>% 
+    unnest(cenfit_summ) %>% 
+    select(where(~ !is.list(.x)))
+  
+  list(
   "Observations" = summary(cenfit_brms),
   "Posterior predictions" = pp
-) %>% 
+  ) %>% 
   bind_rows(.id = "type") %>% 
   ggplot(aes(obs, prob, col = type, linetype = type, size = type, group = draw)) + 
   geom_line() + 
@@ -60,59 +104,65 @@ list(
     col = NULL,
     size = NULL
   )
-  
-```
+}
 
-```{r simulated-resids}
+ppc_km_nada(model_brm, simdat$y_star, simdat$ci == "left")
+# compare with:
+pp_check(model_brm, type = "ecdf_overlay") 
+
+```
+```{r simulate-resids-fn}
 
 # work in progress! 
 # see ?carx::residuals.carx and ?DHARMa::simulateResiduals for details on this 
 
-model_in_brms2 <- preds %>% 
-  mutate(
-    value = if_else(censored == "left", exp(.epred), value),
-    censored = "none"
-  ) %>% 
-  ungroup() %>% 
-  filter(.draw == sample(1:max(preds$.draw), 1)) 
+simulate_residuals <- function(model, data, ...) {
+  
+  data_aug <- tidybayes::add_predicted_draws(data, model, ndraws = 1) %>% 
+    ungroup() %>% 
+    mutate(
+      # replace left-censored values with predictions
+      y_star = if_else(ci == "left", .prediction, y_star),
+      ci = "none" # no censoring
+    )
+  
+  model_update <- update(
+    model, 
+    newdata = data_aug,
+    ...
+    # seed = 35
+  )
+  
+  residuals(model_update, method = "posterior_predict")
+  
+}
 
-preds_aug %>% 
-  ggplot(aes(date, value, group = .draw)) + 
-  geom_line(col = "grey", size = .1)
+resids <- simulate_residuals(model_brm, simdat)
+# compare with:
+resid_cens <- residuals(model_brm)
 
-model_brms2 <- update(
-  model_brms, 
-  newdata = model_in_brms2,
-  seed = 35
+acf(resids[,1])
+acf(resid_cens[,1])
+
+```
+```{r model-ar}
+
+model_brm_ar <- brm(
+  bf(y_star | cens(ci) ~ s(x) + ar(time = x, p = 1)),
+  data = simdat,
+  seed = 124,
+  control = list(adapt_delta = .9),
+  # iter = 3000,
+  # prior = prior(normal(0.5,.25), class = ar)
 )
 
-model_resid <- model_in_brms2 %>% 
-  select(date, numeric_date, sem, value, ci, lcl, censored) %>% 
-  tidybayes::add_epred_draws(model_brms2) %>% # should this be add_posterior_draws()?? same with pred above
-  ungroup() %>% 
-  mutate(resid = log(value) - .epred)
+ppc_km_nada(model_brm, simdat$y_star, simdat$ci == "left")
 
-map(
-  sample(1:max(preds$.draw), 3), 
-  ~ model_resid %>%
-      filter(.draw == .x) %>% 
-      with(acf(resid))
-)
+resids_ar <- simulate_residuals(model_brm_ar, simdat, control = list(adapt_delta = .995))
+resid_cens_ar <- residuals(model_brm_ar)
 
-map(
-  sample(1:max(preds$.draw), 3), 
-  ~ model_resid %>% 
-    filter(.draw == .x) %>% 
-    ggplot(aes(sample = resid)) + 
-    geom_qq() + 
-    geom_qq_line()
-)
-
-model_resid %>% 
-  filter(.draw == 1) %>% 
-  ggplot(aes(sample = resid)) + 
-  geom_qq() + 
-  geom_qq_line()
+acf(resids_ar[,1])
+acf(resid_cens_ar[,1])
 
 ```
 
