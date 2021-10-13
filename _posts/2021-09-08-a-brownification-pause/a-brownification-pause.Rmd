@@ -294,8 +294,6 @@ But overall, there's not much evidence here that the GAM describes this particul
 
 ```{r model-brms, echo=TRUE, results="hide"}
 
-future::plan("multisession") # for parallelization
-
 model_in_brms <- model_in %>% 
   mutate(
     # left-censor missing values at the maximum value of the series
@@ -309,8 +307,7 @@ model_brms <- brm(
        s(numeric_date) + sem + ar(time = numeric_date, p = 1)),
   data = model_in_brms,
   control = list(adapt_delta = .999),
-  seed = 3152,
-  future = TRUE # for parallelization
+  seed = 3152
 )
 
 ```
@@ -350,11 +347,10 @@ preds %>%
     fill = "black",
     show.legend = FALSE
   ) +
-  geom_line(
-    data = function(x) x %>%
-      group_by(date, sem) %>%
-      summarize(med_pred = median(exp(.prediction))),
-    aes(y = med_pred, linetype = sem, col = "brms")
+  tidybayes::stat_lineribbon(
+    aes(y = exp(.prediction), linetype = sem, col = "brms"),
+    .width = 0,
+    show.legend = FALSE
   ) +
   geom_point(
     data = function(x) x %>%

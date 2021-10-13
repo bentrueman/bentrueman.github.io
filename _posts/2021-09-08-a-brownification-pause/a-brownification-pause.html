@@ -1520,9 +1520,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>But overall, there’s not much evidence here that the GAM describes this particular series any better than the linear model. And a GAM fit using <code>brms</code> (“Bayesian Regression Models using Stan”)—which accomodates both left-censoring and autoregression—yielded similar results. Here is a sketch of the model one might fit using <code>brms::brm()</code>; missing values are left-censored at the maximum observed value of the series. While I haven’t fully evaluated the fit of this model, it is worth noting that it yields a smooth curve that differs little from the censored autogregression with linear time covariate. Fitted values from the latter model—including the AR(1) component—are superimposed in red on the following plot.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>future</span><span class='fu'>::</span><span class='fu'><a href='https://future.futureverse.org/reference/plan.html'>plan</a></span><span class='op'>(</span><span class='st'>"multisession"</span><span class='op'>)</span> <span class='co'># for parallelization</span>
-
-<span class='va'>model_in_brms</span> <span class='op'>&lt;-</span> <span class='va'>model_in</span> <span class='op'>%&gt;%</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_in_brms</span> <span class='op'>&lt;-</span> <span class='va'>model_in</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>mutate</span><span class='op'>(</span>
     <span class='co'># left-censor missing values at the maximum value of the series</span>
     ci <span class='op'>=</span> <span class='fu'>replace_na</span><span class='op'>(</span><span class='va'>ci</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>,
@@ -1535,8 +1533,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
        <span class='fu'><a href='https://rdrr.io/pkg/brms/man/s.html'>s</a></span><span class='op'>(</span><span class='va'>numeric_date</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>sem</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/ar.html'>ar</a></span><span class='op'>(</span>time <span class='op'>=</span> <span class='va'>numeric_date</span>, p <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,
   data <span class='op'>=</span> <span class='va'>model_in_brms</span>,
   control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>adapt_delta <span class='op'>=</span> <span class='fl'>.999</span><span class='op'>)</span>,
-  seed <span class='op'>=</span> <span class='fl'>3152</span>,
-  future <span class='op'>=</span> <span class='cn'>TRUE</span> <span class='co'># for parallelization</span>
+  seed <span class='op'>=</span> <span class='fl'>3152</span>
 <span class='op'>)</span>
 </code></pre>
 </div>
