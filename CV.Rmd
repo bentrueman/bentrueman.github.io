@@ -32,7 +32,9 @@ Dalhousie University, Halifax, NS
 
 # Journal articles 
 
-1.	Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00539A
+1. Li, B., **Trueman, B. F.**, Doré, E., & Gagnon, G. A. (2021). Effectiveness of Sodium Silicates for Lead Corrosion Control: A Critical Review of Current Data. Environmental Science & Technology Letters. https://doi.org/10.1021/acs.estlett.1c00671
+
+1. Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2021). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00539A
 
 1. **^a^Joint first author**: Anderson, L.E.,^a^ **Trueman, B.F.**,^a^ Dunnington, D.W.^a^ & Gagnon, G. A. (2021).  Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 https://doi.org/10.1038/s41545-021-00115-4
 
