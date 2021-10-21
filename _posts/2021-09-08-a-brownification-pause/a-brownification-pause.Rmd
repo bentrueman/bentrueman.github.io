@@ -367,6 +367,7 @@ preds %>%
   scale_color_manual(values = c("black", pal[c(5,3,1)])) +
   scale_y_continuous(limits = c(0, 70)) +
   # scale_y_log10() +
+  theme(legend.box.margin = margin(r = 1, unit = "cm")) +
   labs(
     x = NULL,
     y = "Apparent colour (Pt-Co)", col = NULL,
