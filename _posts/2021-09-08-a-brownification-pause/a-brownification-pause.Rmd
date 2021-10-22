@@ -323,7 +323,7 @@ conditional_smooths(model_brms)
 
 ```
 
-```{r model-preds, fig.height=4}
+```{r model-preds, fig.height=4, preview=TRUE}
 
 preds <- model_in_brms %>% 
   tidybayes::add_epred_draws(model_brms)

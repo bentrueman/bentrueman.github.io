@@ -168,7 +168,7 @@ peaks_idd <- bind_rows(
 
 Finally, we add the identified peaks to the plot:
 
-```{r data-w-peaks, fig.height=3.5}
+```{r data-w-peaks, fig.height=3.5, preview=TRUE}
 
 data %>% 
   ggplot(aes(two_theta, intensity)) + 

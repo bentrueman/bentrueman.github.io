@@ -20,19 +20,19 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -52,7 +52,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
@@ -102,9 +102,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="An improved workflow for visualizing X-ray diffraction data in R."/>
 <meta property="og:url" content="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/"/>
-<meta property="og:image" content="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/plot-funs-1.png"/>
+<meta property="og:image" content="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/data-w-peaks-1.png"/>
 <meta property="og:image:width" content="1248"/>
-<meta property="og:image:height" content="480"/>
+<meta property="og:image:height" content="672"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Benjamin Trueman"/>
 
@@ -113,9 +113,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta property="twitter:title" content="Benjamin Trueman: Peak detection for qualitative XRD analysis in R"/>
 <meta property="twitter:description" content="An improved workflow for visualizing X-ray diffraction data in R."/>
 <meta property="twitter:url" content="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/"/>
-<meta property="twitter:image" content="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/plot-funs-1.png"/>
+<meta property="twitter:image" content="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/data-w-peaks-1.png"/>
 <meta property="twitter:image:width" content="1248"/>
-<meta property="twitter:image:height" content="480"/>
+<meta property="twitter:image:height" content="672"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
 <meta name="citation_title" content="Benjamin Trueman: Peak detection for qualitative XRD analysis in R"/>
@@ -2057,6 +2057,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.10/header-attrs.js"></script>
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2259,7 +2260,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <span class='fu'>custom_colour_scale</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/data-w-peaks-1.png" width="624" /></p>
+<p><img src="peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/data-w-peaks-1.png" width="624" data-distill-preview=1 /></p>
 </div>
 <p>And there we have it—the XRD data with and the appropriate standard patterns, with each peak in the data labelled according to the corresponding peak in one of the standards. Of course, this is a relatively crystalline sample, and the signal-to-noise ratio is high; in a future post I’ll test this workflow out on some noisy XRD data.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>

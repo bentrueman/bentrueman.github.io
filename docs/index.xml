@@ -15,7 +15,7 @@
       <description>Censored autoregression with a smoothed time covariate.</description>
       <guid>https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause</guid>
       <pubDate>Wed, 08 Sep 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause/a-brownification-pause_files/figure-html5/plot-1.png" medium="image" type="image/png" width="1248" height="576"/>
+      <media:content url="https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause/a-brownification-pause_files/figure-html5/model-preds-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>New preprint!</title>
@@ -51,7 +51,7 @@
       <description>An improved workflow for visualizing X-ray diffraction data in R.</description>
       <guid>https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r</guid>
       <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/plot-funs-1.png" medium="image" type="image/png" width="1248" height="480"/>
+      <media:content url="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/data-w-peaks-1.png" medium="image" type="image/png" width="1248" height="672"/>
     </item>
     <item>
       <title>Lead solubility prediction using R and Shiny</title>
