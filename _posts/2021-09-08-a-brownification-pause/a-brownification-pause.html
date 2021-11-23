@@ -1505,7 +1505,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p><img src="a-brownification-pause_files/figure-html5/plot-carx-1.png" width="624" /></p>
 </div>
 <p>While the GAM does appear to track the series slightly better, the linear model yielded an AIC of -44, whereas the cubic regression spline model yielded a larger AIC of -39.</p>
-<p>Both models yielded residuals with no obvious deviations from whiteness; the grey band denotes <span class="math inline">\(\pm1.96/\sqrt{n}\)</span>, the approximate 95% confidence bands on the autocorrelation function of white noise. For comparison, equivalent models fit using the function <code>lm()</code> (no autoregression) are shown as well. Autocorrelation at lag 1 is notably lower in the residuals from the censored AR(1) models.</p>
+<p>Both models yielded residuals with no obvious deviations from whiteness. For comparison, equivalent models fit using the function <code>lm()</code> (no autoregression) are shown as well. Autocorrelation at lag 1 is notably lower in the residuals from the censored AR(1) models.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="a-brownification-pause_files/figure-html5/diagnostics-1.png" width="624" /></p>
 </div>
@@ -1539,9 +1539,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-
-</div>
-<div class="layout-chunk" data-layout="l-body">
 <p><img src="a-brownification-pause_files/figure-html5/model-preds-1.png" width="624" data-distill-preview=1 /></p>
 </div>
 <p>The <code>brms</code> and <code>carx</code> models also yielded similar estimates of the AR(1) parameter: 0.21 for the censored autoregression (linear time covariate) and 0.28 for the Bayesian regression model. In percentage terms, the two approaches differ mainly in the predictions over the first part of the series, where most of the censored observations were recorded.</p>
@@ -1564,15 +1561,6 @@ Wang, Chao, and Kung-Sik Chan. 2017. <span>“Carx: An <span>R</span> <span>Pack
 <div class="d-appendix">
 </div>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
