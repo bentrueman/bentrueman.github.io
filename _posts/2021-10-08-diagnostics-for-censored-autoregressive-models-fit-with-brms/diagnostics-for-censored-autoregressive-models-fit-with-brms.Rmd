@@ -12,10 +12,14 @@ output:
 draft: true
 ---
 
+<!-- check for divergent transitions!! -->
 
 ```{r setup, include=FALSE}
+here::i_am("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/diagnostics-for-censored-autoregressive-models-fit-with-brms.Rmd")
+
 knitr::opts_chunk$set(echo = FALSE)
 library("tidyverse")
+library("NADA")
 library("brms")
 
 theme_set(
@@ -25,144 +29,383 @@ theme_set(
       strip.background = element_blank()
     )
 )
+pal <- wesanderson::wes_palette("Zissou1")
 ```
+
+```{r load, message=FALSE}
+ldat <- read_csv(here::here("2021-09-08-a-brownification-pause/UPPER-SILVER-LAKE.csv"))
+```
+
+In a previous post ("A brownification pause"), I made an attempt at tackling a common problem in environmental science: analyzing autocorrelated time series with left-censored values (i.e., nondetects). One powerful tool for this type of problem is `brms`[@brms; @brmsadv], an R package for fitting Bayesian regression models via Stan [@rstan].
+
+There are, however, relatively few tools that I'm aware of for posterior predictive checks of censored regression models. The R function `bayesplot::ppc_km_overlay()` is one, but it is only suitable for right-censored data, which are less common in environmental time series.
+
+Here I use a similar approach to overlay the empirical cumulative distribution function (ECDF) of a left-censored time series. I use the R function `NADA::cenfit()` [@nada] to estimate the ECDF of the series and the posterior draws, which works by "flipping" the input and estimating the ECDF according to the Kaplan-Meier method (for right-censored data).
+
+```{r model-in}
+
+ldat_clean <- ldat %>%
+  arrange(date) %>% 
+  transmute(
+    date, 
+    yr = lubridate::year(date),
+    sem = lubridate::semester(date),
+    value,
+    ci = if_else(flag == "<", -1, 0),
+    ci = replace_na(ci, 0)
+  )
+
+model_in <- crossing(
+  yr = seq(1983, max(ldat_clean$yr), by = 1),
+  sem = 1:2
+) %>% 
+  left_join(ldat_clean, by = c("yr", "sem")) %>%
+  group_by(yr, sem) %>% 
+  summarize(
+    date = median(date),
+    med_ci = median(ci),
+    value = median(value)
+  ) %>% 
+  ungroup() %>% 
+  transmute(
+    date,
+    numeric_date = yr + sem / 2,
+    numeric_date = numeric_date - min(numeric_date) + 1,
+    sem = factor(sem),
+    value,
+    ci = sign(med_ci),
+    # replace missing values in the censoring indicator with 0 (uncensored)
+    ci = replace_na(ci, 0),
+    lcl = if_else(ci == -1, value, 5)
+  )
+
+```
+
+```{r model-brms, echo=TRUE, results="hide"}
+
+model_brms <- brm(
+  bf(log(value) | cens(ci) + mi() ~
+       s(numeric_date) + sem + ar(time = numeric_date, p = 1)),
+  data = model_in,
+  control = list(adapt_delta = .999),
+  seed = 3152,
+  file = here::here("2021-09-08-a-brownification-pause/model_brms"),
+  cores = 4
+)
+
+model_brms_noar <- brm(
+  bf(log(value) | cens(ci) + mi() ~ s(numeric_date) + sem),
+  data = model_in,
+  # control = list(adapt_delta = .999),
+  seed = 3152,
+  file = here::here(
+    "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_noar"
+  ),
+  cores = 4
+)
+
+```
+
+```{r ecdf}
+
+pp_ecdf <- function(model, newdata, yval, log_t = TRUE) {
+  
+  ecdf_data_in <- newdata %>% 
+  # convert censoring indicator to logical:
+  mutate(ci = ci == -1) %>% 
+  filter(!is.na({{yval}}))
+  
+  ecdf_data <- NADA::cenfit(
+    obs = if(log_t) {
+      log(pull(ecdf_data_in, {{yval}}))
+    } else {
+      pull(ecdf_data_in, {{yval}})
+    },
+    censored = ecdf_data_in$ci
+  )
+
+ecdf_pp <- tidybayes::add_predicted_draws(
+    newdata, 
+    model,
+    ndraws = 200
+  ) %>% 
+  ungroup() %>% 
+  group_by(.draw) %>% 
+  nest() %>% 
+  ungroup() %>% 
+  mutate(
+    cenfit = map(data, 
+      ~ with(.x, 
+        NADA::cenfit(
+          obs = .prediction, 
+          censored = rep(FALSE, length(.prediction))
+        )
+      )
+    ),
+    cenfit_summ = map(cenfit, summary)
+  ) %>% 
+  unnest(cenfit_summ) %>% 
+  select(where(~ !is.list(.x))) 
+
+  bind_rows(
+    "Posterior draws" = ecdf_pp,
+    "Observations" = summary(ecdf_data),
+    .id = "type"
+  )
+}
+
+```
+
+Here I've superimposed the ECDF of the time series on the ECDFs estimated from 200 draws from the posterior distribution of the model fit using `brms::brm()`. From this plot, it appears that the posterior draws track the data reasonably well.
+
+```{r ecdf-plot}
+
+bind_rows(
+  "AR(1)" = pp_ecdf(model_brms, model_in, value),
+  # "Independent errors" = pp_ecdf(
+  #   model_brms_noar, model_in, value
+  # ),
+  .id = "model"
+) %>% 
+  ggplot(
+    aes(obs, prob, col = type, size = type, group = .draw)
+  ) +
+  # facet_wrap(vars(model)) +
+  scale_color_manual(values = pal[c(3,1)]) +
+  scale_size_manual(values = c(.7, .2)) +
+  geom_line() + 
+  guides(size = "none") +
+  labs(x = "Observation", y ="ECDF", col = NULL)
+
+```
+
+Another difficulty in evaluating models fitted to censored time series is residuals analysis. Here I adopt the approach of @wang_quasilikelihood_2018, generating simulated residuals by substituting censored values of the time series with a draw from the posterior distribution of the fitted model and refitting the model on the augmented data. I then generated residual draws from the updated model.
+
+```{r resids-simulate-fun}
+
+simulate_residuals <- function(model, newdata, yval, file, ...) {
+  
+  data_aug <- tidybayes::add_predicted_draws(
+    newdata,
+    model,
+    ndraws = 1,
+    seed = 3215
+  ) %>% 
+    ungroup() %>% 
+    mutate(
+      value = if_else(
+        is.na({{yval}}) | ci == -1,
+        .prediction,
+        {{yval}}
+      ),
+      ci = 0 # no censoring
+    ) %>%
+    select(-starts_with("."))
+  
+  model_update <- update(
+    model, 
+    newdata = data_aug,
+    file = here::here(file),
+    cores = 4,
+    ...
+  )
+  
+  model_resids <- tidybayes::add_residual_draws(
+    object = model_update,
+    newdata = data_aug,
+    method = "posterior_predict"
+  )
+  
+  list(
+    model = model_update, 
+    residuals = model_resids, 
+    data = data_aug
+  )
+  
+}
+
+```
+
+```{r resids-simulate}
+
+resids <- simulate_residuals(
+  model_brms, model_in, value,
+  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid"
+)
+
+resids_noar <- simulate_residuals(
+  model_brms_noar, model_in, value,
+  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid_noar"
+)
+```
+
+Here is the density of the lag one autocorrelation, estimated from residual draws from Bayesian GAMs fitted with and without a first-order autoregressive (AR(1)) term. Weak first-order autocorrelation is apparent in the residuals of the GAM without an AR(1) term and absent from those of the GAM with one.
+
+```{r resids-plot}
+
+bind_rows(
+  "AR(1)" = resids$residuals,
+  "Independent\nerrors" = resids_noar$residuals,
+  .id = "model"
+) %>% 
+  ungroup() %>% 
+  group_by(model, .draw) %>% 
+  mutate(
+    lag1 = dplyr::lag(.residual, 1),
+    # lag2 = dplyr::lag(.residual, 2),
+    # lag3 = dplyr::lag(.residual, 3),
+    # lag4 = dplyr::lag(.residual, 4)
+  ) %>% 
+  pivot_longer(
+    starts_with("lag"), 
+    names_to = "lag", 
+    values_to = ".residual_lagged"
+  ) %>% 
+  group_by(lag, .add = TRUE) %>% 
+  summarize(
+    cor = cor(.residual_lagged, .residual, use = "complete")
+  ) %>% 
+  ungroup() %>% 
+  ggplot(aes(cor, model)) + 
+  # facet_wrap(vars(lag)) +
+  ggdist::stat_halfeye(
+    aes(fill = stat(x < 0)), 
+    slab_alpha = .5
+  ) + 
+  scale_fill_manual(values = pal[c(3, 1)]) +
+  labs(x = "Lag 1 autocorrelation", y = NULL)
+  
+```
+
+For a bit more verification, I fitted a similar GAM to a simulated dataset, generated by adding an AR(1) series to a nonlinear trend, as follows:
 
 ```{r data-simulate}
 
-lcl <- 9 # lower censoring limit
+lcl <- 10 # lower censoring limit
 
 simdat <- withr::with_seed(101, {
   tibble(
-  x = 1:100,
-  y_t = 2 * sin(x / 5),
+  x = 1:200,
+  y_t = 1e-3 * x + 1e-4 * x ^ 2,
   e = arima.sim(list(ar = .5), length(y_t)) %>% 
     as.numeric(),
   y = y_t + e + 10,
   y_star = pmax(y, lcl),
-  ci = if_else(y < lcl, "left", "none")
+  ci = if_else(y < lcl, -1, 0)
 )
 })
 
 simdat %>% 
   pivot_longer(c(y, y_star)) %>% 
   ggplot(aes(x, value, col = name)) +
-  geom_line()
+  scale_color_manual(
+    values = pal[c(3,1)], 
+    labels = c(y = "Uncensored", y_star = "Censored")
+  ) +
+  geom_line() + 
+  labs(x = NULL, y = NULL, col = NULL)
 
 ```
+
+I fit a similar GAM using `brms`, along with the equivalent model without an AR(1) term:
+
 
 ```{r model}
 
-model_brm <- brm(
-  bf(y_star | cens(ci) ~ s(x)),
-  data = simdat,
-  seed = 124,
-  control = list(adapt_delta = .99)
-)
-
-```
-
-```{r ecdf-fn}
-
-ppc_km_nada <- function(model, y, ci) {
-  
-  pal <- wesanderson::wes_palette("Zissou1")
-  
-  library("NADA")
-  
-  cenfit_brms <- NADA::cenfit(
-    obs = y,
-    censored = ci
-  )
-  
-  pp <- posterior_predict(model, ndraws = 100) %>% 
-    t() %>% 
-    as_tibble(.name_repair = "unique") %>% 
-    pivot_longer(everything(), names_to = "draw") %>% 
-    group_by(draw) %>% 
-    nest() %>% 
-    ungroup() %>% 
-    mutate(
-      cenfit = map(data, ~ NADA::cenfit(.x$value, censored = rep(FALSE, length(.x$value)))),
-      cenfit_summ = map(cenfit, summary)
-    ) %>% 
-    unnest(cenfit_summ) %>% 
-    select(where(~ !is.list(.x)))
-  
-  list(
-  "Observations" = summary(cenfit_brms),
-  "Posterior predictions" = pp
-  ) %>% 
-  bind_rows(.id = "type") %>% 
-  ggplot(aes(obs, prob, col = type, linetype = type, size = type, group = draw)) + 
-  geom_line() + 
-  scale_color_manual(values = pal[c(5,1)]) + 
-  scale_size_manual(values = c(.7, .2)) +
-  labs(
-    x = "Observation", 
-    y = "Empirical cumulative\ndistribution function", 
-    linetype = NULL,
-    col = NULL,
-    size = NULL
-  )
-}
-
-ppc_km_nada(model_brm, simdat$y_star, simdat$ci == "left")
-# compare with:
-pp_check(model_brm, type = "ecdf_overlay") 
-
-```
-```{r simulate-resids-fn}
-
-# work in progress! 
-# see ?carx::residuals.carx and ?DHARMa::simulateResiduals for details on this 
-
-simulate_residuals <- function(model, data, ...) {
-  
-  data_aug <- tidybayes::add_predicted_draws(data, model, ndraws = 1) %>% 
-    ungroup() %>% 
-    mutate(
-      # replace left-censored values with predictions
-      y_star = if_else(ci == "left", .prediction, y_star),
-      ci = "none" # no censoring
-    )
-  
-  model_update <- update(
-    model, 
-    newdata = data_aug,
-    ...
-    # seed = 35
-  )
-  
-  residuals(model_update, method = "posterior_predict")
-  
-}
-
-resids <- simulate_residuals(model_brm, simdat)
-# compare with:
-resid_cens <- residuals(model_brm)
-
-acf(resids[,1])
-acf(resid_cens[,1])
-
-```
-```{r model-ar}
-
-model_brm_ar <- brm(
+model_simdat <- brm(
   bf(y_star | cens(ci) ~ s(x) + ar(time = x, p = 1)),
   data = simdat,
   seed = 124,
-  control = list(adapt_delta = .9),
-  # iter = 3000,
-  # prior = prior(normal(0.5,.25), class = ar)
+  file = here::here(
+    "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat"
+  ),
+  cores = 4,
+  file_refit = "on_change",
 )
 
-ppc_km_nada(model_brm, simdat$y_star, simdat$ci == "left")
-
-resids_ar <- simulate_residuals(model_brm_ar, simdat, control = list(adapt_delta = .995))
-resid_cens_ar <- residuals(model_brm_ar)
-
-acf(resids_ar[,1])
-acf(resid_cens_ar[,1])
+model_simdat_noar <- brm(
+  bf(y_star | cens(ci) ~ s(x)),
+  data = simdat,
+  seed = 124,
+  file = here::here(
+    "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_noar"
+  ),
+  cores = 4,
+  file_refit = "on_change",
+)
 
 ```
+
+Here is the ECDF overlay described above:
+
+```{r ecdf-sim}
+
+pp_ecdf(model_simdat, simdat, y_star, log_t = FALSE) %>% 
+  ggplot(
+    aes(obs, prob, col = type, size = type, group = .draw)
+  ) +
+  scale_color_manual(values = pal[c(3,1)]) +
+  scale_size_manual(values = c(.7, .2)) +
+  geom_line() + 
+  guides(size = "none") +
+  labs(x = "Observation", y ="ECDF", col = NULL)
+
+```
+
+```{r resid-sim}
+
+resids_simdat <- simulate_residuals(
+  model_simdat, simdat, y_star,
+  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid",
+  file_refit = "on_change"
+)
+
+resids_simdat_noar <- simulate_residuals(
+  model_simdat_noar, simdat, y_star,
+  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid_noar",
+  file_refit = "on_change"
+)
+
+```
+
+The first-order autocorrelation estimate from the simulated residuals suggests that the model isd accounting for autocorrelation in the residuals, as expected:
+
+```{r resdid-sim-plot}
+
+bind_rows(
+  "AR(1)" = resids_simdat$residuals,
+  "Independent\nerrors" = resids_simdat_noar$residuals,
+  .id = "model"
+) %>% 
+  ungroup() %>% 
+  group_by(model, .draw) %>% 
+  mutate(
+    lag1 = dplyr::lag(.residual, 1),
+    # lag2 = dplyr::lag(.residual, 2),
+    # lag3 = dplyr::lag(.residual, 3),
+    # lag4 = dplyr::lag(.residual, 4)
+  ) %>% 
+  pivot_longer(
+    starts_with("lag"), 
+    names_to = "lag", 
+    values_to = ".residual_lagged"
+  ) %>% 
+  group_by(lag, .add = TRUE) %>% 
+  summarize(
+    cor = cor(.residual_lagged, .residual, use = "complete")
+  ) %>% 
+  ungroup() %>% 
+  ggplot(aes(cor, model)) + 
+  # facet_wrap(vars(lag)) +
+  ggdist::stat_halfeye(
+    aes(fill = stat(x < 0)), 
+    slab_alpha = .5
+  ) + 
+  scale_fill_manual(values = pal[c(3, 1)]) +
+  labs(x = "Lag 1 autocorrelation", y = NULL)
+
+```
+
+The estimate of the AR(1) term is `r round(summary(model_simdat)$cor_pars$Estimate, 2)`, which is similar to true value of 0.5.
+
 
