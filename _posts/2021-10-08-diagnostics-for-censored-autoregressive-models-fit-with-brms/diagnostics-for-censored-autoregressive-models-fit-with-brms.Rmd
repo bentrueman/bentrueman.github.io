@@ -1,7 +1,7 @@
 ---
-title: "Diagnostics for censored autoregressive models fit with brms"
+title: "Diagnostics for censored autoregressive models fitted with brms"
 description: |
-  A short description of the post.
+  Posterior predictive checks and simulated residuals.
 author:
   - name: Ben Trueman
     url: {}
@@ -10,9 +10,8 @@ output:
   distill::distill_article:
     self_contained: false
 draft: true
+bibliography: references.bib
 ---
-
-<!-- check for divergent transitions!! -->
 
 ```{r setup, include=FALSE}
 here::i_am("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/diagnostics-for-censored-autoregressive-models-fit-with-brms.Rmd")
@@ -36,11 +35,11 @@ pal <- wesanderson::wes_palette("Zissou1")
 ldat <- read_csv(here::here("2021-09-08-a-brownification-pause/UPPER-SILVER-LAKE.csv"))
 ```
 
-In a previous post ("A brownification pause"), I made an attempt at tackling a common problem in environmental science: analyzing autocorrelated time series with left-censored values (i.e., nondetects). One powerful tool for this type of problem is `brms`[@brms; @brmsadv], an R package for fitting Bayesian regression models via Stan [@rstan].
+In a previous post ([A brownification pause](a-brownification-pause.html)), I made an attempt at tackling a common problem in environmental science: analyzing autocorrelated time series with left-censored values (i.e., nondetects). As I've learned, one powerful tool for this type of problem is `brms` [@brms; @brmsadv], an R package for fitting Bayesian regression models via Stan [@rstan].
 
 There are, however, relatively few tools that I'm aware of for posterior predictive checks of censored regression models. The R function `bayesplot::ppc_km_overlay()` is one, but it is only suitable for right-censored data, which are less common in environmental time series.
 
-Here I use a similar approach to overlay the empirical cumulative distribution function (ECDF) of a left-censored time series. I use the R function `NADA::cenfit()` [@nada] to estimate the ECDF of the series and the posterior draws, which works by "flipping" the input and estimating the ECDF according to the Kaplan-Meier method (for right-censored data).
+Here I use a similar approach to generate a posterior predictive check for a left-censored model. I use the R function `NADA::cenfit()` [@nada] to estimate the empirical cumulative distribution function (ECDF) of the series and the posterior draws from the model. The function works by "flipping" the input---subtracting all values from a constant larger than any value---and estimating the ECDF according to the Kaplan-Meier method (for right-censored data).
 
 ```{r model-in}
 
@@ -81,7 +80,7 @@ model_in <- crossing(
 
 ```
 
-```{r model-brms, echo=TRUE, results="hide"}
+```{r model-brms, echo=FALSE, results="hide"}
 
 model_brms <- brm(
   bf(log(value) | cens(ci) + mi() ~
@@ -96,7 +95,7 @@ model_brms <- brm(
 model_brms_noar <- brm(
   bf(log(value) | cens(ci) + mi() ~ s(numeric_date) + sem),
   data = model_in,
-  # control = list(adapt_delta = .999),
+  control = list(adapt_delta = .999),
   seed = 3152,
   file = here::here(
     "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_noar"
@@ -106,7 +105,9 @@ model_brms_noar <- brm(
 
 ```
 
-```{r ecdf}
+The following generates ECDFs of the data and posterior predictions according to this method:
+
+```{r ecdf, echo=TRUE}
 
 pp_ecdf <- function(model, newdata, yval, log_t = TRUE) {
   
@@ -156,7 +157,7 @@ ecdf_pp <- tidybayes::add_predicted_draws(
 
 ```
 
-Here I've superimposed the ECDF of the time series on the ECDFs estimated from 200 draws from the posterior distribution of the model fit using `brms::brm()`. From this plot, it appears that the posterior draws track the data reasonably well.
+Here I've superimposed the ECDF of the time series on the ECDFs estimated using 200 draws from the posterior distribution of the `brms::brm()` model. From this plot, it appears that the posterior draws approximate the data reasonably well.
 
 ```{r ecdf-plot}
 
@@ -179,9 +180,11 @@ bind_rows(
 
 ```
 
-Another difficulty in evaluating models fitted to censored time series is residuals analysis. Here I adopt the approach of @wang_quasilikelihood_2018, generating simulated residuals by substituting censored values of the time series with a draw from the posterior distribution of the fitted model and refitting the model on the augmented data. I then generated residual draws from the updated model.
+Another difficulty in evaluating models fitted to censored time series is residuals analysis. Here I adopt the approach of @wang_quasilikelihood_2018, generating simulated residuals by substituting censored and missing values of the time series with a draw from the posterior distribution of the fitted model and refitting the model on the augmented data. I then generated residual draws from the updated model.
 
-```{r resids-simulate-fun}
+The function below does the simulation:
+
+```{r resids-simulate-fun, echo=TRUE}
 
 simulate_residuals <- function(model, newdata, yval, file, ...) {
   
@@ -235,11 +238,12 @@ resids <- simulate_residuals(
 
 resids_noar <- simulate_residuals(
   model_brms_noar, model_in, value,
-  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid_noar"
+  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid_noar",
+  control = list(adapt_delta = .999)
 )
 ```
 
-Here is the density of the lag one autocorrelation, estimated from residual draws from Bayesian GAMs fitted with and without a first-order autoregressive (AR(1)) term. Weak first-order autocorrelation is apparent in the residuals of the GAM without an AR(1) term and absent from those of the GAM with one.
+Here is the density of the lag one autocorrelation, estimated using residual draws from Bayesian GAMs fitted with and without a first-order autoregressive (AR(1)) term. Weak first-order autocorrelation is apparent in the residuals of the GAM without an AR(1) term and absent from those of the GAM with one.
 
 ```{r resids-plot}
 
@@ -250,12 +254,8 @@ bind_rows(
 ) %>% 
   ungroup() %>% 
   group_by(model, .draw) %>% 
-  mutate(
-    lag1 = dplyr::lag(.residual, 1),
-    # lag2 = dplyr::lag(.residual, 2),
-    # lag3 = dplyr::lag(.residual, 3),
-    # lag4 = dplyr::lag(.residual, 4)
-  ) %>% 
+  mutate(lag1 = dplyr::lag(.residual, 1)) %>% 
+  # pivot_longer() allows for additional lags to be included above
   pivot_longer(
     starts_with("lag"), 
     names_to = "lag", 
@@ -267,7 +267,7 @@ bind_rows(
   ) %>% 
   ungroup() %>% 
   ggplot(aes(cor, model)) + 
-  # facet_wrap(vars(lag)) +
+  # facet_wrap(vars(lag)) + # use this for multiple lags
   ggdist::stat_halfeye(
     aes(fill = stat(x < 0)), 
     slab_alpha = .5
@@ -279,8 +279,7 @@ bind_rows(
 
 For a bit more verification, I fitted a similar GAM to a simulated dataset, generated by adding an AR(1) series to a nonlinear trend, as follows:
 
-```{r data-simulate}
-
+```{r data-simulate, echo=TRUE}
 lcl <- 10 # lower censoring limit
 
 simdat <- withr::with_seed(101, {
@@ -294,23 +293,11 @@ simdat <- withr::with_seed(101, {
   ci = if_else(y < lcl, -1, 0)
 )
 })
-
-simdat %>% 
-  pivot_longer(c(y, y_star)) %>% 
-  ggplot(aes(x, value, col = name)) +
-  scale_color_manual(
-    values = pal[c(3,1)], 
-    labels = c(y = "Uncensored", y_star = "Censored")
-  ) +
-  geom_line() + 
-  labs(x = NULL, y = NULL, col = NULL)
-
 ```
 
 I fit a similar GAM using `brms`, along with the equivalent model without an AR(1) term:
 
-
-```{r model}
+```{r model, echo=TRUE}
 
 model_simdat <- brm(
   bf(y_star | cens(ci) ~ s(x) + ar(time = x, p = 1)),
@@ -320,8 +307,43 @@ model_simdat <- brm(
     "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat"
   ),
   cores = 4,
-  file_refit = "on_change",
+  control = list(adapt_delta = .99)
 )
+
+```
+
+Here are the simulated data and the fitted model:
+
+```{r data-plot}
+
+fitted_vals <- fitted(model_simdat) %>% 
+  as_tibble()
+
+simdat %>% 
+  bind_cols(fitted_vals) %>% 
+  pivot_longer(c(y, y_star, Estimate)) %>% 
+  mutate(name = fct_relevel(name, "Estimate", after = Inf)) %>% 
+  ggplot(aes(x)) +
+  scale_color_manual(
+    values = c("grey", "black", pal[1]),
+    labels = c(
+      Estimate = "Model", 
+      y = "Uncensored", 
+      y_star = "Censored"
+    )
+  ) +
+  geom_line(aes(y = value, col = name)) + 
+  geom_ribbon(
+    data = function(x) x %>% 
+      filter(name == "Estimate"),
+    aes(ymin = Q2.5, ymax = Q97.5),
+    alpha = .5, col = NA, fill = pal[1]
+  ) +
+  labs(x = NULL, y = NULL, col = NULL)
+
+```
+
+```{r model-no-ar}
 
 model_simdat_noar <- brm(
   bf(y_star | cens(ci) ~ s(x)),
@@ -331,12 +353,12 @@ model_simdat_noar <- brm(
     "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_noar"
   ),
   cores = 4,
-  file_refit = "on_change",
+  control = list(adapt_delta = .99)
 )
 
 ```
 
-Here is the ECDF overlay described above:
+And here is the ECDF overlay described above:
 
 ```{r ecdf-sim}
 
@@ -356,19 +378,17 @@ pp_ecdf(model_simdat, simdat, y_star, log_t = FALSE) %>%
 
 resids_simdat <- simulate_residuals(
   model_simdat, simdat, y_star,
-  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid",
-  file_refit = "on_change"
+  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid"
 )
 
 resids_simdat_noar <- simulate_residuals(
   model_simdat_noar, simdat, y_star,
-  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid_noar",
-  file_refit = "on_change"
+  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid_noar"
 )
 
 ```
 
-The first-order autocorrelation estimate from the simulated residuals suggests that the model isd accounting for autocorrelation in the residuals, as expected:
+The first-order autocorrelation estimate from the simulated residuals suggests that the model is accounting for autocorrelation in the residuals, as expected:
 
 ```{r resdid-sim-plot}
 
