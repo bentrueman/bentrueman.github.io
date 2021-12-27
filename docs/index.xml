@@ -7,7 +7,16 @@
     <description>Data analysis, water quality, and R workflow.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 08 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Diagnostics for censored autoregressive models fitted with brms</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms</link>
+      <description>Posterior predictive checks and simulated residuals.</description>
+      <guid>https://bentrueman.github.io/posts/2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms</guid>
+      <pubDate>Fri, 08 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/diagnostics-for-censored-autoregressive-models-fit-with-brms_files/figure-html5/ecdf-sim-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>A brownification pause?</title>
       <dc:creator>Ben Trueman</dc:creator>

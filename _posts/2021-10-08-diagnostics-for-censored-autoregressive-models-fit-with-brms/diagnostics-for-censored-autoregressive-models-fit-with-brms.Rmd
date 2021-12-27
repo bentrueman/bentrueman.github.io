@@ -9,7 +9,6 @@ date: 10-08-2021
 output:
   distill::distill_article:
     self_contained: false
-draft: true
 bibliography: references.bib
 ---
 
@@ -163,15 +162,11 @@ Here I've superimposed the ECDF of the time series on the ECDFs estimated using 
 
 bind_rows(
   "AR(1)" = pp_ecdf(model_brms, model_in, value),
-  # "Independent errors" = pp_ecdf(
-  #   model_brms_noar, model_in, value
-  # ),
   .id = "model"
 ) %>% 
   ggplot(
     aes(obs, prob, col = type, size = type, group = .draw)
   ) +
-  # facet_wrap(vars(model)) +
   scale_color_manual(values = pal[c(3,1)]) +
   scale_size_manual(values = c(.7, .2)) +
   geom_line() + 
@@ -186,13 +181,20 @@ The function below does the simulation:
 
 ```{r resids-simulate-fun, echo=TRUE}
 
-simulate_residuals <- function(model, newdata, yval, file, ...) {
+simulate_residuals <- function(
+  model, 
+  newdata, 
+  yval, 
+  file, 
+  seed = NULL,
+  ...
+) {
   
   data_aug <- tidybayes::add_predicted_draws(
     newdata,
     model,
     ndraws = 1,
-    seed = 3215
+    seed = seed
   ) %>% 
     ungroup() %>% 
     mutate(
@@ -208,8 +210,9 @@ simulate_residuals <- function(model, newdata, yval, file, ...) {
   model_update <- update(
     model, 
     newdata = data_aug,
-    file = here::here(file),
+    file = file,
     cores = 4,
+    seed = seed,
     ...
   )
   
@@ -231,15 +234,19 @@ simulate_residuals <- function(model, newdata, yval, file, ...) {
 
 ```{r resids-simulate}
 
+brm_seed <- 3125
+
 resids <- simulate_residuals(
   model_brms, model_in, value,
-  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid"
+  file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid"),
+  seed = brm_seed
 )
 
 resids_noar <- simulate_residuals(
   model_brms_noar, model_in, value,
-  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid_noar",
-  control = list(adapt_delta = .999)
+  file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid_noar"),
+  control = list(adapt_delta = .999),
+  seed = brm_seed
 )
 ```
 
@@ -295,7 +302,12 @@ simdat <- withr::with_seed(101, {
 })
 ```
 
-I fit a similar GAM using `brms`, along with the equivalent model without an AR(1) term:
+Again, I fitted the GAM---and the equivalent model without an AR(1) 
+term---using `brms`:
+
+```{r filepath}
+file_path <- "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms"
+```
 
 ```{r model, echo=TRUE}
 
@@ -303,9 +315,8 @@ model_simdat <- brm(
   bf(y_star | cens(ci) ~ s(x) + ar(time = x, p = 1)),
   data = simdat,
   seed = 124,
-  file = here::here(
-    "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat"
-  ),
+  # save the model:
+  file = here::here(paste(file_path, "model_simdat", sep = "/")),
   cores = 4,
   control = list(adapt_delta = .99)
 )
@@ -348,19 +359,17 @@ simdat %>%
 model_simdat_noar <- brm(
   bf(y_star | cens(ci) ~ s(x)),
   data = simdat,
-  seed = 124,
-  file = here::here(
-    "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_noar"
-  ),
+  file = here::here(paste(file_path, "model_simdat_noar", sep = "/")),
   cores = 4,
-  control = list(adapt_delta = .99)
+  control = list(adapt_delta = .99),
+  seed = 124
 )
 
 ```
 
 And here is the ECDF overlay described above:
 
-```{r ecdf-sim}
+```{r ecdf-sim, preview=TRUE}
 
 pp_ecdf(model_simdat, simdat, y_star, log_t = FALSE) %>% 
   ggplot(
@@ -378,12 +387,14 @@ pp_ecdf(model_simdat, simdat, y_star, log_t = FALSE) %>%
 
 resids_simdat <- simulate_residuals(
   model_simdat, simdat, y_star,
-  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid"
+  file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid"),
+  seed = brm_seed
 )
 
 resids_simdat_noar <- simulate_residuals(
   model_simdat_noar, simdat, y_star,
-  file = "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid_noar"
+  file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid_noar"),
+  seed = brm_seed
 )
 
 ```
@@ -426,6 +437,5 @@ bind_rows(
 
 ```
 
-The estimate of the AR(1) term is `r round(summary(model_simdat)$cor_pars$Estimate, 2)`, which is similar to true value of 0.5.
-
+And the estimate of the AR(1) term is `r round(summary(model_simdat)$cor_pars$Estimate, 2)`, which is similar to true value of 0.5.
 

@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Diagnostics for censored autoregressive models fitted with brms"]},{"type":"character","attributes":{},"value":["Posterior predictive checks and simulated residuals.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Trueman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["10-08-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["references.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Diagnostics for censored autoregressive models fitted with brms"]},{"type":"character","attributes":{},"value":["Posterior predictive checks and simulated residuals.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Trueman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["10-08-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["references.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1513,7 +1513,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     censored <span class='op'>=</span> <span class='va'>ecdf_data_in</span><span class='op'>$</span><span class='va'>ci</span>
   <span class='op'>)</span>
 
-<span class='va'>ecdf_pp</span> <span class='op'>&lt;-</span> <span class='fu'>tidybayes</span><span class='fu'>::</span><span class='fu'><a href='http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html'>add_predicted_draws</a></span><span class='op'>(</span>
+<span class='va'>ecdf_pp</span> <span class='op'>&lt;-</span> <span class='fu'>tidybayes</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tidybayes/man/add_predicted_draws.html'>add_predicted_draws</a></span><span class='op'>(</span>
     <span class='va'>newdata</span>, 
     <span class='va'>model</span>,
     ndraws <span class='op'>=</span> <span class='fl'>200</span>
@@ -1553,13 +1553,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>The function below does the simulation:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>simulate_residuals</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>newdata</span>, <span class='va'>yval</span>, <span class='va'>file</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>simulate_residuals</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span>
+  <span class='va'>model</span>, 
+  <span class='va'>newdata</span>, 
+  <span class='va'>yval</span>, 
+  <span class='va'>file</span>, 
+  <span class='va'>seed</span> <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span> <span class='op'>{</span>
   
-  <span class='va'>data_aug</span> <span class='op'>&lt;-</span> <span class='fu'>tidybayes</span><span class='fu'>::</span><span class='fu'><a href='http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html'>add_predicted_draws</a></span><span class='op'>(</span>
+  <span class='va'>data_aug</span> <span class='op'>&lt;-</span> <span class='fu'>tidybayes</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tidybayes/man/add_predicted_draws.html'>add_predicted_draws</a></span><span class='op'>(</span>
     <span class='va'>newdata</span>,
     <span class='va'>model</span>,
     ndraws <span class='op'>=</span> <span class='fl'>1</span>,
-    seed <span class='op'>=</span> <span class='fl'>3215</span>
+    seed <span class='op'>=</span> <span class='va'>seed</span>
   <span class='op'>)</span> <span class='op'>%&gt;%</span> 
     <span class='fu'>ungroup</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
     <span class='fu'>mutate</span><span class='op'>(</span>
@@ -1575,12 +1582,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <span class='va'>model_update</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span>
     <span class='va'>model</span>, 
     newdata <span class='op'>=</span> <span class='va'>data_aug</span>,
-    file <span class='op'>=</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>,
+    file <span class='op'>=</span> <span class='va'>file</span>,
     cores <span class='op'>=</span> <span class='fl'>4</span>,
+    seed <span class='op'>=</span> <span class='va'>seed</span>,
     <span class='va'>...</span>
   <span class='op'>)</span>
   
-  <span class='va'>model_resids</span> <span class='op'>&lt;-</span> <span class='fu'>tidybayes</span><span class='fu'>::</span><span class='fu'><a href='http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html'>add_residual_draws</a></span><span class='op'>(</span>
+  <span class='va'>model_resids</span> <span class='op'>&lt;-</span> <span class='fu'>tidybayes</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tidybayes/man/add_predicted_draws.html'>add_residual_draws</a></span><span class='op'>(</span>
     object <span class='op'>=</span> <span class='va'>model_update</span>,
     newdata <span class='op'>=</span> <span class='va'>data_aug</span>,
     method <span class='op'>=</span> <span class='st'>"posterior_predict"</span>
@@ -1608,7 +1616,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>lcl</span> <span class='op'>&lt;-</span> <span class='fl'>10</span> <span class='co'># lower censoring limit</span>
 
-<span class='va'>simdat</span> <span class='op'>&lt;-</span> <span class='fu'>withr</span><span class='fu'>::</span><span class='fu'><a href='https://withr.r-lib.org/reference/with_seed.html'>with_seed</a></span><span class='op'>(</span><span class='fl'>101</span>, <span class='op'>{</span>
+<span class='va'>simdat</span> <span class='op'>&lt;-</span> <span class='fu'>withr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/withr/man/with_seed.html'>with_seed</a></span><span class='op'>(</span><span class='fl'>101</span>, <span class='op'>{</span>
   <span class='fu'>tibble</span><span class='op'>(</span>
   x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>200</span>,
   y_t <span class='op'>=</span> <span class='fl'>1e-3</span> <span class='op'>*</span> <span class='va'>x</span> <span class='op'>+</span> <span class='fl'>1e-4</span> <span class='op'>*</span> <span class='va'>x</span> <span class='op'>^</span> <span class='fl'>2</span>,
@@ -1622,16 +1630,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </code></pre>
 </div>
 </div>
-<p>I fit a similar GAM using <code>brms</code>, along with the equivalent model without an AR(1) term:</p>
+<p>Again, I fitted the GAM—and the equivalent model without an AR(1) term—using <code>brms</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_simdat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/brm.html'>brm</a></span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/pkg/brms/man/brmsformula.html'>bf</a></span><span class='op'>(</span><span class='va'>y_star</span> <span class='op'>|</span> <span class='fu'>cens</span><span class='op'>(</span><span class='va'>ci</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/s.html'>s</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/ar.html'>ar</a></span><span class='op'>(</span>time <span class='op'>=</span> <span class='va'>x</span>, p <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,
   data <span class='op'>=</span> <span class='va'>simdat</span>,
   seed <span class='op'>=</span> <span class='fl'>124</span>,
-  file <span class='op'>=</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span>
-    <span class='st'>"2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat"</span>
-  <span class='op'>)</span>,
+  <span class='co'># save the model:</span>
+  file <span class='op'>=</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>file_path</span>, <span class='st'>"model_simdat"</span>, sep <span class='op'>=</span> <span class='st'>"/"</span><span class='op'>)</span><span class='op'>)</span>,
   cores <span class='op'>=</span> <span class='fl'>4</span>,
   control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>adapt_delta <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span>
 <span class='op'>)</span>
@@ -1647,7 +1657,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>And here is the ECDF overlay described above:</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="diagnostics-for-censored-autoregressive-models-fit-with-brms_files/figure-html5/ecdf-sim-1.png" width="624" /></p>
+<p><img src="diagnostics-for-censored-autoregressive-models-fit-with-brms_files/figure-html5/ecdf-sim-1.png" width="624" data-distill-preview=1 /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1656,7 +1666,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="diagnostics-for-censored-autoregressive-models-fit-with-brms_files/figure-html5/resdid-sim-plot-1.png" width="624" /></p>
 </div>
-<p>The estimate of the AR(1) term is 0.57, which is similar to true value of 0.5.</p>
+<p>And the estimate of the AR(1) term is 0.57, which is similar to true value of 0.5.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-brms" class="csl-entry" role="doc-biblioentry">
