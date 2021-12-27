@@ -1,0 +1,21 @@
+---
+title: "*UPDATE:* non-parametric matched pair testing with left-censored data"
+description: |
+  An alternative (Bayesian) approach using brms.
+author:
+  - name: Ben Trueman
+    url: {}
+date: 12-27-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+

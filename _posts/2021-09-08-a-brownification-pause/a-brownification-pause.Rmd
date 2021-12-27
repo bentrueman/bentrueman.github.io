@@ -151,7 +151,7 @@ model <- model_in %>%
 
 As a point of comparison, I fit a separate censored autoregression with a linear time covariate. Here are the linear model and GAM predictions along with 95% confidence intervals on the predicted values:
 
-```{r plot-carx, fig.height=4.5}
+```{r plot-carx, fig.height=4.5, preview=TRUE}
 
 list(
   `Linear AR(1)` = unnest(model, c(data, out_lm)),
@@ -312,7 +312,7 @@ model_brms <- brm(
 ```
 
 
-```{r model-preds, fig.height=4, preview=TRUE}
+```{r model-preds, fig.height=4}
 
 preds <- model_in_brms %>% 
   tidybayes::add_epred_draws(model_brms)
