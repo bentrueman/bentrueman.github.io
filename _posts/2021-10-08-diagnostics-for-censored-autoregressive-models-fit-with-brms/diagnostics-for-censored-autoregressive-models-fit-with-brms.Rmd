@@ -34,7 +34,7 @@ pal <- wesanderson::wes_palette("Zissou1")
 ldat <- read_csv(here::here("2021-09-08-a-brownification-pause/UPPER-SILVER-LAKE.csv"))
 ```
 
-In a previous post ([A brownification pause](a-brownification-pause.html)), I made an attempt at tackling a common problem in environmental science: analyzing autocorrelated time series with left-censored values (i.e., nondetects). As I've learned, one powerful tool for this type of problem is `brms` [@brms; @brmsadv], an R package for fitting Bayesian regression models via Stan [@rstan].
+In a previous post ([A brownification pause](https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause/)), I made an attempt at tackling a common problem in environmental science: analyzing autocorrelated time series with left-censored values (i.e., nondetects). As I've learned, one powerful tool for this type of problem is `brms` [@brms; @brmsadv], an R package for fitting Bayesian regression models via Stan [@rstan].
 
 There are, however, relatively few tools that I'm aware of for posterior predictive checks of censored regression models. The R function `bayesplot::ppc_km_overlay()` is one, but it is only suitable for right-censored data, which are less common in environmental time series.
 
