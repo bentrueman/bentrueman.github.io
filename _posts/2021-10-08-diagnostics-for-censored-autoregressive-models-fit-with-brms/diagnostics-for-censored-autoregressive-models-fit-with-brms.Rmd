@@ -193,9 +193,9 @@ simulate_residuals <- function(
   data_aug <- tidybayes::add_predicted_draws(
     newdata,
     model,
-    ndraws = 1,
     seed = seed
   ) %>% 
+    ggdist::median_qi() %>% 
     ungroup() %>% 
     mutate(
       value = if_else(
@@ -239,18 +239,20 @@ brm_seed <- 3125
 resids <- simulate_residuals(
   model_brms, model_in, value,
   file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid"),
+  file_refit = "on_change",
   seed = brm_seed
 )
 
 resids_noar <- simulate_residuals(
   model_brms_noar, model_in, value,
   file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid_noar"),
+  file_refit = "on_change",
   control = list(adapt_delta = .999),
   seed = brm_seed
 )
 ```
 
-Here is the density of the lag one autocorrelation, estimated using residual draws from Bayesian GAMs fitted with and without a first-order autoregressive (AR(1)) term. Weak first-order autocorrelation is apparent in the residuals of the GAM without an AR(1) term and absent from those of the GAM with one.
+Here is the density of the lag one autocorrelation, estimated using residual draws from Bayesian GAMs fitted with and without a first-order autoregressive (AR(1)) term. There is some indication here that the GAM with an AR(1) term is accounting for residual autocorrelation.
 
 ```{r resids-plot}
 
@@ -388,12 +390,14 @@ pp_ecdf(model_simdat, simdat, y_star, log_t = FALSE) %>%
 resids_simdat <- simulate_residuals(
   model_simdat, simdat, y_star,
   file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid"),
+  file_refit = "on_change",
   seed = brm_seed
 )
 
 resids_simdat_noar <- simulate_residuals(
   model_simdat_noar, simdat, y_star,
   file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid_noar"),
+  file_refit = "on_change",
   seed = brm_seed
 )
 
