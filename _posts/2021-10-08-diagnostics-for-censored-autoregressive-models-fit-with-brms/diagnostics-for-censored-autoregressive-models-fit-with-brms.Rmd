@@ -193,9 +193,9 @@ simulate_residuals <- function(
   data_aug <- tidybayes::add_predicted_draws(
     newdata,
     model,
-    seed = seed
+    seed = seed,
+    ndraws = 1
   ) %>% 
-    ggdist::median_qi() %>% 
     ungroup() %>% 
     mutate(
       value = if_else(
