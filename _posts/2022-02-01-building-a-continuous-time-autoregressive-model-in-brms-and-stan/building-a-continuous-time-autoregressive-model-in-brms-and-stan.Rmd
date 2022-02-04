@@ -1,7 +1,7 @@
 ---
-title: "Building a continuous-time autoregressive model in brms and Stan"
+title: "Building a continuous-time autoregressive model in brms"
 description: |
-  A short description of the post.
+  A simple modification of brms-generated Stan code to fit first-order autoregressive models to irregularly-spaced time series.
 author:
   - name: Ben Trueman
     url: {}
@@ -9,16 +9,175 @@ date: 02-01-2022
 output:
   distill::distill_article:
     self_contained: false
-draft: true
+bibliography: references.bib
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+here::i_am("building-a-continuous-time-autoregressive-model-in-brms-and-stan.Rmd")
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library("tidyverse")
+library("brms")
+library("rstan")
+
+options(mc.cores = parallel::detectCores())
+
+theme_set(
+  theme_bw(14) + 
+    theme(
+      legend.position = "bottom",
+      strip.background = element_blank()
+    )
+)
+pal <- wesanderson::wes_palette("Zissou1")
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+In recent posts, I've written about using `brms` to fit fully Bayesian autoregressive models to left-censored time series data. And while this approach is powerful, it is not easy to use for irregularly spaced series.
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+It turns out, though, that there is a straightforward generalization of the first-order autoregressive---AR(1)---model, called the continuous-time AR(1), or CAR(1). Whereas the AR(1) takes the form 
 
+$$x_t = \phi x_{t-1} + \epsilon_t$$
+
+(where $x$ is the time series, $t$ is time, $\phi$ defines the autocorrelation structure, and $\epsilon_t$ is an independent error term), the CAR(1) model has the following autocorrelation structure:
+
+$$h(s, \phi) = \phi^s, s\geq0, \phi\geq0 $$
+where $s$ is a real number representing the time difference between successive observations. This model is implemented in R by the function `nlme::corCAR1()` [@nlme], and there is an open issue on GitHub discussing implementation in [`brms`](https://github.com/paul-buerkner/brms/issues/741). 
+
+Not being able to wait for a future version of `brms` with CAR(1) as an option, I modified the `brms` generated Stan code to fit a CAR(1) model, as follows.
+
+First, let's simulate a couple of irregularly-spaced AR(1) processes:
+
+```{r simulate}
+
+stan_seed <- 1256
+
+phi <- .75
+p_ret <- .6 # proportion retained
+
+withr::with_seed(stan_seed, {
+  data <- tibble(
+    x = 1:100,
+    y1 = arima.sim(list(ar = phi), length(x)),
+    y2 = arima.sim(list(ar = phi), length(x))
+  ) %>% 
+    pivot_longer(starts_with("y"), names_to = "g", values_to = "y")
+  
+  subset <- data %>% 
+    slice_sample(prop = p_ret) %>% 
+    arrange(g, x) %>% 
+    group_by(g) %>% 
+    mutate(
+      x_lag = lag(x),
+      d_x = replace_na(x - x_lag, 0) # spacing of observations
+    ) %>% 
+    ungroup()
+})
+
+```
+
+Then, use `brms` to generate Stan code and the accompanying data as a list:
+
+```{r generate-code}
+
+priors <- prior(normal(.5, .25), class = ar)
+formula <- bf(y ~ ar(time = x, gr = g))
+
+sdata <- brms::make_standata(formula, prior = priors, data = subset)
+sdata$s <- subset$d_x # CAR(1) exponent 
+
+scode <- brms::make_stancode(formula, prior = priors, data = subset)
+
+```
+
+Next, modify the Stan code to fit a CAR(1) model... 
+
+```{r modify}
+
+scode_car1 <- scode %>% 
+  # add time difference variable s:
+  str_replace(
+    "response variable\\\n", 
+    "response variable\n  vector[N] s;  // CAR(1) exponent\n"
+  ) %>% 
+  # set lower bound of zero on ar param:
+  str_replace(
+    "vector\\[Kar\\] ar;", 
+    "vector<lower=0>[Kar] ar;"
+  ) %>% 
+  # convert AR process to CAR1:
+  str_replace(
+    "mu\\[n\\] \\+= Err\\[n, 1:Kar\\] \\* ar;", 
+    "mu[n] += Err[n, 1] * pow(ar[1], s[n]); // CAR(1)"
+  ) %>% 
+  # modify prior to reflect 0 lower bound:
+  # (n.b., this works for a normal prior on the ar param)
+  str_replace(
+    "(target.+\\(ar.+\\\n.+normal_lcdf\\()(-1)", 
+    "\\10"
+  )
+
+class(scode_car1) <- "brmsmodel"
+
+```
+
+... and pass the data list and the modified Stan code to `rstan::stan()` to fit the model.
+
+```{r fit, eval=FALSE}
+
+stanfit <- rstan::stan(
+  model_code = scode_car1,
+  data = sdata,
+  sample_file = "carmodel", # output in csv format
+  seed = stan_seed
+)
+
+```
+
+```{r load-fit, echo=FALSE}
+
+csvfiles <- list.files(
+  pattern = "carmodel_\\d\\.csv",
+  full.names = TRUE
+)
+
+stanfit <- rstan::read_stan_csv(csvfiles)
+
+```
+
+Once the chains have finished running, feed the Stan model back into `brms`, and have a look at the output of `summary()`. There are no obvious problems with convergence, given the lack of warnings from Stan and the $\widehat{r}$ values being very close to 1.
+
+```{r as-brms}
+
+fit <- brm(formula, data = subset, empty = TRUE)
+fit$fit <- stanfit
+fit <- rename_pars(fit)
+summary(fit)
+
+```
+
+We're not going to do any extensive posterior predictive checking here, but the fitted values can be recovered using `fitted()`. Plot them along with the data, adding the 0.025 and 0.975 quantiles of the posterior predicitive distribution as a ribbon:
+
+```{r plot, echo=FALSE}
+
+fitted_vals <- fitted(fit)
+
+subset %>%
+  bind_cols(as_tibble(fitted_vals)) %>% 
+  ggplot(aes(x)) + 
+  facet_wrap(vars(g), ncol = 1) + 
+  geom_line(aes(y = y, col = "Data")) + 
+  geom_ribbon(
+    aes(ymin = Q2.5, ymax = Q97.5, fill = "Model"),
+    alpha = .5, show.legend = FALSE
+  ) +
+  geom_line(aes(y = Estimate, col = "Model")) + 
+  scale_color_manual(values = pal[c(2,5)]) + 
+  labs(x = NULL, y = NULL, col = NULL) + 
+  theme(strip.text = element_blank())
+
+```
+
+And that's it! The model recovers the parameters used to generate the simulated data well in this case, which is a good sign that we're on the right track.
 

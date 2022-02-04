@@ -7,7 +7,16 @@
     <description>Data analysis, water quality, and R workflow.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 08 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Building a continuous-time autoregressive model in brms</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2022-02-01-building-a-continuous-time-autoregressive-model-in-brms-and-stan</link>
+      <description>A simple modification of brms-generated Stan code to fit first-order autoregressive models to irregularly-spaced time series.</description>
+      <guid>https://bentrueman.github.io/posts/2022-02-01-building-a-continuous-time-autoregressive-model-in-brms-and-stan</guid>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2022-02-01-building-a-continuous-time-autoregressive-model-in-brms-and-stan/building-a-continuous-time-autoregressive-model-in-brms-and-stan_files/figure-html5/plot-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Diagnostics for censored autoregressive models fitted with brms</title>
       <dc:creator>Ben Trueman</dc:creator>

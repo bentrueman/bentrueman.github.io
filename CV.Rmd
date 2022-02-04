@@ -26,19 +26,19 @@ Dalhousie University, Halifax, NS
 - Geochemical modeling with applications in corrosion control
   - Developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
 - Well-developed written and verbal communication skills
-  - Wrote or co-wrote 25 peer-reviewed journal articles, presented work at international academic conferences
+  - Wrote or co-wrote 25+ peer-reviewed journal articles, presented work at international academic conferences
 - Well-developed data analysis skills 
   - See https://doi.org/10.1039/D0EM00425A, https://doi.org/10.1021/acsestengg.0c00053, https://doi.org/10.1021/acs.est.8b04139, and https://doi.org/10.1039/C5EW00285K in particular
 
 # Journal articles 
 
-1. Li, B., **Trueman, B. F.**, Doré, E., & Gagnon, G. A. (2021). Effectiveness of Sodium Silicates for Lead Corrosion Control: A Critical Review of Current Data. Environmental Science & Technology Letters. https://doi.org/10.1021/acs.estlett.1c00671
+1. Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2022). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. Environmental Science: Water Research & Technology. 8, 47-61. https://doi.org/10.1039/D1EW00539A
 
-1. Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2021). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00539A
+1. Li, B., **Trueman, B. F.**, Doré, E., & Gagnon, G. A. (2021). Effectiveness of sodium silicates for lead corrosion control: a critical review of current data. Environmental Science & Technology Letters. 8(11), 932–939. https://doi.org/10.1021/acs.estlett.1c00671
 
 1. **^a^Joint first author**: Anderson, L.E.,^a^ **Trueman, B.F.**,^a^ Dunnington, D.W.^a^ & Gagnon, G. A. (2021).  Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 https://doi.org/10.1038/s41545-021-00115-4
 
-2.	Aghasadeghi, K., Peldszus, S., **Trueman, B. F.**, Mishrra, A., Cooke, M. G., Slawson, R. M., Giammar, D. E., Gagnon, G. A., & Huck, P. M. Pilot-scale comparison of sodium silicates, orthophosphate and pH adjustment to reduce lead release from lead service lines. Water Research. 195, 116955. https://doi.org/10.1016/j.watres.2021.116955
+2.	Aghasadeghi, K., Peldszus, S., **Trueman, B. F.**, Mishrra, A., Cooke, M. G., Slawson, R. M., Giammar, D. E., Gagnon, G. A., & Huck, P. M. (2021). Pilot-scale comparison of sodium silicates, orthophosphate and pH adjustment to reduce lead release from lead service lines. Water Research. 195, 116955. https://doi.org/10.1016/j.watres.2021.116955
 
 3.	**^a^Joint first author**: Redden, D.,^a^ **Trueman, B. F.**,^a^ Dunnington, D. W., Anderson, L. A., & Gagnon, G. A. (2021). Chemical recovery and browning of Nova Scotia surface waters in response to declining acid deposition. Environmental Science: Processes & Impacts. 23, 446-456. https://doi.org/10.1039/D0EM00425A
 
@@ -88,7 +88,7 @@ Dalhousie University, Halifax, NS
 
 # Preprints  
 
-1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.33774/chemrxiv-2021-59nd6-v2
+1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.33774/chemrxiv-2021-59nd6-v3
 
 2. Munoz, S., **Trueman, B. F.** Li, B., & Gagnon, G. A. (2021). Effect of sodium silicate on drinking water biofilm development. bioRxiv. https://doi.org/10.1101/2021.09.15.460503
 
