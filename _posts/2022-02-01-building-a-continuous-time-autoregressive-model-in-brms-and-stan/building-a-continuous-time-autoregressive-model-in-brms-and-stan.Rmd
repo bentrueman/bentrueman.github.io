@@ -165,17 +165,18 @@ fitted_vals <- fitted(fit)
 
 subset %>%
   bind_cols(as_tibble(fitted_vals)) %>% 
+  mutate(g = fct_recode(g, "Series 1" = "y1", "Series 2" = "y2")) %>% 
   ggplot(aes(x)) + 
   facet_wrap(vars(g), ncol = 1) + 
   geom_line(aes(y = y, col = "Data")) + 
+  geom_point(aes(y = y, col = "Data")) + 
   geom_ribbon(
     aes(ymin = Q2.5, ymax = Q97.5, fill = "Model"),
-    alpha = .5, show.legend = FALSE
+    alpha = .4, show.legend = FALSE
   ) +
   geom_line(aes(y = Estimate, col = "Model")) + 
   scale_color_manual(values = pal[c(2,5)]) + 
-  labs(x = NULL, y = NULL, col = NULL) + 
-  theme(strip.text = element_blank())
+  labs(x = NULL, y = NULL, col = NULL)
 
 ```
 
