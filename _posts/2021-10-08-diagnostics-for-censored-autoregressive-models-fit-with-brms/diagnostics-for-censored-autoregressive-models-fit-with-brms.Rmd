@@ -91,14 +91,14 @@ model_brms <- brm(
   cores = 4
 )
 
+here::i_am("diagnostics-for-censored-autoregressive-models-fit-with-brms.Rmd")
+
 model_brms_noar <- brm(
   bf(log(value) | cens(ci) + mi() ~ s(numeric_date) + sem),
   data = model_in,
   control = list(adapt_delta = .999),
   seed = 3152,
-  file = here::here(
-    "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_noar"
-  ),
+  file = here::here("model_brms_noar"),
   cores = 4
 )
 
@@ -219,7 +219,7 @@ simulate_residuals <- function(
   model_resids <- tidybayes::add_residual_draws(
     object = model_update,
     newdata = data_aug,
-    method = "posterior_predict"
+    method = "posterior_epred"
   )
   
   list(
@@ -238,14 +238,14 @@ brm_seed <- 3125
 
 resids <- simulate_residuals(
   model_brms, model_in, value,
-  file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid"),
+  file = here::here("model_brms_resid"),
   file_refit = "on_change",
   seed = brm_seed
 )
 
 resids_noar <- simulate_residuals(
   model_brms_noar, model_in, value,
-  file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_brms_resid_noar"),
+  file = here::here("model_brms_resid_noar"),
   file_refit = "on_change",
   control = list(adapt_delta = .999),
   seed = brm_seed
@@ -307,10 +307,6 @@ simdat <- withr::with_seed(101, {
 Again, I fitted the GAM---and the equivalent model without an AR(1) 
 term---using `brms`:
 
-```{r filepath}
-file_path <- "2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms"
-```
-
 ```{r model, echo=TRUE}
 
 model_simdat <- brm(
@@ -318,7 +314,7 @@ model_simdat <- brm(
   data = simdat,
   seed = 124,
   # save the model:
-  file = here::here(paste(file_path, "model_simdat", sep = "/")),
+  file = here::here("model_simdat"),
   cores = 4,
   control = list(adapt_delta = .99)
 )
@@ -361,7 +357,7 @@ simdat %>%
 model_simdat_noar <- brm(
   bf(y_star | cens(ci) ~ s(x)),
   data = simdat,
-  file = here::here(paste(file_path, "model_simdat_noar", sep = "/")),
+  file = here::here("model_simdat_noar"),
   cores = 4,
   control = list(adapt_delta = .99),
   seed = 124
@@ -389,14 +385,14 @@ pp_ecdf(model_simdat, simdat, y_star, log_t = FALSE) %>%
 
 resids_simdat <- simulate_residuals(
   model_simdat, simdat, y_star,
-  file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid"),
+  file = here::here("model_simdat_resid"),
   file_refit = "on_change",
   seed = brm_seed
 )
 
 resids_simdat_noar <- simulate_residuals(
   model_simdat_noar, simdat, y_star,
-  file = here::here("2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/model_simdat_resid_noar"),
+  file = here::here("model_simdat_resid_noar"),
   file_refit = "on_change",
   seed = brm_seed
 )
