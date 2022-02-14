@@ -18,7 +18,10 @@ here::i_am("building-a-continuous-time-autoregressive-model-in-brms-and-stan.Rmd
 
 knitr::opts_chunk$set(echo = TRUE)
 
-library("tidyverse")
+library("dplyr")
+library("stringr")
+library("tidyr")
+library("ggplot2")
 library("brms")
 library("rstan")
 
@@ -124,7 +127,7 @@ class(scode_car1) <- "brmsmodel"
 
 ... and pass the data list and the modified Stan code to `rstan::stan()` to fit the model.
 
-```{r fit, eval=FALSE}
+```{r fit, results="hide"}
 
 stanfit <- rstan::stan(
   model_code = scode_car1,
@@ -135,7 +138,9 @@ stanfit <- rstan::stan(
 
 ```
 
-```{r load-fit, echo=FALSE}
+```{r load-fit, echo=FALSE, eval=FALSE}
+
+# note that reading a stan model from CSVs and feeding it back into brms causes warmup draws to be included where they shouldn't. This issue should be fixed in the next release (https://github.com/paul-buerkner/brms/issues/1284)
 
 csvfiles <- list.files(
   pattern = "carmodel_\\d\\.csv",
@@ -157,24 +162,48 @@ summary(fit)
 
 ```
 
-We're not going to do any extensive posterior predictive checking here, but the fitted values can be recovered using `fitted()`. Plot them along with the data, adding the 0.025 and 0.975 quantiles of the posterior predicitive distribution as a ribbon:
+Since the `brmsfit` object doesn't contain the CAR(1) formula, a few extra steps are needed to generate predictions. First, we generate draws from the model without the autocorrelation structure, then we apply a CAR(1) filter to the data, and then we summarize the filtered draws using `median_qi()`. Plot the medians along with the data, adding the 0.025 and 0.975 quantiles as a ribbon:
+
+```{r preds}
+
+# extract AR(1) draws:
+phi <- as_draws_df(fit, "ar[1]") %>% 
+  as_tibble()
+
+# generate draws from the model without the autocorrelation structure:
+pred_car1 <- tidybayes::add_epred_draws(subset, fit, incl_autocor = FALSE) %>% 
+  ungroup() %>% 
+  select(-c(.chain, .iteration)) %>% 
+  arrange(.draw, g, x) %>% 
+  left_join(phi, by = ".draw") %>% 
+  # add the CAR(1) structure:
+  group_by(.draw, g) %>% 
+  mutate(
+    r_lag = replace_na(lag(y - .epred), 0),
+    .epred = .epred + r_lag * `ar[1]` ^ d_x
+  ) %>% 
+  ungroup() %>% 
+  # summarize:
+  select(-c(r_lag, `ar[1]`)) %>% 
+  group_by(across(matches(paste(names(subset), collapse = "|")))) %>% 
+  ggdist::median_qi() %>% 
+  ungroup()
+```
+
 
 ```{r plot, echo=FALSE}
 
-fitted_vals <- fitted(fit)
-
-subset %>%
-  bind_cols(as_tibble(fitted_vals)) %>% 
-  mutate(g = fct_recode(g, "Series 1" = "y1", "Series 2" = "y2")) %>% 
+pred_car1 %>%
+  mutate(g = forcats::fct_recode(g, "Series 1" = "y1", "Series 2" = "y2")) %>% 
   ggplot(aes(x)) + 
   facet_wrap(vars(g), ncol = 1) + 
   geom_line(aes(y = y, col = "Data")) + 
   geom_point(aes(y = y, col = "Data")) + 
   geom_ribbon(
-    aes(ymin = Q2.5, ymax = Q97.5, fill = "Model"),
+    aes(ymin = .lower, ymax = .upper, fill = "Model"),
     alpha = .4, show.legend = FALSE
   ) +
-  geom_line(aes(y = Estimate, col = "Model")) + 
+  geom_line(aes(y = .epred, col = "Model")) + 
   scale_color_manual(values = pal[c(2,5)]) + 
   labs(x = NULL, y = NULL, col = NULL)
 

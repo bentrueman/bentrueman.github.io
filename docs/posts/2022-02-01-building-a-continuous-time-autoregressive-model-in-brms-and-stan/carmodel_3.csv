@@ -2029,7 +2029,7 @@ lp__,accept_stat__,stepsize__,treedepth__,n_leapfrog__,divergent__,energy__,Inte
 -192.915,1,0.782262,2,3,0,194.348,-0.441833,0.626251,1.25253,-0.441833
 -192.578,0.986383,0.782262,3,7,0,193.856,0.176028,0.739772,1.09439,0.176028
 # 
-#  Elapsed Time: 0.414 seconds (Warm-up)
-#                0.333 seconds (Sampling)
-#                0.747 seconds (Total)
+#  Elapsed Time: 0.2 seconds (Warm-up)
+#                0.192 seconds (Sampling)
+#                0.392 seconds (Total)
 # 
