@@ -88,7 +88,7 @@ Dalhousie University, Halifax, NS
 
 # Preprints  
 
-1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.33774/chemrxiv-2021-59nd6-v3
+1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.26434/chemrxiv-2021-59nd6-v4
 
 2. Munoz, S., **Trueman, B. F.** Li, B., & Gagnon, G. A. (2021). Effect of sodium silicate on drinking water biofilm development. bioRxiv. https://doi.org/10.1101/2021.09.15.460503
 
