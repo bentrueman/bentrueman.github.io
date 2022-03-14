@@ -94,6 +94,8 @@ Dalhousie University, Halifax, NS
 
 2. Munoz, S., **Trueman, B. F.** Li, B., & Gagnon, G. A. (2021). Effect of sodium silicate on drinking water biofilm development. bioRxiv. https://doi.org/10.1101/2021.09.15.460503
 
+3. Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. https://doi.org/10.1101/2020.12.04.20237230
+
 # First author conference presentations
 
 1.	Trueman, B.F., A.K. Stoddart & G.A. Gagnon. 2019. Complexation of metals in drinking water systems by NOM. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.
