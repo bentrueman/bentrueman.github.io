@@ -32,6 +32,8 @@ Dalhousie University, Halifax, NS
 
 # Journal articles 
 
+1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ACS ES&T Water. (accepted).
+
 1. Locsin, J. A., Hood, K. M., Doré, E., **Trueman, B. F.**,  & Gagnon, G. A. (2022). Colloidal lead in drinking water: Formation, occurrence, and characterization. Critical Reviews in Environmental Science and Technology. https://doi.org/10.1080/10643389.2022.2039549
 
 1. Guardado, A. L. P., Sweeney, C. L., Hayes, E., **Trueman, B. F.**, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., & Stoddart, A. K. (2022). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. Environmental Science: Water Research & Technology. 8, 47-61. https://doi.org/10.1039/D1EW00539A
