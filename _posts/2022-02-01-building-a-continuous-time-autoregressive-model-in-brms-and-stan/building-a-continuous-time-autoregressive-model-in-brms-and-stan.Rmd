@@ -37,6 +37,8 @@ theme_set(
 pal <- wesanderson::wes_palette("Zissou1")
 ```
 
+EDIT: This post has been updated to reflect the changes to prior specification implemented in `brms 2.17.0`.
+
 In recent posts, I've written about using `brms` to fit fully Bayesian autoregressive models to left-censored time series data. And while this approach is powerful, it is not easy to use for irregularly spaced series.
 
 It turns out, though, that there is a straightforward generalization of the first-order autoregressive---AR(1)---model, called the continuous-time AR(1), or CAR(1). Whereas the AR(1) takes the form 
@@ -84,7 +86,7 @@ Then, use `brms` to generate Stan code and the accompanying data as a list:
 
 ```{r generate-code}
 
-priors <- prior(normal(.5, .25), class = ar)
+priors <- prior(normal(.5, .25), class = ar, lb = 0, ub = 1)
 formula <- bf(y ~ ar(time = x, gr = g))
 
 sdata <- brms::make_standata(formula, prior = priors, data = subset)
@@ -113,13 +115,7 @@ scode_car1 <- scode %>%
   str_replace(
     "mu\\[n\\] \\+= Err\\[n, 1:Kar\\] \\* ar;", 
     "mu[n] += Err[n, 1] * pow(ar[1], s[n]); // CAR(1)"
-  ) %>% 
-  # modify prior to reflect 0 lower bound:
-  # (n.b., this works for a normal prior on the ar param)
-  str_replace(
-    "(target.+\\(ar.+\\\n.+normal_lcdf\\()(-1)", 
-    "\\10"
-  )
+  ) 
 
 class(scode_car1) <- "brmsmodel"
 
@@ -127,7 +123,7 @@ class(scode_car1) <- "brmsmodel"
 
 ... and pass the data list and the modified Stan code to `rstan::stan()` to fit the model.
 
-```{r fit, results="hide"}
+```{r fit, results="hide", eval=FALSE}
 
 stanfit <- rstan::stan(
   model_code = scode_car1,
@@ -138,9 +134,7 @@ stanfit <- rstan::stan(
 
 ```
 
-```{r load-fit, echo=FALSE, eval=FALSE}
-
-# note that reading a stan model from CSVs and feeding it back into brms causes warmup draws to be included where they shouldn't. This issue should be fixed in the next release (https://github.com/paul-buerkner/brms/issues/1284)
+```{r load-fit, echo=FALSE}
 
 csvfiles <- list.files(
   pattern = "carmodel_\\d\\.csv",
@@ -209,5 +203,5 @@ pred_car1 %>%
 
 ```
 
-And that's it! The model recovers the parameters used to generate the simulated data well in this case, which is a good sign that we're on the right track.
+And that's it! The model recovers the parameters used to generate the simulated data well in this case---the mean of the posterior of $\phi$ is `r round(posterior::summarise_draws(phi)$median, 2)`---which is a good sign that we're on the right track.
 
