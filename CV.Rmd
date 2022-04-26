@@ -32,7 +32,7 @@ Dalhousie University, Halifax, NS
 
 # Journal articles 
 
-1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ACS ES&T Water. https://doi.org/10.1021/acsestwater.1c00320
+1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release into drinking water and the effect of aluminum. ACS ES&T Water. https://doi.org/10.1021/acsestwater.1c00320
 
 1. Locsin, J. A., Hood, K. M., Doré, E., **Trueman, B. F.**,  & Gagnon, G. A. (2022). Colloidal lead in drinking water: Formation, occurrence, and characterization. Critical Reviews in Environmental Science and Technology. https://doi.org/10.1080/10643389.2022.2039549
 
@@ -91,6 +91,8 @@ Dalhousie University, Halifax, NS
 25.	Pei, W. W., Xie, X., Ong, P., **Trueman, B. F.**, McVicar, M. A., Walsh, M. E., & Gagnon, G. A. (2013). Water Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. https://doi.org/10.2175/106143013X13698672322183
 
 # Preprints  
+
+1. Locsin, J. A., **Trueman, B. F.**, Doré, E., Bleasdale-Pollowy, A., & Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2
 
 1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.26434/chemrxiv-2021-59nd6-v4
 
