@@ -26,11 +26,15 @@ Dalhousie University, Halifax, NS
 - Geochemical modeling with applications in corrosion control
   - Developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
 - Well-developed written and verbal communication skills
-  - Wrote or co-wrote 25+ peer-reviewed journal articles, presented work at international academic conferences
+  - Wrote or co-wrote more than 30 peer-reviewed journal articles, presented work at international academic conferences
 - Well-developed data analysis skills 
   - See https://doi.org/10.1039/D0EM00425A, https://doi.org/10.1021/acsestengg.0c00053, https://doi.org/10.1021/acs.est.8b04139, and https://doi.org/10.1039/C5EW00285K in particular
 
 # Journal articles 
+
+1. King, P. W., Peldszus, S., Mishrra, A., **Trueman, B. F.**, Aghasadeghi, K., Gagnon G. A., Giammar, D. E., Huck, P. M. Role of natural organic matter and hardness on lead release from galvanic corrosion. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00903F
+
+1. Munoz, S., **Trueman, B. F.**, Li, B., & Gagnon, G. A. (2022). Effect of sodium silicate on drinking water biofilm development. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00682G
 
 1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release into drinking water and the effect of aluminum. ACS ES&T Water. https://doi.org/10.1021/acsestwater.1c00320
 
@@ -91,6 +95,8 @@ Dalhousie University, Halifax, NS
 25.	Pei, W. W., Xie, X., Ong, P., **Trueman, B. F.**, McVicar, M. A., Walsh, M. E., & Gagnon, G. A. (2013). Water Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. https://doi.org/10.2175/106143013X13698672322183
 
 # Preprints  
+
+1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-b3f72-v2
 
 1. Locsin, J. A., **Trueman, B. F.**, Doré, E., Bleasdale-Pollowy, A., & Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2
 
