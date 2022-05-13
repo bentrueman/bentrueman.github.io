@@ -27,12 +27,14 @@ Dalhousie University, Halifax, NS
   - Developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
 - Well-developed written and verbal communication skills
   - Wrote or co-wrote more than 30 peer-reviewed journal articles, presented work at international academic conferences
-- Well-developed data analysis skills 
-  - See https://doi.org/10.1039/D0EM00425A, https://doi.org/10.1021/acsestengg.0c00053, https://doi.org/10.1021/acs.est.8b04139, and https://doi.org/10.1039/C5EW00285K in particular
+- Data analysis  
+  - e.g., https://doi.org/10.26434/chemrxiv-2022-b3f72-v2
 
 # Journal articles 
 
-1. King, P. W., Peldszus, S., Mishrra, A., **Trueman, B. F.**, Aghasadeghi, K., Gagnon G. A., Giammar, D. E., Huck, P. M. Role of natural organic matter and hardness on lead release from galvanic corrosion. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00903F
+<!-- https://doi.org/10.1039/D1EW00903F -->
+
+1. King, P. W., Peldszus, S., Mishrra, A., **Trueman, B. F.**, Aghasadeghi, K., Gagnon G. A., Giammar, D. E., Huck, P. M. Role of natural organic matter and hardness on lead release from galvanic corrosion. Environmental Science: Water Research & Technology. (in press).  
 
 1. Munoz, S., **Trueman, B. F.**, Li, B., & Gagnon, G. A. (2022). Effect of sodium silicate on drinking water biofilm development. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00682G
 
