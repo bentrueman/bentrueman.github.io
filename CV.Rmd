@@ -98,7 +98,7 @@ Dalhousie University, Halifax, NS
 
 # Preprints  
 
-1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-b3f72-v2
+1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-b3f72-v3
 
 1. Locsin, J. A., **Trueman, B. F.**, Doré, E., Bleasdale-Pollowy, A., & Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2
 
