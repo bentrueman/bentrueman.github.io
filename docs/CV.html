@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,9 +74,9 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
 code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
@@ -1030,10 +1031,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-top: 1.5em;
   }
 
-  .figure img {
-    width: 100%;
-  }
-
   .figure .caption {
     color: rgba(0, 0, 0, 0.6);
     font-size: 12px;
@@ -1863,6 +1860,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
           return "<p>" + $('#ref-' + ref).html() + "</p>";
@@ -1877,6 +1880,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1976,6 +2004,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1998,7 +2028,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2037,7 +2067,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2095,94 +2125,346 @@ Halifax, NS, CAN</p></p>
 
 
 <div class="d-article">
-<p>Website: <a href="https://bentrueman.github.io" class="uri">https://bentrueman.github.io</a><br />
-Google Scholar: <a href="https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&amp;hl=en" class="uri">https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&amp;hl=en</a></p>
+<p>Website: <a href="https://bentrueman.github.io"
+class="uri">https://bentrueman.github.io</a><br />
+Google Scholar: <a
+href="https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&amp;hl=en"
+class="uri">https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&amp;hl=en</a></p>
 <h1 id="academic-background">Academic background</h1>
 <p>2018 PhD, Civil Engineering<br />
 Dalhousie University, Halifax, NS<br />
-Thesis title: “Controlling Lead Release To Drinking Water: Impacts Of Iron Oxides, Complexing Species, Orthophosphate, And Lead Pipe Replacement”</p>
+Thesis title: “Controlling Lead Release To Drinking Water: Impacts Of
+Iron Oxides, Complexing Species, Orthophosphate, And Lead Pipe
+Replacement”</p>
 <p>2012 BSc, Environmental Science<br />
 Dalhousie University, Halifax, NS</p>
 <h1 id="skills">Skills</h1>
 <ul>
-<li>Proficient in R (<a href="https://github.com/bentrueman" class="uri">https://github.com/bentrueman</a>)</li>
+<li>Proficient in R (<a href="https://github.com/bentrueman"
+class="uri">https://github.com/bentrueman</a>)</li>
 <li>Geochemical modeling with applications in corrosion control
 <ul>
-<li>Developed an R package for predicting lead and copper solubility using PHREEQC, available at <a href="https://github.com/bentrueman/pbcusol" class="uri">https://github.com/bentrueman/pbcusol</a></li>
+<li>Developed an R package for predicting lead and copper solubility
+using PHREEQC, available at <a
+href="https://github.com/bentrueman/pbcusol"
+class="uri">https://github.com/bentrueman/pbcusol</a></li>
 </ul></li>
 <li>Well-developed written and verbal communication skills
 <ul>
-<li>Wrote or co-wrote more than 30 peer-reviewed journal articles, presented work at international academic conferences</li>
+<li>Wrote or co-wrote more than 30 peer-reviewed journal articles,
+presented work at international academic conferences</li>
 </ul></li>
 <li>Data analysis
 <ul>
-<li>e.g., <a href="https://doi.org/10.26434/chemrxiv-2022-b3f72-v2" class="uri">https://doi.org/10.26434/chemrxiv-2022-b3f72-v2</a></li>
+<li>e.g., <a href="https://doi.org/10.26434/chemrxiv-2022-b3f72-v2"
+class="uri">https://doi.org/10.26434/chemrxiv-2022-b3f72-v2</a></li>
 </ul></li>
 </ul>
 <h1 id="journal-articles">Journal articles</h1>
 <!-- https://doi.org/10.1039/D1EW00903F -->
 <ol type="1">
-<li><p>King, P. W., Peldszus, S., Mishrra, A., <strong>Trueman, B. F.</strong>, Aghasadeghi, K., Gagnon G. A., Giammar, D. E., Huck, P. M. Role of natural organic matter and hardness on lead release from galvanic corrosion. Environmental Science: Water Research &amp; Technology. (in press).</p></li>
-<li><p>Munoz, S., <strong>Trueman, B. F.</strong>, Li, B., &amp; Gagnon, G. A. (2022). Effect of sodium silicate on drinking water biofilm development. Environmental Science: Water Research &amp; Technology. <a href="https://doi.org/10.1039/D1EW00682G" class="uri">https://doi.org/10.1039/D1EW00682G</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., &amp; Gagnon, G. A. (2021). Seasonal lead release into drinking water and the effect of aluminum. ACS ES&amp;T Water. <a href="https://doi.org/10.1021/acsestwater.1c00320" class="uri">https://doi.org/10.1021/acsestwater.1c00320</a></p></li>
-<li><p>Locsin, J. A., Hood, K. M., Doré, E., <strong>Trueman, B. F.</strong>, &amp; Gagnon, G. A. (2022). Colloidal lead in drinking water: Formation, occurrence, and characterization. Critical Reviews in Environmental Science and Technology. <a href="https://doi.org/10.1080/10643389.2022.2039549" class="uri">https://doi.org/10.1080/10643389.2022.2039549</a></p></li>
-<li><p>Guardado, A. L. P., Sweeney, C. L., Hayes, E., <strong>Trueman, B. F.</strong>, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., &amp; Stoddart, A. K. (2022). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. Environmental Science: Water Research &amp; Technology. 8, 47-61. <a href="https://doi.org/10.1039/D1EW00539A" class="uri">https://doi.org/10.1039/D1EW00539A</a></p></li>
-<li><p>Li, B., <strong>Trueman, B. F.</strong>, Doré, E., &amp; Gagnon, G. A. (2021). Effectiveness of sodium silicates for lead corrosion control: a critical review of current data. Environmental Science &amp; Technology Letters. 8(11), 932–939. <a href="https://doi.org/10.1021/acs.estlett.1c00671" class="uri">https://doi.org/10.1021/acs.estlett.1c00671</a></p></li>
-<li><p><strong><sup>a</sup>Joint first author</strong>: Anderson, L.E.,<sup>a</sup> <strong>Trueman, B.F.</strong>,<sup>a</sup> Dunnington, D.W.<sup>a</sup> &amp; Gagnon, G. A. (2021). Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 <a href="https://doi.org/10.1038/s41545-021-00115-4" class="uri">https://doi.org/10.1038/s41545-021-00115-4</a></p></li>
-<li><p>Aghasadeghi, K., Peldszus, S., <strong>Trueman, B. F.</strong>, Mishrra, A., Cooke, M. G., Slawson, R. M., Giammar, D. E., Gagnon, G. A., &amp; Huck, P. M. (2021). Pilot-scale comparison of sodium silicates, orthophosphate and pH adjustment to reduce lead release from lead service lines. Water Research. 195, 116955. <a href="https://doi.org/10.1016/j.watres.2021.116955" class="uri">https://doi.org/10.1016/j.watres.2021.116955</a></p></li>
-<li><p><strong><sup>a</sup>Joint first author</strong>: Redden, D.,<sup>a</sup> <strong>Trueman, B. F.</strong>,<sup>a</sup> Dunnington, D. W., Anderson, L. A., &amp; Gagnon, G. A. (2021). Chemical recovery and browning of Nova Scotia surface waters in response to declining acid deposition. Environmental Science: Processes &amp; Impacts. 23, 446-456. <a href="https://doi.org/10.1039/D0EM00425A" class="uri">https://doi.org/10.1039/D0EM00425A</a></p></li>
-<li><p>Li, B., <strong>Trueman, B. F.</strong>, Locsin, J. A., Rahman, M. S., Gao, Y., Park, Y., &amp; Gagnon, G. A. (2021). Impact of sodium silicate on lead release from lead carbonate. Environmental Science: Water Research &amp; Technology. 7, 599-609. <a href="https://doi.org/10.1039/D0EW00886A" class="uri">https://doi.org/10.1039/D0EW00886A</a></p></li>
-<li><p>Li, B., <strong>Trueman, B. F.</strong>, Rahman, M. S., &amp; Gagnon, G. A. (2021). Controlling lead release due to uniform and galvanic corrosion—An evaluation of silicate-based inhibitors. Journal of Hazardous Materials, 407, 124707. <a href="https://doi.org/10.1016/j.jhazmat.2020.124707" class="uri">https://doi.org/10.1016/j.jhazmat.2020.124707</a></p></li>
-<li><p>Li, B., <strong>Trueman, B. F.</strong>, Munoz, S., Locsin, J. M., &amp; Gagnon, G. A. (2021). Impact of sodium silicate on lead release and colloid size distributions in drinking water. Water Research, 190, 116709. <a href="https://doi.org/10.1016/j.watres.2020.116709" class="uri">https://doi.org/10.1016/j.watres.2020.116709</a></p></li>
-<li><p>Dunnington, D. W., <strong>Trueman, B. F.</strong>, Raseman, W. J., Anderson, L. E., Gagnon, G. A. (2021). Comparing the Predictive Performance, Interpretability, and Accessibility of Machine Learning and Physically Based Models for Water Treatment. ACS ES&amp;T Engineering. 1(3), 348–356. <a href="https://doi.org/10.1021/acsestengg.0c00053" class="uri">https://doi.org/10.1021/acsestengg.0c00053</a></p></li>
-<li><p><strong><sup>a</sup>Joint first author</strong>: Lane, K.,<sup>a</sup> <strong>Trueman, B. F.</strong>,<sup>a</sup> Locsin, J., Gagnon, G. A. (2020). Inorganic contaminants in Canadian First Nation community water systems. Journal of Water and Health. 18 (5), 728–740. <a href="https://doi.org/10.2166/wh.2020.185" class="uri">https://doi.org/10.2166/wh.2020.185</a></p></li>
-<li><p>Locsin, J. M., <strong>Trueman, B.F.</strong>, Serracin-Pitti, D., Stanton, G. M. L., Gagnon, G. A. (2020). Potential regulatory implications of guideline changes in lead monitoring for Nova Scotia. AWWA Water Science, 2(4), e1182. <a href="https://doi.org/10.1002/aws2.1182" class="uri">https://doi.org/10.1002/aws2.1182</a></p></li>
-<li><p>Gora, S. L., Anaviapik-Soucie, T., Allward, N. E., Ontiveros, C. C., L’Hérault, V., Kunuk- Gavin, M., <strong>Trueman, B. F.</strong>, Campbell, J., Stoddart, A. K., Gagnon, G. A. (2020). Microbiological water quality in a decentralized Arctic drinking water system. Environmental Science: Water Research &amp; Technology, 6, 1855-1868. <a href="https://doi.org/10.1039/d0ew00019a" class="uri">https://doi.org/10.1039/d0ew00019a</a></p></li>
-<li><p>Gora, S. L., <strong>Trueman, B. F.</strong>, Anaviapik-Soucie, T., Gavin, M. K., Ontiveros, C. C., Campbell, J., L’Hérault, V., Stoddart, A. K., &amp; Gagnon, G. A. (2020). Source Water Characteristics and Building-specific Factors Influence Corrosion and Point of Use Water Quality in a Decentralized Arctic Drinking Water System. Environmental Science &amp; Technology, 54, 2192−2201. <a href="https://doi.org/10.1021/acs.est.9b04691" class="uri">https://doi.org/10.1021/acs.est.9b04691</a></p></li>
-<li><p><strong><sup>a</sup>Joint first author</strong>: Brophy, M. J.,<sup>a</sup> <strong>Trueman, B. F.</strong>,<sup>a</sup> Park, Y., Betts, R. A., &amp; Gagnon, G. A. (2019). Fluorescence Spectra Predict Microcystin-LR and Disinfection Byproduct Formation Potential in Lake Water. Environmental Science &amp; Technology, 53(2), 586–594. <a href="https://doi.org/10.1021/acs.est.8b04139" class="uri">https://doi.org/10.1021/acs.est.8b04139</a></p></li>
-<li><p>Li, B., <strong>Trueman, B. F.</strong>, Rahman, M. S., Gao, Y., Park, Y., &amp; Gagnon, G. A. (2019). Understanding the impacts of sodium silicate on water quality and iron oxide particles. Environmental Science: Water Research &amp; Technology, 5(8), 1360–1370. <a href="https://doi.org/10.1039/C9EW00257J" class="uri">https://doi.org/10.1039/C9EW00257J</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, Anaviapik-Soucie, T., L’Hérault, V., &amp; Gagnon, G. A. (2019). Characterizing colloidal metals in drinking water by field flow fractionation. Environmental Science: Water Research &amp; Technology, 5(12), 2202–2209. <a href="https://doi.org/10.1039/C9EW00560A" class="uri">https://doi.org/10.1039/C9EW00560A</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, Gregory, B. S., McCormick, N. E., Gao, Y., Gora, S., Anaviapik-Soucie, T., L’Hérault, V., &amp; Gagnon, G. A. (2019). Manganese Increases Lead Release to Drinking Water. Environmental Science &amp; Technology, 53(9), 4803–4812. <a href="https://doi.org/10.1021/acs.est.9b00317" class="uri">https://doi.org/10.1021/acs.est.9b00317</a></p></li>
-<li><p>Deshommes, E., <strong>Trueman, B .F.</strong>, Douglas, I., Huggins, D., Laroche, L., Swertfeger, J., Spielmacher, A., Gagnon, G. A., &amp; Prévost, M. (2018). Lead Levels at the Tap and Consumer Exposure from Legacy and Recent Lead Service Line Replacements in Six Utilities. Environmental Science &amp; Technology, 52(16), 9451–9459. <a href="https://doi.org/10.1021/acs.est.8b02388" class="uri">https://doi.org/10.1021/acs.est.8b02388</a></p></li>
-<li><p>Gao, Y., <strong>Trueman, B. F.</strong>, Stoddart, A. K., &amp; Gagnon, G. A. (2018). Understanding the Impact of Extracellular Polymeric Substances on Lead Release in Drinking Water Systems. ACS Omega, 3(11), 14824–14832. <a href="https://doi.org/10.1021/acsomega.8b02363" class="uri">https://doi.org/10.1021/acsomega.8b02363</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, Krkošek, W. H., &amp; Gagnon, G. A. (2018). Effects of ortho- and polyphosphates on lead speciation in drinking water. Environmental Science: Water Research &amp; Technology, 4(4), 505–512. <a href="https://doi.org/10.1039/C7EW00521K" class="uri">https://doi.org/10.1039/C7EW00521K</a></p></li>
-<li><p>Anderson, L. E., Krkošek, W. H., Stoddart, A. K., <strong>Trueman, B. F.</strong>, &amp; Gagnon, G. A. (2017). Lake Recovery Through Reduced Sulfate Deposition: A New Paradigm for Drinking Water Treatment. Environmental Science &amp; Technology, 51(3), 1414–1422. <a href="https://doi.org/10.1021/acs.est.6b04889" class="uri">https://doi.org/10.1021/acs.est.6b04889</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, Sweet, G. A., Harding, M. D., Estabrook, H., Bishop, D. P., &amp; Gagnon, G. A. (2017). Galvanic Corrosion of Lead by Iron (Oxyhydr)Oxides: Potential Impacts on Drinking Water Quality. Environmental Science &amp; Technology, 51(12), 6812–6820. <a href="https://doi.org/10.1021/acs.est.7b01671" class="uri">https://doi.org/10.1021/acs.est.7b01671</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, Camara, E., &amp; Gagnon, G. A. (2016). Evaluating the Effects of Full and Partial Lead Service Line Replacement on Lead Levels in Drinking Water. Environmental Science &amp; Technology, 50(14), 7389–7396. <a href="https://doi.org/10.1021/acs.est.6b01912" class="uri">https://doi.org/10.1021/acs.est.6b01912</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, &amp; Gagnon, G. A. (2016a). A new analytical approach to understanding nanoscale lead-iron interactions in drinking water distribution systems. Journal of Hazardous Materials, 311, 151–157. <a href="https://doi.org/10.1016/j.jhazmat.2016.03.001" class="uri">https://doi.org/10.1016/j.jhazmat.2016.03.001</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, MacIsaac, S. A., Stoddart, A. K., &amp; Gagnon, G. A. (2016). Prediction of disinfection by-product formation in drinking water via fluorescence spectroscopy. Environmental Science: Water Research &amp; Technology, 2(2), 383–389. <a href="https://doi.org/10.1039/C5EW00285K" class="uri">https://doi.org/10.1039/C5EW00285K</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, &amp; Gagnon, G. A. (2016b). Understanding the Role of Particulate Iron in Lead Release to Drinking Water. Environmental Science &amp; Technology, 50(17), 9053–9060. <a href="https://doi.org/10.1021/acs.est.6b01153" class="uri">https://doi.org/10.1021/acs.est.6b01153</a></p></li>
-<li><p>Pei, W. W., Xie, X., Ong, P., <strong>Trueman, B. F.</strong>, McVicar, M. A., Walsh, M. E., &amp; Gagnon, G. A. (2013). Water Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. <a href="https://doi.org/10.2175/106143013X13698672322183" class="uri">https://doi.org/10.2175/106143013X13698672322183</a></p></li>
+<li><p>King, P. W., Peldszus, S., Mishrra, A., <strong>Trueman, B.
+F.</strong>, Aghasadeghi, K., Gagnon G. A., Giammar, D. E., Huck, P. M.
+Role of natural organic matter and hardness on lead release from
+galvanic corrosion. Environmental Science: Water Research &amp;
+Technology. (in press).</p></li>
+<li><p>Munoz, S., <strong>Trueman, B. F.</strong>, Li, B., &amp; Gagnon,
+G. A. (2022). Effect of sodium silicate on drinking water biofilm
+development. Environmental Science: Water Research &amp; Technology. <a
+href="https://doi.org/10.1039/D1EW00682G"
+class="uri">https://doi.org/10.1039/D1EW00682G</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, Bleasdale-Pollowy, A., Locsin,
+J. A., Bennett, J. L., Krkošek, W. H., &amp; Gagnon, G. A. (2021).
+Seasonal lead release into drinking water and the effect of aluminum.
+ACS ES&amp;T Water. <a
+href="https://doi.org/10.1021/acsestwater.1c00320"
+class="uri">https://doi.org/10.1021/acsestwater.1c00320</a></p></li>
+<li><p>Locsin, J. A., Hood, K. M., Doré, E., <strong>Trueman, B.
+F.</strong>, &amp; Gagnon, G. A. (2022). Colloidal lead in drinking
+water: Formation, occurrence, and characterization. Critical Reviews in
+Environmental Science and Technology. <a
+href="https://doi.org/10.1080/10643389.2022.2039549"
+class="uri">https://doi.org/10.1080/10643389.2022.2039549</a></p></li>
+<li><p>Guardado, A. L. P., Sweeney, C. L., Hayes, E., <strong>Trueman,
+B. F.</strong>, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A.,
+&amp; Stoddart, A. K. (2022). Development and optimization of a new
+method for direct extraction of SARS-CoV-2 RNA from municipal wastewater
+using magnetic beads. Environmental Science: Water Research &amp;
+Technology. 8, 47-61. <a href="https://doi.org/10.1039/D1EW00539A"
+class="uri">https://doi.org/10.1039/D1EW00539A</a></p></li>
+<li><p>Li, B., <strong>Trueman, B. F.</strong>, Doré, E., &amp; Gagnon,
+G. A. (2021). Effectiveness of sodium silicates for lead corrosion
+control: a critical review of current data. Environmental Science &amp;
+Technology Letters. 8(11), 932–939. <a
+href="https://doi.org/10.1021/acs.estlett.1c00671"
+class="uri">https://doi.org/10.1021/acs.estlett.1c00671</a></p></li>
+<li><p><strong><sup>a</sup>Joint first author</strong>: Anderson,
+L.E.,<sup>a</sup> <strong>Trueman, B.F.</strong>,<sup>a</sup>
+Dunnington, D.W.<sup>a</sup> &amp; Gagnon, G. A. (2021). Relative
+importance of organic- and iron-based colloids in six Nova Scotian
+lakes. npj Clean Water 4, 26 <a
+href="https://doi.org/10.1038/s41545-021-00115-4"
+class="uri">https://doi.org/10.1038/s41545-021-00115-4</a></p></li>
+<li><p>Aghasadeghi, K., Peldszus, S., <strong>Trueman, B. F.</strong>,
+Mishrra, A., Cooke, M. G., Slawson, R. M., Giammar, D. E., Gagnon, G.
+A., &amp; Huck, P. M. (2021). Pilot-scale comparison of sodium
+silicates, orthophosphate and pH adjustment to reduce lead release from
+lead service lines. Water Research. 195, 116955. <a
+href="https://doi.org/10.1016/j.watres.2021.116955"
+class="uri">https://doi.org/10.1016/j.watres.2021.116955</a></p></li>
+<li><p><strong><sup>a</sup>Joint first author</strong>: Redden,
+D.,<sup>a</sup> <strong>Trueman, B. F.</strong>,<sup>a</sup> Dunnington,
+D. W., Anderson, L. A., &amp; Gagnon, G. A. (2021). Chemical recovery
+and browning of Nova Scotia surface waters in response to declining acid
+deposition. Environmental Science: Processes &amp; Impacts. 23, 446-456.
+<a href="https://doi.org/10.1039/D0EM00425A"
+class="uri">https://doi.org/10.1039/D0EM00425A</a></p></li>
+<li><p>Li, B., <strong>Trueman, B. F.</strong>, Locsin, J. A., Rahman,
+M. S., Gao, Y., Park, Y., &amp; Gagnon, G. A. (2021). Impact of sodium
+silicate on lead release from lead carbonate. Environmental Science:
+Water Research &amp; Technology. 7, 599-609. <a
+href="https://doi.org/10.1039/D0EW00886A"
+class="uri">https://doi.org/10.1039/D0EW00886A</a></p></li>
+<li><p>Li, B., <strong>Trueman, B. F.</strong>, Rahman, M. S., &amp;
+Gagnon, G. A. (2021). Controlling lead release due to uniform and
+galvanic corrosion—An evaluation of silicate-based inhibitors. Journal
+of Hazardous Materials, 407, 124707. <a
+href="https://doi.org/10.1016/j.jhazmat.2020.124707"
+class="uri">https://doi.org/10.1016/j.jhazmat.2020.124707</a></p></li>
+<li><p>Li, B., <strong>Trueman, B. F.</strong>, Munoz, S., Locsin, J.
+M., &amp; Gagnon, G. A. (2021). Impact of sodium silicate on lead
+release and colloid size distributions in drinking water. Water
+Research, 190, 116709. <a
+href="https://doi.org/10.1016/j.watres.2020.116709"
+class="uri">https://doi.org/10.1016/j.watres.2020.116709</a></p></li>
+<li><p>Dunnington, D. W., <strong>Trueman, B. F.</strong>, Raseman, W.
+J., Anderson, L. E., Gagnon, G. A. (2021). Comparing the Predictive
+Performance, Interpretability, and Accessibility of Machine Learning and
+Physically Based Models for Water Treatment. ACS ES&amp;T Engineering.
+1(3), 348–356. <a href="https://doi.org/10.1021/acsestengg.0c00053"
+class="uri">https://doi.org/10.1021/acsestengg.0c00053</a></p></li>
+<li><p><strong><sup>a</sup>Joint first author</strong>: Lane,
+K.,<sup>a</sup> <strong>Trueman, B. F.</strong>,<sup>a</sup> Locsin, J.,
+Gagnon, G. A. (2020). Inorganic contaminants in Canadian First Nation
+community water systems. Journal of Water and Health. 18 (5), 728–740.
+<a href="https://doi.org/10.2166/wh.2020.185"
+class="uri">https://doi.org/10.2166/wh.2020.185</a></p></li>
+<li><p>Locsin, J. M., <strong>Trueman, B.F.</strong>, Serracin-Pitti,
+D., Stanton, G. M. L., Gagnon, G. A. (2020). Potential regulatory
+implications of guideline changes in lead monitoring for Nova Scotia.
+AWWA Water Science, 2(4), e1182. <a
+href="https://doi.org/10.1002/aws2.1182"
+class="uri">https://doi.org/10.1002/aws2.1182</a></p></li>
+<li><p>Gora, S. L., Anaviapik-Soucie, T., Allward, N. E., Ontiveros, C.
+C., L’Hérault, V., Kunuk- Gavin, M., <strong>Trueman, B. F.</strong>,
+Campbell, J., Stoddart, A. K., Gagnon, G. A. (2020). Microbiological
+water quality in a decentralized Arctic drinking water system.
+Environmental Science: Water Research &amp; Technology, 6, 1855-1868. <a
+href="https://doi.org/10.1039/d0ew00019a"
+class="uri">https://doi.org/10.1039/d0ew00019a</a></p></li>
+<li><p>Gora, S. L., <strong>Trueman, B. F.</strong>, Anaviapik-Soucie,
+T., Gavin, M. K., Ontiveros, C. C., Campbell, J., L’Hérault, V.,
+Stoddart, A. K., &amp; Gagnon, G. A. (2020). Source Water
+Characteristics and Building-specific Factors Influence Corrosion and
+Point of Use Water Quality in a Decentralized Arctic Drinking Water
+System. Environmental Science &amp; Technology, 54, 2192−2201. <a
+href="https://doi.org/10.1021/acs.est.9b04691"
+class="uri">https://doi.org/10.1021/acs.est.9b04691</a></p></li>
+<li><p><strong><sup>a</sup>Joint first author</strong>: Brophy, M.
+J.,<sup>a</sup> <strong>Trueman, B. F.</strong>,<sup>a</sup> Park, Y.,
+Betts, R. A., &amp; Gagnon, G. A. (2019). Fluorescence Spectra Predict
+Microcystin-LR and Disinfection Byproduct Formation Potential in Lake
+Water. Environmental Science &amp; Technology, 53(2), 586–594. <a
+href="https://doi.org/10.1021/acs.est.8b04139"
+class="uri">https://doi.org/10.1021/acs.est.8b04139</a></p></li>
+<li><p>Li, B., <strong>Trueman, B. F.</strong>, Rahman, M. S., Gao, Y.,
+Park, Y., &amp; Gagnon, G. A. (2019). Understanding the impacts of
+sodium silicate on water quality and iron oxide particles. Environmental
+Science: Water Research &amp; Technology, 5(8), 1360–1370. <a
+href="https://doi.org/10.1039/C9EW00257J"
+class="uri">https://doi.org/10.1039/C9EW00257J</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, Anaviapik-Soucie, T., L’Hérault,
+V., &amp; Gagnon, G. A. (2019). Characterizing colloidal metals in
+drinking water by field flow fractionation. Environmental Science: Water
+Research &amp; Technology, 5(12), 2202–2209. <a
+href="https://doi.org/10.1039/C9EW00560A"
+class="uri">https://doi.org/10.1039/C9EW00560A</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, Gregory, B. S., McCormick, N.
+E., Gao, Y., Gora, S., Anaviapik-Soucie, T., L’Hérault, V., &amp;
+Gagnon, G. A. (2019). Manganese Increases Lead Release to Drinking
+Water. Environmental Science &amp; Technology, 53(9), 4803–4812. <a
+href="https://doi.org/10.1021/acs.est.9b00317"
+class="uri">https://doi.org/10.1021/acs.est.9b00317</a></p></li>
+<li><p>Deshommes, E., <strong>Trueman, B .F.</strong>, Douglas, I.,
+Huggins, D., Laroche, L., Swertfeger, J., Spielmacher, A., Gagnon, G.
+A., &amp; Prévost, M. (2018). Lead Levels at the Tap and Consumer
+Exposure from Legacy and Recent Lead Service Line Replacements in Six
+Utilities. Environmental Science &amp; Technology, 52(16), 9451–9459. <a
+href="https://doi.org/10.1021/acs.est.8b02388"
+class="uri">https://doi.org/10.1021/acs.est.8b02388</a></p></li>
+<li><p>Gao, Y., <strong>Trueman, B. F.</strong>, Stoddart, A. K., &amp;
+Gagnon, G. A. (2018). Understanding the Impact of Extracellular
+Polymeric Substances on Lead Release in Drinking Water Systems. ACS
+Omega, 3(11), 14824–14832. <a
+href="https://doi.org/10.1021/acsomega.8b02363"
+class="uri">https://doi.org/10.1021/acsomega.8b02363</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, Krkošek, W. H., &amp; Gagnon, G.
+A. (2018). Effects of ortho- and polyphosphates on lead speciation in
+drinking water. Environmental Science: Water Research &amp; Technology,
+4(4), 505–512. <a href="https://doi.org/10.1039/C7EW00521K"
+class="uri">https://doi.org/10.1039/C7EW00521K</a></p></li>
+<li><p>Anderson, L. E., Krkošek, W. H., Stoddart, A. K.,
+<strong>Trueman, B. F.</strong>, &amp; Gagnon, G. A. (2017). Lake
+Recovery Through Reduced Sulfate Deposition: A New Paradigm for Drinking
+Water Treatment. Environmental Science &amp; Technology, 51(3),
+1414–1422. <a href="https://doi.org/10.1021/acs.est.6b04889"
+class="uri">https://doi.org/10.1021/acs.est.6b04889</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, Sweet, G. A., Harding, M. D.,
+Estabrook, H., Bishop, D. P., &amp; Gagnon, G. A. (2017). Galvanic
+Corrosion of Lead by Iron (Oxyhydr)Oxides: Potential Impacts on Drinking
+Water Quality. Environmental Science &amp; Technology, 51(12),
+6812–6820. <a href="https://doi.org/10.1021/acs.est.7b01671"
+class="uri">https://doi.org/10.1021/acs.est.7b01671</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, Camara, E., &amp; Gagnon, G. A.
+(2016). Evaluating the Effects of Full and Partial Lead Service Line
+Replacement on Lead Levels in Drinking Water. Environmental Science
+&amp; Technology, 50(14), 7389–7396. <a
+href="https://doi.org/10.1021/acs.est.6b01912"
+class="uri">https://doi.org/10.1021/acs.est.6b01912</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, &amp; Gagnon, G. A. (2016a). A
+new analytical approach to understanding nanoscale lead-iron
+interactions in drinking water distribution systems. Journal of
+Hazardous Materials, 311, 151–157. <a
+href="https://doi.org/10.1016/j.jhazmat.2016.03.001"
+class="uri">https://doi.org/10.1016/j.jhazmat.2016.03.001</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, MacIsaac, S. A., Stoddart, A.
+K., &amp; Gagnon, G. A. (2016). Prediction of disinfection by-product
+formation in drinking water via fluorescence spectroscopy. Environmental
+Science: Water Research &amp; Technology, 2(2), 383–389. <a
+href="https://doi.org/10.1039/C5EW00285K"
+class="uri">https://doi.org/10.1039/C5EW00285K</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, &amp; Gagnon, G. A. (2016b).
+Understanding the Role of Particulate Iron in Lead Release to Drinking
+Water. Environmental Science &amp; Technology, 50(17), 9053–9060. <a
+href="https://doi.org/10.1021/acs.est.6b01153"
+class="uri">https://doi.org/10.1021/acs.est.6b01153</a></p></li>
+<li><p>Pei, W. W., Xie, X., Ong, P., <strong>Trueman, B. F.</strong>,
+McVicar, M. A., Walsh, M. E., &amp; Gagnon, G. A. (2013). Water
+Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. <a
+href="https://doi.org/10.2175/106143013X13698672322183"
+class="uri">https://doi.org/10.2175/106143013X13698672322183</a></p></li>
 </ol>
 <h1 id="preprints">Preprints</h1>
 <ol type="1">
-<li><p><strong>Trueman, B. F.</strong>, James, W., Shu, T., Doré, E., &amp; Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ChemRxiv. <a href="https://doi.org/10.26434/chemrxiv-2022-b3f72-v3" class="uri">https://doi.org/10.26434/chemrxiv-2022-b3f72-v3</a></p></li>
-<li><p>Locsin, J. A., <strong>Trueman, B. F.</strong>, Doré, E., Bleasdale-Pollowy, A., &amp; Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. ChemRxiv. <a href="https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2" class="uri">https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2</a></p></li>
-<li><p><strong>Trueman, B. F.</strong>, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., &amp; Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. <a href="https://doi.org/10.26434/chemrxiv-2021-59nd6-v4" class="uri">https://doi.org/10.26434/chemrxiv-2021-59nd6-v4</a></p></li>
-<li><p>Munoz, S., <strong>Trueman, B. F.</strong> Li, B., &amp; Gagnon, G. A. (2021). Effect of sodium silicate on drinking water biofilm development. bioRxiv. <a href="https://doi.org/10.1101/2021.09.15.460503" class="uri">https://doi.org/10.1101/2021.09.15.460503</a></p></li>
-<li><p>Guardado, A. L. P., Sweeney, C. L., Hayes, E., <strong>Trueman, B. F.</strong>, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A., &amp; Stoddart, A. K. (2020). Development and optimization of a new method for direct extraction of SARS-CoV-2 RNA from municipal wastewater using magnetic beads. medRxiv. <a href="https://doi.org/10.1101/2020.12.04.20237230" class="uri">https://doi.org/10.1101/2020.12.04.20237230</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, James, W., Shu, T., Doré, E.,
+&amp; Gagnon, G. A. (2022). Comparing corrosion control treatments using
+a robust Bayesian generalized additive model. ChemRxiv. <a
+href="https://doi.org/10.26434/chemrxiv-2022-b3f72-v3"
+class="uri">https://doi.org/10.26434/chemrxiv-2022-b3f72-v3</a></p></li>
+<li><p>Locsin, J. A., <strong>Trueman, B. F.</strong>, Doré, E.,
+Bleasdale-Pollowy, A., &amp; Gagnon, G. A. (2022). Impacts of
+orthophosphate-polyphosphate blends on the dissolution and
+transformation of lead (II) carbonate. ChemRxiv. <a
+href="https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2"
+class="uri">https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2</a></p></li>
+<li><p>Gao, Y., <strong>Trueman, B. F.</strong>, &amp; Gagnon, G. A.
+(2022). Early Phase Effects of Silicate and Orthophosphate on Lead (Pb)
+Corrosion Scale Development and Pb Release. SSRN. <a
+href="http://dx.doi.org/10.2139/ssrn.4127245"
+class="uri">http://dx.doi.org/10.2139/ssrn.4127245</a></p></li>
+<li><p><strong>Trueman, B. F.</strong>, Bleasdale-Pollowy, A., Locsin,
+J. A., Bennett, J. L., Krkošek, W. H., &amp; Gagnon, G. A. (2021).
+Seasonal lead release to drinking water and the effect of aluminum.
+ChemRxiv. <a href="https://doi.org/10.26434/chemrxiv-2021-59nd6-v4"
+class="uri">https://doi.org/10.26434/chemrxiv-2021-59nd6-v4</a></p></li>
+<li><p>Munoz, S., <strong>Trueman, B. F.</strong> Li, B., &amp; Gagnon,
+G. A. (2021). Effect of sodium silicate on drinking water biofilm
+development. bioRxiv. <a
+href="https://doi.org/10.1101/2021.09.15.460503"
+class="uri">https://doi.org/10.1101/2021.09.15.460503</a></p></li>
+<li><p>Guardado, A. L. P., Sweeney, C. L., Hayes, E., <strong>Trueman,
+B. F.</strong>, Huang, Y., Jamieson, R. C., Rand, J. L., Gagnon, G. A.,
+&amp; Stoddart, A. K. (2020). Development and optimization of a new
+method for direct extraction of SARS-CoV-2 RNA from municipal wastewater
+using magnetic beads. medRxiv. <a
+href="https://doi.org/10.1101/2020.12.04.20237230"
+class="uri">https://doi.org/10.1101/2020.12.04.20237230</a></p></li>
 </ol>
-<h1 id="first-author-conference-presentations">First author conference presentations</h1>
+<h1 id="first-author-conference-presentations">First author conference
+presentations</h1>
 <ol type="1">
-<li><p>Trueman, B.F., A.K. Stoddart &amp; G.A. Gagnon. 2019. Complexation of metals in drinking water systems by NOM. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.</p></li>
-<li><p>Trueman, B.F., L.A. Anderson &amp; G.A. Gagnon. 2019. NOM, cyanobacteria and algal toxins: monitoring tools and predictive modeling of contaminant occurrence in drinking water supplies. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.</p></li>
-<li><p>Trueman, B.F., D. Dunnington, &amp; G.A. Gagnon. 2019. Communicating water quality data using the grammar of graphics. Poster presentation. American Chemical Society National Meeting &amp; Expo, August 25 – 29 in San Diego, CA.</p></li>
-<li><p>Trueman, B.F., M. Brophy, L. A. Anderson, Y. Park &amp; G. A. Gagnon. 2019. Fluorescence spectra predict microcystin-LR occurrence in lake water. Oral presentation. 3rd Interdisciplinary Freshwater Harmful Algal Blooms Workshop, April 24 – 26 in Toronto, Canada.</p></li>
-<li><p>Trueman, B.F., J. Locsin, W.H. Krkošek, and G.A. Gagnon. 2018. Understanding lead complexation through corrosion control with phosphate-based inhibitors. Oral presentation. American Water Works Association Water Quality Technology Conference, November 11-14 in Toronto, Canada.</p></li>
-<li><p>Trueman, B.F., W.H. Krkošek, and G.A. Gagnon. 2018. Effects of ortho- and polyphosphates on lead speciation in drinking water. Oral presentation. American Chemical Society Annual Conference, March 18-22, in New Orleans, LA.</p></li>
-<li><p>Trueman, B.F. and G.A. Gagnon. 2017. Galvanic corrosion of lead by iron (oxyhydr)oxides: potential impacts on drinking water quality. Oral presentation. American Chemical Society Annual Conference, August 20-24, in Washington, DC.</p></li>
-<li><p>Trueman, B.F. and G.A. Gagnon. 2017. Evaluating strategies for controlling lead release to drinking water. Oral presentation. American Water Works Association International Symposium on Inorganics, March 21-22 in Detroit, MI.</p></li>
-<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding the role of iron particles in lead release to drinking water. Poster presentation. American Water Works Association Water Quality Technology Conference, November 13-17 in Indianapolis, IN.</p></li>
-<li><p>Trueman, B.F., S.A. MacIsaac, A.K. Stoddart, and G.A. Gagnon. 2016. Prediction of disinfection byproduct formation in drinking water via fluorescence spectroscopy. Oral presentation. 17th National Conference on Drinking Water, October 16-18 in Ottawa, Canada.</p></li>
-<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding lead contamination in drinking water systems. Oral presentation. Atlantic Canadian Water Works Association Annual Conference, September 18-21, in Moncton, Canada.</p></li>
-<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding the role of colloidal particles in lead release to drinking water. Oral presentation. American Chemical Society Annual Conference, August 21-25 in Philadelphia, PA.</p></li>
-<li><p>Trueman, B.F. and G.A. Gagnon. 2015. Controlling lead in drinking water: phosphate inhibition, lead service line replacement, and the role of the water main. Oral presentation. Atlantic Canadian Water Works Association Annual Conference, October 4-7 in St. John’s, Canada.</p></li>
-<li><p>Trueman, B.F., J. Woods, G.A. Gagnon and H. Castleden. 2014. The effect of partial lead service line replacement and the barriers to full replacement. Oral presentation. American Water Works Association Annual Conference, June 8-12 in Boston, MA.</p></li>
-<li><p>Trueman, B.F. and G.A. Gagnon. 2014. The effect of cast iron water mains on lead release to standing water. Oral presentation. Canadian Society for Civil Engineering Environmental Specialty Conference, May 28-31 in Halifax, Canada.</p></li>
-<li><p>Trueman, B.F. and G.A. Gagnon. 2013. Optimization of phosphate dose following residential sampling for lead. Poster presentation. American Water Works Association Annual Conference and Exposition, June 9-13 in Denver, CO.</p></li>
+<li><p>Trueman, B.F., A.K. Stoddart &amp; G.A. Gagnon. 2019.
+Complexation of metals in drinking water systems by NOM. Oral
+presentation. The 7th IWA Specialist Conference on Natural Organic
+Matter in Water, October 7 – 9 in Tokyo, Japan.</p></li>
+<li><p>Trueman, B.F., L.A. Anderson &amp; G.A. Gagnon. 2019. NOM,
+cyanobacteria and algal toxins: monitoring tools and predictive modeling
+of contaminant occurrence in drinking water supplies. Oral presentation.
+The 7th IWA Specialist Conference on Natural Organic Matter in Water,
+October 7 – 9 in Tokyo, Japan.</p></li>
+<li><p>Trueman, B.F., D. Dunnington, &amp; G.A. Gagnon. 2019.
+Communicating water quality data using the grammar of graphics. Poster
+presentation. American Chemical Society National Meeting &amp; Expo,
+August 25 – 29 in San Diego, CA.</p></li>
+<li><p>Trueman, B.F., M. Brophy, L. A. Anderson, Y. Park &amp; G. A.
+Gagnon. 2019. Fluorescence spectra predict microcystin-LR occurrence in
+lake water. Oral presentation. 3rd Interdisciplinary Freshwater Harmful
+Algal Blooms Workshop, April 24 – 26 in Toronto, Canada.</p></li>
+<li><p>Trueman, B.F., J. Locsin, W.H. Krkošek, and G.A. Gagnon. 2018.
+Understanding lead complexation through corrosion control with
+phosphate-based inhibitors. Oral presentation. American Water Works
+Association Water Quality Technology Conference, November 11-14 in
+Toronto, Canada.</p></li>
+<li><p>Trueman, B.F., W.H. Krkošek, and G.A. Gagnon. 2018. Effects of
+ortho- and polyphosphates on lead speciation in drinking water. Oral
+presentation. American Chemical Society Annual Conference, March 18-22,
+in New Orleans, LA.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2017. Galvanic corrosion of lead
+by iron (oxyhydr)oxides: potential impacts on drinking water quality.
+Oral presentation. American Chemical Society Annual Conference, August
+20-24, in Washington, DC.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2017. Evaluating strategies for
+controlling lead release to drinking water. Oral presentation. American
+Water Works Association International Symposium on Inorganics, March
+21-22 in Detroit, MI.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding the role of
+iron particles in lead release to drinking water. Poster presentation.
+American Water Works Association Water Quality Technology Conference,
+November 13-17 in Indianapolis, IN.</p></li>
+<li><p>Trueman, B.F., S.A. MacIsaac, A.K. Stoddart, and G.A. Gagnon.
+2016. Prediction of disinfection byproduct formation in drinking water
+via fluorescence spectroscopy. Oral presentation. 17th National
+Conference on Drinking Water, October 16-18 in Ottawa, Canada.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding lead
+contamination in drinking water systems. Oral presentation. Atlantic
+Canadian Water Works Association Annual Conference, September 18-21, in
+Moncton, Canada.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2016. Understanding the role of
+colloidal particles in lead release to drinking water. Oral
+presentation. American Chemical Society Annual Conference, August 21-25
+in Philadelphia, PA.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2015. Controlling lead in drinking
+water: phosphate inhibition, lead service line replacement, and the role
+of the water main. Oral presentation. Atlantic Canadian Water Works
+Association Annual Conference, October 4-7 in St. John’s,
+Canada.</p></li>
+<li><p>Trueman, B.F., J. Woods, G.A. Gagnon and H. Castleden. 2014. The
+effect of partial lead service line replacement and the barriers to full
+replacement. Oral presentation. American Water Works Association Annual
+Conference, June 8-12 in Boston, MA.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2014. The effect of cast iron
+water mains on lead release to standing water. Oral presentation.
+Canadian Society for Civil Engineering Environmental Specialty
+Conference, May 28-31 in Halifax, Canada.</p></li>
+<li><p>Trueman, B.F. and G.A. Gagnon. 2013. Optimization of phosphate
+dose following residential sampling for lead. Poster presentation.
+American Water Works Association Annual Conference and Exposition, June
+9-13 in Denver, CO.</p></li>
 </ol>
 <h1 id="reports">Reports</h1>
-<p>Prepared confidential consulting reports on topics in drinking water quality and treatment for the cities of Regina, Saint John, and Halifax and for Health Canada and Nova Scotia Environment.</p>
+<p>Prepared confidential consulting reports on topics in drinking water
+quality and treatment for the cities of Regina, Saint John, and Halifax
+and for Health Canada and Nova Scotia Environment.</p>
 <h1 id="peer-reviewer">Peer-reviewer</h1>
 <ul>
 <li>Water Research</li>
@@ -2199,12 +2481,14 @@ Dalhousie University, Halifax, NS</p>
 <h1 id="awards">Awards</h1>
 <ul>
 <li>2021 Mitacs Accelerate Grant ($110,000 over 2 years)</li>
-<li>2019 Best presentation award, The 7th IWA Specialist Conference on Natural Organic Matter (Tokyo, Japan)</li>
+<li>2019 Best presentation award, The 7th IWA Specialist Conference on
+Natural Organic Matter (Tokyo, Japan)</li>
 <li>2017 Nova Scotia Graduate Scholarship</li>
 <li>2015 NSERC Post Graduate Scholarship Doctoral Level</li>
 <li>2015 President’s Award, Dalhousie University</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -102,6 +102,8 @@ Dalhousie University, Halifax, NS
 
 1. Locsin, J. A., **Trueman, B. F.**, Doré, E., Bleasdale-Pollowy, A., & Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2
 
+1. Gao, Y., **Trueman, B. F.**, & Gagnon, G. A. (2022). Early Phase Effects of Silicate and Orthophosphate on Lead (Pb) Corrosion Scale Development and Pb Release. SSRN. http://dx.doi.org/10.2139/ssrn.4127245
+
 1. **Trueman, B. F.**, Bleasdale-Pollowy, A., Locsin, J. A., Bennett, J. L., Krkošek, W. H., & Gagnon, G. A. (2021). Seasonal lead release to drinking water and the effect of aluminum. ChemRxiv. https://doi.org/10.26434/chemrxiv-2021-59nd6-v4
 
 2. Munoz, S., **Trueman, B. F.** Li, B., & Gagnon, G. A. (2021). Effect of sodium silicate on drinking water biofilm development. bioRxiv. https://doi.org/10.1101/2021.09.15.460503
