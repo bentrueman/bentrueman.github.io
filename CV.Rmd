@@ -32,9 +32,7 @@ Dalhousie University, Halifax, NS
 
 # Journal articles 
 
-<!-- https://doi.org/10.1039/D1EW00903F -->
-
-1. King, P. W., Peldszus, S., Mishrra, A., **Trueman, B. F.**, Aghasadeghi, K., Gagnon G. A., Giammar, D. E., Huck, P. M. Role of natural organic matter and hardness on lead release from galvanic corrosion. Environmental Science: Water Research & Technology. (in press).  
+1. King, P. W., Peldszus, S., Mishrra, A., **Trueman, B. F.**, Aghasadeghi, K., Gagnon G. A., Giammar, D. E., Huck, P. M. Role of natural organic matter and hardness on lead release from galvanic corrosion. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00903F  
 
 1. Munoz, S., **Trueman, B. F.**, Li, B., & Gagnon, G. A. (2022). Effect of sodium silicate on drinking water biofilm development. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D1EW00682G
 
