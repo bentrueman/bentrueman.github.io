@@ -22,13 +22,11 @@ Dalhousie University, Halifax, NS
 
 # Skills  
 
-- Proficient in R (https://github.com/bentrueman)
+- R programming (https://github.com/bentrueman) and data analysis (e.g., https://doi.org/10.26434/chemrxiv-2022-b3f72-v3)
 - Geochemical modeling with applications in corrosion control
   - Developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
 - Well-developed written and verbal communication skills
-  - Wrote or co-wrote more than 30 peer-reviewed journal articles, presented work at international academic conferences
-- Data analysis  
-  - e.g., https://doi.org/10.26434/chemrxiv-2022-b3f72-v2
+  - Wrote or co-wrote more than 30 peer-reviewed journal articles
 
 # Journal articles 
 
