@@ -25,8 +25,9 @@ Dalhousie University, Halifax, NS
 - R programming (https://github.com/bentrueman) and data analysis (e.g., https://doi.org/10.26434/chemrxiv-2022-b3f72-v3)
 - Geochemical modeling with applications in corrosion control
   - Developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
-- Well-developed written and verbal communication skills
+- Communication
   - Wrote or co-wrote more than 30 peer-reviewed journal articles
+  - Presented at international academic conferences
 
 # Journal articles 
 
@@ -64,7 +65,7 @@ Dalhousie University, Halifax, NS
 
 11.	Gora, S. L., **Trueman, B. F.**, Anaviapik-Soucie, T., Gavin, M. K., Ontiveros, C. C., Campbell, J., L’Hérault, V., Stoddart, A. K., & Gagnon, G. A. (2020). Source Water Characteristics and Building-specific Factors Influence Corrosion and Point of Use Water Quality in a Decentralized Arctic Drinking Water System. Environmental Science & Technology, 54, 2192−2201. https://doi.org/10.1021/acs.est.9b04691
 
-12.	**^a^Joint first author**: Brophy, M. J.,^a^ **Trueman, B. F.**,^a^ Park, Y., Betts, R. A., & Gagnon, G. A. (2019). Fluorescence Spectra Predict Microcystin-LR and Disinfection Byproduct Formation Potential in Lake Water. Environmental Science & Technology, 53(2), 586–594. https://doi.org/10.1021/acs.est.8b04139
+12.	**^a^Joint first author**: Brophy, M. J.,^a^ **Trueman, B. F.**,^a^ Park, Y., Betts, R. A., & Gagnon, G. A. (2019). Fluorescence Spectra Predict Microcystin-LR and Disinfection Byproduct Formation Potential in Lake Water. Environmental Science & Technology, 53(2), 586–594. https://doi.org/10.1021/acs.est.8b04139 (ACS Article on Request: https://pubs.acs.org/articlesonrequest/AOR-yzIje94pRCzeBYYfe6sd)
 
 13.	Li, B., **Trueman, B. F.**, Rahman, M. S., Gao, Y., Park, Y., & Gagnon, G. A. (2019). Understanding the impacts of sodium silicate on water quality and iron oxide particles. Environmental Science: Water Research & Technology, 5(8), 1360–1370. https://doi.org/10.1039/C9EW00257J
 
