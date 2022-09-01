@@ -45,7 +45,7 @@ Dalhousie University, Halifax, NS
 
 1. Li, B., **Trueman, B. F.**, Doré, E., & Gagnon, G. A. (2021). Effectiveness of sodium silicates for lead corrosion control: a critical review of current data. Environmental Science & Technology Letters. 8(11), 932–939. https://doi.org/10.1021/acs.estlett.1c00671
 
-1. **^a^Joint first author**: Anderson, L.E.,^a^ **Trueman, B.F.**,^a^ Dunnington, D.W.^a^ & Gagnon, G. A. (2021).  Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 https://doi.org/10.1038/s41545-021-00115-4
+1. **^a^Joint first author**: Anderson, L.E.,^a^ **Trueman, B. F.**,^a^ Dunnington, D.W.^a^ & Gagnon, G. A. (2021).  Relative importance of organic- and iron-based colloids in six Nova Scotian lakes. npj Clean Water 4, 26 https://doi.org/10.1038/s41545-021-00115-4
 
 2.	Aghasadeghi, K., Peldszus, S., **Trueman, B. F.**, Mishrra, A., Cooke, M. G., Slawson, R. M., Giammar, D. E., Gagnon, G. A., & Huck, P. M. (2021). Pilot-scale comparison of sodium silicates, orthophosphate and pH adjustment to reduce lead release from lead service lines. Water Research. 195, 116955. https://doi.org/10.1016/j.watres.2021.116955
 
@@ -61,7 +61,7 @@ Dalhousie University, Halifax, NS
 
 8.	**^a^Joint first author**: Lane, K.,^a^ **Trueman, B. F.**,^a^ Locsin, J., Gagnon, G. A. (2020). Inorganic contaminants in Canadian First Nation community water systems. Journal of Water and Health. 18 (5), 728–740. https://doi.org/10.2166/wh.2020.185
 
-9.	Locsin, J. M., **Trueman, B.F.**, Serracin-Pitti, D., Stanton, G. M. L., Gagnon, G. A. (2020). Potential regulatory implications of guideline changes in lead monitoring for Nova Scotia. AWWA Water Science, 2(4), e1182. https://doi.org/10.1002/aws2.1182
+9.	Locsin, J. M., **Trueman, B. F.**, Serracin-Pitti, D., Stanton, G. M. L., Gagnon, G. A. (2020). Potential regulatory implications of guideline changes in lead monitoring for Nova Scotia. AWWA Water Science, 2(4), e1182. https://doi.org/10.1002/aws2.1182
 
 10.	Gora, S. L., Anaviapik-Soucie, T., Allward, N. E., Ontiveros, C. C., L’Hérault, V., Kunuk- Gavin, M., **Trueman, B. F.**, Campbell, J., Stoddart, A. K., Gagnon, G. A. (2020). Microbiological water quality in a decentralized Arctic drinking water system. Environmental Science: Water Research & Technology, 6, 1855-1868. https://doi.org/10.1039/d0ew00019a
 
@@ -97,7 +97,7 @@ Dalhousie University, Halifax, NS
 
 # Preprints  
 
-1. **Trueman, B.F.**, Locsin, J. M., Doré, E., Hood, K., & Gagnon, G. A. (2022). Sodium silicate and hexametaphosphate promote the release of (oxyhydr)oxide nanoparticles from corroding iron. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-rtzqm-v2
+1. **Trueman, B. F.**, Locsin, J. M., Doré, E., Hood, K., & Gagnon, G. A. (2022). Sodium silicate and hexametaphosphate promote the release of (oxyhydr)oxide nanoparticles from corroding iron. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-rtzqm-v2
   
 1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-b3f72-v4
 
@@ -113,37 +113,39 @@ Dalhousie University, Halifax, NS
 
 # First author conference presentations
 
-1.	Trueman, B.F., A.K. Stoddart & G.A. Gagnon. 2019. Complexation of metals in drinking water systems by NOM. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.
+1. Trueman, B. F., Locsin, J., Doré, E., Hood, K., & Gagnon, G. A. 2022. Colloids and nanoparticles in drinking water: a review of occurrence and new data on the role of sequestrants. American Chemical Society National Meeting & Expo, August 21 – 25 in Chicago, Il. 
 
-2.	Trueman, B.F., L.A. Anderson & G.A. Gagnon. 2019. NOM, cyanobacteria and algal toxins: monitoring tools and predictive modeling of contaminant occurrence in drinking water supplies. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.
+1.	Trueman, B. F., Stoddart,  A. K.,  & Gagnon, G. A. 2019. Complexation of metals in drinking water systems by NOM. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.
 
-3.	Trueman, B.F., D. Dunnington, & G.A. Gagnon. 2019. Communicating water quality data using the grammar of graphics. Poster presentation. American Chemical Society National Meeting & Expo, August 25 – 29 in San Diego, CA. 
+2.	Trueman, B. F., Anderson, L. A., & Gagnon, G. A. 2019. NOM, cyanobacteria and algal toxins: monitoring tools and predictive modeling of contaminant occurrence in drinking water supplies. Oral presentation. The 7th IWA Specialist Conference on Natural Organic Matter in Water, October 7 – 9 in Tokyo, Japan.
 
-4.	Trueman, B.F., M. Brophy, L. A. Anderson, Y. Park & G. A. Gagnon. 2019. Fluorescence spectra predict microcystin-LR occurrence in lake water. Oral presentation. 3rd Interdisciplinary Freshwater Harmful Algal Blooms Workshop, April 24 – 26 in Toronto, Canada.
+3.	Trueman, B. F., Dunnington, D. & Gagnon, G. A. 2019. Communicating water quality data using the grammar of graphics. Poster presentation. American Chemical Society National Meeting & Expo, August 25 – 29 in San Diego, CA. 
 
-5.	Trueman, B.F., J. Locsin, W.H. Krkošek, and G.A. Gagnon. 2018. Understanding lead complexation through corrosion control with phosphate-based inhibitors. Oral presentation. American Water Works Association Water Quality Technology Conference, November 11-14 in Toronto, Canada.
+4.	Trueman, B. F., Brophy, M., Anderson, L. A., Park, Y. & Gagnon, G. A. 2019. Fluorescence spectra predict microcystin-LR occurrence in lake water. Oral presentation. 3rd Interdisciplinary Freshwater Harmful Algal Blooms Workshop, April 24 – 26 in Toronto, Canada.
 
-6.	Trueman, B.F., W.H. Krkošek, and G.A. Gagnon. 2018. Effects of ortho- and polyphosphates on lead speciation in drinking water. Oral presentation. American Chemical Society Annual Conference, March 18-22, in New Orleans, LA.
+5.	Trueman, B. F., Locsin, J., Krkošek, W. H., & Gagnon, G. A. 2018. Understanding lead complexation through corrosion control with phosphate-based inhibitors. Oral presentation. American Water Works Association Water Quality Technology Conference, November 11-14 in Toronto, Canada.
 
-7.	Trueman, B.F. and G.A. Gagnon. 2017. Galvanic corrosion of lead by iron (oxyhydr)oxides: potential impacts on drinking water quality. Oral presentation. American Chemical Society Annual Conference, August 20-24, in Washington, DC.
+6.	Trueman, B. F., Krkošek, W. H., & Gagnon, G. A. 2018. Effects of ortho- and polyphosphates on lead speciation in drinking water. Oral presentation. American Chemical Society Annual Conference, March 18-22, in New Orleans, LA.
 
-8.	Trueman, B.F. and G.A. Gagnon. 2017. Evaluating strategies for controlling lead release to drinking water. Oral presentation. American Water Works Association International Symposium on Inorganics, March 21-22 in Detroit, MI. 
+7.	Trueman, B. F. & Gagnon, G. A. 2017. Galvanic corrosion of lead by iron (oxyhydr)oxides: potential impacts on drinking water quality. Oral presentation. American Chemical Society Annual Conference, August 20-24, in Washington, DC.
 
-9.	Trueman, B.F. and G.A. Gagnon. 2016. Understanding the role of iron particles in lead release to drinking water. Poster presentation. American Water Works Association Water Quality Technology Conference, November 13-17 in Indianapolis, IN.
+8.	Trueman, B. F. & Gagnon, G. A. 2017. Evaluating strategies for controlling lead release to drinking water. Oral presentation. American Water Works Association International Symposium on Inorganics, March 21-22 in Detroit, MI. 
 
-10.	Trueman, B.F., S.A. MacIsaac, A.K. Stoddart, and G.A. Gagnon. 2016. Prediction of disinfection byproduct formation in drinking water via fluorescence spectroscopy. Oral presentation. 17th National Conference on Drinking Water, October 16-18 in Ottawa, Canada.
+9.	Trueman, B. F. & Gagnon, G. A. 2016. Understanding the role of iron particles in lead release to drinking water. Poster presentation. American Water Works Association Water Quality Technology Conference, November 13-17 in Indianapolis, IN.
 
-11.	Trueman, B.F. and G.A. Gagnon. 2016. Understanding lead contamination in drinking water systems. Oral presentation. Atlantic Canadian Water Works Association Annual Conference, September 18-21, in Moncton, Canada.
+10.	Trueman, B. F., MacIsaac, S. A., Stoddart, A. K., & Gagnon, G. A. 2016. Prediction of disinfection byproduct formation in drinking water via fluorescence spectroscopy. Oral presentation. 17th National Conference on Drinking Water, October 16-18 in Ottawa, Canada.
 
-12.	Trueman, B.F. and G.A. Gagnon. 2016. Understanding the role of colloidal particles in lead release to drinking water. Oral presentation. American Chemical Society Annual Conference, August 21-25 in Philadelphia, PA.
+11.	Trueman, B. F. & Gagnon, G. A. 2016. Understanding lead contamination in drinking water systems. Oral presentation. Atlantic Canadian Water Works Association Annual Conference, September 18-21, in Moncton, Canada.
 
-13.	Trueman, B.F. and G.A. Gagnon. 2015. Controlling lead in drinking water: phosphate inhibition, lead service line replacement, and the role of the water main. Oral presentation. Atlantic Canadian Water Works Association Annual Conference, October 4-7 in St. John's, Canada.
+12.	Trueman, B. F. & Gagnon, G. A. 2016. Understanding the role of colloidal particles in lead release to drinking water. Oral presentation. American Chemical Society Annual Conference, August 21-25 in Philadelphia, PA.
 
-14.	Trueman, B.F., J. Woods, G.A. Gagnon and H. Castleden. 2014. The effect of partial lead service line replacement and the barriers to full replacement. Oral presentation. American Water Works Association Annual Conference, June 8-12 in Boston, MA.
+13.	Trueman, B. F. & Gagnon, G. A. 2015. Controlling lead in drinking water: phosphate inhibition, lead service line replacement, and the role of the water main. Oral presentation. Atlantic Canadian Water Works Association Annual Conference, October 4-7 in St. John's, Canada.
 
-15.	Trueman, B.F. and G.A. Gagnon. 2014. The effect of cast iron water mains on lead release to standing water. Oral presentation. Canadian Society for Civil Engineering Environmental Specialty Conference, May 28-31 in Halifax, Canada.
+14.	Trueman, B. F., Woods, J., Gagnon, G. A., & Castleden, H. 2014. The effect of partial lead service line replacement and the barriers to full replacement. Oral presentation. American Water Works Association Annual Conference, June 8-12 in Boston, MA.
 
-16.	Trueman, B.F. and G.A. Gagnon. 2013. Optimization of phosphate dose following residential sampling for lead. Poster presentation. American Water Works Association Annual Conference and Exposition, June 9-13 in Denver, CO.
+15.	Trueman, B. F. & Gagnon, G. A. 2014. The effect of cast iron water mains on lead release to standing water. Oral presentation. Canadian Society for Civil Engineering Environmental Specialty Conference, May 28-31 in Halifax, Canada.
+
+16.	Trueman, B. F. & Gagnon, G. A. 2013. Optimization of phosphate dose following residential sampling for lead. Poster presentation. American Water Works Association Annual Conference and Exposition, June 9-13 in Denver, CO.
 
 # Reports
 
