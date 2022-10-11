@@ -31,6 +31,8 @@ Dalhousie University, Halifax, NS
 
 # Journal articles 
 
+1. Gao, Y., **Trueman, B. F.**, Li, B., Earle, M. R., Gagnon, G. A. (2022). Release and migration of Pb from Pb(II) and Pb(IV) compounds in the presence of microbiological activity. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D2EW00152G
+
 1. **Trueman, B. F.**, Locsin, J. M., Doré, E., Hood, K., & Gagnon, G. A. (2022). Sodium silicate and hexametaphosphate promote the release of (oxyhydr)oxide nanoparticles from corroding iron. Environmental Science: Advances. https://doi.org/10.1039/D2VA00199C
   
 1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ES&T Engineering. (in press, preprint: https://doi.org/10.26434/chemrxiv-2022-b3f72-v5).
