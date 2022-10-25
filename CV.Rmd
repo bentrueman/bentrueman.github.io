@@ -2,6 +2,9 @@
 title: "Benjamin Trueman"
 description: "Postdoctoral researcher  \nDepartment of Civil & Resource Engineering
   \ \nDalhousie University  \nHalifax, NS, CAN  \n"
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -35,7 +38,7 @@ Dalhousie University, Halifax, NS
 
 1. **Trueman, B. F.**, Locsin, J. M., Doré, E., Hood, K., & Gagnon, G. A. (2022). Sodium silicate and hexametaphosphate promote the release of (oxyhydr)oxide nanoparticles from corroding iron. Environmental Science: Advances. https://doi.org/10.1039/D2VA00199C
   
-1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ES&T Engineering. (in press, preprint: https://doi.org/10.26434/chemrxiv-2022-b3f72-v5).
+1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ES&T Engineering. https://doi.org/10.1021/acsestengg.2c00194
 
 1. Locsin, J. A., **Trueman, B. F.**, Doré, E., Bleasdale-Pollowy, A., & Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. Scientific Reports. (in press, preprint: https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2).
 
