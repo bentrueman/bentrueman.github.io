@@ -15,18 +15,31 @@ Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en
 
 2018 PhD, Civil Engineering  
 Dalhousie University, Halifax, NS  
-Thesis title: “Controlling Lead Release To Drinking Water: Impacts Of Iron Oxides, Complexing Species, Orthophosphate, And Lead Pipe Replacement”
+*Thesis title: “Controlling Lead Release To Drinking Water: Impacts Of Iron Oxides, Complexing Species, Orthophosphate, And Lead Pipe Replacement”*
 
 2012 BSc, Environmental Science  
-Dalhousie University, Halifax, NS  
+Dalhousie University, Halifax, NS
+
+# Employment  
+
+2022--Present  
+Postdoctoral employee (Mitacs Accelerate Grant)  
+Halifax Water/Dalhousie University  
+*In this role, I develop Halifax Water’s capabilities to meet water quality challenges by leveraging the utility’s extensive database and data collection enterprise.*  
+
+2018--Present  
+Postdoctoral Employee  
+Centre for Water Resources Studies, Dalhousie University  
+*At the Centre for Water Resources Studies, I manage research projects related to corrosion control in drinking water systems and advanced chromatographic analysis of colloids and nanoparticles.*  
+
 
 # Skills  
 
-- R programming (https://github.com/bentrueman) and data analysis (e.g., https://doi.org/10.26434/chemrxiv-2022-b3f72-v4)
+- R programming (https://github.com/bentrueman) and data analysis (e.g., https://doi.org/10.1021/acsestengg.2c00194)
 - Geochemical modeling with applications in corrosion control
   - Developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
 - Communication
-  - Wrote or co-wrote more than 30 peer-reviewed journal articles
+  - Wrote or co-wrote more than 35 peer-reviewed journal articles
   - Presented at international academic conferences
 
 # Journal articles 
@@ -37,7 +50,7 @@ Dalhousie University, Halifax, NS
   
 1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ES&T Engineering. https://doi.org/10.1021/acsestengg.2c00194
 
-1. Locsin, J. A., **Trueman, B. F.**, Doré, E., Bleasdale-Pollowy, A., & Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. Scientific Reports. (in press, preprint: https://doi.org/10.26434/chemrxiv-2022-2g0j3-v2).
+1. Locsin, J. A., **Trueman, B. F.**, Doré, E., Bleasdale-Pollowy, A., & Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. Scientific Reports. https://doi.org/10.1038/s41598-022-22683-2
 
 1. Gao, Y., **Trueman, B. F.**, & Gagnon, G. A. (2022). Early phase effects of silicate and orthophosphate on lead (Pb) corrosion scale development and Pb release. Journal of Environmental Management, 321, 115947. https://doi.org/10.1016/j.jenvman.2022.115947
 
