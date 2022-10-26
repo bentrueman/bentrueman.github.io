@@ -1,7 +1,7 @@
 ---
 title: "Benjamin Trueman"
-description: "Postdoctoral researcher  \nDepartment of Civil & Resource Engineering
-  \ \nDalhousie University  \nHalifax, NS, CAN  \n"
+description: "Postdoctoral researcher  \nCentre for Water Resources Studies  \nDepartment
+  of Civil & Resource Engineering \nDalhousie University  \nHalifax, NS, CAN"
 ---
 
 ```{r setup, include=FALSE}
