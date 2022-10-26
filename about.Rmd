@@ -3,6 +3,7 @@ title: "About me"
 description: |
   Postdoctoral researcher<br>
   Centre for Water Resources Studies<br>
+  Department of Civil & Resource Engineering<br>
   Dalhousie University<br>
   Halifax, NS, CAN
 ---
