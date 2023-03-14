@@ -17,7 +17,7 @@ here::i_am("2023-03-13-regression-models-with-censored-predictors/regression-mod
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Recently, I've encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul B&uuml;rkner's excellent package for Bayesian regression, `brms` [@brms]. Paul's has written a helpful [vignette](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html) on handling missing values. The general strategy we'll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we'll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that `brms` doesn't handle censored predictors, so we'll need to customize our approach a little bit.
+Recently, I've encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul B&uuml;rkner's excellent package for Bayesian regression, `brms` [@brms]. Paul has written a helpful [vignette](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html) on handling missing values. The general strategy we'll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we'll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that `brms` doesn't handle censored predictors, so we'll need to customize our approach a little bit.
 
 Let's start by loading the following packages:
 
@@ -197,7 +197,7 @@ impute <- function(data, model, var, mi = NULL, cens = NULL, id = NULL) {
 }
 ```
 
-Now, we're ready to set up and run the model. First we need a formula that defines a model for both `y` and `x`. Since we don't have anything else to go on, the model for `x` is intercept only, but we should be able to do better than that in a real application. The `mi()` terms define missing values and how they're handled during model fitting---see the `brms` [vignette](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html) for details.
+Now we're ready to set up and run the model. First we need a formula that defines a model for both `y` and `x`. Since we don't have anything else to go on, the model for `x` is intercept only, but we should be able to do better than that in many real applications. The calls to `mi()` define missing values and how they're handled during model fitting---see the `brms` [vignette](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html) for details.
 
 ```{r model-formula}
 bform <- bf(y | mi() ~ mi(x_star)) + 
@@ -297,7 +297,7 @@ list(
   labs(x = NULL, y = NULL, fill = NULL)
 ```
 
-To estimate prediction performance for the training data, we first impute the censored and missing values. This generates a list of imputed datasets as long as the number of model interations (here, 4000).
+To estimate prediction performance for the training data, we first impute the censored and missing values. This generates a list of imputed datasets as long as the number of posterior samples.
 
 ```{r impute}
 data_train_imputed <- impute(data_train, model_rstan, "x_star", sdata$Jmi_xstar, sdata$Jcens_xstar)
@@ -320,7 +320,7 @@ rmse_train <- map2_dbl(
 median_qi(rmse_train) # summarize
 ```
 
-We can also estimate out-of-sample error by imputing missing values and generating posterior predictions. Imputing censored values, though, is slightly more complicated: since there is no guarantee that model predictions will fall below the censoring limit, we impute by refitting the model to the training set, augmented by the censored observations from the test set:
+We can also estimate out-of-sample error by imputing missing values and generating posterior predictions. Imputing censored values in the test data, though, is slightly more complicated: since there is no guarantee that model predictions will fall below the censoring limit, we impute by refitting the model to the training set, augmented by the censored observations from the test set:
 
 ```{r model-setup-combined}
 data_combined <- bind_rows(data_train, data_test[data_test$cens_x_star, c("x_star", "cens_x_star")])

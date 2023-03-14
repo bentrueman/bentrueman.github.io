@@ -1542,7 +1542,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p>Recently, I’ve encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul Bürkner’s excellent package for Bayesian regression, <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref">Bürkner 2017</a>)</span>. Paul’s has written a helpful <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html">vignette</a> on handling missing values. The general strategy we’ll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we’ll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that <code>brms</code> doesn’t handle censored predictors, so we’ll need to customize our approach a little bit.</p>
+<p>Recently, I’ve encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul Bürkner’s excellent package for Bayesian regression, <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref">Bürkner 2017</a>)</span>. Paul has written a helpful <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html">vignette</a> on handling missing values. The general strategy we’ll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we’ll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that <code>brms</code> doesn’t handle censored predictors, so we’ll need to customize our approach a little bit.</p>
 <p>Let’s start by loading the following packages:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1682,7 +1682,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='op'>}</span></span></code></pre>
 </div>
 </div>
-<p>Now, we’re ready to set up and run the model. First we need a formula that defines a model for both <code>y</code> and <code>x</code>. Since we don’t have anything else to go on, the model for <code>x</code> is intercept only, but we should be able to do better than that in a real application. The <code>mi()</code> terms define missing values and how they’re handled during model fitting—see the <code>brms</code> <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html">vignette</a> for details.</p>
+<p>Now we’re ready to set up and run the model. First we need a formula that defines a model for both <code>y</code> and <code>x</code>. Since we don’t have anything else to go on, the model for <code>x</code> is intercept only, but we should be able to do better than that in many real applications. The calls to <code>mi()</code> define missing values and how they’re handled during model fitting—see the <code>brms</code> <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html">vignette</a> for details.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>bform</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/brmsformula.html'>bf</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/mi.html'>mi</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/mi.html'>mi</a></span><span class='op'>(</span><span class='va'>x_star</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
@@ -1751,7 +1751,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="regression-models-with-censored-predictors_files/figure-html5/plot-param-est-1.png" width="624" /></p>
 </div>
-<p>To estimate prediction performance for the training data, we first impute the censored and missing values. This generates a list of imputed datasets as long as the number of model interations (here, 4000).</p>
+<p>To estimate prediction performance for the training data, we first impute the censored and missing values. This generates a list of imputed datasets as long as the number of posterior samples.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data_train_imputed</span> <span class='op'>&lt;-</span> <span class='fu'>impute</span><span class='op'>(</span><span class='va'>data_train</span>, <span class='va'>model_rstan</span>, <span class='st'>"x_star"</span>, <span class='va'>sdata</span><span class='op'>$</span><span class='va'>Jmi_xstar</span>, <span class='va'>sdata</span><span class='op'>$</span><span class='va'>Jcens_xstar</span><span class='op'>)</span></span></code></pre>
@@ -1776,7 +1776,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <pre><code>          y      ymin     ymax .width .point .interval
 1 0.8905452 0.7783883 1.154363   0.95 median        qi</code></pre>
 </div>
-<p>We can also estimate out-of-sample error by imputing missing values and generating posterior predictions. Imputing censored values, though, is slightly more complicated: since there is no guarantee that model predictions will fall below the censoring limit, we impute by refitting the model to the training set, augmented by the censored observations from the test set:</p>
+<p>We can also estimate out-of-sample error by imputing missing values and generating posterior predictions. Imputing censored values in the test data, though, is slightly more complicated: since there is no guarantee that model predictions will fall below the censoring limit, we impute by refitting the model to the training set, augmented by the censored observations from the test set:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data_combined</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></span><span class='op'>(</span><span class='va'>data_train</span>, <span class='va'>data_test</span><span class='op'>[</span><span class='va'>data_test</span><span class='op'>$</span><span class='va'>cens_x_star</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"x_star"</span>, <span class='st'>"cens_x_star"</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span></span>
