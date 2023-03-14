@@ -1,7 +1,7 @@
 ---
 title: "Regression models with censored predictors"
 description: |
-  A short description of the post.
+  Another modification of brms-generated Stan code, this time to fit regression models with censored predictors.
 author:
   - name: Ben Trueman
     url: {}
@@ -9,33 +9,25 @@ date: 2023-03-13
 output:
   distill::distill_article:
     self_contained: false
-draft: true
 bibliography: references.bib
 ---
 
-<!-- to do: 
-1. get rid of future_map()?
-2 standardize map() syntax -->
-
 ```{r setup, include=FALSE}
 here::i_am("2023-03-13-regression-models-with-censored-predictors/regression-models-with-censored-predictors.Rmd")
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Recently, I've encountered several regression problems where the predictors are partially censored. To tack this issue, I turned to Paul B&uuml;rkner's excellent package for Bayesian regression, `brms` [@brms]. Paul's package includes a helpful vignette on handling [missing values](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html). The general strategy we'll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters in the model. That is, we'll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that `brms` doesn't handle censored predictors, so we'll have to modify Paul's approach.
+Recently, I've encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul B&uuml;rkner's excellent package for Bayesian regression, `brms` [@brms]. Paul's package includes a helpful vignette on handling [missing values](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html). The general strategy we'll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we'll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that `brms` doesn't handle censored predictors, so we'll have to modify Paul's approach.
 
 We'll need the following packages:
 
-```{r packages, echo=TRUE, message=FALSE}
+```{r packages, message=FALSE}
 library("tidyverse")
 library("glue")
-library("testthat")
+library("ggdist")
 library("withr")
 library("brms")
-library("posterior")
 library("rstan")
-library("furrr")
-plan("multisession") # for parallel processing
 options(mc.cores = parallel::detectCores()) # for parallel MCMC chains
 ```
 
@@ -52,7 +44,7 @@ pal <- wesanderson::wes_palette("Zissou1")
 
 Then we'll need to simulate some data:
 
-```{r, echo=TRUE}
+```{r simulate}
 n <- 50 # total number of observations
 lcl <- -1 # lower censoring limit
 
@@ -74,9 +66,9 @@ data_train <- data[train, ]
 data_test <- data[-train, ]
 ```
 
-Let's plot the simulated data so we can see what we're dealing with. Missing `x` values are shown as horizontal lines, and left-censored x-values are shown as horizontal line segments extending from the left edge of the plot to the censoring limit of -1. The true values corresponding to the censored and missing observations are transparent.
+Let's plot the simulated data so we can see what we're dealing with. Missing `x` values are shown as horizontal lines, and left-censored `x` values are shown as horizontal line segments extending from the left edge of the plot to the censoring limit of -1. The true values corresponding to the censored and missing observations are transparent.
 
-```{r plot}
+```{r plot, echo=FALSE}
 p1 <- data %>% 
   rowid_to_column() %>% 
   mutate(
@@ -109,9 +101,9 @@ p1 <- data %>%
 p1
 ```
 
-The trick at this point is to treat left-censored `x` values as missing values with an upper bound equal to the censoring limit, as describe in the [Stan manual](https://mc-stan.org/docs/2_18/stan-users-guide/censored-data.html). But since, `brms` doesn't do this we'll have to code it ourselves. We'll need two functions: one to modify the data list and another to modify the code that `brms` passes to Stan:
+The trick at this point is to treat left-censored `x` values as missing values with an upper bound equal to the censoring limit, as described in the [Stan manual](https://mc-stan.org/docs/2_18/stan-users-guide/censored-data.html). But since `brms` doesn't do this we'll have to code it ourselves. We'll need two functions: one to modify the data list and another to modify the code that `brms` passes to Stan:
 
-```{r functions-modify, echo=TRUE}
+```{r functions-modify}
 modify_standata <- function(sdata, data, lcl, var) {
   
   if (length(lcl) != length(var)) stop("lengths of 'var' and 'lcl' must be equal")
@@ -171,7 +163,7 @@ modify_stancode <- function(scode, var) {
 
 We'll also need a function to impute missing and censored values for prediction using the fitted model:
 
-```{r functions-impute, echo=TRUE}
+```{r functions-impute}
 impute <- function(data, model, var, mi = NULL, cens = NULL, id = NULL) {
   
   varstan <- str_remove_all(var, "_")
@@ -192,7 +184,7 @@ impute <- function(data, model, var, mi = NULL, cens = NULL, id = NULL) {
   
   ndraws <- ncol(censored)
   
-  future_map(
+  map(
     seq_len(ndraws),
     \(x) {
       data_imputed <- data
@@ -207,7 +199,7 @@ impute <- function(data, model, var, mi = NULL, cens = NULL, id = NULL) {
 
 Now, we're ready to set up and run the model. First we need a formula that defines a model for both `y` and `x`. Since we don't have anything else to go on, the model for `x` is intercept only, but we should be able to do better than that in a real application. The `mi()` terms define missing values and how they're handled during model fitting---see the `brms` [vignette](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html) for details.
 
-```{r model-formula, echo=TRUE}
+```{r model-formula}
 bform <- bf(y | mi() ~ mi(x_star)) + 
   bf(x_star | mi() ~ 1) +
   set_rescor(FALSE)
@@ -215,7 +207,7 @@ bform <- bf(y | mi() ~ mi(x_star)) +
 
 Next, we modify the data and code passed to Stan... 
 
-```{r model-setup, echo=TRUE}
+```{r model-setup}
 sdata <- make_standata(bform, data = data_train) %>% 
   modify_standata(data_train, lcl, "x_star")
 scode <- make_stancode(bform, data = data_train) %>% 
@@ -224,7 +216,7 @@ scode <- make_stancode(bform, data = data_train) %>%
 
 ... and fit (and save) the model using `rstan::stan`.
 
-```{r model-fit, echo=TRUE, eval=FALSE}
+```{r model-fit, eval=FALSE}
 stanseed <- 1257
 model_rstan <- stan(
   model_code = scode,
@@ -236,29 +228,27 @@ model_rstan <- stan(
 
 We can load the fitted model later using the following:
 
-```{r model-load, echo=TRUE}
+```{r model-load}
 model_rstan <- read_stan_csv(list.files(pattern = "model-censored-x_"))
 ```
 
 Now we can generate posterior predictions along a regular sequence of predictor values, using the posterior draws for the slope and intercept:
 
-```{r predict-summarize, echo=TRUE}
+```{r predict-summarize}
 post_draws <- as_draws_df(model_rstan) # posterior draws:
 
 xnew <- seq(min(data$x), max(data$x), length.out = 25) # regular sequence of x-values
 
 post_imp <- map(
   seq_len(nrow(post_draws)),
-  \(x) {
-    xnew * post_draws$`bsp_y[1]`[x] + post_draws$Intercept_y[x]
-  }
+  ~ xnew * post_draws$`bsp_y[1]`[.x] + post_draws$Intercept_y[.x]
 ) %>%
   do.call(rbind, .)
 ```
 
 Here is the fitted model; the shaded region represents a 95% credible interval on the posterior expectation.
 
-```{r plot-model}
+```{r plot-model, echo=FALSE, preview=TRUE}
 preds <- tibble(
   x = xnew,
   yhat = apply(post_imp, 2, median),
@@ -280,28 +270,57 @@ p1 +
   )
 ```
 
+Let's compare the parameter estimates from this model with those of a simple linear regression model that doesn't account for censoring or missingness:
+
+```{r model-naive, message=FALSE}
+model_naive <- brm(
+  y ~ x_star,
+  data = data_train,
+  file = "model-naive",
+  file_refit = "on_change"
+)
+post_draws_naive <- as_draws_df(model_naive)
+```
+
+The posterior draws of the censoring model match the true parameter values closely, while those of the naive model are a poor match:
+
+```{r plot-param-est, echo=FALSE}
+list(
+  Censored = select(post_draws, Slope = `bsp_y[1]`, Intercept = Intercept_y, Sigma = sigma_y),
+  Naive = select(post_draws_naive, Slope = b_x_star, Intercept = b_Intercept, Sigma = sigma)
+) %>% 
+  bind_rows(.id = "model") %>% 
+  pivot_longer(c(Slope, Intercept, Sigma)) %>% 
+  ggplot(aes(x = value, y = name, fill = model)) + 
+  scale_fill_manual(values = pal[c(2,3)]) +
+  stat_halfeye(slab_alpha = .5, position = "dodge") + 
+  labs(x = NULL, y = NULL, fill = NULL)
+```
+
 To estimate prediction performance for the training data, we first impute the censored and missing values. This generates a list of imputed datasets as long as the number of model interations (here, 4000).
 
-```{r impute, eval=FALSE}
+```{r impute}
 data_train_imputed <- impute(data_train, model_rstan, "x_star", sdata$Jmi_xstar, sdata$Jcens_xstar)
 ```
 
 Then, we can calculate RMSE for the training data by generating predictions using the imputed datasets and the posterior draws of the model parameters:
 
 ```{r rmse-train}
-rmse <- map2_dbl(
+rmse <- function(y, yhat) {
+  sqrt(mean((y - yhat) ^ 2))
+}
+rmse_train <- map2_dbl(
   seq_len(nrow(post_draws)),
   data_train_imputed,
   \(x, y) {
     yhat <- y$x_star * post_draws$`bsp_y[1]`[x] + post_draws$Intercept_y[x]
-    sqrt(mean((y$y - yhat) ^ 2))
+    rmse(y$y, yhat)
   }
 )
-
-tibble(mean_rmse = mean(rmse), q2.5 = quantile(rmse, .025), q97.5 = quantile(rmse, .975))
+median_qi(rmse_train) # summarize
 ```
 
-We can estimate out-of-sample error by imputing missing values and then generating posterior predictions. Imputating censored values, though, is slightly more complicated: since there is no guarantee that model predictions will fall below the censoring limit, we impute by refitting the model to the training set augmented by the censored observations from the test set.
+We can also estimate out-of-sample error by imputing missing values and generating posterior predictions. Imputing censored values, though, is slightly more complicated: since there is no guarantee that model predictions will fall below the censoring limit, we impute by refitting the model to the training set, augmented by the censored observations from the test set:
 
 ```{r model-setup-combined}
 data_combined <- bind_rows(data_train, data_test[data_test$cens_x_star, c("x_star", "cens_x_star")])
@@ -309,9 +328,9 @@ sdata_combined <- make_standata(bform, data = data_combined) %>%
   modify_standata(data_combined, lcl, "x_star")
 ```
 
-Fit:
+We fit the same model as we did on the training data. The augmented model excludes all of the response values from the test set; these are imputed during model fitting (and then discarded).
 
-```{r model-fit-combined}
+```{r model-fit-combined, eval=FALSE}
 model_rstan_combined <- stan(
   model_code = scode,
   data = sdata_combined,
@@ -321,14 +340,13 @@ model_rstan_combined <- stan(
 )
 ```
 
-```{r model-load-combined}
+```{r model-load-combined, echo=FALSE}
 model_rstan_combined <- read_stan_csv(list.files(pattern = "model-censored-x-combined_"))
 ```
 
-Impute censored:
+After fitting, we impute the censored values, and fill in the missings by posterior prediction.
 
-```{r}
-
+```{r impute-test}
 data_test_imputed <- impute(
   data = data_test,
   model = model_rstan_combined,
@@ -349,12 +367,11 @@ data_test_imputed <- impute(
           )
         )
   )
-
 ```
 
-The generate test predictions:
+Then, we generate test predictions... 
 
-```{r}
+```{r predictions-test}
 preds_test <- map2(
   seq_len(nrow(post_draws)),
   data_test_imputed,
@@ -362,23 +379,30 @@ preds_test <- map2(
 )
 ```
 
-Compare with the naive model. Compare only those predictions common to both models:
+... and use them to calculate the RMSE. Since the naive model uses complete cases only, we omit the row with a missing `x` value from the RMSE calculation for the censored model.
 
-```{r}
+```{r rmse-test}
+rmse_test <- apply(
+  do.call(rbind, preds_test)[,-4], 
+  1, 
+  \(x) rmse(x, data_test$y[-4])
+) %>% 
+  median_qi()
 
-model_naive <- brm(
-  y ~ x_star,
-  data = data_train,
-  file = "model-naive",
-  file_refit = "on_change"
-)
+rmse_naive <- apply(
+  posterior_epred(model_naive, newdata = data_test)[ , -4],
+  1,
+  \(x) rmse(x, data_test$y[-4])
+) %>% 
+  median_qi()
+```
 
-# rmse:
+Finally, let's compare the predictions:
 
-do.call(rbind, preds_test)[,-4] %>% apply(1, \(x) sqrt(mean((x - data_test$y[-4]) ^ 2))) %>% ggdist::median_qi()
-posterior_epred(model_naive, newdata = data_test)[ , -4] %>% apply(1, \(x) sqrt(mean((x - data_test$y[-4]) ^ 2))) %>% ggdist::median_qi()
-
+```{r model-compare, warning=FALSE, echo=FALSE}
 preds_naive <- fitted(model_naive, newdata = data_test)
+rmse_labels <- bind_rows(list(cens = rmse_test, naive = rmse_naive), .id = "model") %>% 
+  mutate(label = glue("RMSE = {round(y, 2)} (95% CI: {round(ymin, 2)} - {round(ymax, 2)})"))
 
 data_test %>% 
   mutate(
@@ -397,64 +421,21 @@ data_test %>%
     names_pattern = "([^_]+)_([^_]+)"
   ) %>% 
   ggplot(aes(y, yhat)) + 
-  facet_wrap(vars(model)) +
+  facet_wrap(
+    vars(model),
+    labeller = as_labeller(c(cens = "Censored model", naive = "Naive model"))
+  ) +
   geom_errorbar(aes(ymin = ymin, ymax = ymax)) +
   geom_abline() +
   geom_point() +
   geom_label(
-    data = . %>% 
-      group_by(model) %>% 
-      summarize(
-        rmse = sqrt(mean((y - yhat) ^ 2, na.rm = TRUE)),
-        rmse = paste0("RMSE = ", round(rmse, 2))
-      ),
-    aes(x = -Inf, y = Inf, label = rmse),
+    data = rmse_labels,
+    aes(x = -Inf, y = Inf, label = label),
     hjust = "inward", vjust = "inward",
     label.padding = unit(0.35, "lines"),
     label.size = 0
-  )
-
+  ) +
+  labs(x = "Observations", y = "Predictions")
 ```
 
-And plot:
-
-```{r}
-
-```
-
-
-
-<!-- extras -->
-
-<!-- For post-processing, it's convenient to convert the model back into a `brms` object:  -->
-
-```{r model-convert, eval=FALSE}
-brmsmod <- brm(bform, data = data_train, empty = TRUE)
-brmsmod$fit <- model_rstan
-brmsmod <- rename_pars(brmsmod)
-```
-
-<!-- Make sure to use the `newdata` argument to generate predictions, though, since, `brms` doesn't know how to impute the censored predictor values---we'll have to do that ourselves. -->
-
-
-<!-- Now we can generate posterior predictions from the model using our list of 4000 imputed datasets. The following code works, but it's slow---about 10 minutes of run time for this very simple model on my 2017 Macbook Pro. I'll eventually have to come up with a more efficient prediction method. -->
-
-```{r predict-train, echo=TRUE, eval=FALSE}
-post_imp <- future_map(
-  seq_len(length(data_train_imputed)),
-  ~ posterior_epred(brmsmod, newdata = data_train_imputed[[.x]], resp = "y", draw_ids = .x),
-  .progress = TRUE
-) %>% 
-  do.call(rbind, .)
-```
-
-```{r predict-train-write, eval=FALSE}
-write_csv(as_tibble(post_imp, .name_repair = "unique"), "posterior-predictions-training-data.csv")
-```
-
-```{r predict-train-read, eval=FALSE}
-post_imp <- read_csv("posterior-predictions-training-data.csv")
-```
-
-
-
+And that's it! The linear regression model with censored predictors recovers the true parameter values well and yields better prediction performance than the simple linear regression model.
