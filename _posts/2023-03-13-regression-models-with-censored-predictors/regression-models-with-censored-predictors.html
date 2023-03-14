@@ -1542,8 +1542,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p>Recently, I’ve encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul Bürkner’s excellent package for Bayesian regression, <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref">Bürkner 2017</a>)</span>. Paul’s package includes a helpful vignette on handling <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html">missing values</a>. The general strategy we’ll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we’ll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that <code>brms</code> doesn’t handle censored predictors, so we’ll have to modify Paul’s approach.</p>
-<p>We’ll need the following packages:</p>
+<p>Recently, I’ve encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul Bürkner’s excellent package for Bayesian regression, <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref">Bürkner 2017</a>)</span>. Paul’s has written a helpful <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html">vignette</a> on handling missing values. The general strategy we’ll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we’ll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that <code>brms</code> doesn’t handle censored predictors, so we’ll need to customize our approach a little bit.</p>
+<p>Let’s start by loading the following packages:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://tidyverse.tidyverse.org'>"tidyverse"</a></span><span class='op'>)</span></span>
@@ -1556,16 +1556,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='fl'>14</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
-<span>      legend.position <span class='op'>=</span> <span class='st'>"bottom"</span>,</span>
-<span>      strip.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span>    <span class='op'>)</span></span>
-<span><span class='op'>)</span></span>
-<span><span class='va'>pal</span> <span class='op'>&lt;-</span> <span class='fu'>wesanderson</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/wesanderson/man/wes_palette.html'>wes_palette</a></span><span class='op'>(</span><span class='st'>"Zissou1"</span><span class='op'>)</span></span></code></pre>
-</div>
+
 </div>
 <p>Then we’ll need to simulate some data:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1740,7 +1731,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span><span class='op'>(</span><span class='va'>rbind</span>, <span class='va'>.</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>Here is the fitted model; the shaded region represents a 95% credible interval on the posterior expectation.</p>
+<p>Here is the fitted model—the shaded region represents a 95% credible interval on the posterior expectation.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="regression-models-with-censored-predictors_files/figure-html5/plot-model-1.png" width="624" data-distill-preview=1 /></p>
 </div>
@@ -1793,7 +1784,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'>modify_standata</span><span class='op'>(</span><span class='va'>data_combined</span>, <span class='va'>lcl</span>, <span class='st'>"x_star"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>We fit the same model as we did on the training data. The augmented model excludes all of the response values from the test set; these are imputed during model fitting (and then discarded).</p>
+<p>We fit the same model as we did on the training data. The augmented model excludes all of the response values from the test set, though: these are imputed during model fitting but not used further.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>model_rstan_combined</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstan/reference/stan.html'>stan</a></span><span class='op'>(</span></span>

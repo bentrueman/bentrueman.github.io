@@ -17,9 +17,9 @@ here::i_am("2023-03-13-regression-models-with-censored-predictors/regression-mod
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Recently, I've encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul B&uuml;rkner's excellent package for Bayesian regression, `brms` [@brms]. Paul's package includes a helpful vignette on handling [missing values](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html). The general strategy we'll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we'll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that `brms` doesn't handle censored predictors, so we'll have to modify Paul's approach.
+Recently, I've encountered several regression problems where the predictors are partially censored. To tackle this issue, I turned to Paul B&uuml;rkner's excellent package for Bayesian regression, `brms` [@brms]. Paul's has written a helpful [vignette](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html) on handling missing values. The general strategy we'll use here is outlined in that vignette: imputation during model fitting by declaring the missing values as parameters. That is, we'll fit a multivariate model that imputes missing values in both the predictor and the response variable. The only problem is that `brms` doesn't handle censored predictors, so we'll need to customize our approach a little bit.
 
-We'll need the following packages:
+Let's start by loading the following packages:
 
 ```{r packages, message=FALSE}
 library("tidyverse")
@@ -31,7 +31,7 @@ library("rstan")
 options(mc.cores = parallel::detectCores()) # for parallel MCMC chains
 ```
 
-```{r theme}
+```{r theme, echo=FALSE}
 theme_set(
   theme_bw(14) + 
     theme(
@@ -80,12 +80,12 @@ p1 <- data %>%
   geom_point(
     data = . %>% 
       filter(cens_x_star | missing),
-    alpha = .4, shape = 16
+    alpha = .4, shape = 16, size = 2
   ) +
   geom_point(
     data = . %>% 
       filter(!cens_x_star & !missing),
-    shape = 16
+    shape = 16, size = 2
   ) +
   geom_hline(
     data = . %>% 
@@ -246,7 +246,7 @@ post_imp <- map(
   do.call(rbind, .)
 ```
 
-Here is the fitted model; the shaded region represents a 95% credible interval on the posterior expectation.
+Here is the fitted model---the shaded region represents a 95% credible interval on the posterior expectation.
 
 ```{r plot-model, echo=FALSE, preview=TRUE}
 preds <- tibble(
@@ -328,7 +328,7 @@ sdata_combined <- make_standata(bform, data = data_combined) %>%
   modify_standata(data_combined, lcl, "x_star")
 ```
 
-We fit the same model as we did on the training data. The augmented model excludes all of the response values from the test set; these are imputed during model fitting (and then discarded).
+We fit the same model as we did on the training data. The augmented model excludes all of the response values from the test set, though: these are imputed during model fitting but not used further.
 
 ```{r model-fit-combined, eval=FALSE}
 model_rstan_combined <- stan(
