@@ -415,6 +415,7 @@ data_test %>%
     ymin_naive = preds_naive[, "Q2.5"],
     ymax_naive = preds_naive[, "Q97.5"]
   ) %>% 
+  filter(!is.na(x_star)) %>%  # remove so models are comparable
   pivot_longer(
     matches("y.+"),
     names_to = c(".value", "model"),
