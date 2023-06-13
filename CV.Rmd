@@ -12,6 +12,10 @@ description: |
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# About me  
+
+I am a water quality specialist with significant experience in statistical programming, data analysis, data management, machine learning, and geochemical modeling.
+
 Website: https://bentrueman.github.io  
 Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en  
 
@@ -36,6 +40,9 @@ Postdoctoral Employee
 Centre for Water Resources Studies, Dalhousie University  
 *At the Centre for Water Resources Studies, I manage research projects related to corrosion control in drinking water systems and advanced chromatographic analysis of colloids and nanoparticles.*  
 
+2017--Present  
+Consultant  
+*In this role, I provide analysis and technical opinions on aspects of drinking water quality and treatment for Health Canada, water utilities, and legal teams.*
 
 # Skills  
 
@@ -121,6 +128,8 @@ Centre for Water Resources Studies, Dalhousie University
 25.	Pei, W. W., Xie, X., Ong, P., **Trueman, B. F.**, McVicar, M. A., Walsh, M. E., & Gagnon, G. A. (2013). Water Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. https://doi.org/10.2175/106143013X13698672322183
 
 # Preprints  
+
+1. **Trueman, B. F.**, Krkošek, W. H., & Gagnon, G. A. (2023). Sentinel lead pipe racks quantify orthophosphate’s dose-response in drinking water. ChemRxiv. https://doi.org/10.26434/chemrxiv-2023-h1459-v2
 
 1. **Trueman, B. F.**, Locsin, J. M., Doré, E., Hood, K., & Gagnon, G. A. (2022). Sodium silicate and hexametaphosphate promote the release of (oxyhydr)oxide nanoparticles from corroding iron. ChemRxiv. https://doi.org/10.26434/chemrxiv-2022-rtzqm-v3
   

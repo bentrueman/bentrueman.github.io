@@ -7,14 +7,14 @@
     <description>Data analysis, water quality, and R workflow.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>2023-03-13</lastBuildDate>
     <item>
       <title>Regression models with censored predictors</title>
       <dc:creator>Ben Trueman</dc:creator>
       <link>https://bentrueman.github.io/posts/2023-03-13-regression-models-with-censored-predictors</link>
       <description>Another modification of brms-generated Stan code, this time to fit regression models with censored predictors.</description>
       <guid>https://bentrueman.github.io/posts/2023-03-13-regression-models-with-censored-predictors</guid>
-      <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
+      <pubDate>2023-03-13</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2023-03-13-regression-models-with-censored-predictors/regression-models-with-censored-predictors_files/figure-html5/plot-model-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
@@ -23,7 +23,7 @@
       <link>https://bentrueman.github.io/posts/2022-02-01-building-a-continuous-time-autoregressive-model-in-brms-and-stan</link>
       <description>A simple modification of brms-generated Stan code to fit first-order autoregressive models to irregularly-spaced time series.</description>
       <guid>https://bentrueman.github.io/posts/2022-02-01-building-a-continuous-time-autoregressive-model-in-brms-and-stan</guid>
-      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      <pubDate>2022-02-01</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2022-02-01-building-a-continuous-time-autoregressive-model-in-brms-and-stan/building-a-continuous-time-autoregressive-model-in-brms-and-stan_files/figure-html5/plot-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
@@ -32,7 +32,7 @@
       <link>https://bentrueman.github.io/posts/2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms</link>
       <description>Posterior predictive checks and simulated residuals.</description>
       <guid>https://bentrueman.github.io/posts/2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms</guid>
-      <pubDate>Fri, 08 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-10-08</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2021-10-08-diagnostics-for-censored-autoregressive-models-fit-with-brms/diagnostics-for-censored-autoregressive-models-fit-with-brms_files/figure-html5/ecdf-sim-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
@@ -41,7 +41,7 @@
       <link>https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause</link>
       <description>Censored autoregression with a smoothed time covariate.</description>
       <guid>https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause</guid>
-      <pubDate>Wed, 08 Sep 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-09-08</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2021-09-08-a-brownification-pause/a-brownification-pause_files/figure-html5/plot-carx-1.png" medium="image" type="image/png" width="1248" height="864"/>
     </item>
     <item>
@@ -50,7 +50,7 @@
       <link>https://bentrueman.github.io/posts/2021-08-13-new-preprint</link>
       <description>Aluminum in drinking water can interact with orthophosphate, increasing lead solubility.</description>
       <guid>https://bentrueman.github.io/posts/2021-08-13-new-preprint</guid>
-      <pubDate>Fri, 13 Aug 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-08-13</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2021-08-13-new-preprint/new-preprint_files/figure-html5/plot-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
@@ -59,7 +59,7 @@
       <link>https://bentrueman.github.io/posts/2021-07-07-comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models</link>
       <description>Revisiting work from 2016 to better model time series with non-linear trends.</description>
       <guid>https://bentrueman.github.io/posts/2021-07-07-comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models</guid>
-      <pubDate>Wed, 07 Jul 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-07-07</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2021-07-07-comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models/comparing-drinking-water-quality-time-series-using-generalized-additive-mixed-models_files/figure-html5/plot-1.png" medium="image" type="image/png" width="1248" height="672"/>
     </item>
     <item>
@@ -68,7 +68,7 @@
       <link>https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data</link>
       <description>Comparing two groups of measurements when some values are below one or multiple detection limit(s).</description>
       <guid>https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data</guid>
-      <pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-07-05</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2021-07-05-non-parametric-matched-pair-testing-with-left-censored-data/non-parametric-matched-pair-testing-with-left-censored-data_files/figure-html5/helsel-plot-1.png" medium="image" type="image/png" width="1248" height="576"/>
     </item>
     <item>
@@ -77,7 +77,7 @@
       <link>https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r</link>
       <description>An improved workflow for visualizing X-ray diffraction data in R.</description>
       <guid>https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r</guid>
-      <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-06-29</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2021-06-29-peak-detection-for-qualitative-xrd-analysis-in-r/peak-detection-for-qualitative-xrd-analysis-in-r_files/figure-html5/data-w-peaks-1.png" medium="image" type="image/png" width="1248" height="672"/>
     </item>
     <item>
@@ -86,7 +86,7 @@
       <link>https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny</link>
       <description>An R package and Shiny app for PHREEQC-based equilibrium lead and copper solubility prediction.</description>
       <guid>https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny</guid>
-      <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-06-18</pubDate>
       <media:content url="https://bentrueman.github.io/posts/2021-06-18-lead-solubility-prediction-using-shiny/lead-solubility-prediction-using-shiny_files/figure-html5/basic-grid-plot-1.png" medium="image" type="image/png" width="1248" height="576"/>
     </item>
   </channel>
