@@ -1,0 +1,355 @@
+---
+title: "Probabilistic principal component analysis for censored data"
+description: |
+  Application of Bayesian PCA to a heavily left-censored (simulated) dataset.
+author:
+  - name: Ben Trueman
+    url: {}
+date: 2023-07-06
+output:
+  distill::distill_article:
+    self_contained: false
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+here::i_am("probabilistic-principal-component-analysis-for-censored-data.Rmd")
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Principal component analysis (PCA) has been a recent focus in my efforts to find Bayesian versions of statistical methods that play nicely with censored data. The solution in this case is probabilistic PCA [@NIPS1998_c88d8d0a], demonstrated here using a simulated dataset and then fitted using Stan via the R interface `cmdstanr`. The simulation approach and Stan program borrow heavily from [this Jupyter notebook](https://github.com/nbip/PPCA-Stan/blob/master/PPCA.ipynb)---I (roughly) translate the Python to R and modify the simulation and Stan program to allow imputation of censored values as a step in the model fitting process.
+
+Probabilistic PCA is a latent variable model that can be written as follows:
+
+$$
+y \sim N(Wz, \sigma^2I) \\
+z \sim N(0, I)
+$$
+where $y$ is an $n \times d$ matrix of data, $z$ is an $n \times k$ matrix of latent variables with $k \leq d$, $W$ is a $d \times k$ transformation matrix mapping from the latent space to the data space, and $\sigma^2$ is the error variance.
+
+To explore this model, we'll need the following packages:
+
+```{r packages, message=FALSE}
+library("tidyverse")
+library("here")
+library("cmdstanr")
+library("MASS", include.only = "mvrnorm")
+library("pracma", include.only = "orth")
+library("withr")
+```
+
+```{r theme, echo=FALSE}
+theme_set(
+  theme_bw(14) + 
+    theme(
+      legend.position = "bottom",
+      strip.background = element_blank(),
+      legend.direction = "vertical"
+    )
+)
+pal <- wesanderson::wes_palette("Zissou1")
+```
+
+First, we need to simulate from the data-generating process:
+
+```{r simulate}
+n <- 500 # number of observations
+d <- 2 # number of data dimensions
+k <- 1 # number of latent space dimensions
+sigma2 <- 0.05 # error variance
+
+with_seed(124563, {
+  # sample latent variable Z:
+  Z <- mvrnorm(n, mu = rep(0, k), Sigma = diag(1, k, k)) # n x k
+  # create orthogonal transformation matrix:
+  W <- orth(matrix(runif(d * k), d, k)) # d x k
+  # generate additive noise:
+  noise <- mvrnorm(n, mu = rep(0, d), Sigma = sigma2 * diag(1, d, d)) # n x d
+})
+
+# generate data:
+Y <- W %*% t(Z) + t(noise)
+```
+
+Here are the data, along with the first principal component---that is, the first and only column of $W$.
+
+```{r plot-sim, echo=FALSE}
+add_pc_arrow <- function(W, color, size = 0.1, ...) {
+  geom_segment(
+    data = tibble(x = 0, y = 0, xend = W[1,1], yend = W[2,1]),
+    aes(x = x, y = y, xend = xend, yend = yend, col = color),
+    arrow = arrow(length = unit(size, "inches"), ...)
+  )
+}
+p1 <- t(Y) %>% 
+  `colnames<-`(paste0("y", seq_len(d))) %>% 
+  as_tibble() %>% 
+  ggplot(aes(y1, y2)) + 
+  geom_point(shape = 16, size = 2, alpha = .7) + 
+  add_pc_arrow(W, "True principal component direction", size = 0.15, type = "closed") + 
+  scale_color_manual(values = pal[3]) +
+  labs(x = expression("Y"[1]), y = expression("Y"[2]), col = NULL)
+p1
+```
+
+Next, we'll need to put the data into a list for passing to `cmdstanr` methods.
+
+```{r standata}
+standata <- list(
+  N = n,
+  D = d,
+  K = k,
+  y = Y
+)
+stanseed <- 215678
+```
+
+Read the Stan program and compile (the Stan code is available in the Jupyter notebook linked at the top of this post; I've modified the basic version only slightly).
+
+```{r compile, eval=FALSE}
+ppca_scode <- readLines(here("ppca.stan"))
+model <- cmdstan_model(stan_file = write_stan_file(ppca_scode))
+```
+
+Once compiling is done, sample from the posterior:
+
+```{r sample, eval=FALSE}
+fit <- model$sample(data = standata, seed = stanseed, parallel_chains = 4)
+fit$save_output_files(
+  dir = "models", basename = "ppca", random = FALSE, timestamp = FALSE
+)
+```
+
+```{r load, echo=FALSE}
+fit <- as_cmdstan_fit(list.files("models", pattern = "ppca-\\d", full.names = TRUE))
+```
+
+The model recovers the transformation matrix quite well:
+
+```{r post-process, warning=FALSE}
+# extract draws:
+draws_df <- fit$draws(format = "df")
+
+# extract the raw transformation matrix:
+A <- draws_df %>% 
+  select(starts_with("A"))
+
+# calculate the posterior mean and orthogonalize:
+W_est <- A %>% 
+  apply(2, \(x) mean(abs(x))) %>% 
+  matrix(standata$D, standata$K) %>% 
+  orth()
+```
+
+```{r plot-w-hat, echo=FALSE, message=FALSE}
+p1 + 
+  add_pc_arrow(.95 * W_est, "Estimated principal component direction", type = "open") +
+  scale_color_manual(values = pal[c(1,3)])
+```
+
+Same goes for the error variance:
+
+```{r sigma-hat}
+mean(draws_df$sigma ^ 2)
+```
+
+To compare the latent variable estimates with the true values, we have to correct for the sign of $W$, iteration-by-iteration:
+
+```{r recover-z, warning=FALSE}
+# extract the signs of transformation matrix:
+S <- tibble(sign = apply(sign(A), 1, unique)) 
+# extract raw latent variables:
+X <- draws_df %>% 
+  select(starts_with("x"))
+# sign correction:
+Z_est <- X %>% 
+  apply(2, \(x) x * S$sign) %>% 
+  apply(2, mean) %>% 
+  matrix(standata$N, standata$K) %>% 
+  `colnames<-`(paste0("pc", seq_len(standata$K))) %>% 
+  as_tibble()
+```
+
+Here are the posterior means of the latent variables compared with the true $z$:
+
+```{r compare-z, echo=FALSE}
+Z_est %>% 
+  mutate(z = Z[,1]) %>% 
+  ggplot(aes(z, pc1)) + 
+  geom_point() +
+  geom_abline(aes(slope = 1, intercept = 0, col = "y=x")) + 
+  scale_color_manual(values = pal[2]) +
+  labs(x = "Z", y = expression(widehat(Z)), col = NULL)
+```
+
+This is very similar to the PCA solution:
+
+```{r compare-pca-w}
+pca <- princomp(t(Y))
+pca$loadings[,1] # principal component directions
+W_est[,1] # transformation matrix
+```
+
+```{r compare-pca-z}
+# correlation between PC scores and latent variable:
+cor(Z_est, pca$scores[,1])
+```
+
+Now let's turn to the problem of censoring. First, let's modify the simulated data to introduce left-censoring:
+
+```{r censor}
+# set censoring limits:
+lcl_1 <- -1.5 # left-censoring limit, y1
+lcl_2 <- 0 # left-censoring limit, y2
+
+# simulate left-censored data:
+Y_cens <- Y
+Y_cens[1, ] <- pmax(Y[1, ], lcl_1)
+Y_cens[2, ] <- pmax(Y[2, ], lcl_2)
+
+# censored indicators:
+nondetect_1 <- Y[1,] < lcl_1
+nondetect_2 <- Y[2,] < lcl_2
+```
+
+Values censored in one dimension are represented as blue lines and values censored in both dimensions are represented as points within the shaded region:
+
+```{r plot-y-cens, echo=FALSE}
+p2 <- t(Y) %>% 
+  `colnames<-`(paste0("y", seq_len(d))) %>% 
+  as_tibble() %>% 
+  mutate(
+    cens_y1 = nondetect_1,
+    cens_y2 = nondetect_2
+  ) %>% 
+  ggplot(aes(y1, y2)) + 
+  geom_point(
+    data = . %>% 
+      filter(!cens_y1 & !cens_y2)
+  ) +
+  geom_segment(
+    data = . %>% 
+      filter(cens_y1 & !cens_y2),
+    aes(x = lcl_1, xend = -Inf, yend = y2),
+    col = pal[2], linewidth = 0.3
+  ) +
+  geom_segment(
+    data = . %>% 
+      filter(!cens_y1 & cens_y2),
+    aes(y = lcl_2, yend = -Inf, xend = y1),
+    col = pal[2], linewidth = 0.3
+  ) +
+  geom_point(
+    data = . %>% 
+      filter(cens_y1 & cens_y2),
+    col = pal[2]
+  ) +
+  geom_rect(
+    data = tibble(xmin = -Inf, xmax = lcl_1, ymin = xmin, ymax = lcl_2),
+    aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+    inherit.aes = FALSE,
+    alpha = 0.3, fill = pal[2]
+  ) + 
+  add_pc_arrow(W, "True principal component direction", size = 0.15, type = "closed") +
+  scale_color_manual(values = pal[c(3)]) +
+  labs(x = expression("Y"[1]), y = expression("Y"[2]), col = NULL)
+p2
+```
+
+We'll need a new list of data inputs to pass to `cmdstan` functions:
+
+```{r standata-cens}
+standata_cens <- list(
+  N = n,
+  D = d,
+  K = k,
+  y = Y_cens,
+  Ncens_y1 = sum(nondetect_1),
+  Ncens_y2 = sum(nondetect_2),
+  Jcens_y1 = seq_len(n)[nondetect_1],
+  Jcens_y2 = seq_len(n)[nondetect_2],
+  U_y1 = lcl_1,
+  U_y2 = lcl_2
+)
+```
+
+```{r compile-cens, echo=FALSE}
+ppca_scode_cens <- readLines(here("ppca-cens.stan"))
+model_cens <- cmdstan_model(stan_file = write_stan_file(ppca_scode_cens))
+```
+
+The following Stan program estimates the latent variable model after imputing censored data:
+
+```{r print, echo=FALSE}
+model_cens$print()
+```
+
+```{r sample-cens, eval=FALSE, echo=FALSE}
+fit_cens <- model_cens$sample(data = standata_cens, seed = stanseed, parallel_chains = 4)
+fit_cens$save_output_files(
+  dir = "models", basename = "ppca-cens", random = FALSE, timestamp = FALSE
+)
+```
+
+```{r load-cens, echo=FALSE}
+fit_cens <- as_cmdstan_fit(list.files("models", pattern = "ppca-cens", full.names = TRUE))
+```
+
+```{r post-process-cens, warning=FALSE, echo=FALSE}
+# extract draws:
+draws_df_cens <- fit_cens$draws(format = "df")
+
+# extract the raw transformation matrix:
+A_cens <- draws_df_cens %>% 
+  select(starts_with("A"))
+
+# calculate the posterior mean and orthogonalize:
+W_est_cens <- A_cens %>% 
+  apply(2, \(x) mean(abs(x))) %>% 
+  matrix(standata$D, standata$K) %>% 
+  orth()
+```
+
+As above, we sample and extract the components. This time, the PCA solution is quite biased, while the Bayesian implementation does much better:
+
+```{r compare-pca-w-cens}
+pca_cens <- princomp(t(Y_cens))
+pca_cens$loadings[,1] # PCA solution
+W_est_cens[,1] # Bayesian solution
+W[,1] # true W
+```
+
+```{r plot-pc-cens, echo=FALSE, preview=TRUE}
+p2 + 
+  add_pc_arrow(.95 * W_est_cens, "Estimated principal component direction (Bayesian model)", type = "open") + 
+  add_pc_arrow(pca_cens$loadings, "Estimated principal component direction (standard PCA)", type = "open") + 
+  scale_color_manual(values = pal[c(1,5,3)])
+```
+
+```{r recover-z-cens, warning=FALSE, echo=FALSE}
+S_cens <- tibble(sign = apply(sign(A_cens), 1, unique)) # signs of transformation matrix
+X_cens <- draws_df_cens %>% 
+  select(starts_with("x"))
+Z_est_cens <- X_cens %>% 
+  apply(2, \(x) x * S_cens$sign) %>% 
+  apply(2, mean) %>% 
+  matrix(standata$N, standata$K) %>% 
+  `colnames<-`(paste0("pc", seq_len(standata$K))) %>% 
+  as_tibble()
+```
+
+Here are the posterior means of the latent variables compared with the true $z$; again, there is bias at the low end of the conventional principal component scores, but not with the Bayesian version.
+
+```{r compare-z-cens, echo=FALSE}
+Z_est_cens %>% 
+  mutate(z = Z[,1], pca_pc1 = pca_cens$scores[,1]) %>% 
+  pivot_longer(starts_with("pc")) %>% 
+  ggplot(aes(z, value, col = name)) + 
+  geom_point(shape = 16, alpha = .8, size = 2) +
+  geom_abline(col = "grey") +
+  scale_color_manual(
+    values = pal[c(1,3)], 
+    labels = c("Bayesian solution", "Standard PCA solution")
+  ) + 
+  labs(x = "Z", y = expression(widehat("Z")), col = NULL)
+```

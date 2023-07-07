@@ -7,7 +7,16 @@
     <description>Data analysis, water quality, and R workflow.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>2023-03-13</lastBuildDate>
+    <lastBuildDate>2023-07-06</lastBuildDate>
+    <item>
+      <title>Probabilistic principal component analysis for censored data</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2023-07-06-probabilistic-principal-component-analysis-for-censored-data</link>
+      <description>Application of Bayesian PCA to a heavily left-censored (simulated) dataset.</description>
+      <guid>https://bentrueman.github.io/posts/2023-07-06-probabilistic-principal-component-analysis-for-censored-data</guid>
+      <pubDate>2023-07-06</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2023-07-06-probabilistic-principal-component-analysis-for-censored-data/probabilistic-principal-component-analysis-for-censored-data_files/figure-html5/plot-pc-cens-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Regression models with censored predictors</title>
       <dc:creator>Ben Trueman</dc:creator>
