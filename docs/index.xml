@@ -24,7 +24,7 @@
       <description>Using heirarchical shrinkage priors on linear regression coefficients to reduce the variance of ccorrelated predictors.</description>
       <guid>https://bentrueman.github.io/posts/2023-06-20-a-bayesian-approach-to-predicting-disinfection-byproduct-formation-using-regularizing-priors</guid>
       <pubDate>2023-06-20</pubDate>
-      <media:content url="https://bentrueman.github.io/posts/2023-06-20-a-bayesian-approach-to-predicting-disinfection-byproduct-formation-using-regularizing-priors/a-bayesian-approach-to-predicting-disinfection-byproduct-formation-using-regularizing-priors_files/figure-html5/test-predictions-1.png" medium="image" type="image/png" width="1248" height="768"/>
+      <media:content url="https://bentrueman.github.io/posts/2023-06-20-a-bayesian-approach-to-predicting-disinfection-byproduct-formation-using-regularizing-priors/a-bayesian-approach-to-predicting-disinfection-byproduct-formation-using-regularizing-priors_files/figure-html5/eem-plot-1.png" medium="image" type="image/png" width="1248" height="960"/>
     </item>
     <item>
       <title>Regression models with censored predictors</title>
