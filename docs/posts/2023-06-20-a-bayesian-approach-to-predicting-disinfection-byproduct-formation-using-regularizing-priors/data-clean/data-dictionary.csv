@@ -1,0 +1,8 @@
+file,column,description
+dataset-bench.csv,haa_ppb,haloacetic acid concentrations in µg/L
+dataset-bench.csv,thm_ppb,trihalomethane concentrations in µg/L
+dataset-bench.csv,240_213.65,fluorescence intensity at an excitation/emission wavelength pair (ex_em)
+dataset-plant.csv,haa_ppb,haloacetic acid concentrations in µg/L
+dataset-plant.csv,thm_ppb,trihalomethane concentrations in µg/L
+dataset-plant.csv,formation,DBP formation potential (TRUE) or instantaneous concentration (FALSE)
+dataset-plant.csv,240_213.65,fluorescence intensity at an excitation/emission wavelength pair (ex_em)

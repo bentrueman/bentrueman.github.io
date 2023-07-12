@@ -1,0 +1,304 @@
+---
+title: "A Bayesian approach to predicting disinfection byproduct formation using regularizing priors"
+description: |
+  Using heirarchical shrinkage priors on linear regression coefficients to reduce the variance of ccorrelated predictors.
+author:
+  - name: Ben Trueman
+    url: {}
+date: 2023-06-20
+output:
+  distill::distill_article:
+    self_contained: false
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+here::i_am("a-bayesian-approach-to-predicting-disinfection-byproduct-formation-using-regularizing-priors.Rmd")
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I've recently been experimenting with regularizing priors in Bayesian linear regression models, and I thought a good opportunity to explore them was to revisit an older paper of mine featuring a $p>N$ problem [@trueman_prediction_2016]. The paper described predicting the byproducts of chlorine disinfection in drinking water using fluorescence over a range of excitation wavelengths. 
+
+One of the benefits of a Bayesian approach here, I think, is that any prediction performance metric can be calculated or each posterior draw---meaning that it too has a distribution. I think this really helps add some perspective to comparisons among models that point estimates of predictive error lack.
+
+For this post, I used linear regression with a Gamma likelihood to keep predictions positive and a heirarchical shrinkage prior on the regression coefficients [@piironen_sparsity_2017] to help stabilize the estimates of correlated predictors. The $n$ trihalomethane concentrations, $y_n$, are predicted using the following model, and fitted with `brms`.
+
+$$
+y_n \sim Gamma(\mu, \alpha)~\text{[likelihood]} \\ 
+log(\mu) = \gamma + X \beta~\text{[model for }\mu] \\ 
+\text{priors:} \\
+\gamma \sim T(4.1,2.5,3)~\text{[intercept]} \\ 
+\alpha \sim Gamma(0.01, 0.01)~\text{[shape parameter]} \\
+\beta_j \sim N(0, \tau^2\widetilde{\lambda}_j^2)~\text{[regression coefficients]} \\
+\widetilde{\lambda}_j^2 = \frac{c^2 \lambda_j^2}{c^2 + \tau^2\lambda_j^2} \\
+\lambda_j \sim T(0, 1, 3),~j=1,...,D \\
+c^2 \sim \text{Inv-Gamma}(\nu/2, \nu s^2/2) \\
+\tau \sim C^+(0,1) \\
+\nu = 4 \\
+s^2 = 4 \\
+$$
+where $T$, $C^+$, $Gamma$, and $N$ are the student-t, half-Cauchy, gamma, and normal distributions. The parameters $\mu$ and $\alpha$ represent the mean and shape of the gamma distribution, while $\gamma$ and $\beta$ represent the intercept and the regression coefficients; $X$ is an $n \times D$ matrix of $D$ scaled predictors. 
+
+The horseshoe prior on the regression coefficients is a little more difficult to understand. The basic intuition is that the global shrinkage parameter, $\tau$, pulls all of the regression coefficients towards zero, while the local shrinkage parameters, $\widetilde{\lambda}_j$, allow some coefficients to escape the shrinkage with their fat-tailed prior. The $\widetilde{\lambda}_j$ are a function of $\tau$, $\lambda_j$, and $c^2$, each of which have their own prior distributions. For regression coefficients with large absolute values, the prior approaches $N(0,c^2)$ while for the smallest coefficients, the prior approaches $N(0,\tau^2\lambda_j^2)$ [@piironen_sparsity_2017].
+
+To fit the model, we'll need the following packages:
+
+```{r packages, message=FALSE}
+library("tidyverse")
+library("brms")
+library("withr")
+library("here")
+library("ggdist", include.only = "median_qi")
+library("rstan", include.only = "get_sampler_params")
+library("data.table", include.only = "fread")
+library("posterior", include.only = "summarise_draws")
+```
+
+```{r theme, echo=FALSE}
+theme_set(
+  theme_bw(14) + 
+    theme(
+      legend.position = "bottom",
+      strip.background = element_blank()
+    )
+)
+pal <- wesanderson::wes_palette("Zissou1")
+```
+
+First, read the data using `data.table::fread`, which will be faster than `readr::read_csv`.
+
+```{r read-data, message=FALSE}
+plant <- fread(here("data-clean/dataset-plant.csv")) %>% 
+  as_tibble()
+```
+
+Then, we'll need functions to prepare the data and fit the model. The first one separates the training and test data, ranks the predictors in the training data by correlation with the response, chooses the $D$ predictors with the highest correlation, fits the model, and generates the test predictions.
+
+```{r functions-main}
+dbp_model <- function(data, folds, this_fold, n, filename, ...) {
+  # generate train/test indices:
+  test_rows <- folds == this_fold
+  train_rows <- folds != this_fold
+  # prepare training data:
+  data_train <- data[train_rows, ]
+  # select the n variables in the training data having the largest 
+  # correlation with the response:
+  corvars_train <- apply(
+    data_train, 2, 
+    \(x) suppressWarnings(cor(data_train[,"thm_ppb"], x))
+  )
+  these_vars <- names(sort(abs(corvars_train), decreasing  = TRUE)[seq_len(n + 1)])
+  data_train_sub <- select(data_train, all_of(these_vars)) %>% 
+    scale()
+  # prepare test data:
+  data_test <- data[test_rows, ] %>% 
+    select(all_of(these_vars), -thm_ppb) %>% 
+    scale_testdata(data_train_sub)
+  # rescale training response:
+  data_train_sub[,"thm_ppb"] <- data_train$thm_ppb
+  # train model:
+  model_train <- fit_dbp_model(data_train_sub, this_fold, filename, ...)
+  # test model:
+  preds_test <- posterior_epred(
+    model_train, newdata = data_test
+  ) 
+  list(
+    model_train = model_train, 
+    preds_test = preds_test, 
+    thm_ppb = data$thm_ppb[test_rows]
+  )
+}
+```
+
+We'll need two helper functions as well: one as a wrapper around `brms::brm`... 
+
+```{r functions-helper-1}
+fit_dbp_model <- function(data, this_fold, filename, ...) {
+  brm(
+    thm_ppb ~ .,
+    data = data,
+    family = Gamma(link = "log"),
+    cores = 4,
+    backend = "cmdstanr",
+    file = here(paste0("models/thm-", filename, "-", this_fold)),
+    file_refit = "on_change",
+    seed = 1578, 
+    ...
+  )
+}
+```
+
+... and one to scale the test data using the column means and standard deviations from the training data.
+
+```{r functions-helper-2}
+scale_testdata <- function(data_test, data_train) {
+  trainscale <- list(
+    mean = attr(data_train, "scaled:center")[-1], 
+    sd = attr(data_train, "scaled:scale")[-1]
+  ) %>% 
+  map(
+    ~ matrix(
+      .x, 
+      nrow = nrow(data_test), 
+      ncol = ncol(data_test),
+      byrow = TRUE
+    )
+  )
+  (data_test - trainscale$mean) / trainscale$sd
+}
+
+```
+
+Before using these functions, some minor cleaning of the data is necessary:
+
+```{r prepare-data}
+thmfp <- plant %>% 
+  filter(!is.na(thm_ppb)) %>%
+  mutate(formation = if_else(formation == "T", 1, 0)) %>% 
+  select(-haa_ppb) %>%
+  rename_with(.fn = ~ str_replace(.x, "^(\\d)", "f\\1"), .cols = everything())
+```
+
+Then, determine random fold assignment as follows. For each of the $k=10$ folds, we fit the data on the $k-1$ training folds and make test predictions using the $k^{th}$ fold. 
+
+```{r cv-setup}
+folds <- with_seed(125656, sample(1:10, nrow(thmfp), replace = TRUE))
+stopifnot(all(1:10 %in% folds))
+```
+
+This yields a minimum training set for each iteration of `r min(dim(thmfp)[1] - table(folds))` observations. Now we can run the model; I'm using $D=38$ predictors, making this a $p>n$ problem without generating an overly large model.
+
+```{r cv-horseshoe}
+cv_out <- sort(unique(folds)) %>%
+  set_names() %>%
+  map(~ dbp_model(
+    thmfp, folds, this_fold = .x, n = 38,
+    filename = "horseshoe",
+    prior = set_prior(horseshoe(df = 3)),
+    control = list(adapt_delta = .999, max_treedepth = 12)
+  ))
+```
+
+```{r check-diagnostics, echo=FALSE}
+model_list <- map(cv_out, "model_train")
+
+mdraws <- model_list %>% 
+  map(as_draws_df) %>% 
+  map(posterior::summarise_draws) %>% 
+  list_rbind(names_to = "fold")
+
+mparams <- model_list %>% 
+  map(
+    ~ get_sampler_params(.x$fit, inc_warmup = FALSE) %>%
+      map(as_tibble) %>%
+      bind_rows(.id = ".chain") %>%
+      mutate(max_treedepth = .x$fit@stan_args[[4]]$max_depth)
+  ) %>% 
+  list_rbind(names_to = "fold")
+
+stopifnot(all(mdraws$ess_bulk > 400))
+stopifnot(all(mdraws$ess_tail > 400))
+stopifnot(all(mdraws$rhat < 1.05))
+stopifnot(all(mparams$treedepth__ < mparams$max_treedepth))
+stopifnot(all(mparams$divergent__ == 0))
+```
+
+We can assess prediction performance using the median absolute prediction error... 
+
+```{r summarize-predictions}
+mae <- cv_out %>% 
+  map(~ apply(.x$preds_test, 1, \(y) abs(y - .x$thm_ppb))) %>% 
+  reduce(rbind) %>% 
+  apply(2, median) %>% 
+  median_qi() %>% 
+  mutate(across(starts_with("y"), ~ round(.x, 1)))
+```
+
+... and plot the predictions against the observations to assess the fit.
+
+```{r test-predictions, echo=FALSE}
+cv_out %>% 
+  map(~ t(.x$preds_test)) %>% 
+  reduce(rbind) %>% 
+  apply(1, ggdist::median_qi) %>% 
+  list_rbind() %>% 
+  mutate(thm_ppb = unlist(map(cv_out, "thm_ppb"))) %>% 
+  ggplot(aes(thm_ppb, y)) + 
+  geom_abline() +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0, col = "grey") +
+  geom_point(size = 3, shape = 16, alpha = .8) + 
+  geom_label(
+    data = mae,
+    aes(
+      x = -Inf, y = Inf, 
+      label = paste0("MAE = ", y, " µg/L", " (95% CI: ", ymin, " - ", ymax, ")")
+    ),
+    hjust = "inward", vjust = "inward",
+    label.size = 0
+  ) + 
+  coord_cartesian(ylim = c(0, 150)) + 
+  labs(
+    x = expression("[THM]"[observed]~"(µg L"^-1*")"),
+    y = expression("[THM]"[predicted]~"(µg L"^-1*")"),
+  )
+```
+
+Here are the regression coefficients mapped onto a contour plot representing the average fluorescence intensity at each excitation/emission pair. The coordinates most correlated with the response tend to cluster at the boundaries of the region characteristic of humic acid fluorescence.
+
+```{r eem-plot, echo=FALSE, fig.height=5, preview=TRUE}
+post_draws <- cv_out %>% 
+  map(~ as_draws_df(.x$model_train, variable = "^b_f\\d", regex = TRUE)) %>% 
+  map(summarise_draws) %>% 
+  list_rbind(names_to = "fold") %>% 
+  mutate(
+    ex = str_extract(variable, "(?<=f)\\d+(?=_)"),
+    em = str_extract(variable, "(?<=_)\\d+\\.?\\d*$"),
+    across(c(ex, em), as.numeric)
+  ) %>% 
+  group_by(ex, em) %>% 
+  summarize(mean = mean(mean)) %>% 
+  ungroup()
+
+thmfp_long <- thmfp[,-(1:2)] %>% 
+  pivot_longer(everything()) %>% 
+  separate_wider_delim(name, names = c("ex", "em"), delim = "_") %>% 
+  mutate(
+    ex = str_remove(ex, "^f"),
+    across(c(ex, em), as.numeric)
+  ) %>% 
+  group_by(ex, em) %>% 
+  summarize(value = mean(value)) %>% 
+  ungroup() %>% 
+  arrange(ex, em) %>% 
+  group_by(ex) %>% 
+  mutate(
+    em_regular = seq(
+      min(em), max(em),
+      length.out = n_distinct(em)
+    )
+  ) %>% 
+  ungroup()
+
+thmfp_long %>% 
+  ggplot(aes(ex, em_regular, z = value)) +
+  theme(
+    panel.grid = element_blank(),
+    legend.title = ggtext::element_markdown(),
+    legend.text = element_text(angle = 35, hjust = 1)
+  ) +
+  scale_color_gradientn(colours = pal) +
+  geom_contour(col = "black", breaks = c(.01, seq(.05, 0.4, length.out = 5))) +
+  geom_point(
+    data = post_draws,
+    aes(ex, em, col = mean),
+    inherit.aes = FALSE,
+    size = 3, shape = 16, alpha = 0.8
+  ) +
+  labs(
+    x = "Excitation (nm)",
+    y = "Emission (nm)",
+    col = "Posterior<br>mean of &beta;<br><br>"
+  )
+```
+
+The out-of-sample prediction error had a 95% credible interval of `r mae$ymin`--`r mae$ymax` $\mu$g L^-1^. This is probably too high to be useful in practice, but more data would likely help---the 38 observations used here don't make for a large training set.
