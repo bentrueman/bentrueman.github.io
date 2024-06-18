@@ -30,29 +30,61 @@ Dalhousie University, Halifax, NS
 
 # Employment  
 
-2022--Present  
-Postdoctoral employee (Mitacs Accelerate Grant)  
-Halifax Water/Dalhousie University  
-*In this role, I develop Halifax Water’s capabilities to meet water quality challenges by leveraging the utility’s extensive database and data collection enterprise.*  
-
 2018--Present  
 Postdoctoral Employee  
 Centre for Water Resources Studies, Dalhousie University  
-*At the Centre for Water Resources Studies, I manage research projects related to corrosion control in drinking water systems and advanced chromatographic analysis of colloids and nanoparticles.*  
+*At the Centre for Water Resources Studies, I manage research projects on organic and inorganic contamination of drinking and source waters. Topics have included using environmental DNA to understand contamination of source waters with cyanotoxins, characterizing interactions between dissolved organic carbon and trace metals in natural and engineered water systems, using sodium silicates for corrosion control, and developing software for modeling environmental time series.*  
 
 2017--Present  
 Consultant  
-*In this role, I provide analysis and technical opinions on aspects of drinking water quality and treatment for Health Canada, water utilities, and legal teams.*
+*As a consultant for private companies, Health Canada, water utilities, and legal teams, I provide analysis and technical opinions on aspects of water quality and treatment.*
 
-# Skills  
+2021--2023  
+Postdoctoral employee (Mitacs Accelerate Grant)  
+Halifax Water/Dalhousie University  
+*In this role, I developed Halifax Water’s capabilities to meet water quality challenges by leveraging the utility’s extensive database and data collection enterprise.*  
 
-- R programming (https://github.com/bentrueman) and data analysis (e.g., https://doi.org/10.1021/acsestengg.2c00194)
-- Geochemical modeling with applications in corrosion control
-  - Developed an R package for predicting lead and copper solubility using PHREEQC, available at https://github.com/bentrueman/pbcusol
-- Communication
-  - Wrote or co-wrote more than 35 peer-reviewed journal articles
-  - Presented at international academic conferences
+# Skills 
 
+  * Statistical programming
+     - Proficient in R, Stan, and bash
+     - Experienced in the use of high performance computing for data intensive analyses
+     - Creator and maintainer of R packages for time series analysis, field-flow fractionation data processing, and geochemical water quality modeling
+  * Bioinformatics 
+    - Trained in the application of bioinformatics tools for both metagenomic and marker gene sequencing data
+  * Communication 
+    - Experience communicating technical content to academic and general audiences (wrote or co-wrote 35+ academic journal articles as well as technical reports and white papers)
+    - Presented original research at international conferences, including the American Chemical Society's Annual Conference and the International Water Association's Annual Specialist Conference on Natural Organic Matter
+  * Analytical Chemistry
+    - Field-flow fractionation
+    - Mulitangle light scattering
+    - Inductively-coupled plasma mass spectrometry 
+    - X-ray diffraction
+    - X-ray photoelectron spectroscopy
+    - High-performance liquid chromatography 
+  * Microbiology
+    - Trained on the Illumina NextSeq 1000 sequencing platform, including library preparation for 16S rRNA and shotgun metagenomic sequencing
+
+# Software and online resources  
+
+A collection of online code repositories authored by me
+
+### R packages
+
+  * [bgamcar1](https://github.com/bentrueman/bgamcar1)
+    - A set of functions for fitting robust Bayesian generalized additive models with continuous-time autoregressive errors to partially censored environmental time series.
+  * [pbcusol](https://github.com/bentrueman/pbcusol)
+    - This package facilitates modeling equilibrium lead and copper solubility and is also available as a web application available [here](https://bentrueman.shinyapps.io/shinypbcusol).
+  * [fffprocessr](https://github.com/bentrueman/fffprocessr)
+    - Designed for analyzing flow field-flow fractionation data, with a focus on environmental applications.
+
+### Online resources 
+
+  * [censored-env-data-analysis](https://github.com/bentrueman/censored-env-data-analysis) 
+    - A comprehensive set of tools for analyzing left-censored environmental data in a Bayesian framework. Applicable to both univariate and multivariate problems.
+  * [cwrs-r-group](https://github.com/bentrueman/cwrs-r-group)
+    - Selected code and datasets from a weekly R programming meeting at Dalhousie University's Centre for Water Resources Studies. The focus of the meetings is statistical modeling, and sessions usually introduce a concept or method, step-by-step.
+    
 # Journal articles 
 
 1. **Trueman, B. F.**, Locsin, J. A., Krkošek, W. H., & Gagnon, G. A. (2023). Evaluating Sentinel Pipe Racks for Monitoring Lead Release and Optimizing Corrosion Control. ACS ES&T Water. https://doi.org/10.1021/acsestwater.3c00273
