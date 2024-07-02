@@ -1,7 +1,7 @@
 ---
 title: "Benjamin Trueman"
 description: |
-  Postdoctoral researcher<br>
+  Research scientist<br>
   Centre for Water Resources Studies<br>
   Department of Civil & Resource Engineering<br>
   Dalhousie University<br>
@@ -14,56 +14,70 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # About me  
 
-I am a water quality specialist with significant experience in statistical programming, data analysis, data management, machine learning, and geochemical modeling.
+I am a water quality scientist with significant experience in statistical programming, data analysis, data management, machine learning, and geochemical modeling.
 
 Website: https://bentrueman.github.io  
 Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en  
 
-# Academic background    
+# Work experience  
 
-2018 PhD, Civil Engineering  
-Dalhousie University, Halifax, NS  
-*Thesis title: “Controlling Lead Release To Drinking Water: Impacts Of Iron Oxides, Complexing Species, Orthophosphate, And Lead Pipe Replacement”*
-
-2012 BSc, Environmental Science  
-Dalhousie University, Halifax, NS
-
-# Employment  
-
-2018--Present  
-Postdoctoral Employee  
+2024--Present  
+Senior Research Scientist  
 Centre for Water Resources Studies, Dalhousie University  
-*At the Centre for Water Resources Studies, I manage research projects on organic and inorganic contamination of drinking and source waters. Topics have included using environmental DNA to understand contamination of source waters with cyanotoxins, characterizing interactions between dissolved organic carbon and trace metals in natural and engineered water systems, using sodium silicates for corrosion control, and developing software for modeling environmental time series.*  
+
+  * Developed a bespoke workflow for marker gene and metagenomic sequencing and subsequent data analysis  
+  
+  * Managed a Research Nova Scotia grant valued at more than $1M, focused on water surveillance using environmental DNA  
+  
+  * Mentored PhD, MASc, and co-op students in research, writing, data analysis, and programming
 
 2017--Present  
-Consultant  
-*As a consultant for private companies, Health Canada, water utilities, and legal teams, I provide analysis and technical opinions on aspects of water quality and treatment.*
+Independent consultant  
 
+  * Built a statistical model for predicting toxic aluminum concentrations in high priority salmon rivers 
+  
+  * Designed a geochemical model to better understand alkalinity enhancement of acidified surface waters  
+  
+  * Provided data analysis and modeling expertise for a major US lawsuit involving lead contamination of drinking water
+
+2018--2024 
+Postdoctoral Employee  
+Centre for Water Resources Studies, Dalhousie University  
+
+  * Created open-source software packages for modeling (1) environmental time series and (2) the fate of inorganic contaminants in water 
+  
+  * Contributed research insights to Halifax Water's corrosion control program, resulting in lower levels of toxic lead in drinking water and prolonged infrastructure life 
+  
+  * Detected a lead polyphosphate complex in drinking water using a purpose-built method; the USEPA and others had warned about these complexes for years, but this was among the first detections in real drinking water 
+  * Showed that sodium silicate was not a viable corrosion control treatment for lead, despite its mention in many corrosion control manuals for that purpose---a finding which will avoid wasted resources, and, potentially, elevated lead in drinking water
+ 
 2021--2023  
-Postdoctoral employee (Mitacs Accelerate Grant)  
+Postdoctoral employee (Mitacs Accelerate Grant holder)  
 Halifax Water/Dalhousie University  
-*In this role, I developed Halifax Water's capacity for data-driven decision-making, with a focus on corrosion control, disinfection byproduct formation, and long-term infrastructure planning.*  
+
+  * Developed and published a novel monitoring strategy for the corrosiveness of drinking water that has been cited in Health Canada's new draft guidance document on controlling lead corrosion
 
 # Skills 
 
-  * Statistical programming
+  * **Statistical programming/machine learning**
      - Proficient in R, Stan, and bash
-     - Experienced in the use of high performance computing for data intensive analyses
-     - Creator and maintainer of R packages for time series analysis, field-flow fractionation data processing, and geochemical water quality modeling
-  * Bioinformatics 
-    - Trained in the application of bioinformatics tools for both metagenomic and marker gene sequencing data
-  * Communication 
-    - Experience communicating technical content to academic and general audiences (wrote or co-wrote 35+ academic journal articles as well as technical reports and white papers)
-    - Presented original research at international conferences, including the American Chemical Society's Annual Conference and the International Water Association's Annual Specialist Conference on Natural Organic Matter
-  * Analytical Chemistry
+     - High-performance computing 
+     - Some Python and SQL
+  * **Technical communication **
+    - Wrote or co-wrote 35+ academic journal articles 
+    - Wrote numerous technical reports for federal, provincial, and municipal clients
+    - Presented original research at international conferences (including best presentation award, 7^th^ IWA Specialist Conference on Natural Organic Matter in Tokyo, Japan)
+  * **Analytical Chemistry**
     - Field-flow fractionation
     - Mulitangle light scattering
     - Inductively-coupled plasma mass spectrometry 
     - X-ray diffraction
     - X-ray photoelectron spectroscopy
     - High-performance liquid chromatography 
-  * Microbiology
-    - Trained on the Illumina NextSeq 1000 sequencing platform, including library preparation for 16S rRNA and shotgun metagenomic sequencing
+  * **Microbiology**
+    - 16S rRNA and shotgun metagenomic sequencing on the Illumina NextSeq 1000 sequencing platform
+  * **Bioinformatics** 
+    - Metagenomic and marker gene sequencing data analysis
 
 # Software and online resources  
 
@@ -84,6 +98,23 @@ A collection of online code repositories authored by me
     - A comprehensive set of tools for analyzing left-censored environmental data in a Bayesian framework. Applicable to both univariate and multivariate problems.
   * [cwrs-r-group](https://github.com/bentrueman/cwrs-r-group)
     - Selected code and datasets from a weekly R programming meeting at Dalhousie University's Centre for Water Resources Studies. The focus of the meetings is statistical modeling, and sessions usually introduce a concept or method, step-by-step.
+    
+# Reports
+
+Prepared data-focused technical reports---including original research---on topics in drinking water quality and treatment for **Halifax Water**, **EPCOR**, the cities of **Regina**, **Saint John**, and **Thunder Bay**, as well as for **Health Canada** and **Nova Scotia Environment and Climate Change**.
+
+# Academic background    
+
+2018 PhD, Civil Engineering  
+Dalhousie University, Halifax, NS  
+*Thesis title: “Controlling Lead Release To Drinking Water: Impacts Of Iron Oxides, Complexing Species, Orthophosphate, And Lead Pipe Replacement”* 
+
+  * NSERC Postgraduate Scholarship, Doctoral level 
+  * Nova Scotia Graduate Scholarship
+  * President’s Award 
+
+2012 BSc, Environmental Science  
+Dalhousie University, Halifax, NS
     
 # Journal articles 
 
@@ -215,10 +246,6 @@ A collection of online code repositories authored by me
 
 16.	Trueman, B. F. & Gagnon, G. A. 2013. Optimization of phosphate dose following residential sampling for lead. Poster presentation. American Water Works Association Annual Conference and Exposition, June 9--13 in Denver, CO.
 
-# Reports
-
-Prepared confidential consulting reports on topics in drinking water quality and treatment for the cities of Regina, Saint John, and Halifax and for Health Canada and Nova Scotia Environment.
-
 # Peer-reviewer
 
 - Water Research
@@ -231,12 +258,3 @@ Prepared confidential consulting reports on topics in drinking water quality and
 - Environmental Science: Processes & Impacts
 - Environmental Pollution
 - Springer Nature Applied Sciences
-
-# Awards  
-
-- 2021 Mitacs Accelerate Grant ($110,000 over 2 years)
-- 2019	Best presentation award, The 7th IWA Specialist Conference on Natural Organic Matter (Tokyo, Japan)
-- 2017 	Nova Scotia Graduate Scholarship
-- 2015	NSERC Post Graduate Scholarship Doctoral Level
-- 2015	President’s Award, Dalhousie University
-

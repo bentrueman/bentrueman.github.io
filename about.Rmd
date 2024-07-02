@@ -1,7 +1,7 @@
 ---
 title: "About me"
 description: |
-  Postdoctoral researcher<br>
+  Research scientist<br>
   Centre for Water Resources Studies<br>
   Department of Civil & Resource Engineering<br>
   Dalhousie University<br>
@@ -12,4 +12,4 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-My research interests include drinking/source water quality and treatment, water quality data analysis, and corrosion as it relates to drinking water quality. I study the occurrence and mobility of lead and copper in drinking water, the impact of iron corrosion on water quality, and changes in source water bodies that impact drinking water quality (e.g., brownification, cyanobacteria).
+My research interests include drinking/source water quality and treatment, water quality data analysis, environmental DNA, and corrosion as it relates to drinking water quality. I study the occurrence and mobility of lead and copper in drinking water, the impact of iron corrosion on water quality, and changes in source water bodies that impact drinking water quality (e.g., brownification, cyanobacteria).
