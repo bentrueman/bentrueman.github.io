@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 I am a water quality scientist with significant experience in statistical programming, data analysis, data management, machine learning, and geochemical modeling.
 
-Website: https://bentrueman.github.io  
+Github: https://github.com/bentrueman   
 Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en  
 
 # Work experience  
