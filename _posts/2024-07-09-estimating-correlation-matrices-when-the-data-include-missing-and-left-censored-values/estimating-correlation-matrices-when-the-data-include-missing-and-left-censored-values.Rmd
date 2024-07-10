@@ -1,0 +1,317 @@
+---
+title: "Estimating correlation matrices when the data include missing and left-censored values"
+description: |
+  A one-step Bayesian approach.
+author:
+  - name: Ben Trueman
+    url: {}
+date: 2024-07-09
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I recently put together a [GitHub repository](https://github.com/bentrueman/censored-env-data-analysis) with some collected tips on how to fit common models in environmental science when the data are partially left-censored. This occurs most often when observations are reported as falling below a detection limit. One of these models is used to estimate a correlation matrix, and I thought I'd explore that here using a simulation. I follow the typical approach of simulating data, fitting a model, and then comparing the parameter values that generated the data to the model estimates.
+
+We'll need the following R packages and options:
+
+```{r packages, message=FALSE}
+library("MASS") # random generation for multivariate normal
+library("tidyverse") # data wrangling
+library("scales") # rescaling vectors
+library("withr") # set a random seed
+library("trialr") # generate random correlation matrices
+library("brms") # generate Stan code template
+library("bgamcar1") # customize Stan code and fit models
+library("cmdstanr") # postprocess model
+library("posterior") # postprocess model
+library("ggplot2") # visualize
+library("patchwork") # compose plots
+options(mc.cores = parallel::detectCores()) # detect and set number of CPU cores
+```
+
+```{r theme, echo=FALSE}
+theme_set(
+  theme_bw(14) + 
+    theme(
+      legend.position = "bottom",
+      strip.background = element_blank(),
+      legend.direction = "vertical"
+    )
+)
+pal <- wesanderson::wes_palette("Zissou1")
+```
+
+First, let's set the simulation parameters. I'm choosing a missing rate of 20% and a censoring rate of approximately 35% for each variable. 
+
+```{r set-parameters}
+filename_prefix <- "correlation-matrix-simulation-" # for saving models
+n_variables <- 5
+n_observations <- 100
+n_simulations <- 25
+proportion_missing <- 0.2
+n_missing <- round(proportion_missing * n_observations)
+
+# this is the proportion of sigma to subtract from the mean, yielding the censoring threshold:
+
+proportion_censored <- 0.25
+
+# parameters for lognormal distributions of mu and sigma:
+mean_mu <- 0
+sd_mu <- 1
+meanlog_sigma <- 1
+sdlog_sigma <- 1
+
+# make variable/indicator names:
+these_variables <- paste0("x", seq(n_variables))
+these_indicators <- paste0("cens_x", seq(n_variables))
+
+this_seed <- 124256764 # choose a random seed:
+```
+
+Then, let's simulate the data. Missingness is not random: higher values are more likely to be missing.
+
+```{r simulate-data}
+with_seed(this_seed, {
+
+  simulation_inputs <- replicate(n_simulations, {
+    tibble(
+      variable = these_variables,
+      mu = rnorm(n_variables, mean_mu, sd_mu),
+      sigma = rlnorm(n_variables, meanlog_sigma, sdlog_sigma),
+      censoring_thresholds = mu - proportion_censored * sigma
+    )
+  }, simplify = FALSE)
+
+  correlation_matrices <- replicate(n_simulations, {
+    trialr::rlkjcorr(1, n_variables)
+  }, simplify = FALSE)
+
+  data <- map2(correlation_matrices, simulation_inputs, \(x, y) {
+
+    sigma <- diag(y$sigma)
+
+    covariance_matrix <- sigma %*% x %*% sigma
+
+    data <- mvrnorm(n = n_observations, mu = y$mu, Sigma = covariance_matrix)
+
+    # add in missings and censored:
+
+    data_missing <- data |>
+      apply(2, \(u) {u[sample(seq(n_observations), n_missing, prob = rescale(u))] <- NA; u})
+
+
+    censoring_indicators <- data_missing |>
+      sweep(2, y$censoring_thresholds, FUN = "<") |>
+      apply(2, \(u) if_else(u, "left", "none")) |>
+      apply(2, \(u) replace_na(u, "none"))
+
+    data_censored <- data_missing |>
+      sweep(2, y$censoring_thresholds, FUN = pmax)
+
+    # convert to tibble:
+
+    colnames(data_censored) <- these_variables
+
+    colnames(censoring_indicators) <- these_indicators
+
+    bind_cols(data.frame(data_censored), data.frame(censoring_indicators)) |>
+      as_tibble()
+
+  })
+})
+```
+
+Now that we have data, we can verify that the proportion censored is reasonable:
+
+```{r percent-censoring}
+data |>
+  list_rbind(names_to = "simulation") |>
+  summarize(across(starts_with("cens_"), ~ mean(.x == "left")))
+```
+
+We'll fit the models using [`bgamcar1`](), a package I built to fill a few gaps in the functionality of the immensely useful `brms`. First let's generate the model formula:
+
+```{r model-formula}
+these_formulas <- lapply(these_variables, \(x) bf(paste0(x, " | mi() ~ 1")))
+multivariate_formula <- mvbrmsformula(flist = these_formulas) + set_rescor(TRUE)
+```
+
+Now we can do the sampling. After it's done, we'll save CSVs of the draws and read them back in as `CmdStanFit` objects for easy post-processing.
+
+```{r load-models, echo=FALSE}
+filenames <- map_chr(seq(n_simulations), ~ paste0("models/", filename_prefix, .x)) |>
+    map(~ paste0(.x, "-", 1:4, ".csv"))
+censored_model_fitted <- map(filenames, as_cmdstan_fit)
+```
+
+```{r fit-models, eval=FALSE}
+map(seq_along(data), ~ fit_stan_model(
+    file = paste0("models/", filename_prefix, .x),
+    seed = this_seed,
+    bform = multivariate_formula,
+    bdata = data[[.x]],
+    car1 = FALSE,
+    var_xcens = these_variables,
+    cens_ind = these_indicators,
+    lcl = simulation_inputs[[.x]]$censoring_thresholds,
+    family = "gaussian",
+    backend = "cmdstanr",
+    overwrite = TRUE
+  ))
+# read the CSVs storing the draws as cmdstanfit objects:
+filenames <- map_chr(seq(n_simulations), ~ paste0("models/", filename_prefix, .x)) |>
+    map(~ paste0(.x, "-", 1:4, ".csv"))
+censored_model_fitted <- map(filenames, as_cmdstan_fit)
+```
+
+Not all of these models fully converged. Usually, that would mean diagnosing and tweaking each one, but here we'll just identify them and check later whether or not they recover the true parameter values well. In particular, we'll flag any model where the maximum tree depth was exceeded, divergent transitions occurred, the estimated Bayesian fraction of missing information was less than 0.3, r-hat values were greater than 1.05, or effective sample size for any parameter was less than 400---see [here](https://mc-stan.org/misc/warnings) for details.
+
+```{r diagnose, message=FALSE}
+diagnostics_1 <- map(censored_model_fitted, ~ .x$diagnostic_summary()) |>
+  map_lgl(
+    ~ all(.x$num_divergent == 0) & all(.x$num_max_treedepth == 0) & all(.x$ebfmi >= 0.3)
+  )
+
+diagnostics_2 <- map(censored_model_fitted, ~ .x$summary()) |>
+  map_lgl(
+    ~ with(.x,
+           all(rhat < 1.05, na.rm = TRUE) &
+             all(ess_bulk >= 400, na.rm = TRUE) &
+             all(ess_tail >= 400, na.rm = TRUE))
+  )
+
+diagnostics <- tibble(simulation = seq(n_simulations), converged = diagnostics_1 & diagnostics_2)
+```
+
+To evaluate model performance, we'll need to collect the true values from all the simulations...
+
+```{r collect-true-values}
+these_variable_pairs <- data.frame(t(combn(these_variables, 2))) |>
+  unite(col = variable, X1, X2)
+
+correlation_matrices_tbl <- correlation_matrices |>
+  map(\(x) x[lower.tri(x)]) |>
+  map(\(x) mutate(these_variable_pairs, rho = x)) |>
+  list_rbind(names_to = "simulation")
+
+simulation_inputs_tbl <- simulation_inputs |>
+  list_rbind(names_to = "simulation")
+```
+
+... and compare them to the model estimates:
+
+```{r get-draws, message=FALSE}
+model_draws <- censored_model_fitted |>
+  map(~ .x$draws(format = "draws_df")) |>
+  map(as_tibble) |>
+  list_rbind(names_to = "simulation") |> 
+  # rename correlation parameters:
+  rename_with(
+    .cols = matches("^Rescor\\[\\d\\,\\d\\]"), 
+    .fn = ~ str_replace(.x, "(\\d+),(\\d+)", "x\\1,x\\2")
+  )
+
+estimates <- list(
+  mu_estimated = "Intercept$", sigma_estimated = "^sigma", rho_estimated = "^Rescor\\[x\\d,x\\d\\]"
+) |>
+  map2(
+    list(simulation_inputs_tbl, simulation_inputs_tbl, correlation_matrices_tbl),
+    ~ model_draws |>
+      select(c(simulation, matches(.x))) |>
+      pivot_longer(-simulation, names_to = "param") |> 
+      mutate(
+        variable = str_extract_all(param, paste(these_variables, collapse = "|")),
+        variable = map(variable, ~ paste(.x, collapse = "_")),
+        variable = unlist(variable)
+      ) |> 
+      group_by(variable, simulation) |> 
+      summarize(
+        lower = quantile(value, .025),
+        upper = quantile(value, .975),
+        estimate = quantile(value, .5)
+      ) |>
+      ungroup() |>
+      right_join(.y, by = c("simulation", "variable")) |>
+      left_join(diagnostics, by = "simulation")
+  )
+```
+
+That's it! Now we just need to put all the information in a set of plots.
+
+```{r plot-estimates, echo=FALSE}
+plot_estimates <- \(x, param) {
+  x |> 
+    mutate(
+      ci_contains_true_value = upper - .data[[param]] > 0 & lower - .data[[param]] < 0,
+      across(c(converged, ci_contains_true_value), ~ if_else(.x, "Yes", "No"))
+    ) |>
+    ggplot(aes(.data[[param]], estimate, col = ci_contains_true_value, shape = converged)) +
+    geom_abline() +
+    geom_errorbar(aes(ymin = lower, ymax = upper), width = 0, linewidth = 0.1) +
+    geom_point(alpha = 0.5)
+}
+
+these_plots <- map2(
+  estimates,
+  list("mu", "sigma", "rho"),
+  plot_estimates
+)
+```
+
+```{r combine-plots, echo=FALSE}
+wrap_plots(
+  these_plots$mu_estimated + labs(title = "Means"),
+  these_plots$sigma_estimated + 
+    scale_x_log10() + 
+    scale_y_log10() + 
+    labs(title = "Standard\ndeviations"), 
+  these_plots$rho_estimated + labs(title = "Correlation\ncoefficients"), 
+  ncol = 3
+) +
+  plot_layout(guides = "collect") &
+  scale_color_manual(values = pal[c(3, 1)]) &
+  theme(legend.position = "bottom", legend.direction = "vertical") &
+  labs(
+    x = "True value", y = "Estimate",
+    shape = "Did the model converge?",
+    col = "Does the CI contain the true value?"
+  )
+```
+
+The model is recovering our parameters reasonably well. But how does it compare to a simpler approach? Let's try estimating correlation coefficients with the `stats::cor()` function. We'll use pairwise complete cases for calculating each of the correlation coefficients and impute the censoring limits for the left-censored values.
+
+```{r correlation-w-cor}
+estimates_conventional <- data |> 
+  map(~ select(.x, starts_with("x"))) |> 
+  map(~ cor(.x, use = "pairwise")) |> 
+  map(\(x) x[lower.tri(x)]) |>
+  map(\(x) mutate(these_variable_pairs, rho = x)) |>
+  list_rbind(names_to = "simulation") |> 
+  left_join(
+    correlation_matrices_tbl, 
+    by = c("simulation", "variable"),
+    suffix = c("_estimate", "_true")
+  )
+```
+
+```{r plot-correlation-w-cor, echo=FALSE}
+estimates_conventional |> 
+  ggplot() + 
+  geom_abline() +
+  geom_point(aes(rho_true, rho_estimate, col = "stats::cor()")) + 
+  geom_point(
+    data = estimates$rho_estimated,
+    aes(rho, estimate, col = "Bayesian model")
+  ) + 
+  theme(legend.position = "right") + 
+  scale_color_manual(values = pal[c(5, 2)]) +
+  labs(x = "True value", y = "Estimate", col = NULL)
+```
+
+The conventional approach does comparably well at estimating small correlations, but it tends to underestimate large correlations---especially large negative ones. 
+

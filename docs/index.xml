@@ -7,7 +7,16 @@
     <description>Data analysis, water quality, and R workflow.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Estimating correlation matrices when the data include missing and left-censored values</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2024-07-09-estimating-correlation-matrices-when-the-data-include-missing-and-left-censored-values</link>
+      <description>A one-step Bayesian approach.</description>
+      <guid>https://bentrueman.github.io/posts/2024-07-09-estimating-correlation-matrices-when-the-data-include-missing-and-left-censored-values</guid>
+      <pubDate>Tue, 09 Jul 2024 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2024-07-09-estimating-correlation-matrices-when-the-data-include-missing-and-left-censored-values/estimating-correlation-matrices-when-the-data-include-missing-and-left-censored-values_files/figure-html5/combine-plots-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Probabilistic principal component analysis for censored data</title>
       <dc:creator>Ben Trueman</dc:creator>
