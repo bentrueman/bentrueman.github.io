@@ -21,8 +21,8 @@ Google Scholar: https://scholar.google.ca/citations?user=V1hY9TkAAAAJ&hl=en
 
 # Work experience  
 
-2024--Present  
-Senior Research Scientist  
+*2024--Present*  
+**Senior Research Scientist**  
 Centre for Water Resources Studies, Dalhousie University  
 
   * Developed a bespoke workflow for marker gene and metagenomic sequencing and subsequent data analysis  
@@ -31,8 +31,8 @@ Centre for Water Resources Studies, Dalhousie University
   
   * Mentored PhD, MASc, and co-op students in research, writing, data analysis, and programming
 
-2017--Present  
-Independent consultant  
+*2017--Present*  
+**Independent consultant**  
 
   * Built a statistical model for predicting toxic aluminum concentrations in high priority salmon rivers 
   
@@ -40,8 +40,8 @@ Independent consultant
   
   * Provided data analysis and modeling expertise for a major US lawsuit involving lead contamination of drinking water
 
-2018--2024 
-Postdoctoral Employee  
+*2018--2024*  
+**Postdoctoral Employee**  
 Centre for Water Resources Studies, Dalhousie University  
 
   * Created open-source software packages for modeling (1) environmental time series and (2) the fate of inorganic contaminants in water 
@@ -51,8 +51,8 @@ Centre for Water Resources Studies, Dalhousie University
   * Detected a lead polyphosphate complex in drinking water using a purpose-built method; the USEPA and others had warned about these complexes for years, but this was among the first detections in real drinking water 
   * Showed that sodium silicate was not a viable corrosion control treatment for lead, despite its mention in many corrosion control manuals for that purpose---a finding which will avoid wasted resources, and, potentially, elevated lead in drinking water
  
-2021--2023  
-Postdoctoral employee (Mitacs Accelerate Grant holder)  
+*2021--2023*  
+**Postdoctoral employee (Mitacs Accelerate Grant holder)**  
 Halifax Water/Dalhousie University  
 
   * Developed and published a novel monitoring strategy for the corrosiveness of drinking water that has been cited in Health Canada's new draft guidance document on controlling lead corrosion
