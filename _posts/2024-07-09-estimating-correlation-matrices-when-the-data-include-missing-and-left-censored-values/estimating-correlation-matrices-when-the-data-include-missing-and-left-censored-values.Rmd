@@ -57,7 +57,6 @@ proportion_missing <- 0.2
 n_missing <- round(proportion_missing * n_observations)
 
 # this is the proportion of sigma to subtract from the mean, yielding the censoring threshold:
-
 proportion_censored <- 0.25
 
 # parameters for lognormal distributions of mu and sigma:
@@ -134,7 +133,7 @@ data |>
   summarize(across(starts_with("cens_"), ~ mean(.x == "left")))
 ```
 
-We'll fit the models using [`bgamcar1`](), a package I built to fill a few gaps in the functionality of the immensely useful `brms`. First let's generate the model formula:
+We'll fit the models using [`bgamcar1`](https://github.com/bentrueman/bgamcar1), a package I built to fill a few gaps in the functionality of the immensely useful [`brms`](https://paul-buerkner.github.io/brms/). First let's generate the model formula:
 
 ```{r model-formula}
 these_formulas <- lapply(these_variables, \(x) bf(paste0(x, " | mi() ~ 1")))
@@ -313,5 +312,6 @@ estimates_conventional |>
   labs(x = "True value", y = "Estimate", col = NULL)
 ```
 
-The conventional approach does comparably well at estimating small correlations, but it tends to underestimate large correlations---especially large negative ones. 
+The conventional approach does comparably well at estimating small correlations, but it tends to underestimate large correlations---especially large negative ones. The Bayesian version also has the advantage that a robust model is straightforward---if extreme observations occur, we can compensate by using a student t likelihood, whereas `stats::cor()` doesn't have that option.
+
 

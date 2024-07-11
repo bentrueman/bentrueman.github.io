@@ -1577,7 +1577,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='va'>n_missing</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>proportion_missing</span> <span class='op'>*</span> <span class='va'>n_observations</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># this is the proportion of sigma to subtract from the mean, yielding the censoring threshold:</span></span>
-<span></span>
 <span><span class='va'>proportion_censored</span> <span class='op'>&lt;-</span> <span class='fl'>0.25</span></span>
 <span></span>
 <span><span class='co'># parameters for lognormal distributions of mu and sigma:</span></span>
@@ -1658,7 +1657,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 1   0.352   0.362   0.344   0.348    0.35</code></pre>
 </div>
-<p>We’ll fit the models using <a href=""><code>bgamcar1</code></a>, a package I built to fill a few gaps in the functionality of the immensely useful <code>brms</code>. First let’s generate the model formula:</p>
+<p>We’ll fit the models using <a href="https://github.com/bentrueman/bgamcar1"><code>bgamcar1</code></a>, a package I built to fill a few gaps in the functionality of the immensely useful <a href="https://paul-buerkner.github.io/brms/"><code>brms</code></a>. First let’s generate the model formula:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>these_formulas</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>these_variables</span>, \<span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://paul-buerkner.github.io/brms/reference/brmsformula.html'>bf</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>" | mi() ~ 1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
@@ -1788,7 +1787,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="estimating-correlation-matrices-when-the-data-include-missing-and-left-censored-values_files/figure-html5/plot-correlation-w-cor-1.png" width="624" /></p>
 </div>
-<p>The conventional approach does comparably well at estimating small correlations, but it tends to underestimate large correlations—especially large negative ones.</p>
+<p>The conventional approach does comparably well at estimating small correlations, but it tends to underestimate large correlations—especially large negative ones. The Bayesian version also has the advantage that a robust model is straightforward—if extreme observations occur, we can compensate by using a student t likelihood, whereas <code>stats::cor()</code> doesn’t have that option.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
