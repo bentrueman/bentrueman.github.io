@@ -7,7 +7,16 @@
     <description>Data analysis, water quality, and R workflow.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 09 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Gaussian process regression as an alternative to continuous-time autoregression</title>
+      <dc:creator>Ben Trueman</dc:creator>
+      <link>https://bentrueman.github.io/posts/2024-09-04-modeling-time-series-using-gaussian-processes</link>
+      <description>For small datasets, Gaussian process regression can be just as effective.</description>
+      <guid>https://bentrueman.github.io/posts/2024-09-04-modeling-time-series-using-gaussian-processes</guid>
+      <pubDate>Fri, 06 Sep 2024 00:00:00 +0000</pubDate>
+      <media:content url="https://bentrueman.github.io/posts/2024-09-04-modeling-time-series-using-gaussian-processes/modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-2-d-1.png" medium="image" type="image/png" width="1248" height="528"/>
+    </item>
     <item>
       <title>Estimating correlation matrices when the data include missing and left-censored values</title>
       <dc:creator>Ben Trueman</dc:creator>
