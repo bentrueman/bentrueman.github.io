@@ -5,20 +5,18 @@ description: |
 author:
   - name: Ben Trueman
     url: {}
-date: 2024-07-09
+date: 2024-09-06
 output:
   distill::distill_article:
     self_contained: false
-draft: true
 ---
-<!-- to do: 1. make sure to add references! -->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 options(mc.cores = parallel::detectCores())
 ```
 
-Recently, I've begun learning about Gaussian processes, and it's become clear that they offer an alternative to something I've spent some time on recently: modeling time series as the sum of one or more smoothing splines and a continuous time autoregression---see my [`bgamcar1` package](https://github.com/bentrueman/bgamcar1) for examples. 
+Recently, I've been learning about Gaussian processes, and it's become clear that they offer an alternative to something I've spent some time on recently: modeling time series as the sum of one or more smoothing splines and a continuous time autoregression---see my [`bgamcar1` package](https://github.com/bentrueman/bgamcar1) for examples. 
 
 I'll start this post with some simulations that helped me understand the basics of Gaussian processes, and then I'll fit one to some (simulated) data and compare it with a continuous-time autoregression.
 
@@ -57,7 +55,7 @@ where $\sigma$ is the error term, $\rho$ controls the frequency, and $\alpha$ co
 
 This is what the covariance function looks like for a range of $\rho$ values:
 
-```{r plot-covariance-function, echo=FALSE}
+```{r plot-covariance-function, echo=FALSE, fig.height=3}
 distance <- seq(0, 50, length.out = 200)
 
 rho_plot <- seq(1, 21, by = 0.5)
@@ -89,7 +87,7 @@ rho <- c(1, 2, 5, 10, 20) # length-scale (frequency)
 alpha <- 1 # marginal standard deviation (amplitude of the GP)
 ```
 
-For each set, we'll simulate a multivariate normal draw:
+For each set, we'll simulate a multivariate normal draw with zero mean:
 
 ```{r simulation-1-d}
 N <- 100
@@ -103,7 +101,7 @@ covariance_matrix <- covariance_matrix |>
 y <- with_seed(12456, {map(covariance_matrix, ~ mvtnorm::rmvnorm(1, sigma = .x))}) 
 ```
 
-The parameter $\rho$ has an important effect on the kinds of functions a Gaussian process can model:
+The parameter $\rho$ has an important effect on the kinds of functions a Gaussian process can model. In the figure below, realizations are on the left and the covariance matrices that generated them are on the right.
 
 ```{r plot-simulation-1-d, echo=FALSE, fig.height=6}
 gp_1d <- map(y, ~ t(.x)[,1]) |> 
@@ -150,6 +148,7 @@ rho <- c(5, 10, 20)
 N <- 35
 x <- seq(N)
 grid <- crossing(x1 = x, x2 = x)
+# squared Euclidean distance in 2D:
 distance_matrix <- outer(grid$x1, grid$x1, "-") ^ 2 + 
   outer(grid$x2, grid$x2, "-") ^ 2
 ```
@@ -162,7 +161,7 @@ covariance_matrix <- map(covariance_matrix, ~ .x + diag(rep(sigma ^ 2, nrow(cova
 y <- with_seed(415, {map(covariance_matrix, ~ mvtnorm::rmvnorm(1, sigma = .x))}) # simulate a multivariate normal draw
 ```
 
-```{r plot-simulation-2-d, echo=FALSE}
+```{r plot-simulation-2-d, echo=FALSE, fig.height=2.75, preview=TRUE}
 map(y, ~ t(.x)[,1]) |> 
   set_names(paste0("<i>&rho;</i>=", rho)) |> 
   as_tibble() |> 
@@ -177,9 +176,9 @@ map(y, ~ t(.x)[,1]) |>
   labs(fill = "y")
 ```
 
-Now to fit a Gaussian process to data. In `brms`, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter $\eta_i \sim N(0, 1)$ for each data point. The $\eta_i$ are then transformed to yield the target multivariate normal distribution. 
+Now, on to fitting a Gaussian process! In `brms`, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter $\eta_i \sim N(0, 1)$ for each data point. The $\eta_i$ are then transformed to yield the target multivariate normal distribution, as described in the *Gaussian processes* section of the [Stan manual](https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html). 
 
-Posterior predictions at new predictor values are calculated analytically, as described in the *Gaussian processes* section of the [Stan manual](https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html) under "Analytical form of joint predictive inference".
+Posterior predictions at new predictor values are calculated analytically, and a function to do so is provided at the above link, under *Analytical form of joint predictive inference*.
 
 Let's simulate from a Gaussian process, add a linear trend, subsample from it to create an irregularly-spaced time series, and then fit (1) a continuous-time autoregressive model and (2) a Gaussian process regression model to the data.
 
@@ -202,9 +201,9 @@ with_seed(1241521412, {
 })
 ```
 
-The autocorrelation function looks first-order autoregressive:
+The autocorrelation function looks a lot like it came from a first-order autoregressive model:
 
-```{r acf-gp, echo=FALSE}
+```{r acf-gp, echo=FALSE, fig.height=2.5}
 acf(t(y)[,1], plot = FALSE) |> 
   with(tibble(lag, acf)) |> 
   ggplot(aes(lag, acf)) + 
@@ -249,7 +248,7 @@ model_car1 <- fit_stan_model(
 
 It does a good job of modeling the autocorrelation ...
 
-```{r acf-car1, echo=FALSE}
+```{r acf-car1, echo=FALSE, fig.height=2.5}
 residuals_car1 <- add_resid_draws_car1(data_simulated, model_car1, yvar = y)
 residuals_car1 |> 
   group_by(time) |> 
@@ -286,7 +285,7 @@ model_gp <- brm(
 
 Unsurprisingly, it models the autocorrelation too:
 
-```{r acf-gp-linear, echo=FALSE}
+```{r acf-gp-linear, echo=FALSE, fig.height=2.5}
 residuals(model_gp, robust = TRUE)[,"Estimate"] |> 
   acf(plot = FALSE) |> 
   with(tibble(lag, acf)) |> 
@@ -304,7 +303,7 @@ fixef(model_gp)
 
 Here are the predictions from the two models, superimposed on the data:
 
-```{r plot-predictions, echo=FALSE}
+```{r plot-predictions, echo=FALSE, fig.height=3}
 predictions <- list(
   "Gaussian process regression" = tidybayes::add_epred_draws(data_simulated, model_gp), 
   "Continuous-time autoregression" = add_pred_draws_car1(data_simulated, model_car1)

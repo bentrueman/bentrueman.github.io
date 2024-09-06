@@ -94,8 +94,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2024-07-09"/>
-  <meta property="article:created" itemprop="dateCreated" content="2024-07-09"/>
+  <meta property="article:published" itemprop="datePublished" content="2024-09-06"/>
+  <meta property="article:created" itemprop="dateCreated" content="2024-09-06"/>
   <meta name="article:author" content="Ben Trueman"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -113,7 +113,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["Gaussian process regression as an alternative to continuous-time autoregression"]},{"type":"character","attributes":{},"value":["For small datasets, Gaussian process regression can be just as effective.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Trueman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2024-07-09"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Gaussian process regression as an alternative to continuous-time autoregression"]},{"type":"character","attributes":{},"value":["For small datasets, Gaussian process regression can be just as effective.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Trueman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2024-09-06"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1521,7 +1521,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Gaussian process regression as an alternative to continuous-time autoregression","description":"For small datasets, Gaussian process regression can be just as effective.","authors":[{"author":"Ben Trueman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2024-07-09T00:00:00.000-03:00","citationText":"Trueman, 2024"}
+{"title":"Gaussian process regression as an alternative to continuous-time autoregression","description":"For small datasets, Gaussian process regression can be just as effective.","authors":[{"author":"Ben Trueman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2024-09-06T00:00:00.000-03:00","citationText":"Trueman, 2024"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1541,12 +1541,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-byline">
   Ben Trueman true 
   
-<br/>2024-07-09
+<br/>2024-09-06
 </div>
 
 <div class="d-article">
-<!-- to do: 1. make sure to add references! -->
-<p>Recently, I’ve begun learning about Gaussian processes, and it’s become clear that they offer an alternative to something I’ve spent some time on recently: modeling time series as the sum of one or more smoothing splines and a continuous time autoregression—see my <a href="https://github.com/bentrueman/bgamcar1"><code>bgamcar1</code> package</a> for examples. I’ll start this post with some simulations that helped me understand the basics of Gaussian processes, and then I’ll fit one to some (simulated) data and compare it with a continuous-time autoregression.</p>
+<p>Recently, I’ve been learning about Gaussian processes, and it’s become clear that they offer an alternative to something I’ve spent some time on recently: modeling time series as the sum of one or more smoothing splines and a continuous time autoregression—see my <a href="https://github.com/bentrueman/bgamcar1"><code>bgamcar1</code> package</a> for examples.</p>
+<p>I’ll start this post with some simulations that helped me understand the basics of Gaussian processes, and then I’ll fit one to some (simulated) data and compare it with a continuous-time autoregression.</p>
 <p>We’ll need the following packages:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1567,12 +1567,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p><span class="math display">\[
 K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} \sum_{d = 1}^D(x_{i,d} - x_{j,d}) ^ 2 \right) + \delta_{i,j} \sigma ^ 2
 \]</span></p>
-<p>where <span class="math inline">\(\sigma\)</span> is the error term, <span class="math inline">\(\rho\)</span> controls the frequency of the Gaussian process, and <span class="math inline">\(\alpha\)</span> controls its range.</p>
+<p>where <span class="math inline">\(\sigma\)</span> is the error term, <span class="math inline">\(\rho\)</span> controls the frequency, and <span class="math inline">\(\alpha\)</span> controls the range.</p>
 <p>This is what the covariance function looks like for a range of <span class="math inline">\(\rho\)</span> values:</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-covariance-function-1.png" width="624" /></p>
 </div>
-<p>First, we’ll do a simulation in one dimension. We’ll set the parameters as follows:</p>
+<p>First, we’ll do a simulation in one dimension with the following parameters:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>1e-4</span> <span class='co'># residual standard deviation (noise term)</span></span>
@@ -1580,18 +1580,21 @@ K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} 
 <span><span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>1</span> <span class='co'># marginal standard deviation (amplitude of the GP)</span></span></code></pre>
 </div>
 </div>
-<p>For each set, we’ll simulate a multivariate normal draw:</p>
+<p>For each set, we’ll simulate a multivariate normal draw with zero mean:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>N</span> <span class='op'>&lt;-</span> <span class='fl'>100</span></span>
 <span><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>N</span><span class='op'>)</span></span>
-<span><span class='va'>distance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>x</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='co'># compute distance matrix</span></span>
-<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>rho</span>, <span class='op'>~</span> <span class='va'>alpha</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>distance_matrix</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>.x</span> <span class='op'>^</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># exponentiated quadratic kernel output</span></span>
-<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span>, <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>sigma</span> <span class='op'>^</span> <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># add sigma squared to diagonal</span></span>
-<span><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://withr.r-lib.org/reference/with_seed.html'>with_seed</a></span><span class='op'>(</span><span class='fl'>12456</span>, <span class='op'>{</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span>, <span class='op'>~</span> <span class='fu'>mvtnorm</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html'>rmvnorm</a></span><span class='op'>(</span><span class='fl'>1</span>, sigma <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span> <span class='co'># simulate a multivariate normal draw</span></span></code></pre>
+<span><span class='va'>distance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>x</span>, <span class='st'>"-"</span><span class='op'>)</span> </span>
+<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>rho</span>, <span class='op'>~</span> <span class='va'>alpha</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>distance_matrix</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>.x</span> <span class='op'>^</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> </span>
+<span><span class='co'># add sigma squared to diagonal:</span></span>
+<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='va'>covariance_matrix</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='op'>~</span> <span class='va'>.x</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>sigma</span> <span class='op'>^</span> <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> </span>
+<span><span class='co'># simulate a multivariate normal draw:</span></span>
+<span><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://withr.r-lib.org/reference/with_seed.html'>with_seed</a></span><span class='op'>(</span><span class='fl'>12456</span>, <span class='op'>{</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span>, <span class='op'>~</span> <span class='fu'>mvtnorm</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html'>rmvnorm</a></span><span class='op'>(</span><span class='fl'>1</span>, sigma <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span> </span></code></pre>
 </div>
 </div>
-<p>The parameter <span class="math inline">\(\rho\)</span> has an important effect on the kinds of functions a Gaussian process can model:</p>
+<p>The parameter <span class="math inline">\(\rho\)</span> has an important effect on the kinds of functions a Gaussian process can model. In the figure below, realizations are on the left and the covariance matrices that generated them are on the right.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-1-d-1.png" width="624" /></p>
 </div>
@@ -1602,18 +1605,20 @@ K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} 
 <span><span class='va'>N</span> <span class='op'>&lt;-</span> <span class='fl'>35</span></span>
 <span><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>N</span><span class='op'>)</span></span>
 <span><span class='va'>grid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/expand.html'>crossing</a></span><span class='op'>(</span>x1 <span class='op'>=</span> <span class='va'>x</span>, x2 <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span></span>
+<span><span class='co'># squared Euclidean distance in 2D:</span></span>
 <span><span class='va'>distance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>grid</span><span class='op'>$</span><span class='va'>x1</span>, <span class='va'>grid</span><span class='op'>$</span><span class='va'>x1</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>+</span> </span>
 <span>  <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>grid</span><span class='op'>$</span><span class='va'>x2</span>, <span class='va'>grid</span><span class='op'>$</span><span class='va'>x2</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='op'>^</span> <span class='fl'>2</span></span></code></pre>
 </div>
 </div>
-<p>Covariance matrices and multivariate normal draws are generated as above, and they yield something like this:</p>
+<p>Covariance matrices and multivariate normal draws are generated as above, and they should yield something like this:</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-2-d-1.png" width="624" /></p>
+<p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-2-d-1.png" width="624" data-distill-preview=1 /></p>
 </div>
-<p>Now to fit a Gaussian process to data. In <code>brms</code>, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter <span class="math inline">\(\eta_i \sim N(0, 1)\)</span> for each data point. The <span class="math inline">\(\eta_i\)</span> are then transformed to yield the target multivariate normal distribution. Posterior predictions at new predictor values are calculated analytically, as described in the <em>Gaussian processes</em> section of the <a href="https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html">Stan manual</a> under “Analytical form of joint predictive inference”.</p>
+<p>Now, on to fitting a Gaussian process! In <code>brms</code>, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter <span class="math inline">\(\eta_i \sim N(0, 1)\)</span> for each data point. The <span class="math inline">\(\eta_i\)</span> are then transformed to yield the target multivariate normal distribution, as described in the <em>Gaussian processes</em> section of the <a href="https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html">Stan manual</a>.</p>
+<p>Posterior predictions at new predictor values are calculated analytically, and a function to do so is provided at the above link, under <em>Analytical form of joint predictive inference</em>.</p>
 <p>Let’s simulate from a Gaussian process, add a linear trend, subsample from it to create an irregularly-spaced time series, and then fit (1) a continuous-time autoregressive model and (2) a Gaussian process regression model to the data.</p>
 <p>First, we’ll simulate a one-dimensional Gaussian process like we did above, with the following parameters:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1627,7 +1632,7 @@ K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} 
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>The autocorrelation function looks first-order autoregressive:</p>
+<p>The autocorrelation function looks a lot like it came from a first-order autoregressive model:</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/acf-gp-1.png" width="624" /></p>
 </div>
