@@ -88,9 +88,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Modeling time series using Gaussian processes</title>
+  <title>Gaussian process regression as an alternative to continuous-time autoregression</title>
 
-  <meta property="description" itemprop="description" content="Description here."/>
+  <meta property="description" itemprop="description" content="For small datasets, Gaussian process regression can be just as effective."/>
 
 
   <!--  https://schema.org/Article -->
@@ -99,26 +99,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta name="article:author" content="Ben Trueman"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Modeling time series using Gaussian processes"/>
+  <meta property="og:title" content="Gaussian process regression as an alternative to continuous-time autoregression"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Description here."/>
+  <meta property="og:description" content="For small datasets, Gaussian process regression can be just as effective."/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Modeling time series using Gaussian processes"/>
-  <meta property="twitter:description" content="Description here."/>
+  <meta property="twitter:title" content="Gaussian process regression as an alternative to continuous-time autoregression"/>
+  <meta property="twitter:description" content="For small datasets, Gaussian process regression can be just as effective."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["Modeling time series using Gaussian processes"]},{"type":"character","attributes":{},"value":["Description here.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Trueman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2024-07-09"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["Gaussian process regression as an alternative to continuous-time autoregression"]},{"type":"character","attributes":{},"value":["For small datasets, Gaussian process regression can be just as effective.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Trueman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2024-07-09"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["modeling-time-series-using-gaussian-processes_files/anchor-4.2.2/anchor.min.js","modeling-time-series-using-gaussian-processes_files/bowser-1.9.3/bowser.min.js","modeling-time-series-using-gaussian-processes_files/distill-2.2.21/template.v2.js","modeling-time-series-using-gaussian-processes_files/figure-html5/plot-covariance-function-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-1-d-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-2-d-1.png","modeling-time-series-using-gaussian-processes_files/header-attrs-2.27/header-attrs.js","modeling-time-series-using-gaussian-processes_files/jquery-3.6.0/jquery-3.6.0.js","modeling-time-series-using-gaussian-processes_files/jquery-3.6.0/jquery-3.6.0.min.js","modeling-time-series-using-gaussian-processes_files/jquery-3.6.0/jquery-3.6.0.min.map","modeling-time-series-using-gaussian-processes_files/popper-2.6.0/popper.min.js","modeling-time-series-using-gaussian-processes_files/tippy-6.2.7/tippy-bundle.umd.min.js","modeling-time-series-using-gaussian-processes_files/tippy-6.2.7/tippy-light-border.css","modeling-time-series-using-gaussian-processes_files/tippy-6.2.7/tippy.css","modeling-time-series-using-gaussian-processes_files/tippy-6.2.7/tippy.umd.min.js","modeling-time-series-using-gaussian-processes_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["modeling-time-series-using-gaussian-processes_files/anchor-4.2.2/anchor.min.js","modeling-time-series-using-gaussian-processes_files/bowser-1.9.3/bowser.min.js","modeling-time-series-using-gaussian-processes_files/distill-2.2.21/template.v2.js","modeling-time-series-using-gaussian-processes_files/figure-html5/acf-car1-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/acf-gp-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/acf-gp-linear-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/plot-covariance-function-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/plot-predictions-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-1-d-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-2-d-1.png","modeling-time-series-using-gaussian-processes_files/figure-html5/unnamed-chunk-3-1.png","modeling-time-series-using-gaussian-processes_files/header-attrs-2.27/header-attrs.js","modeling-time-series-using-gaussian-processes_files/jquery-3.6.0/jquery-3.6.0.js","modeling-time-series-using-gaussian-processes_files/jquery-3.6.0/jquery-3.6.0.min.js","modeling-time-series-using-gaussian-processes_files/jquery-3.6.0/jquery-3.6.0.min.map","modeling-time-series-using-gaussian-processes_files/popper-2.6.0/popper.min.js","modeling-time-series-using-gaussian-processes_files/tippy-6.2.7/tippy-bundle.umd.min.js","modeling-time-series-using-gaussian-processes_files/tippy-6.2.7/tippy-light-border.css","modeling-time-series-using-gaussian-processes_files/tippy-6.2.7/tippy.css","modeling-time-series-using-gaussian-processes_files/tippy-6.2.7/tippy.umd.min.js","modeling-time-series-using-gaussian-processes_files/webcomponents-2.0.0/webcomponents.js","models/model-car1-1.csv","models/model-car1-2.csv","models/model-car1-3.csv","models/model-car1-4.csv","models/model-car1.rds","models/model-gp.rds"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1521,7 +1521,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Modeling time series using Gaussian processes","description":"Description here.","authors":[{"author":"Ben Trueman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2024-07-09T00:00:00.000-03:00","citationText":"Trueman, 2024"}
+{"title":"Gaussian process regression as an alternative to continuous-time autoregression","description":"For small datasets, Gaussian process regression can be just as effective.","authors":[{"author":"Ben Trueman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2024-07-09T00:00:00.000-03:00","citationText":"Trueman, 2024"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1531,11 +1531,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Modeling time series using Gaussian processes</h1>
+<h1>Gaussian process regression as an alternative to continuous-time autoregression</h1>
 
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Description here.</p></p>
+<p><p>For small datasets, Gaussian process regression can be just as effective.</p></p>
 </div>
 
 <div class="d-byline">
@@ -1545,194 +1545,172 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<!-- to do: 1. make sure to add references! 2. use brms:::.predictor_gp_new() -->
+<!-- to do: 1. make sure to add references! -->
+<p>Recently, I’ve begun learning about Gaussian processes, and it’s become clear that they offer an alternative to something I’ve spent some time on recently: modeling time series as the sum of one or more smoothing splines and a continuous time autoregression—see my <a href="https://github.com/bentrueman/bgamcar1"><code>bgamcar1</code> package</a> for examples. I’ll start this post with some simulations that helped me understand the basics of Gaussian processes, and then I’ll fit one to some (simulated) data and compare it with a continuous-time autoregression.</p>
+<p>We’ll need the following packages:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>mc.cores <span class='op'>=</span> <span class='fu'>parallel</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/parallel/detectCores.html'>detectCores</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
-</div>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://tidyverse.tidyverse.org'>"tidyverse"</a></span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://here.r-lib.org/'>"here"</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://tidyverse.tidyverse.org'>"tidyverse"</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://wilkelab.org/ggtext/'>"ggtext"</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://patchwork.data-imaginist.com'>"patchwork"</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/cmdstanr/'>"cmdstanr"</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"mgcv"</span><span class='op'>)</span></span></code></pre>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://withr.r-lib.org'>"withr"</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/paul-buerkner/brms'>"brms"</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='http://mvtnorm.R-forge.R-project.org'>"mvtnorm"</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"bgamcar1"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://mc-stan.org/cmdstanr/reference/register_knitr_engine.html'>register_knitr_engine</a></span><span class='op'>(</span>override <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
+
 </div>
-</div>
-<p>We can estimate a function as a draw from an <span class="math inline">\(N\)</span>-dimentional multivariate normal, where <span class="math inline">\(N\)</span> is the number of observations. For an isotropic Gaussian process, the covariance matrix of the multivariate normal is fully determined by the distance between all pairs of observations, via a covariance function. A popular choice is the <em>exponentiated quadratic</em>. For <span class="math inline">\(D\)</span>-dimensional observations <span class="math inline">\(x_1, ..., x_N \in \mathbb{R}^D\)</span> the covariance between <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span> is calculated as</p>
+<p>The basic idea behind a Gaussian process regression is that we can estimate any continuous function as a draw from an <span class="math inline">\(N\)</span>-dimentional multivariate normal, where <span class="math inline">\(N\)</span> is the number of observations. For an isotropic Gaussian process, the covariance matrix of the multivariate normal is fully determined by the distance between all pairs of observations, via a covariance function. A popular choice is the <em>exponentiated quadratic</em>. For <span class="math inline">\(D\)</span>-dimensional observations <span class="math inline">\(x_1, ..., x_N \in \mathbb{R}^D\)</span> the covariance between <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span> is calculated as</p>
 <p><span class="math display">\[
 K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} \sum_{d = 1}^D(x_{i,d} - x_{j,d}) ^ 2 \right) + \delta_{i,j} \sigma ^ 2
 \]</span></p>
 <p>where <span class="math inline">\(\sigma\)</span> is the error term, <span class="math inline">\(\rho\)</span> controls the frequency of the Gaussian process, and <span class="math inline">\(\alpha\)</span> controls its range.</p>
-<p>This is what the covariance function looks like:</p>
+<p>This is what the covariance function looks like for a range of <span class="math inline">\(\rho\)</span> values:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>distance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>50</span>, length.out <span class='op'>=</span> <span class='fl'>200</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>rho_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>21</span>, by <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
-<span><span class='va'>alpha_plot</span> <span class='op'>&lt;-</span> <span class='fl'>2</span></span>
-<span></span>
-<span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>rho_plot</span>, <span class='op'>~</span> <span class='va'>alpha_plot</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>distance</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>.x</span> <span class='op'>^</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://rlang.r-lib.org/reference/set_names.html'>set_names</a></span><span class='op'>(</span><span class='va'>rho_plot</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='va'>distance</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>distance</span>, names_to <span class='op'>=</span> <span class='st'>"rho"</span>, values_to <span class='op'>=</span> <span class='st'>"covariance"</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>rho <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>rho</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>distance</span>, <span class='va'>covariance</span>, col <span class='op'>=</span> <span class='va'>rho</span>, group <span class='op'>=</span> <span class='va'>rho</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='va'>alpha_plot</span> <span class='op'>^</span> <span class='fl'>2</span>, labels <span class='op'>=</span> <span class='st'>"&amp;alpha;&lt;sup&gt;2&lt;/sup&gt;"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
-<span>    axis.text.y <span class='op'>=</span> <span class='fu'><a href='https://wilkelab.org/ggtext/reference/element_markdown.html'>element_markdown</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
-<span>    legend.title <span class='op'>=</span> <span class='fu'><a href='https://wilkelab.org/ggtext/reference/element_markdown.html'>element_markdown</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span>  <span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"&amp;rho;"</span><span class='op'>)</span></span></code></pre>
-</div>
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-covariance-function-1.png" width="624" /></p>
 </div>
-<p>Simulation in one dimension</p>
+<p>First, we’ll do a simulation in one dimension. We’ll set the parameters as follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>1e-4</span> <span class='co'># residual standard deviation</span></span>
-<span><span class='va'>rho</span> <span class='op'>&lt;-</span> <span class='fl'>10</span> <span class='co'># length-scale</span></span>
-<span><span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>1</span> <span class='co'># marginal standard deviation</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>1e-4</span> <span class='co'># residual standard deviation (noise term)</span></span>
+<span><span class='va'>rho</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>20</span><span class='op'>)</span> <span class='co'># length-scale (frequency)</span></span>
+<span><span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>1</span> <span class='co'># marginal standard deviation (amplitude of the GP)</span></span></code></pre>
 </div>
 </div>
+<p>For each set, we’ll simulate a multivariate normal draw:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>N</span> <span class='op'>&lt;-</span> <span class='fl'>100</span></span>
 <span><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>N</span><span class='op'>)</span></span>
 <span><span class='va'>distance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>x</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='co'># compute distance matrix</span></span>
-<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='va'>alpha</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>distance_matrix</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>rho</span> <span class='op'>^</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># compute exponentiated quadratic kernel output</span></span>
-<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='va'>covariance_matrix</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>sigma</span> <span class='op'>^</span> <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># add sigma squared to diagonal</span></span>
-<span><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>mvtnorm</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html'>rmvnorm</a></span><span class='op'>(</span><span class='fl'>1</span>, sigma <span class='op'>=</span> <span class='va'>covariance_matrix</span><span class='op'>)</span> <span class='co'># simulate a multivariate normal draw</span></span></code></pre>
+<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>rho</span>, <span class='op'>~</span> <span class='va'>alpha</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>distance_matrix</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>.x</span> <span class='op'>^</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># exponentiated quadratic kernel output</span></span>
+<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span>, <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>sigma</span> <span class='op'>^</span> <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># add sigma squared to diagonal</span></span>
+<span><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://withr.r-lib.org/reference/with_seed.html'>with_seed</a></span><span class='op'>(</span><span class='fl'>12456</span>, <span class='op'>{</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span>, <span class='op'>~</span> <span class='fu'>mvtnorm</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html'>rmvnorm</a></span><span class='op'>(</span><span class='fl'>1</span>, sigma <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span> <span class='co'># simulate a multivariate normal draw</span></span></code></pre>
 </div>
 </div>
+<p>The parameter <span class="math inline">\(\rho\)</span> has an important effect on the kinds of functions a Gaussian process can model:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span><span class='va'>x</span>, y <span class='op'>=</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>1</span>,<span class='op'>]</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>these_breaks</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>N</span>, by <span class='op'>=</span> <span class='fl'>25</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='va'>covariance_matrix</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rowid_to_column</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>rowid</span>, names_to <span class='op'>=</span> <span class='st'>"columnid"</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>columnid <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_extract.html'>str_extract</a></span><span class='op'>(</span><span class='va'>columnid</span>, <span class='st'>"\\d+"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>columnid</span>, <span class='op'>-</span><span class='va'>rowid</span>, fill <span class='op'>=</span> <span class='va'>value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='va'>these_breaks</span>, position <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='op'>-</span><span class='va'>these_breaks</span>, labels <span class='op'>=</span> <span class='va'>these_breaks</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_raster</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"x"</span>, y <span class='op'>=</span> <span class='st'>"x"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'><a href='https://patchwork.data-imaginist.com/reference/wrap_plots.html'>wrap_plots</a></span><span class='op'>(</span><span class='va'>p1</span>, <span class='va'>p2</span><span class='op'>)</span></span></code></pre>
-</div>
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-1-d-1.png" width="624" /></p>
 </div>
-<p>Simulation in two dimensions</p>
+<p>Next, we’ll do a simulation in two dimensions. Since the covariance matrix depends only on the Euclidean distance between points, the code above generalizes easily.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rho</span> <span class='op'>&lt;-</span> <span class='fl'>5</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rho</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>20</span><span class='op'>)</span></span>
 <span><span class='va'>N</span> <span class='op'>&lt;-</span> <span class='fl'>35</span></span>
 <span><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>N</span><span class='op'>)</span></span>
-<span><span class='va'>grid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/expand.html'>crossing</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, y <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span></span>
-<span><span class='va'>distance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>grid</span><span class='op'>$</span><span class='va'>x</span>, <span class='va'>grid</span><span class='op'>$</span><span class='va'>x</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>grid</span><span class='op'>$</span><span class='va'>y</span>, <span class='va'>grid</span><span class='op'>$</span><span class='va'>y</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='op'>^</span> <span class='fl'>2</span></span>
-<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='va'>alpha</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>distance_matrix</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>rho</span> <span class='op'>^</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># squared exponential kernel</span></span>
-<span><span class='va'>covariance_matrix</span> <span class='op'>&lt;-</span> <span class='va'>covariance_matrix</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>sigma</span> <span class='op'>^</span> <span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>covariance_matrix</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'>mvtnorm</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html'>rmvnorm</a></span><span class='op'>(</span><span class='fl'>1</span>, sigma <span class='op'>=</span> <span class='va'>covariance_matrix</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>grid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/expand.html'>crossing</a></span><span class='op'>(</span>x1 <span class='op'>=</span> <span class='va'>x</span>, x2 <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span></span>
+<span><span class='va'>distance_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>grid</span><span class='op'>$</span><span class='va'>x1</span>, <span class='va'>grid</span><span class='op'>$</span><span class='va'>x1</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='op'>^</span> <span class='fl'>2</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>grid</span><span class='op'>$</span><span class='va'>x2</span>, <span class='va'>grid</span><span class='op'>$</span><span class='va'>x2</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='op'>^</span> <span class='fl'>2</span></span></code></pre>
 </div>
+</div>
+<p>Covariance matrices and multivariate normal draws are generated as above, and they yield something like this:</p>
+<div class="layout-chunk" data-layout="l-body">
+
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>grid</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_raster</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_contour.html'>geom_contour</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>z <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>, col <span class='op'>=</span> <span class='st'>"white"</span>, linewidth <span class='op'>=</span> <span class='fl'>0.2</span><span class='op'>)</span></span></code></pre>
-</div>
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-2-d-1.png" width="624" /></p>
 </div>
-<p>A relatively simple method of fitting a Gaussian process regression to data requires estimating the parameters of the covariance function as well as a latent standard normal parameter <span class="math inline">\(\eta \sim N(0, 1)\)</span> for each data point that is transformed to yield the target multivariate normal distribution.</p>
-<p>The following Stan program does this for a set of observations and a set of new predictor values used to generate out-of-sample predictions:</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode stan"><code class="sourceCode stan"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">1</span>&gt; N; <span class="co">// number of observations</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> x; <span class="co">// predictor</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] y; <span class="co">// response</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">1</span>&gt; N_new; <span class="co">// number of new x at which to make predictions</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N_new] <span class="dt">real</span> x_new; <span class="co">// new x at which to make predictions</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed data</span> {</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// small constant added to diagonal of covariance matrix for numerical stability:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> delta = <span class="fl">1e-9</span>; </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// concatenate x and x_new:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">1</span>&gt; N_combined = N + N_new;</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N_combined] <span class="dt">real</span> x_combined;</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    x_combined[n] = x[n];</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span>:N_new) {</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    x_combined[N + n] = x_new[n];</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> Intercept;</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; rho; <span class="co">// length scale</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; alpha; <span class="co">// marginal standard deviation</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma; <span class="co">// residual standard deviation</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N_combined] eta; <span class="co">// standard normal latent variables (one for each x)</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// covariance matrix K:</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">matrix</span>[N_combined, N_combined] K = gp_exp_quad_cov(x_combined, alpha, rho);</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// add a small constant for stability:</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  K += diag_matrix(rep_vector(delta, N_combined));</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">// gaussian process:</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N_combined] mu = rep_vector(<span class="dv">0</span>, N_combined);</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  mu += Intercept + cholesky_decompose(K) * eta;</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// priors:</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  Intercept ~ student_t(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">4</span>);</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  rho ~ inv_gamma(<span class="fl">1.5</span>, <span class="fl">0.06</span>);</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  alpha ~ student_t(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>);</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  sigma ~ student_t(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>);</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  eta ~ std_normal();</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">// model:</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  y ~ normal(mu[<span class="dv">1</span>:N], sigma);</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-<p>We’ll simulate data</p>
+<p>Now to fit a Gaussian process to data. In <code>brms</code>, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter <span class="math inline">\(\eta_i \sim N(0, 1)\)</span> for each data point. The <span class="math inline">\(\eta_i\)</span> are then transformed to yield the target multivariate normal distribution. Posterior predictions at new predictor values are calculated analytically, as described in the <em>Gaussian processes</em> section of the <a href="https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html">Stan manual</a> under “Analytical form of joint predictive inference”.</p>
+<p>Let’s simulate from a Gaussian process, add a linear trend, subsample from it to create an irregularly-spaced time series, and then fit (1) a continuous-time autoregressive model and (2) a Gaussian process regression model to the data.</p>
+<p>First, we’ll simulate a one-dimensional Gaussian process like we did above, with the following parameters:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data_simulated</span> <span class='op'>&lt;-</span> <span class='fu'>mgcv</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/gamSim.html'>gamSim</a></span><span class='op'>(</span><span class='fl'>1</span>, n <span class='op'>=</span> <span class='fl'>30</span>, scale <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>Gu &amp; Wahba 4 term additive model</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data_stan</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>data_simulated</span><span class='op'>$</span><span class='va'>x2</span>, y <span class='op'>=</span> <span class='va'>data_simulated</span><span class='op'>$</span><span class='va'>y</span>, N <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>data_simulated</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='co'># add new x values for predictions:</span></span>
-<span><span class='va'>x_new</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>data_simulated</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>x2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>x2</span><span class='op'>)</span>, length.out <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='va'>data_stan</span><span class='op'>$</span><span class='va'>x_new</span> <span class='op'>&lt;-</span> <span class='va'>x_new</span></span>
-<span><span class='va'>data_stan</span><span class='op'>$</span><span class='va'>N_new</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>data_stan</span><span class='op'>$</span><span class='va'>x_new</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.5</span> <span class='co'># residual standard deviation</span></span>
+<span><span class='va'>rho</span> <span class='op'>&lt;-</span> <span class='fl'>10</span> <span class='co'># length-scale</span></span>
+<span><span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>1</span> <span class='co'># marginal standard deviation</span></span>
+<span><span class='va'>N</span> <span class='op'>&lt;-</span> <span class='fl'>100</span> <span class='co'># number of observations before subsampling</span></span></code></pre>
 </div>
 </div>
-<p>and fit the model</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>The autocorrelation function looks first-order autoregressive:</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/acf-gp-1.png" width="624" /></p>
+</div>
+<p>Then, we’ll simulate the data:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gp_posterior</span> <span class='op'>&lt;-</span> <span class='va'>model</span><span class='op'>$</span><span class='fu'>sample</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>data_stan</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>beta_0</span> <span class='op'>&lt;-</span> <span class='fl'>5</span> <span class='co'># linear model intercept</span></span>
+<span><span class='va'>beta_1</span> <span class='op'>&lt;-</span> <span class='fl'>0.1</span> <span class='co'># linear model slope</span></span>
+<span></span>
+<span><span class='va'>data_simulated</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span></span>
+<span>  time <span class='op'>=</span> <span class='va'>x</span>,</span>
+<span>  y <span class='op'>=</span> <span class='va'>beta_0</span> <span class='op'>+</span> <span class='va'>beta_1</span> <span class='op'>*</span> <span class='va'>time</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>]</span></span>
+<span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://withr.r-lib.org/reference/with_seed.html'>with_seed</a></span><span class='op'>(</span><span class='fl'>4128128</span>, <span class='op'>{</span></span>
+<span>  <span class='va'>data_simulated</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_sample</a></span><span class='op'>(</span><span class='va'>data_simulated</span>, prop <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>time</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>d_x <span class='op'>=</span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/replace_na.html'>replace_na</a></span><span class='op'>(</span><span class='va'>time</span> <span class='op'>-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/lead-lag.html'>lag</a></span><span class='op'>(</span><span class='va'>time</span><span class='op'>)</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='op'>}</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
+<p>Next, we’ll fit the continuous-time autoregressive model using my R package <a href="https://github.com/bentrueman/bgamcar1"><code>bgamcar1</code></a>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>model_car1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bgamcar1/man/fit_stan_model.html'>fit_stan_model</a></span><span class='op'>(</span></span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"_posts/2024-09-04-modeling-time-series-using-gaussian-processes/models/model-car1"</span><span class='op'>)</span>,</span>
+<span>  seed <span class='op'>=</span> <span class='fl'>1245</span>,</span>
+<span>  bform <span class='op'>=</span> <span class='va'>y</span> <span class='op'>~</span> <span class='va'>time</span> <span class='op'>+</span> <span class='fu'>ar</span><span class='op'>(</span><span class='va'>time</span><span class='op'>)</span>,</span>
+<span>  bdata <span class='op'>=</span> <span class='va'>data_simulated</span>,</span>
+<span>  bpriors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span>    <span class='fu'><a href='https://paul-buerkner.github.io/brms/reference/set_prior.html'>prior</a></span><span class='op'>(</span><span class='fu'>normal</span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, class <span class='op'>=</span> <span class='va'>b</span><span class='op'>)</span>, </span>
+<span>    <span class='fu'><a href='https://paul-buerkner.github.io/brms/reference/set_prior.html'>prior</a></span><span class='op'>(</span><span class='fu'>normal</span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>2</span><span class='op'>)</span>, class <span class='op'>=</span> <span class='va'>ar</span>, lb <span class='op'>=</span> <span class='fl'>0</span>, ub <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span>,</span>
+<span>  backend <span class='op'>=</span> <span class='st'>"cmdstanr"</span></span>
+<span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>It does a good job of modeling the autocorrelation …</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/acf-car1-1.png" width="624" /></p>
+</div>
+<p>… and it recovers the linear model parameters reasonably well:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/nlme/man/fixed.effects.html'>fixef</a></span><span class='op'>(</span><span class='va'>model_car1</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>            Estimate  Est.Error       Q2.5     Q97.5
+Intercept 5.13800326 0.73921859 3.64954625 6.6194333
+time      0.09237404 0.02105802 0.04426472 0.1299154</code></pre>
+</div>
+<p>Finally, we’ll fit the Gaussian process regression:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>model_gp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://paul-buerkner.github.io/brms/reference/brm.html'>brm</a></span><span class='op'>(</span></span>
+<span>  <span class='va'>y</span> <span class='op'>~</span> <span class='va'>time</span> <span class='op'>+</span> <span class='fu'><a href='https://paul-buerkner.github.io/brms/reference/gp.html'>gp</a></span><span class='op'>(</span><span class='va'>time</span><span class='op'>)</span>,</span>
+<span>  data <span class='op'>=</span> <span class='va'>data_simulated</span>,</span>
+<span>  prior <span class='op'>=</span> <span class='fu'><a href='https://paul-buerkner.github.io/brms/reference/set_prior.html'>prior</a></span><span class='op'>(</span><span class='fu'>normal</span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, class <span class='op'>=</span> <span class='va'>b</span><span class='op'>)</span>,</span>
+<span>  cores <span class='op'>=</span> <span class='fl'>4</span>,</span>
+<span>  backend <span class='op'>=</span> <span class='st'>"cmdstanr"</span>,</span>
+<span>  seed <span class='op'>=</span> <span class='fl'>214</span>,</span>
+<span>  control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>adapt_delta <span class='op'>=</span> <span class='fl'>0.999</span>, max_treedepth <span class='op'>=</span> <span class='fl'>14</span><span class='op'>)</span>,</span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"_posts/2024-09-04-modeling-time-series-using-gaussian-processes/models/model-gp"</span><span class='op'>)</span></span>
+<span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>Unsurprisingly, it models the autocorrelation too:</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/acf-gp-linear-1.png" width="624" /></p>
+</div>
+<p>And it recovers the linear model parameters:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/nlme/man/fixed.effects.html'>fixef</a></span><span class='op'>(</span><span class='va'>model_gp</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>           Estimate Est.Error       Q2.5     Q97.5
+Intercept 4.2608885 1.2682394 1.68248725 6.8221698
+time      0.1087675 0.0215588 0.06731881 0.1537618</code></pre>
+</div>
+<p>Here are the predictions from the two models, superimposed on the data:</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-predictions-1.png" width="624" /></p>
+</div>
+<p>The Gaussian process regression is much slower and more difficult to fit, at least with the default priors. But it is a much, much more flexible model than the continuous-time autoregression, and for some applications it may be preferable.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
