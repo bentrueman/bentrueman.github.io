@@ -48,10 +48,10 @@ The basic idea behind a Gaussian process regression is that we can estimate any 
 
 
 $$
-K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} \sum_{d = 1}^D(x_{i,d} - x_{j,d}) ^ 2 \right) + \delta_{i,j} \sigma ^ 2
+K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} \sum_{d = 1}^D(x_{i,d} - x_{j,d}) ^ 2 \right) +  \sigma ^ 2 I_N
 $$
 
-where $\sigma$ is the error term, $\rho$ controls the frequency, and $\alpha$ controls the range.
+where $\sigma$ is the error term, $\rho$ controls the frequency, $\alpha$ controls the range, and $I_N$ is the identity matrix. See the *Gaussian processes* section of the [Stan manual](https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html) for details.
 
 This is what the covariance function looks like for a range of $\rho$ values:
 
@@ -141,7 +141,7 @@ p2 <- covariance_matrix |>
 wrap_plots(p1, p2)
 ```
 
-Next, we'll do a simulation in two dimensions. Since the covariance matrix depends only on the Euclidean distance between points, the code above generalizes easily.
+Next, we'll do a simulation in two dimensions. Since the covariance matrix depends only on the Euclidean distance between points, the code above generalizes easily (n.b., the distance matrix is already squared, so no need to square it when calculating the covariance matrix).
 
 ```{r simulation-2-d}
 rho <- c(5, 10, 20)
@@ -176,13 +176,13 @@ map(y, ~ t(.x)[,1]) |>
   labs(fill = "y")
 ```
 
-Now, on to fitting a Gaussian process! In `brms`, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter $\eta_i \sim N(0, 1)$ for each data point. The $\eta_i$ are then transformed to yield the target multivariate normal distribution, as described in the *Gaussian processes* section of the [Stan manual](https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html). 
+Now, on to fitting a Gaussian process! In `brms`, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter $\eta_i \sim N(0, 1)$ for each data point. The $\eta_i$ are then transformed to yield the target multivariate normal distribution, as described [here](https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html). 
 
 Posterior predictions at new predictor values are calculated analytically, and a function to do so is provided at the above link, under *Analytical form of joint predictive inference*.
 
 Let's simulate from a Gaussian process, add a linear trend, subsample from it to create an irregularly-spaced time series, and then fit (1) a continuous-time autoregressive model and (2) a Gaussian process regression model to the data.
 
-First, we'll simulate a one-dimensional Gaussian process like we did above, with the following parameters:
+First, we'll simulate a one-dimensional Gaussian process like we did above, with the following parameters (and without a call to `map()`, since we only have one `rho`):
 
 ```{r simulate-gp}
 sigma <- 0.5 # residual standard deviation

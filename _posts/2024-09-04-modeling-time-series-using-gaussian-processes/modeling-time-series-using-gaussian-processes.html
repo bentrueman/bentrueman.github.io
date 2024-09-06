@@ -1565,9 +1565,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>The basic idea behind a Gaussian process regression is that we can estimate any continuous function as a draw from an <span class="math inline">\(N\)</span>-dimentional multivariate normal, where <span class="math inline">\(N\)</span> is the number of observations. For an isotropic Gaussian process, the covariance matrix of the multivariate normal is fully determined by the distance between all pairs of observations, via a covariance function. A popular choice is the <em>exponentiated quadratic</em>. For <span class="math inline">\(D\)</span>-dimensional observations <span class="math inline">\(x_1, ..., x_N \in \mathbb{R}^D\)</span> the covariance between <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span> is calculated as</p>
 <p><span class="math display">\[
-K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} \sum_{d = 1}^D(x_{i,d} - x_{j,d}) ^ 2 \right) + \delta_{i,j} \sigma ^ 2
+K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} \sum_{d = 1}^D(x_{i,d} - x_{j,d}) ^ 2 \right) +  \sigma ^ 2 I_N
 \]</span></p>
-<p>where <span class="math inline">\(\sigma\)</span> is the error term, <span class="math inline">\(\rho\)</span> controls the frequency, and <span class="math inline">\(\alpha\)</span> controls the range.</p>
+<p>where <span class="math inline">\(\sigma\)</span> is the error term, <span class="math inline">\(\rho\)</span> controls the frequency, <span class="math inline">\(\alpha\)</span> controls the range, and <span class="math inline">\(I_N\)</span> is the identity matrix. See the <em>Gaussian processes</em> section of the <a href="https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html">Stan manual</a> for details.</p>
 <p>This is what the covariance function looks like for a range of <span class="math inline">\(\rho\)</span> values:</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-covariance-function-1.png" width="624" /></p>
@@ -1598,7 +1598,7 @@ K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} 
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-1-d-1.png" width="624" /></p>
 </div>
-<p>Next, we’ll do a simulation in two dimensions. Since the covariance matrix depends only on the Euclidean distance between points, the code above generalizes easily.</p>
+<p>Next, we’ll do a simulation in two dimensions. Since the covariance matrix depends only on the Euclidean distance between points, the code above generalizes easily (n.b., the distance matrix is already squared, so no need to square it when calculating the covariance matrix).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rho</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>20</span><span class='op'>)</span></span>
@@ -1617,10 +1617,10 @@ K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} 
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="modeling-time-series-using-gaussian-processes_files/figure-html5/plot-simulation-2-d-1.png" width="624" data-distill-preview=1 /></p>
 </div>
-<p>Now, on to fitting a Gaussian process! In <code>brms</code>, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter <span class="math inline">\(\eta_i \sim N(0, 1)\)</span> for each data point. The <span class="math inline">\(\eta_i\)</span> are then transformed to yield the target multivariate normal distribution, as described in the <em>Gaussian processes</em> section of the <a href="https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html">Stan manual</a>.</p>
+<p>Now, on to fitting a Gaussian process! In <code>brms</code>, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter <span class="math inline">\(\eta_i \sim N(0, 1)\)</span> for each data point. The <span class="math inline">\(\eta_i\)</span> are then transformed to yield the target multivariate normal distribution, as described <a href="https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html">here</a>.</p>
 <p>Posterior predictions at new predictor values are calculated analytically, and a function to do so is provided at the above link, under <em>Analytical form of joint predictive inference</em>.</p>
 <p>Let’s simulate from a Gaussian process, add a linear trend, subsample from it to create an irregularly-spaced time series, and then fit (1) a continuous-time autoregressive model and (2) a Gaussian process regression model to the data.</p>
-<p>First, we’ll simulate a one-dimensional Gaussian process like we did above, with the following parameters:</p>
+<p>First, we’ll simulate a one-dimensional Gaussian process like we did above, with the following parameters (and without a call to <code>map()</code>, since we only have one <code>rho</code>):</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.5</span> <span class='co'># residual standard deviation</span></span>
