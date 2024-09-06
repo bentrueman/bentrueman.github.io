@@ -13,37 +13,54 @@ draft: true
 ---
 <!-- to do: 1. make sure to add references! -->
 
-```{r setup, include=TRUE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 options(mc.cores = parallel::detectCores())
 ```
 
+Recently, I've begun learning about Gaussian processes, and it's become clear that they offer an alternative to something I've spent some time on recently: modeling time series as the sum of one or more smoothing splines and a continuous time autoregression---see my [`bgamcar1` package](https://github.com/bentrueman/bgamcar1) for examples. 
+
+I'll start this post with some simulations that helped me understand the basics of Gaussian processes, and then I'll fit one to some (simulated) data and compare it with a continuous-time autoregression.
+
+We'll need the following packages:
+
 ```{r packages, message=FALSE}
+library("here")
 library("tidyverse")
 library("ggtext")
 library("patchwork")
+library("withr")
 library("brms")
+library("mvtnorm")
+library("bgamcar1")
 ```
 
-```{r override-default-engine, eval=FALSE}
-register_knitr_engine(override = TRUE)
+```{r theme, echo=FALSE}
+theme_set(
+  theme_bw(14) + 
+    theme(
+      strip.background = element_blank(),
+      strip.text = element_markdown()
+    )
+)
+pal <- wesanderson::wes_palette("Zissou1")
 ```
 
-We can estimate a function as a draw from an $N$-dimentional multivariate normal, where $N$ is the number of observations. For an isotropic Gaussian process, the covariance matrix of the multivariate normal is fully determined by the distance between all pairs of observations, via a covariance function. A popular choice is the *exponentiated quadratic*. For $D$-dimensional observations $x_1, ..., x_N \in \mathbb{R}^D$ the covariance between $x_i$ and $x_j$ is calculated as 
+The basic idea behind a Gaussian process regression is that we can estimate any continuous function as a draw from an $N$-dimentional multivariate normal, where $N$ is the number of observations. For an isotropic Gaussian process, the covariance matrix of the multivariate normal is fully determined by the distance between all pairs of observations, via a covariance function. A popular choice is the *exponentiated quadratic*. For $D$-dimensional observations $x_1, ..., x_N \in \mathbb{R}^D$ the covariance between $x_i$ and $x_j$ is calculated as 
 
 
 $$
 K(x | \sigma, \rho, \alpha)_{i,j} = \alpha ^ 2 exp \left( -\frac{1}{2 \rho ^ 2} \sum_{d = 1}^D(x_{i,d} - x_{j,d}) ^ 2 \right) + \delta_{i,j} \sigma ^ 2
 $$
 
-where $\sigma$ is the error term, $\rho$ controls the frequency of the Gaussian process, and $\alpha$ controls its range.
+where $\sigma$ is the error term, $\rho$ controls the frequency, and $\alpha$ controls the range.
 
-This is what the covariance function looks like:
+This is what the covariance function looks like for a range of $\rho$ values:
 
-```{r plot-covariance-function}
+```{r plot-covariance-function, echo=FALSE}
 distance <- seq(0, 50, length.out = 200)
 
-rho_plot <- seq(1, 21, by = 1)
+rho_plot <- seq(1, 21, by = 0.5)
 alpha_plot <- 2
 
 map(rho_plot, ~ alpha_plot ^ 2 * exp(-distance ^ 2 / (2 * .x ^ 2))) |> 
@@ -54,103 +71,254 @@ map(rho_plot, ~ alpha_plot ^ 2 * exp(-distance ^ 2 / (2 * .x ^ 2))) |>
   mutate(rho = as.numeric(rho)) |> 
   ggplot(aes(distance, covariance, col = rho, group = rho)) + 
   scale_y_continuous(breaks = alpha_plot ^ 2, labels = "&alpha;<sup>2</sup>") +
+  scale_color_gradientn(colors = pal) +
   theme(
-    axis.text.y = element_markdown(),
+    axis.text = element_markdown(),
+    axis.title = element_markdown(),
     legend.title = element_markdown()
   ) +
   geom_line() + 
-  labs(col = "&rho;")
+  labs(x = "<i>&Delta;</i>x", y = "Covariance (<i>K</i>(<i>&Delta;</i>x))", col = "<i>&rho;</i>")
 ```
 
-Simulation in one dimension
+First, we'll do a simulation in one dimension with the following parameters:
 
 ```{r gaussian-process-parameters}
-sigma <- 1e-4 # residual standard deviation
-rho <- 10 # length-scale
-alpha <- 1 # marginal standard deviation
+sigma <- 1e-4 # residual standard deviation (noise term)
+rho <- c(1, 2, 5, 10, 20) # length-scale (frequency)
+alpha <- 1 # marginal standard deviation (amplitude of the GP)
 ```
+
+For each set, we'll simulate a multivariate normal draw:
 
 ```{r simulation-1-d}
 N <- 100
 x <- seq(N)
-distance_matrix <- outer(x, x, "-") # compute distance matrix
-covariance_matrix <- alpha ^ 2 * exp(-distance_matrix ^ 2 / (2 * rho ^ 2)) # compute exponentiated quadratic kernel output
-covariance_matrix <- covariance_matrix + diag(rep(sigma ^ 2, nrow(covariance_matrix))) # add sigma squared to diagonal
-y <- mvtnorm::rmvnorm(1, sigma = covariance_matrix) # simulate a multivariate normal draw
+distance_matrix <- outer(x, x, "-") 
+covariance_matrix <- map(rho, ~ alpha ^ 2 * exp(-distance_matrix ^ 2 / (2 * .x ^ 2))) 
+# add sigma squared to diagonal:
+covariance_matrix <- covariance_matrix |> 
+  map(~ .x + diag(rep(sigma ^ 2, nrow(covariance_matrix[[1]])))) 
+# simulate a multivariate normal draw:
+y <- with_seed(12456, {map(covariance_matrix, ~ mvtnorm::rmvnorm(1, sigma = .x))}) 
 ```
 
-```{r plot-simulation-1-d}
-p1 <- tibble(x, y = y[1,]) |> 
-  ggplot(aes(x, y)) + 
-  geom_line()
+The parameter $\rho$ has an important effect on the kinds of functions a Gaussian process can model:
 
-these_breaks <- seq(1, N, by = 25)
+```{r plot-simulation-1-d, echo=FALSE, fig.height=6}
+gp_1d <- map(y, ~ t(.x)[,1]) |> 
+  set_names(paste0("<i>&rho;</i>=", rho)) |> 
+  as_tibble() |> 
+  mutate(x) |> 
+  pivot_longer(-x, names_to = "rho")
+
+p1 <- gp_1d |> 
+  mutate(rho = fct_reorder(rho, as.numeric(str_extract(rho, "\\d+")))) |> 
+  ggplot(aes(x, value)) + 
+  facet_wrap(vars(rho), ncol = 1) +
+  geom_line() + 
+  labs(y = "y")
 
 p2 <- covariance_matrix |> 
-  as.data.frame() |> 
-  rowid_to_column() |> 
-  pivot_longer(-rowid, names_to = "columnid") |> 
-  mutate(columnid = as.numeric(str_extract(columnid, "\\d+"))) |> 
+  map(as.data.frame) |> 
+  map(rowid_to_column) |> 
+  map(~ pivot_longer(.x, -rowid, names_to = "columnid")) |> 
+  map(~ mutate(.x, columnid = as.numeric(str_extract(columnid, "\\d+")))) |> 
+  set_names(paste0("<i>&rho;</i>=", rho)) |> 
+  list_rbind(names_to = "rho") |> 
+  mutate(rho = fct_reorder(rho, as.numeric(str_extract(rho, "\\d+")))) |> 
   ggplot(aes(columnid, -rowid, fill = value)) +
-  scale_x_continuous(breaks = these_breaks, position = "top") +
-  scale_y_continuous(breaks = -these_breaks, labels = these_breaks) +
-  scale_fill_viridis_c() +
+  facet_wrap(vars(rho), ncol = 1) +
+  scale_fill_gradientn(colors = pal[1:3]) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
+    strip.text = element_markdown()
+  ) +
   geom_raster() +
-  labs(x = "x", y = "x")
+  labs(x = NULL, y = NULL, fill = "Covariance")
 
 wrap_plots(p1, p2)
 ```
 
-Simulation in two dimensions
+Next, we'll do a simulation in two dimensions. Since the covariance matrix depends only on the Euclidean distance between points, the code above generalizes easily.
 
 ```{r simulation-2-d}
-rho <- 5
+rho <- c(5, 10, 20)
 N <- 35
 x <- seq(N)
-grid <- crossing(x = x, y = x)
-distance_matrix <- outer(grid$x, grid$x, "-") ^ 2 + 
-  outer(grid$y, grid$y, "-") ^ 2
-covariance_matrix <- alpha ^ 2 * exp(-distance_matrix / (2 * rho ^ 2)) # squared exponential kernel
-covariance_matrix <- covariance_matrix + diag(rep(sigma ^ 2, nrow(covariance_matrix)))
-z <- mvtnorm::rmvnorm(1, sigma = covariance_matrix)
+grid <- crossing(x1 = x, x2 = x)
+distance_matrix <- outer(grid$x1, grid$x1, "-") ^ 2 + 
+  outer(grid$x2, grid$x2, "-") ^ 2
 ```
 
-```{r plot-simulation-2-d}
-grid |> 
-  mutate(z = t(z)[,1]) |> 
-  ggplot(aes(x, y)) + 
-  scale_fill_viridis_c() +
-  geom_raster(aes(fill = z)) + 
-  geom_contour(aes(z = z), col = "white", linewidth = 0.2)
+Covariance matrices and multivariate normal draws are generated as above, and they should yield something like this:
+
+```{r simulation-2-d-part-2, echo=FALSE}
+covariance_matrix <- map(rho, ~ alpha ^ 2 * exp(-distance_matrix / (2 * .x ^ 2))) # exponentiated quadratic kernel output
+covariance_matrix <- map(covariance_matrix, ~ .x + diag(rep(sigma ^ 2, nrow(covariance_matrix[[1]])))) # add sigma squared to diagonal
+y <- with_seed(415, {map(covariance_matrix, ~ mvtnorm::rmvnorm(1, sigma = .x))}) # simulate a multivariate normal draw
 ```
 
-In `brms`, Gaussian processes are fitted to data by estimating the parameters of the covariance function as well as a latent standard normal parameter $\eta \sim N(0, 1)$ for each data point. $\eta$ is then transformed to yield the target multivariate normal distribution. Posterior predictions at new predictor values are calculated analytically, as described in the *Gaussian processes* section of the [Stan manual](https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html) under "Analytical form of joint predictive inference".
+```{r plot-simulation-2-d, echo=FALSE}
+map(y, ~ t(.x)[,1]) |> 
+  set_names(paste0("<i>&rho;</i>=", rho)) |> 
+  as_tibble() |> 
+  bind_cols(grid) |> 
+  pivot_longer(-c(x1, x2), names_to = "rho") |> 
+  mutate(rho = fct_reorder(rho, as.numeric(str_extract(rho, "\\d+")))) |> 
+  ggplot(aes(x1, x2)) + 
+  facet_wrap(vars(rho)) +
+  scale_fill_gradientn(colors = pal) +
+  geom_raster(aes(fill = value)) +
+  geom_contour(aes(z = value), col = "white", linewidth = 0.3) + 
+  labs(fill = "y")
+```
 
-Let's simulate a first-order autoregressive model with a linear trend, subsample from it to create an irregularly-spaced time series, and then use a Gaussian process to model it:
+Now to fit a Gaussian process to data. In `brms`, this is done by estimating the parameters of the covariance function as well as a latent standard normal parameter $\eta_i \sim N(0, 1)$ for each data point. The $\eta_i$ are then transformed to yield the target multivariate normal distribution. 
 
-```{r}
-beta_0 <- 5
-beta_1 <- 0.1
-N <- 100
+Posterior predictions at new predictor values are calculated analytically, as described in the *Gaussian processes* section of the [Stan manual](https://mc-stan.org/docs/stan-users-guide/gaussian-processes.html) under "Analytical form of joint predictive inference".
+
+Let's simulate from a Gaussian process, add a linear trend, subsample from it to create an irregularly-spaced time series, and then fit (1) a continuous-time autoregressive model and (2) a Gaussian process regression model to the data.
+
+First, we'll simulate a one-dimensional Gaussian process like we did above, with the following parameters:
+
+```{r simulate-gp}
+sigma <- 0.5 # residual standard deviation
+rho <- 10 # length-scale
+alpha <- 1 # marginal standard deviation
+N <- 100 # number of observations before subsampling
+```
+
+```{r simulate-gp-part-2, echo=FALSE}
+x <- seq(N)
+distance_matrix <- outer(x, x, "-") # compute distance matrix
+covariance_matrix <- alpha ^ 2 * exp(-distance_matrix ^ 2 / (2 * rho ^ 2)) # compute exponentiated quadratic kernel output
+covariance_matrix <- covariance_matrix + diag(rep(sigma ^ 2, nrow(covariance_matrix))) # add sigma squared to diagonal
+with_seed(1241521412, {
+  y <- mvtnorm::rmvnorm(1, sigma = covariance_matrix)
+})
+```
+
+The autocorrelation function looks first-order autoregressive:
+
+```{r acf-gp, echo=FALSE}
+acf(t(y)[,1], plot = FALSE) |> 
+  with(tibble(lag, acf)) |> 
+  ggplot(aes(lag, acf)) + 
+  geom_col() +
+  geom_hline(yintercept = c(-2 / sqrt(N), 2 / sqrt(N)), linetype = 3) +
+  labs(x = "Lag", y = "Autocorrelation")
+```
+
+Then, we'll simulate the data:
+
+```{r simulate-ts-data}
+beta_0 <- 5 # linear model intercept
+beta_1 <- 0.1 # linear model slope
+
 data_simulated <- tibble(
-  time = seq(N),
-  noise = as.numeric(arima.sim(list(ar = 0.9), N)),
-  y = beta_0 + beta_1 * time + noise
-) |> 
-  slice_sample(prop = 0.5)
-model <- brm(
+  time = x,
+  y = beta_0 + beta_1 * time + t(y)[,1]
+)
+
+with_seed(4128128, {
+  data_simulated <- slice_sample(data_simulated, prop = 0.5) |> 
+    arrange(time) |> 
+    mutate(d_x = replace_na(time - lag(time), 0))
+})
+```
+
+Next, we'll fit the continuous-time autoregressive model using my R package [`bgamcar1`](https://github.com/bentrueman/bgamcar1):
+
+```{r fit-car1}
+model_car1 <- fit_stan_model(
+  file = here("_posts/2024-09-04-modeling-time-series-using-gaussian-processes/models/model-car1"),
+  seed = 1245,
+  bform = y ~ time + ar(time),
+  bdata = data_simulated,
+  bpriors = c(
+    prior(normal(0, 1), class = b), 
+    prior(normal(0.5, 2), class = ar, lb = 0, ub = 1)
+  ),
+  backend = "cmdstanr"
+)
+```
+
+It does a good job of modeling the autocorrelation ...
+
+```{r acf-car1, echo=FALSE}
+residuals_car1 <- add_resid_draws_car1(data_simulated, model_car1, yvar = y)
+residuals_car1 |> 
+  group_by(time) |> 
+  summarize(.residual = median(.residual)) |> 
+  pull(.residual) |> 
+  acf(plot = FALSE) |> 
+  with(tibble(lag, acf)) |> 
+  ggplot(aes(lag, acf)) + 
+  geom_col() +
+  geom_hline(yintercept = c(-2 / sqrt(N), 2 / sqrt(N)), linetype = 3) +
+  labs(x = "Lag", y = "Autocorrelation")
+```
+
+... and it recovers the linear model parameters reasonably well:
+
+```{r car1-estimates}
+fixef(model_car1)
+```
+
+Finally, we'll fit the Gaussian process regression:
+
+```{r fit-gp-brms}
+model_gp <- brm(
   y ~ time + gp(time),
   data = data_simulated,
-  cores = 4
+  prior = prior(normal(0, 1), class = b),
+  cores = 4,
+  backend = "cmdstanr",
+  seed = 214,
+  control = list(adapt_delta = 0.999, max_treedepth = 14),
+  file = here("_posts/2024-09-04-modeling-time-series-using-gaussian-processes/models/model-gp")
 )
-model
-predictions <- fitted(model)
-data_simulated |> 
-  ggplot(aes(time, y)) + 
-  geom_line() +
-  geom_ribbon(aes(ymin = predictions[,"Q2.5"], ymax = predictions[,"Q97.5"], fill = "model"), alpha = 0.3) +
-  geom_line(aes(y = predictions[,"Estimate"], col = "model")) + 
-  labs(col = NULL, fill = NULL)
 ```
 
-This is an alternative to the continuous-time autoregression I developed in my own package [`bgamcar1`](https://github.com/bentrueman/bgamcar1), but it will be very slow for large datasets, so the `bgamcar1` approach still has a lot of value. That is, until it's implemented in `brms`.
+Unsurprisingly, it models the autocorrelation too:
+
+```{r acf-gp-linear, echo=FALSE}
+residuals(model_gp, robust = TRUE)[,"Estimate"] |> 
+  acf(plot = FALSE) |> 
+  with(tibble(lag, acf)) |> 
+  ggplot(aes(lag, acf)) + 
+  geom_col() +
+  geom_hline(yintercept = c(-2 / sqrt(N), 2 / sqrt(N)), linetype = 3) +
+  labs(x = "Lag", y = "Autocorrelation")
+```
+
+And it recovers the linear model parameters:
+
+```{r gp-estimates}
+fixef(model_gp)
+```
+
+Here are the predictions from the two models, superimposed on the data:
+
+```{r plot-predictions, echo=FALSE}
+predictions <- list(
+  "Gaussian process regression" = tidybayes::add_epred_draws(data_simulated, model_gp), 
+  "Continuous-time autoregression" = add_pred_draws_car1(data_simulated, model_car1)
+) |> 
+  map(~ summarize_preds(.x, retrans = FALSE)) |> 
+  list_rbind(names_to = "model")
+
+predictions |> 
+  ggplot(aes(time, y)) + 
+  facet_wrap(vars(model)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.3, fill = pal[1]) + 
+  geom_line(aes(y = .epred), col = pal[1])
+```
+
+The Gaussian process regression is much slower and more difficult to fit, at least with the default priors. But it is a much, much more flexible model than the continuous-time autoregression, and for some applications it may be preferable.
+
