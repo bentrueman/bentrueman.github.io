@@ -131,7 +131,7 @@ Dalhousie University, Halifax, NS
     
 # Journal articles 
 
-1. 
+1. Hart, K. A., **Trueman, B. F.**, Halfyard, E. A., Sterling, S. M. (2024). Detection and Prediction of Toxic Aluminum Concentrations in High-Priority Salmon Rivers in Nova Scotia. Environmental Toxicology and Chemistry. 
 
 1. **Trueman, B. F.**, Locsin, J. A., Krkošek, W. H., & Gagnon, G. A. (2023). Evaluating Sentinel Pipe Racks for Monitoring Lead Release and Optimizing Corrosion Control. ACS ES&T Water. https://doi.org/10.1021/acsestwater.3c00273
 
@@ -208,6 +208,8 @@ Dalhousie University, Halifax, NS
 25.	Pei, W. W., Xie, X., Ong, P., **Trueman, B. F.**, McVicar, M. A., Walsh, M. E., & Gagnon, G. A. (2013). Water Reclamation and Reuse. Water Environment Research, 85(10), 1308–1321. https://doi.org/10.2175/106143013X13698672322183
 
 # Preprints  
+
+1. **Trueman, B. F.**, Gouthro, M, Stoddart, A. K., & Gagnon, G. A. (2024). A comprehensive approach to analyzing environmental data with non-detects. ChemRxiv. https://doi.org/10.26434/chemrxiv-2024-m2h4h
 
 1. **Trueman, B. F.**, Locsin, J. A., Krkošek, W. H., & Gagnon, G. A. (2023). Evaluating Sentinel Pipe Racks for Monitoring Lead Release and Optimizing Corrosion Control. ChemRxiv. https://doi.org/10.26434/chemrxiv-2023-h1459-v3
 
