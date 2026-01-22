@@ -131,11 +131,17 @@ Dalhousie University, Halifax, NS
     
 # Journal articles 
 
-1. Hart, K. A., **Trueman, B. F.**, Halfyard, E. A., Sterling, S. M. (2024). Detection and Prediction of Toxic Aluminum Concentrations in High-Priority Salmon Rivers in Nova Scotia. Environmental Toxicology and Chemistry. 
+1. Hood, K. M., Lewis, N., **Trueman, B. F.**, Swinamer, R., Anderson, L., & Gagnon, G. A. (2025). Granular Activated Carbon Filtration as a Lead Control Strategy. ACS ES&T Water. https://doi.org/10.1021/acsestwater.5c01094
+
+1. King, P. W., **Trueman, B. F.**, Peldszus, S., Mishrra, A., Aghasadeghi, K., Gagnon, G. A., Giammar, D. E., Nezamabad, N. M., & Huck, P. M. (2025). Comparison of Real Versus Synthetic NOM on Lead and Copper Release Using Dump and Fill Studies. AWWA Water Science.  https://doi.org/10.1002/aws2.70039
+
+1. Hood, K. M., **Trueman, B. F.**, & Gagnon, G. A. (2025). Evaluating Orthophosphate-Silicate Blends as an Alternative to Blended Phosphates for Corrosion Control and Sequestration. ACS ES&T Water. https://doi.org/10.1021/acsestwater.5c00159
+
+1. Hart, K. A., **Trueman, B. F.**, Halfyard, E. A., & Sterling, S. M. (2024). Detection and Prediction of Toxic Aluminum Concentrations in High-Priority Salmon Rivers in Nova Scotia. Environmental Toxicology and Chemistry. https://doi.org/10.1002/etc.5997
 
 1. **Trueman, B. F.**, Locsin, J. A., Krkošek, W. H., & Gagnon, G. A. (2023). Evaluating Sentinel Pipe Racks for Monitoring Lead Release and Optimizing Corrosion Control. ACS ES&T Water. https://doi.org/10.1021/acsestwater.3c00273
 
-1. Gao, Y., **Trueman, B. F.**, Li, B., Earle, M. R., Gagnon, G. A. (2022). Release and migration of Pb from Pb(II) and Pb(IV) compounds in the presence of microbiological activity. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D2EW00152G
+1. Gao, Y., **Trueman, B. F.**, Li, B., Earle, M. R., & Gagnon, G. A. (2022). Release and migration of Pb from Pb(II) and Pb(IV) compounds in the presence of microbiological activity. Environmental Science: Water Research & Technology. https://doi.org/10.1039/D2EW00152G
 
 1. **Trueman, B. F.**, Locsin, J. M., Doré, E., Hood, K., & Gagnon, G. A. (2022). Sodium silicate and hexametaphosphate promote the release of (oxyhydr)oxide nanoparticles from corroding iron. Environmental Science: Advances. https://doi.org/10.1039/D2VA00199C
   
@@ -210,6 +216,8 @@ Dalhousie University, Halifax, NS
 # Preprints  
 
 1. **Trueman, B. F.**, Gouthro, M, Stoddart, A. K., & Gagnon, G. A. (2024). A comprehensive approach to analyzing environmental data with non-detects. ChemRxiv. https://doi.org/10.26434/chemrxiv-2024-m2h4h
+
+1. Sterling, S. M., Halfyard, E., Hart, K., **Trueman, B. F.**, Grill, G., & Lehner, B. Addition of alkalinity to rivers: A new CO~2~ removal strategy. Authorea Preprints. https://doi.org/10.22541/essoar.168380809.92137625/v1
 
 1. **Trueman, B. F.**, Locsin, J. A., Krkošek, W. H., & Gagnon, G. A. (2023). Evaluating Sentinel Pipe Racks for Monitoring Lead Release and Optimizing Corrosion Control. ChemRxiv. https://doi.org/10.26434/chemrxiv-2023-h1459-v3
 
