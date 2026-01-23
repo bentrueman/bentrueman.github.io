@@ -48,11 +48,9 @@ Centre for Water Resources Studies, Dalhousie University
 *2017--Present*  
 **Independent Consultant**  
 
-  * Built a statistical model for predicting toxic aluminum concentrations in high priority salmon rivers 
+  * Contributed physical and statistical modelling expertise to clients' projects involving water contamination and treatment
   
-  * Designed a geochemical model to better understand alkalinity enhancement of acidified surface waters  
-  
-  * Provided data analysis and modeling expertise for a major US lawsuit involving lead contamination of drinking water
+  * Provided data analysis and modeling expertise for a major US court case involving lead contamination of drinking water
 
 *2018--2024*  
 **Postdoctoral Employee**  
@@ -77,7 +75,7 @@ Halifax Water/Dalhousie University
      - Proficient in R, Stan, and PHREEQC
      - High-performance computing via the Digital Research Alliance of Canada
   * **Technical Communication **
-    - Wrote or co-wrote 35+ academic journal articles 
+    - Wrote or co-wrote 40+ academic journal articles 
     - Wrote numerous technical reports for federal, provincial, and municipal clients
     - Presented original research at international conferences (including best presentation award, 7^th^ IWA Specialist Conference on Natural Organic Matter in Tokyo, Japan)
   * **Analytical Chemistry**
@@ -108,13 +106,13 @@ A collection of online code repositories authored by me
 ### Online resources 
 
   * [censored-env-data-analysis](https://github.com/bentrueman/censored-env-data-analysis) 
-    - A comprehensive set of tools for analyzing left-censored environmental data in a Bayesian framework. Applicable to both univariate and multivariate problems.
+    - A comprehensive set of tools for analyzing left-censored environmental data in a Bayesian framework. Applicable to both univariate and multivariate problems. Also available as a [preprint](https://doi.org/10.26434/chemrxiv-2024-m2h4h).
   * [cwrs-r-group](https://github.com/bentrueman/cwrs-r-group)
     - Selected code and datasets from a weekly R programming meeting at Dalhousie University's Centre for Water Resources Studies. The focus of the meetings is statistical modeling, and sessions usually introduce a concept or method, step-by-step.
     
 # Reports
 
-Prepared data-focused technical reports---including original research---on topics in drinking water quality and treatment for **Halifax Water**, **EPCOR**, the cities of **Regina**, **Saint John**, and **Thunder Bay**, as well as for **Health Canada** and **Nova Scotia Environment and Climate Change**.
+Prepared technical reports---including original research---on topics in drinking water quality and treatment for **Halifax Water**, **EPCOR**, the cities of **Regina**, **Saint John**, and **Thunder Bay**, as well as for **Health Canada** and **Nova Scotia Environment and Climate Change**.
 
 # Academic background    
 
@@ -145,7 +143,7 @@ Dalhousie University, Halifax, NS
 
 1. **Trueman, B. F.**, Locsin, J. M., Doré, E., Hood, K., & Gagnon, G. A. (2022). Sodium silicate and hexametaphosphate promote the release of (oxyhydr)oxide nanoparticles from corroding iron. Environmental Science: Advances. https://doi.org/10.1039/D2VA00199C
   
-1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ES&T Engineering. https://doi.org/10.1021/acsestengg.2c00194
+1. **Trueman, B. F.**, James, W., Shu, T., Doré, E., & Gagnon, G. A. (2022). Comparing corrosion control treatments using a robust Bayesian generalized additive model. ACS ES&T Engineering. https://doi.org/10.1021/acsestengg.2c00194
 
 1. Locsin, J. A., **Trueman, B. F.**, Doré, E., Bleasdale-Pollowy, A., & Gagnon, G. A. (2022). Impacts of orthophosphate-polyphosphate blends on the dissolution and transformation of lead (II) carbonate. Scientific Reports. https://doi.org/10.1038/s41598-022-22683-2
 
