@@ -1,10 +1,8 @@
 ---
 title: "Benjamin Trueman"
 description: |
-  Research scientist<br>
-  Centre for Water Resources Studies<br>
-  Department of Civil & Resource Engineering<br>
-  Dalhousie University<br>
+  Senior Carbon Removal Scientist<br>
+  CarbonRun<br>
   Halifax, NS, CAN
 ---
 
