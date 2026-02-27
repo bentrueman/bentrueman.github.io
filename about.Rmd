@@ -10,4 +10,4 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-My research interests have included carbon dioxide removal via alkalinity enhancement, freshwater chemistry and water treatment, environmental data analysis, environmental DNA, and corrosion as it relates to drinking water quality. 
+My research interests include carbon dioxide removal via alkalinity enhancement, freshwater chemistry and water treatment, environmental data analysis, environmental DNA, and corrosion as it relates to drinking water quality. 

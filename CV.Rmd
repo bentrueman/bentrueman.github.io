@@ -69,7 +69,7 @@ Halifax Water/Dalhousie University
 
 # Skills 
 
-  * **Modellign and Data Analysis**
+  * **Modelling and Data Analysis**
      - Proficient in R, Stan, and PHREEQC
      - High-performance computing via the Digital Research Alliance of Canada
   * **Technical Communication **
